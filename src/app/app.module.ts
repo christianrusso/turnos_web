@@ -1,16 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+
+import { routing, appRoutingProviders } from './app.routing';
 
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './componets/home/home.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    routing,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
