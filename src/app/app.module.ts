@@ -6,15 +6,15 @@ import { routing, appRoutingProviders } from './app.routing';
 
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './componets/home/home.component';
-import { Paso2Component } from './componets/paso2/paso2.component';
+import { HomeComponent } from './components/home/home.component';
+import { IndexComponent } from './components/index/index.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    Paso2Component
+    IndexComponent
   ],
   imports: [
     BrowserModule,

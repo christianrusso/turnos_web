@@ -2,13 +2,13 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './componets/home/home.component';
-import { Paso2Component } from './componets/paso2/paso2.component';
+import { HomeComponent } from './components/home/home.component';
+import { IndexComponent } from './components/index/index.component';
 
 
   const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'paso2', component: Paso2Component},
+  {path: '', component: IndexComponent},
+  {path: 'home/:id', component: HomeComponent},
 
  
 ];
