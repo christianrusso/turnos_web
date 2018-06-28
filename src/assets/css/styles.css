@@ -998,11 +998,13 @@ textarea:focus{
 
 background: #fff;
 
-height: 140px;
+height: 160px;
+
+width: 160px!important;
 
 margin-bottom: 25px;
 
-margin-right: 25px;
+margin-right: 35px;
 
 width: 21%;
 
@@ -1025,6 +1027,8 @@ overflow: hidden;
 display: inline-block;
 
 position: relative;
+
+padding-top: 25px;
 }
 
 
@@ -1051,7 +1055,7 @@ font-family: Poppins;
   
 font-size: 15px;
   
-margin-top: 6px;
+margin-top: 15px;
 }
 
 .boxes-inicio div.proximamente{
@@ -1429,9 +1433,7 @@ font-weight: 300;
 }
 
 
-.pantalla-2 ul li a:hover{
-  opacity: .7
-}
+.pantalla-2 ul li a:hover{background: #fff;color: #454edb;opacity: 1;}
 
 .pantalla-2 ul li a.special-link{
   
@@ -1791,12 +1793,12 @@ a#close-modal {
 
 
 /***
-    BÃšSQUEDA
+    BÃƒÅ¡SQUEDA
 ***/
 
 
 
-/** BÃºsqueda: Filtros **/
+/** BÃƒÂºsqueda: Filtros **/
 div.filter-search{
     background-color: #f3f3f3;
     padding-bottom: 0;
@@ -1808,6 +1810,7 @@ div.filter-search{
 div.filter-search .white{
   padding: 0;
   background: #fff;
+  padding-bottom: 10px;
 }
 
 div.filter-search h2{
@@ -2037,30 +2040,18 @@ a.see-more {
 }
 a.delete-filters{
   transition: all 0.3s ease-in-out;
-
-border: 1px solid #fb1313;
-
-color: #fb1313;
-
-width: 84%;
-
-display: block;
-
-margin-left: 20px;
-
-text-align: center;
-
-height: 35px;
-
-border-radius: 3px;
-
-line-height: 35px;
-
-font-family: Poppins;
-
-margin-bottom: 30px;
-
-margin-top: 20px;
+  border: 1px solid #fb1313;
+  color: #fb1313;
+  width: 84%;
+  display: block;
+  margin-left: 20px;
+  text-align: center;
+  height: 35px;
+  border-radius: 3px;
+  line-height: 35px;
+  font-family: Poppins;
+  margin-bottom: 15px;
+  margin-top: 20px;
 }
 
 a.delete-filters:hover{
@@ -2276,7 +2267,7 @@ label:hover:before {
 
 
 
-/*** BÃºsqueda: clinicaes ***/
+/*** BÃƒÂºsqueda: clinicaes ***/
 div.clinica-search{
     margin-top: 0;
 }
@@ -2314,7 +2305,7 @@ div.clinica-search{
     border: 2px solid transparent;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    padding-bottom: 40px;
+    padding-bottom: 75px;
 }
 .cluster-clinica:hover{
     transition: all 0.3s ease-in-out;
@@ -2327,10 +2318,14 @@ div.clinica-search{
 .cluster-clinica .img-clin{
 
 float: left;
+
+display: inline-block;
 }
 
 .cluster-clinica .img-clin img{
-    width: 70%;
+    width: 100%;
+    max-width: 120px;
+    /* width: 120px; */
     border-radius: 10%;
     display: block;
     text-align: center;
@@ -2342,6 +2337,8 @@ float: left;
 border-right: 1px solid #cacaca;
 
 float: left;
+
+padding-left: 20px;
 }
 
 
@@ -2406,10 +2403,11 @@ float: left;
     padding-left: 25px;
     padding-right: 25px;
     display: inline-block;
+    text-align: center;
 }
 
 .cluster-clinica .ask-clin h4{
-    font-size: 22px;
+    font-size: 20px;
     color: #fff;
     letter-spacing: 2px;
     font-weight: 600;
@@ -2418,10 +2416,12 @@ float: left;
     height: 40px;
     font-family: Poppins;
     line-height: 40px;
-    padding: 0px 10px;
+    padding: 0px 8px;
     text-align: center;
     border-radius: 7px;
     display: inline-block;
+    float: left;
+    margin-bottom: 10px;
 }
 
 .cluster-clinica .ask-clin a{
@@ -2462,9 +2462,9 @@ font-size: 12px;
 }
 
 .cluster-clinica .ask-clin a.pagar:hover{
-  background: #50ae20;
+  background: #454edb;
   color: #fff;
-
+  border: 1px solid #454edb;
 }
 
 .cluster-clinica .ask-clin a.reservar:hover{
@@ -2536,6 +2536,7 @@ color: gray;
 .cluster-clinica .ask-clin p{
     display: inline-block;
     font-family: Poppins;
+    margin-bottom: 10px;
 }
 
 .cluster-clinica .ask-clin a.comments{
@@ -2563,6 +2564,10 @@ font-family: Poppins;
 border-radius: 0;
 
 margin-top: 0;
+
+margin-bottom: 20px;
+
+transform: translateY(14px);
 }
 
 .cluster-clinica .ask-clin a.heart{
@@ -2623,7 +2628,7 @@ height: 30px;
 }
 
 form.nav-busqueda button{
-    margin-left: -25px;
+    margin-left: -32px;
     background: transparent;
     border: none;
     color: #b1b1b1;
@@ -2817,6 +2822,7 @@ letter-spacing: 0.5px;
 
 .slide-clinica .com-cluster .comentario-single{
   
+padding-left: 30px;
 }
 
 .slide-clinica .com-cluster .comentario-single .puntuacion{
@@ -2948,7 +2954,7 @@ text-align: left;
 
 .resultados-header .form-group label{
   
-transform: translateY(-10px)translateX(10px);
+transform: translateY(-2px)translateX(10px);
   
 position: relative;
   
@@ -2959,6 +2965,8 @@ font-family: Poppins;
 font-size: 12px;
   
 font-weight: 600;
+  
+display: inline-block;
 }
 .resultados-header .form-group.fecha-reserva{
   
@@ -2982,79 +2990,75 @@ form#resultados-form {
 
 form#resultados-form .select2-container{
     height: 50px!important;
-    width: 130px!important;
+    width: 180px!important;
     margin-left: -70px;
 }
 
 
 form#resultados-form .select2-container--default .select2-selection--single{
-    height: 50px!important;
+    height: 40px!important;
     border: none;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.36);
 }
 
 
 form#resultados-form .select2-container--default .select2-selection--single .select2-selection__rendered{
-    line-height: 65px!important;
+    line-height: 46px!important;
     font-family: Poppins!important;
     font-size: 14px!important;
-    height: 50px!important;
+    height: 40px!important;
     text-align: left!important;
     color: #999;
+    padding-left: 85px;
 }
 
 form#resultados-form .select2-container--default .select2-selection--single .select2-selection__arrow{
-  height: 65px!important;
+  height: 45px!important;
 }
 
 .resultados-header .form-group.fecha-reserva label{
   vertical-align: top;
-    transform: translateY(25px)translateX(10px);
+  transform: translateY(38px)translateX(10px);
 }
 
 .resultados-header .form-group.fecha-reserva .input-group {
     display: inline-block;
-    height: 50px;
+    height: 34px;
 }
 
 form#resultados-form input[type="submit"]{
       transition: all 0.3s ease-in-out;
-height: 50px;
-  
-width: 100px;
-  
-margin-left: -20px;
-  
-background: transparent;
-  
-border: 1px solid #454edb;
-  
-border-radius: 4px;
-  
-font-family: Poppins;
-  
-font-size: 15px;
-  
-color: #454edb;
+      height: 40px;
+      cursor: pointer;
+      width: 100px;
+      margin-left: -20px;
+      background: transparent;
+      border: 1px solid #454edb;
+      border-radius: 4px;
+      font-family: Poppins;
+      font-size: 15px;
+      color: #454edb;
+      margin-left: 7px;
 }
 
 .resultados-header .form-group.fecha-reserva .input-group.date .input-group-addon{
     background: #fff;
-    width: 130px;
-    height: 50px;
+    width: 220px;
+    height: 39px;
     border: none;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.33);
     border-radius: 4px;
     text-align: left;
     font-family: Poppins;
     color: #333;
-    padding-top: 20px;
+    padding-top: 10px;
     font-size: 14px;
+    padding-left: 126px;
 }
 .outter{
   position: absolute;
   top: 50%;
-  transform: translate(0%,-50%);
+  transform: translate(0%,-60%);
   z-index: 1;
 }
 section.search-section {
@@ -3115,7 +3119,9 @@ margin-right: 10px;
 }
 
 .map {
-    height: 400px;
+    height: 200px;
+    width: 93%;
+    margin: auto;
 }
 a.bell{
   color: #fff!important;
@@ -3148,4 +3154,146 @@ form#resultados-form input[type="submit"]:hover{
     background: #454edb;
     color: #fff;
     transition: all 0.3s ease-in-out
+}
+
+div.filter-search p.general-puntuacion:first-of-type{
+  margin-left: 20px;
+}
+
+div.filter-search p.general-puntuacion{
+
+display: inline-block;
+
+margin-left: 10px;
+
+padding-left: 0;
+
+border-radius: 6px;
+
+height: 30px;
+
+width: 40px;
+
+text-align: center;
+
+background: #989898;
+
+line-height: 30px;
+
+color: #fff;
+
+font-family: Poppins;
+
+font-size: 14px;
+}
+
+div.filter-search p.general-puntuacion.wrong{
+  
+background: #fb1313;
+}
+
+div.filter-search p.general-puntuacion.medium{
+  
+background: #fc7315;
+}
+
+div.filter-search p.general-puntuacion.good{
+  
+background: #50ae20;
+}
+
+div.filter-search p.general-servicios{
+
+margin-bottom: 15px;
+}
+
+div.filter-search p.general-servicios i{
+  
+font-size: 13px;
+  
+color: #525252;
+  
+border: 1px solid #ccc;
+  
+padding: 7px;
+  
+border-radius: 3px;
+}
+
+div.filter-search p.general-servicios span{
+  
+font-family: Poppins;
+  
+font-size: 13px;
+  
+margin-left: 20px;
+}
+
+.line-mapa {
+    padding: 0px 30px;
+    margin-bottom: 10px;
+}
+.line-ubi {
+    float: left;
+    margin-bottom: 20px;
+}
+.line-button {
+    float: right;
+}
+.half-ubi {
+    display: inline-block;
+}
+
+.slide-clinica div.line-ubi i.fa.fa-map-marker{
+    font-size: 35px;
+    vertical-align: top;
+    color: #6f6f6f;
+}
+
+.slide-clinica div.line-ubi span.frst{
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;	
+}
+.slide-clinica div.line-ubi span.scnd{
+    font-size: 12.5px;
+    font-weight: normal;
+    color: #3c3c3c;
+    transform: translateY(-4px);
+    display: block;
+}
+.line-button a{
+	font-family: Poppins;
+	font-size: 14px;
+	color: #454edb;
+    padding: 5px 10px;
+    border: 1px solid #454edb;
+    border-radius: 4px;
+}
+
+.line-button a:hover{
+    background:  #454edb;
+    color:#fff;
+}
+.line-menu-header {
+    display: inline-block;
+    width: 1px;
+    height: 20px;
+    background: white;
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
+a#navbarDropdown.dropdown-toggle::after {
+  display: none;
+}
+a.nav-link.logout {
+    font-size: 19px;
+    margin-top: 0px;
+}
+a.nav-link.help {
+    color: #fff!important;
+    font-family: Poppins;
+    font-size: 13px;
+    margin-top: 5px;
 }

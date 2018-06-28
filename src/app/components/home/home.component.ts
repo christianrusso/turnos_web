@@ -1,6 +1,6 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
-import {  Router, ActivatedRoute } from "@angular/router";
-import { BaseComponent } from '../../code/base.component';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
+import { Select2OptionData } from 'ng2-select2';
 
 declare const $: any;
 
@@ -10,24 +10,31 @@ declare const $: any;
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent  extends BaseComponent implements AfterViewInit
-{
+export class HomeComponent implements OnInit {
 
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
 
-  )
-  {super();}	
+  ) { }
 
+  public buscador;
   ngOnInit() {
+  
     this._route.params.subscribe(params => {
-			let id = +params["id"];
- 
-			
-		});
+      let id = +params["id"];
+      $('select2 option[value='+id+']').attr("selected",true);
+
+    });
+
+
+    this.buscador={
+      "value":"2",
+      "fecha":"2018/08/27"
+    }
   }
-  async ngAfterViewInit(): Promise<void> {
-    await this.loadScript('/assets/js/select2.min.js');
+  onSubmit() {
+
+    
   }
 }

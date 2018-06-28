@@ -8,18 +8,24 @@ import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { IndexComponent } from './components/index/index.component';
+import { Select2Module } from 'ng2-select2';
+import { FormsModule } from '@angular/forms';
+import { BuscadorComponent } from './components/buscador/buscador.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    IndexComponent
+    IndexComponent,
+    BuscadorComponent
   ],
   imports: [
     BrowserModule,
     routing,
-    HttpModule
+    HttpModule,
+    Select2Module,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

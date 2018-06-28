@@ -1,16 +1,15 @@
-
 <section class="col col-xs-12 general pantalla-2 container-fluid">
 
   <!-- Modal -->
   <div class="col-xs-12 modal-gral">
     <div class="col-xs-12 col-sm-8 col-md-5 col-sm-offset-2 col-md-offset-3 inside-modal">
-      <a href="" id="close-modal">X</a>
+      <a id="close-modal">X</a>
       <div class="col-xs-12 mod">
         <div class="col-xs-6 col-sm-6" id="d-ini">
-          <a href="#" id="ini"> Iniciar sesión</a>
+          <a id="ini"> Iniciar sesión</a>
         </div>
         <div class="col-xs-6 col-sm-6" id="d-reg">
-          <a href="#" id="reg"> Registrarte</a>
+          <a  id="reg"> Registrarte</a>
         </div>
       </div>
       <div class="col-xs-12 modulo-inicio">
@@ -31,7 +30,6 @@
               <img src="/assets/img/fb.png" alt="Facebook">Iniciar sesión con Facebook </p>
           </a>
         </div>
-
 
         <div class="btn-google">
           <a href="">
@@ -85,56 +83,51 @@
   <!-- // modal -->
   <div class="row">
     <section class="col-12 col-sm-5 inicio-bg">
-
       <h1>
         <img src="/assets/img/logo.png" alt="Logo Tu turno">
       </h1>
       <div class="outter">
         <p>Encontrá lo que buscás cerca de vos en un solo lugar</p>
         <p class="bold">Fácil, rápido y gratis</p>
-
-
-        <form action="" id="search_form">
+        <form #formCategoria="ngForm" (ngSubmit)="onEdit()" id="search_form">
           <div class="form-group ">
             <label for="">Categorías</label>
-            <select id="categorias" class="js-example-basic-single form-control" name="categorias" lang="es" >
-              <option  value="1"  >Medicina</option>
-              <option  value="2"  >Peluquería</option>
-              <option  value="3" >Estéticas</option>
-              <option  value="4"  >Restaurantes</option>
-              <option  value="5"  >Deportes</option>
-              <option value="6" >Servicios para el vehículo</option>
-            </select>
+            <select2 >
+                <option value="1">Medicina</option>
+                <option value="2">Peluquería</option>
+                <option value="3">Estéticas</option>
+                <option value="4">Restaurantes</option>
+                <option value="5">Deportes</option>
+                <option value="6">Servicios para el vehículo</option>
+            </select2>
           </div>
           <div class="form-group fecha">
             <div class='input-group date' id='datetimepicker1'>
               <span class="input-group-addon">
                 <i class="fa fa-calendar"></i>
               </span>
-              <input type='text' class="form-control" placeholder="Fecha" />
+              <input #fecha="ngModel" name="fecha" [(ngModel)]="buscador.fecha" type='text' class="form-control" placeholder="Fecha" />
             </div>
           </div>
-
           <div class="form-group donde">
             <label for="">
               <i class="fa fa-map-marker"></i>
             </label>
-            <select class="js-example-basic-single-2 form-control" name="donde" lang="es">
-              <option value="" selected="true" disabled="disabled">¿Dónde?</option>
-              <option value="">Caballito</option>
-              <option value="">Belgrano</option>
-              <option value="">Palermo</option>
-              <option value="">Vicente López</option>
-              <option value="">Almagro</option>
-              <option value="">Villa Urquiza</option>
-            </select>
+
+            <select2 >
+                <option value="" selected="true" disabled="disabled">¿Dónde?</option>
+                <option value="">Caballito</option>
+                <option value="">Belgrano</option>
+                <option value="">Palermo</option>
+                <option value="">Vicente López</option>
+                <option value="">Almagro</option>
+                <option value="">Villa Urquiza</option>
+            </select2>
           </div>
           <div class="form-group search">
             <input type="submit" value="Buscar">
           </div>
         </form>
-
-
       </div>
       <div class="download">
         <img src="/assets/img/google.png" alt="Google Play">

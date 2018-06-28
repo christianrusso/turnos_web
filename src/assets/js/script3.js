@@ -46,6 +46,7 @@ $(document).ready(function() {
 });
 
 /* Menú clínica */
+  $('.info-slide').addClass('activeFilter');
 $('.info-slide').click(function(e) {
   e.preventDefault();
   $('.info-cluster').fadeIn();
