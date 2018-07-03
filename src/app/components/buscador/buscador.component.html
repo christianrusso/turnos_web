@@ -63,7 +63,7 @@
     <form id="resultados-form" action="" method="">
         <div class="form-group cats">
             <label for="">Categorías</label>
-            <select2  name="cats" lang="es">
+            <select2 name="cats" lang="es">
                 <option value="" selected="">Medicina</option>
                 <option value="">Traumatología</option>
                 <option value="">Cardiología</option>
@@ -106,23 +106,23 @@
                         <!-- Especialidad -->
                         <label>Especialidad</label>
                         <p>
-                            <input type="checkbox" id="cbox1" value="first_checkbox">
+                            <input type="checkbox" id="cbox1" value="first_checkbox" (click)="FiltrarEspecialidad('Clínico',$event)">
                             <label for="cbox1">Clínico</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cbox2" value="second_checkbox">
+                            <input type="checkbox" id="cbox2" value="second_checkbox" (click)="FiltrarEspecialidad('Traumatología',$event)">
                             <label for="cbox2">Traumatología</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cbox3" value="third_checkbox">
+                            <input type="checkbox" id="cbox3" value="third_checkbox" (click)="FiltrarEspecialidad('Pediatría',$event)">
                             <label for="cbox3">Pediatría</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cbox4" value="fourth_checkbox">
+                            <input type="checkbox" id="cbox4" value="fourth_checkbox" (click)="FiltrarEspecialidad('Neurología',$event)">
                             <label for="cbox4">Neurología</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cbox5" value="fifth_checkbox">
+                            <input type="checkbox" id="cbox5" value="fifth_checkbox" (click)="FiltrarEspecialidad('Cardiología',$event)">
                             <label for="cbox5">Cardiología</label>
                         </p>
 
@@ -131,15 +131,15 @@
                         <!-- Sub especialidad -->
                         <label>Sub especialidad</label>
                         <p>
-                            <input type="checkbox" id="chbox1" value="primer_checkbox">
+                            <input type="checkbox" id="chbox1" value="primer_checkbox" (click)="SubEspecialidad('Extremidades',$event)">
                             <label for="chbox1">Extremidades</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="chbox2" value="segundo_checkbox">
+                            <input type="checkbox" id="chbox2" value="segundo_checkbox" (click)="SubEspecialidad('Columna',$event)">
                             <label for="chbox2">Columna</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="chbox3" value="tercer_checkbox">
+                            <input type="checkbox" id="chbox3" value="tercer_checkbox" (click)="SubEspecialidad('Rehabilitación',$event)">
                             <label for="chbox3">Rehabilitación</label>
                         </p>
 
@@ -192,7 +192,7 @@
 
                         <div class="divider-filtros"></div>
 
-                        <a href="" class="delete-filters">Borrar todos los filtros</a>
+                        <a class="delete-filters" (click)="BorrarFiltros()">Borrar todos los filtros</a>
 
                     </form>
 
@@ -269,639 +269,188 @@
                     <form method="" action="" id="form-ordenar">
                         <div class="form-group ordenar-clinica">
                             <label for="">Ordenar por</label>
-                            <select2  name="ordenar-clinica" lang="es">
-                                <option value="">Mejor calificación</option>
-                                <option value="">Más popular</option>
-                            </select2>
+                            <select class="form-control col-md-3 pull-right"  name="ordenar-clinica" lang="es" (change)="onChange($event)">
+                                <option value="calificación">Mejor calificación</option>
+                                <option value="popular">Más popular</option>
+                            </select>
                         </div>
                     </form>
                 </div>
+                <div class="text-center" *ngIf="loader==true">
+                    <img src="/assets/img/loader.gif" alt="">
+                </div>
+                <div *ngFor="let row of response">
+                    <div class="col-xs-12 cluster-clinica  " *ngIf="loader==false">
+                        <div class="col-xs-12 col-sm-2 img-clin">
+                            <img src="{{row.logo}}" alt="Clinica">
+                        </div>
+                        <div class="col-xs-12 col-sm-6 text-clin">
+                            <div class="specific-clinica">
+                                <h3>{{row.name}}</h3>
+                            </div>
+                            <div class="ubi-clinica">
+                                <i class="fa fa-map-marker"></i>
+                                <span>{{row.address}}</span>
+                            </div>
 
-                <div class="col-xs-12 cluster-clinica  button-collapse">
-                    <div class="col-xs-12 col-sm-2 img-clin">
-                        <img src="/assets/img/clinica.png" alt="Clinica">
+                            <div class="stars-opiniones">
+                                <span *ngFor="let scor of score">
+                                    <span *ngIf="row.score >= scor ">
+                                        <i class="fa fa-star"></i>
+                                    </span>
+                                </span>
+
+                                <p>Ver comentarios</p>
+                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    Link with href
+                                </a>
+                            </div>
+                            <p class="descr-clin">{{row.description}}.</p>
+
+                            <div class="icon-clin">
+                                <span data-toggle="tooltip" title="Médico">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                </span>
+                                <span data-toggle="tooltip" title="Médico">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                </span>
+                                <span data-toggle="tooltip" title="Médico">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                </span>
+                                <span data-toggle="tooltip" title="Médico">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                </span>
+                                <span data-toggle="tooltip" title="Médico">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-4 ask-clin">
+                            <a href="" class="heart">
+                                <i class="fa fa-heart-o corazon"></i>
+                            </a>
+                            <h4>{{row.score}}</h4>
+                            <a href="" class="comments">
+                                <p>{{row.scoreQuantity}} comentarios</p>
+                            </a>
+
+                            <a href="" class="reservar">Reservar</a>
+                            <a href="" class="pagar">Pagar ahora</a>
+                        </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 text-clin">
-                        <div class="specific-clinica">
-                            <h3>Clínica Bazterrica</h3>
-                        </div>
-                        <div class="ubi-clinica">
-                            <i class="fa fa-map-marker"></i>
-                            <span>Billinghurst 2072</span>
-                        </div>
-                        <div class="stars-opiniones">
-                            <span>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>Ver comentarios</p>
-                        </div>
-                        <p class="descr-clin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum tellus, sed
-                            euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit feugiat.</p>
-
-                        <div class="icon-clin">
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
+                    <div class="col-xs-12 slide-clinica collapse" id="collapseExample{{row.clinicId}}">
+                        <div class="col-xs-12 menu-slide">
+                            <a (click)="info(row.clinicId)" class="info-slide">Información</a>
+                            <a (click)="comen(row.clinicId)" class="com-slide">Comentarios</a>
+                            <a (click)="ubi(row.clinicId,row.latitude,row.longitude)" class="ubi-slide">Ubicación</a>
                         </div>
 
-                    </div>
-                    <div class="col-xs-12 col-sm-4 ask-clin">
-                        <a href="" class="heart">
-                            <i class="fa fa-heart-o corazon"></i>
-                        </a>
-                        <h4>9.5</h4>
-                        <a href="" class="comments">
-                            <p>180 comentarios</p>
-                        </a>
+                        <div class="col-xs-12 height-slide">
 
-                        <a href="" class="reservar">Reservar</a>
-                        <a href="" class="pagar">Pagar ahora</a>
+                            <div class="col-xs-12 info-cluster" id="info{{row.clinicId}}">
+
+                                <p>{{row.description}} </p>
+
+                                <div class="divider-slide"></div>
+
+                                <h2> Servicios</h2>
+                                <div class="services-slide">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <span>Estacionamiento</span>
+                                </div>
+                                <div class="services-slide">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <span>Gastronomía</span>
+                                </div>
+                                <div class="services-slide">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <span>Wifi</span>
+                                </div>
+                                <div class="services-slide">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <span>Guardia</span>
+                                </div>
+
+                                <div class="divider-slide"></div>
+
+                                <h2>Horarios de atención</h2>
+
+                                <p>Lunes a Viernes de 10hs a 17hs</p>
+                                <p>Sábados y Domingos de 10hs a 13hs</p>
+                                <p>Feriados: Cerrado</p>
+                            </div>
+
+                            <div class="col-xs-12 com-cluster" id="comen{{row.clinicId}}">
+                                <h2>Destacados por los usuarios</h2>
+                                <div class="destacado">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <h3>8.0</h3>
+                                    <span>Personal</span>
+                                </div>
+                                <div class="destacado">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <h3>8.0</h3>
+                                    <span>Personal</span>
+                                </div>
+                                <div class="destacado">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <h3>8.0</h3>
+                                    <span>Personal</span>
+                                </div>
+                                <div class="destacado">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <h3>8.0</h3>
+                                    <span>Personal</span>
+                                </div>
+                                <div class="divider-slide"></div>
+
+                                <h2>Todos los comentarios</h2>
+                                <div class="form-group comentarios">
+                                    <label for="">Ordenar por</label>
+                                    <select class="js-example-basic-single-3" name="comentarios" lang="es">
+                                        <option value="">Mejor calificación</option>
+                                        <option value="">Más recientes</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-12 comentarios-gral">
+                                    <div class="col-xs-12 comentario-single" *ngFor="let comment of row.ratings">
+                                        <div class="puntuacion col-xs-4">
+                                            <p class="good">{{comment.score}}</p>
+                                            <h3>Cristian Russo</h3>
+                                            <span>26 de Mayo 2018</span>
+                                        </div>
+                                        <div class="comentario-text col-xs-8">
+                                            <p>"{{comment.comment}}"
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 divider-slide"></div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 ubi-cluster" id="ubi{{row.clinicId}}">
+                                <div class="line-mapa">
+                                    <div class="line-ubi">
+                                        <i class="fa fa-map-marker"></i>
+                                        <div class="half-ubi">
+                                            <span class="frst">{{row.address}}</span>
+                                            <span class="scnd">Palermo</span>
+                                        </div>
+                                    </div>
+                                    <div class="line-button">
+                                        <a href="">Cómo llegar</a>
+
+                                    </div>
+                                </div>
+                                <div id="regularMap{{row.clinicId}}" class="col-xs-12 map"></div>
+                                <br>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-12 slide-clinica collapse">
-                    <div class="col-xs-12 menu-slide">
-                        <a href="#" class="info-slide" >Información</a>
-                        <a href="#" class="com-slide">Comentarios</a>
-                        <a href="#" class="ubi-slide">Ubicación</a>
-                    </div>
-
-                    <div class="col-xs-12 height-slide">
-
-                        <div class="col-xs-12 info-cluster">
-
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum tellus,
-                                sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit feugiat.</p>
-
-                            <div class="divider-slide"></div>
-
-                            <h2> Servicios</h2>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Estacionamiento</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Gastronomía</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Wifi</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Guardia</span>
-                            </div>
-
-                            <div class="divider-slide"></div>
-
-                            <h2>Horarios de atención</h2>
-
-                            <p>Lunes a Viernes de 10hs a 17hs</p>
-                            <p>Sábados y Domingos de 10hs a 13hs</p>
-                            <p>Feriados: Cerrado</p>
-                        </div>
-
-                        <div class="col-xs-12 com-cluster">
-                            <h2>Destacados por los usuarios</h2>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="divider-slide"></div>
-
-                            <h2>Todos los comentarios</h2>
-                            <div class="form-group comentarios">
-                                <label for="">Ordenar por</label>
-                                <select class="js-example-basic-single-3" name="comentarios" lang="es">
-                                    <option value="">Mejor calificación</option>
-                                    <option value="">Más recientes</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-12 comentarios-gral">
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="good">8.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="good">7.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="warning">4.5</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="wrong">2.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 ubi-cluster">
-                            <div class="line-mapa">
-                                <div class="line-ubi">
-                                    <i class="fa fa-map-marker"></i>
-                                    <div class="half-ubi">
-                                        <span class="frst">Billinghurst 2072</span>
-                                        <span class="scnd">Palermo</span>
-                                    </div>
-                                </div>
-                                <div class="line-button">
-                                    <a href="">Cómo llegar</a>
-
-                                </div>
-                            </div>
-                            <div id="map-u" class="col-xs-12 map"></div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-xs-12 cluster-clinica  button-collapse">
-                    <div class="col-xs-12 col-sm-2 img-clin">
-                        <img src="/assets/img/clinica.png" alt="Clinica">
-                    </div>
-                    <div class="col-xs-12 col-sm-6 text-clin">
-                        <div class="specific-clinica">
-                            <h3>Clínica Bazterrica</h3>
-                        </div>
-                        <div class="ubi-clinica">
-                            <i class="fa fa-map-marker"></i>
-                            <span>Billinghurst 2072</span>
-                        </div>
-                        <div class="stars-opiniones">
-                            <span>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>Ver comentarios</p>
-                        </div>
-                        <p class="descr-clin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum tellus, sed
-                            euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit feugiat.</p>
-
-                        <div class="icon-clin">
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-                    </div>
-                    <div class="col-xs-12 col-sm-4 ask-clin">
-                        <a href="" class="heart">
-                            <i class="fa fa-heart-o corazon"></i>
-                        </a>
-                        <h4>9.5</h4>
-                        <a href="" class="comments">
-                            <p>180 comentarios</p>
-                        </a>
-
-                        <a href="" class="reservar">Reservar</a>
-                        <a href="" class="pagar">Pagar ahora</a>
-                    </div>
-                </div>
-                <div class="col-xs-12 slide-clinica collapse">
-                    <div class="col-xs-12 menu-slide">
-                        <a href="#" class="info-slide" >Información</a>
-                        <a href="#" class="com-slide">Comentarios</a>
-                        <a href="#" class="ubi-slide">Ubicación</a>
-                    </div>
-
-                    <div class="col-xs-12 height-slide">
-
-                        <div class="col-xs-12 info-cluster">
-
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum tellus,
-                                sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit feugiat.</p>
-
-                            <div class="divider-slide"></div>
-
-                            <h2> Servicios</h2>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Estacionamiento</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Gastronomía</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Wifi</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Guardia</span>
-                            </div>
-
-                            <div class="divider-slide"></div>
-
-                            <h2>Horarios de atención</h2>
-
-                            <p>Lunes a Viernes de 10hs a 17hs</p>
-                            <p>Sábados y Domingos de 10hs a 13hs</p>
-                            <p>Feriados: Cerrado</p>
-                        </div>
-
-                        <div class="col-xs-12 com-cluster">
-                            <h2>Destacados por los usuarios</h2>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="divider-slide"></div>
-
-                            <h2>Todos los comentarios</h2>
-                            <div class="form-group comentarios">
-                                <label for="">Ordenar por</label>
-                                <select class="js-example-basic-single-3" name="comentarios" lang="es">
-                                    <option value="">Mejor calificación</option>
-                                    <option value="">Más recientes</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-12 comentarios-gral">
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="good">8.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="good">7.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="warning">4.5</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="wrong">2.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 ubi-cluster">
-                            <div class="line-mapa">
-                                <div class="line-ubi">
-                                    <i class="fa fa-map-marker"></i>
-                                    <div class="half-ubi">
-                                        <span class="frst">Billinghurst 2072</span>
-                                        <span class="scnd">Palermo</span>
-                                    </div>
-                                </div>
-                                <div class="line-button">
-                                    <a href="">Cómo llegar</a>
-
-                                </div>
-                            </div>
-                            <div id="map-d" class="col-xs-12 map"></div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-                <div class="col-xs-12 cluster-clinica  button-collapse">
-                    <div class="col-xs-12 col-sm-2 img-clin">
-                        <img src="/assets/img/clinica.png" alt="Clinica">
-                    </div>
-                    <div class="col-xs-12 col-sm-6 text-clin">
-                        <div class="specific-clinica">
-                            <h3>Clínica Bazterrica</h3>
-                        </div>
-                        <div class="ubi-clinica">
-                            <i class="fa fa-map-marker"></i>
-                            <span>Billinghurst 2072</span>
-                        </div>
-                        <div class="stars-opiniones">
-                            <span>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>Ver comentarios</p>
-                        </div>
-                        <p class="descr-clin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum tellus, sed
-                            euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit feugiat.</p>
-
-                        <div class="icon-clin">
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                            <span data-toggle="tooltip" title="Médico">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-                    </div>
-                    <div class="col-xs-12 col-sm-4 ask-clin">
-                        <a href="" class="heart">
-                            <i class="fa fa-heart-o corazon"></i>
-                        </a>
-                        <h4>9.5</h4>
-                        <a href="" class="comments">
-                            <p>180 comentarios</p>
-                        </a>
-
-                        <a href="" class="reservar">Reservar</a>
-                        <a href="" class="pagar">Pagar ahora</a>
-                    </div>
-                </div>
-                <div class="col-xs-12 slide-clinica collapse">
-                    <div class="col-xs-12 menu-slide">
-                        <a href="#" class="info-slide" >Información</a>
-                        <a href="#" class="com-slide">Comentarios</a>
-                        <a href="#" class="ubi-slide">Ubicación</a>
-                    </div>
-
-                    <div class="col-xs-12 height-slide">
-
-                        <div class="col-xs-12 info-cluster">
-
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum tellus,
-                                sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit feugiat.</p>
-
-                            <div class="divider-slide"></div>
-
-                            <h2> Servicios</h2>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Estacionamiento</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Gastronomía</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Wifi</span>
-                            </div>
-                            <div class="services-slide">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <span>Guardia</span>
-                            </div>
-
-                            <div class="divider-slide"></div>
-
-                            <h2>Horarios de atención</h2>
-
-                            <p>Lunes a Viernes de 10hs a 17hs</p>
-                            <p>Sábados y Domingos de 10hs a 13hs</p>
-                            <p>Feriados: Cerrado</p>
-                        </div>
-
-                        <div class="col-xs-12 com-cluster">
-                            <h2>Destacados por los usuarios</h2>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="destacado">
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                <h3>8.0</h3>
-                                <span>Personal</span>
-                            </div>
-                            <div class="divider-slide"></div>
-
-                            <h2>Todos los comentarios</h2>
-                            <div class="form-group comentarios">
-                                <label for="">Ordenar por</label>
-                                <select class="js-example-basic-single-3" name="comentarios" lang="es">
-                                    <option value="">Mejor calificación</option>
-                                    <option value="">Más recientes</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-12 comentarios-gral">
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="good">8.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="good">7.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="warning">4.5</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 divider-slide"></div>
-                                <div class="col-xs-12 comentario-single">
-                                    <div class="puntuacion col-xs-4">
-                                        <p class="wrong">2.0</p>
-                                        <h3>Cristian Russo</h3>
-                                        <span>26 de Mayo 2018</span>
-                                    </div>
-                                    <div class="comentario-text col-xs-8">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie fermentum
-                                            tellus, sed euismod sapien ullamcorper eu. Fusce rutrum turpis sit amet hendrerit
-                                            feugiat"</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 ubi-cluster">
-                            <div class="line-mapa">
-                                <div class="line-ubi">
-                                    <i class="fa fa-map-marker"></i>
-                                    <div class="half-ubi">
-                                        <span class="frst">Billinghurst 2072</span>
-                                        <span class="scnd">Palermo</span>
-                                    </div>
-                                </div>
-                                <div class="line-button">
-                                    <a href="">Cómo llegar</a>
-
-                                </div>
-                            </div>
-                            <div id="map-t" class="col-xs-12 map"></div>
-                        </div>
-
-                    </div>
-                </div>
-
-
             </div>
             <!-- // clinicaes listado -->
 

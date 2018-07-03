@@ -12,6 +12,7 @@ import { Select2Module } from 'ng2-select2';
 import { FormsModule } from '@angular/forms';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 
+ 
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
     routing,
     HttpModule,
     Select2Module,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
