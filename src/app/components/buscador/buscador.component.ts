@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Select2OptionData } from 'ng2-select2';
 import { BusquedaService } from '../../services/busqueda.service';
-import { EILSEQ } from 'constants';
 declare const google: any;
 
 @Component({
@@ -29,6 +28,8 @@ export class BuscadorComponent implements OnInit {
 
     this.getAll(this.filtro);
   
+    this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
+    console.log (this.busqueda);
   }
   public getAll(filtro) {
     this.loader = true;
