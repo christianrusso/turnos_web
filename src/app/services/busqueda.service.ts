@@ -7,12 +7,12 @@ import 'rxjs/add/operator/map';
 export class BusquedaService {
   public url: string;
   private headers= new Headers({'Content-Type':'application/json'});
+  
   constructor(private _http: Http) {
     this.url = global.url;
-
-   }
+  }
    
-   getAll(filtro){
+   getByFilter(filtro){
     return this._http.post(this.url + 'Api/Clinic/GetByFilter',filtro ,{headers: this.headers})
                     .map(res => res.json());
   }

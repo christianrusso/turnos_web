@@ -131,15 +131,15 @@
                         <!-- Sub especialidad -->
                         <label>Sub especialidad</label>
                         <p>
-                            <input type="checkbox" id="chbox1" value="primer_checkbox" (click)="SubEspecialidad('Extremidades',$event)">
+                            <input type="checkbox" id="chbox1" value="primer_checkbox" (click)="FiltrarSubEspecialidad('Extremidades',$event)">
                             <label for="chbox1">Extremidades</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="chbox2" value="segundo_checkbox" (click)="SubEspecialidad('Columna',$event)">
+                            <input type="checkbox" id="chbox2" value="segundo_checkbox" (click)="FiltrarSubEspecialidad('Columna',$event)">
                             <label for="chbox2">Columna</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="chbox3" value="tercer_checkbox" (click)="SubEspecialidad('Rehabilitación',$event)">
+                            <input type="checkbox" id="chbox3" value="tercer_checkbox" (click)="FiltrarSubEspecialidad('Rehabilitación',$event)">
                             <label for="chbox3">Rehabilitación</label>
                         </p>
 
@@ -269,7 +269,7 @@
                     <form method="" action="" id="form-ordenar">
                         <div class="form-group ordenar-clinica">
                             <label for="">Ordenar por</label>
-                            <select class="form-control col-md-3 pull-right"  name="ordenar-clinica" lang="es" (change)="onChange($event)">
+                            <select class="form-control col-md-3 pull-right"  name="ordenar-clinica" lang="es" (change)="filterOrderBy($event)">
                                 <option value="calificación">Mejor calificación</option>
                                 <option value="popular">Más popular</option>
                             </select>
