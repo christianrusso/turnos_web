@@ -126,6 +126,7 @@ export class BuscadorComponent implements OnInit {
     $('.info-slide').removeClass('activeFilter');
     this._MapService.generateMap(latitud, longitud, idClinica);
   }
+  
   //FILTROS DE CLINICAS
   filterOrderBy(deviceValue) {
     var select = deviceValue.target.value;
@@ -133,27 +134,16 @@ export class BuscadorComponent implements OnInit {
     var newArray = [];
     this.response.sort();
     if (select == "calificación") {
-      this.response.forEach(element => {
-        if (element.score >= extra) {
-          newArray.unshift(element);
-          extra = element.score;
-        } else {
-          newArray.push(element);
-        }
+      this.response.sort(function(a, b) {
+        return b.score - a.score;
       });
     }
     else {
-      this.response.forEach(element => {
-        if (element.scoreQuantity >= extra) {
-          newArray.unshift(element);
-          extra = element.scoreQuantity;
-        } else {
-          newArray.push(element);
-        }
+      this.response.sort(function(a, b) {
+        return b.scoreQuantity - a.scoreQuantity;
       });
     }
-    this.response = [];
-    this.response = newArray;
+    
   }
 
   //FILTROS DE COMENTARIOS
