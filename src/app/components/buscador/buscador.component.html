@@ -269,82 +269,85 @@
                     <form method="" action="" id="form-ordenar">
                         <div class="form-group ordenar-clinica">
                             <label for="">Ordenar por</label>
-                            <select class="form-control col-md-3 pull-right"  name="ordenar-clinica" lang="es" (change)="filterOrderBy($event)">
+                            <select id="ordernarPor" class="form-control col-md-2 pull-right " name="ordenar-clinica" lang="es" (change)="filterOrderBy($event)">
                                 <option value="calificación">Mejor calificación</option>
                                 <option value="popular">Más popular</option>
                             </select>
                         </div>
                     </form>
                 </div>
-                <div class="text-center" *ngIf="loader==true">
-                    <img src="/assets/img/loader.gif" alt="">
+                <div class="text-center vertical" *ngIf="loader==true">
+                    <img src="/assets/img/loader.gif" class="img" alt="">
+                </div>
+                <div *ngIf="dontResult">
+                    <h5 class="text-center text-danger vertical"> "No se han encontrado resultados para esta busqueda"</h5>
                 </div>
                 <div *ngFor="let row of response">
-                    <div class="col-xs-12 cluster-clinica  " *ngIf="loader==false">
-                        <div class="col-xs-12 col-sm-2 img-clin">
-                            <img src="{{row.logo}}" alt="Clinica">
-                        </div>
-                        <div class="col-xs-12 col-sm-6 text-clin">
-                            <div class="specific-clinica">
-                                <h3>{{row.name}}</h3>
+                    <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="col-xs-12 cluster-clinica  " *ngIf="loader==false">
+                            <div class="col-xs-12 col-sm-2 img-clin">
+                                <img src="{{row.logo}}" alt="Clinica">
                             </div>
-                            <div class="ubi-clinica">
-                                <i class="fa fa-map-marker"></i>
-                                <span>{{row.address}}</span>
-                            </div>
+                            <div class="col-xs-12 col-sm-6 text-clin">
+                                <div class="specific-clinica">
+                                    <h3>{{row.name}}</h3>
+                                </div>
+                                <div class="ubi-clinica">
+                                    <i class="fa fa-map-marker"></i>
+                                    <span>{{row.address}}</span>
+                                </div>
 
-                            <div class="stars-opiniones">
-                                <span *ngFor="let scor of score">
-                                    <span *ngIf="row.score >= scor ">
-                                        <i class="fa fa-star"></i>
+                                <div class="stars-opiniones">
+                                    <span *ngFor="let scor of score">
+                                        <span *ngIf="row.score -scor >= scor">
+                                            <i class="fa fa-star"></i>
+                                        </span>
                                     </span>
-                                </span>
 
-                                <p>Ver comentarios</p>
-                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false"
-                                    aria-controls="collapseExample">
-                                    Link with href
+                                    <p>Ver comentarios</p>
+
+                                </div>
+                                <p class="descr-clin">{{row.description}}.</p>
+
+                                <div class="icon-clin">
+                                    <span data-toggle="tooltip" title="Médico">
+                                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    </span>
+                                    <span data-toggle="tooltip" title="Médico">
+                                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    </span>
+                                    <span data-toggle="tooltip" title="Médico">
+                                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    </span>
+                                    <span data-toggle="tooltip" title="Médico">
+                                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    </span>
+                                    <span data-toggle="tooltip" title="Médico">
+                                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-12 col-sm-4 ask-clin">
+                                <a href="" class="heart">
+                                    <i class="fa fa-heart-o corazon"></i>
                                 </a>
+                                <h4>{{row.score }}</h4>
+                                <a href="" class="comments">
+                                    <p>{{row.scoreQuantity}} comentarios</p>
+                                </a>
+
+                                <a href="" class="reservar">Reservar</a>
+                                <a href="" class="pagar">Pagar ahora</a>
                             </div>
-                            <p class="descr-clin">{{row.description}}.</p>
-
-                            <div class="icon-clin">
-                                <span data-toggle="tooltip" title="Médico">
-                                    <i class="fa fa-medkit" aria-hidden="true"></i>
-                                </span>
-                                <span data-toggle="tooltip" title="Médico">
-                                    <i class="fa fa-medkit" aria-hidden="true"></i>
-                                </span>
-                                <span data-toggle="tooltip" title="Médico">
-                                    <i class="fa fa-medkit" aria-hidden="true"></i>
-                                </span>
-                                <span data-toggle="tooltip" title="Médico">
-                                    <i class="fa fa-medkit" aria-hidden="true"></i>
-                                </span>
-                                <span data-toggle="tooltip" title="Médico">
-                                    <i class="fa fa-medkit" aria-hidden="true"></i>
-                                </span>
-                            </div>
-
                         </div>
-                        <div class="col-xs-12 col-sm-4 ask-clin">
-                            <a href="" class="heart">
-                                <i class="fa fa-heart-o corazon"></i>
-                            </a>
-                            <h4>{{row.score}}</h4>
-                            <a href="" class="comments">
-                                <p>{{row.scoreQuantity}} comentarios</p>
-                            </a>
+                    </a>
 
-                            <a href="" class="reservar">Reservar</a>
-                            <a href="" class="pagar">Pagar ahora</a>
-                        </div>
-                    </div>
                     <div class="col-xs-12 slide-clinica collapse" id="collapseExample{{row.clinicId}}">
                         <div class="col-xs-12 menu-slide">
-                            <a (click)="info(row.clinicId)" class="info-slide">Información</a>
-                            <a (click)="comen(row.clinicId)" class="com-slide">Comentarios</a>
-                            <a (click)="ubi(row.clinicId,row.latitude,row.longitude)" class="ubi-slide">Ubicación</a>
+                            <a (click)="info(row.clinicId)" class="info-slide activeFilter pointer">Información</a>
+                            <a (click)="comen(row.clinicId)" class="com-slide pointer">Comentarios</a>
+                            <a (click)="ubi(row.clinicId,row.latitude,row.longitude)" class="ubi-slide pointer">Ubicación</a>
                         </div>
 
                         <div class="col-xs-12 height-slide">
@@ -383,7 +386,7 @@
                             </div>
 
                             <div class="col-xs-12 com-cluster" id="comen{{row.clinicId}}">
-                                <h2>Destacados por los usuarios</h2>
+                                <!-- <h2>Destacados por los usuarios</h2>
                                 <div class="destacado">
                                     <i class="fa fa-medkit" aria-hidden="true"></i>
                                     <h3>8.0</h3>
@@ -403,15 +406,15 @@
                                     <i class="fa fa-medkit" aria-hidden="true"></i>
                                     <h3>8.0</h3>
                                     <span>Personal</span>
-                                </div>
-                                <div class="divider-slide"></div>
+                                </div> -->
+                                <!-- <div class="divider-slide"></div> -->
 
                                 <h2>Todos los comentarios</h2>
-                                <div class="form-group comentarios">
+                                <div class="form-group comentarios form-inline">
                                     <label for="">Ordenar por</label>
-                                    <select class="js-example-basic-single-3" name="comentarios" lang="es">
-                                        <option value="">Mejor calificación</option>
-                                        <option value="">Más recientes</option>
+                                    <select id="ordernarPor" class="form-control" name="comentarios" lang="es" (change)="filterComentariosOrderBy($event,row.clinicId)">
+                                        <option value="recientes">Más recientes</option>
+                                        <option value="calificación">Mejor calificación</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-12 comentarios-gral">

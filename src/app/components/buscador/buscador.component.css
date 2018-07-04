@@ -1,0 +1,18 @@
+#ordernarPor{
+    font-family: Poppins!important;
+    font-size: 15px!important;
+    color: #888!important;
+    line-height: 35px!important;
+    
+}
+
+.vertical{
+    line-height: 500px; 
+
+}
+
+.img{
+    width: 50px;
+}
+
+.pointer {cursor: pointer;}

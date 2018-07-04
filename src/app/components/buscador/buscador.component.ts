@@ -14,14 +14,14 @@ export class BuscadorComponent implements OnInit {
   public busqueda;
   public response;
   public filtro;
-  public loader;
+  public loader = false;
   public coments;
-  public score = [1,2,3,4,5,6,7,8,9,10];
-
+  public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  public dontResult:Boolean;
   constructor(
-    private _BusquedaService: BusquedaService, 
+    private _BusquedaService: BusquedaService,
     private _MapService: MapService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.filtro = {
@@ -30,17 +30,27 @@ export class BuscadorComponent implements OnInit {
       "Subspecialties": [],
       "MedicalInsurances": []
     }
+    this.response = true;
+    this.loader = false;
+    this.dontResult = false;
     this.getByFilter(this.filtro);
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
-    console.log (this.busqueda);
+    console.log(this.busqueda);
   }
 
   public getByFilter(filtro) {
     this.loader = true;
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
-        this.response = response;
         this.loader = false;
+        if (response.length != 0) {
+          this.dontResult = false;
+          this.response = response;
+        }
+        else {
+          this.dontResult = true;
+          this.response = null;
+        }
         console.log(response);
       },
       error => {
@@ -50,9 +60,10 @@ export class BuscadorComponent implements OnInit {
   }
 
   public FiltrarEspecialidad(especialidad, deviceValue) {
+    this.response = [];
     if (deviceValue.target.checked) {
       this.filtro.Specialties.push(especialidad);
-    }else {
+    } else {
       for (let index = 0; index < this.filtro.Specialties.length; index++) {
         if (especialidad == this.filtro.Specialties[index]) {
           this.filtro.Specialties.splice(index, 1);
@@ -63,6 +74,7 @@ export class BuscadorComponent implements OnInit {
   }
 
   public FiltrarSubEspecialidad(Subspecialties, deviceValue) {
+    this.response = [];
     if (deviceValue.target.checked) {
       this.filtro.Subspecialties.push(Subspecialties);
     }
@@ -75,7 +87,7 @@ export class BuscadorComponent implements OnInit {
     }
     this.getByFilter(this.filtro);
   }
-  
+
   public BorrarFiltros() {
     this.filtro = {
       "Cities": [],
@@ -87,54 +99,105 @@ export class BuscadorComponent implements OnInit {
 
   }
 
-  public info(idClinica){
-      $("#info"+idClinica).show();
-      $("#comen"+idClinica).hide();
-      $("#ubi"+idClinica).hide();
+  // ACTIVADOR DE PESTAÑAS DE CADA CLINICA
+  public info(idClinica) {
+    $("#info" + idClinica).show();
+    $("#comen" + idClinica).hide();
+    $("#ubi" + idClinica).hide();
+    $('.info-slide').addClass('activeFilter');
+    $('.com-slide').removeClass('activeFilter');
+    $('.ubi-slide').removeClass('activeFilter');
   }
-  public comen(idClinica){
-    $("#info"+idClinica).hide();
-    $("#comen"+idClinica).show();
-    $("#ubi"+idClinica).hide();
+  public comen(idClinica) {
+    $("#info" + idClinica).hide();
+    $("#comen" + idClinica).show();
+    $("#ubi" + idClinica).hide();
+    $('.com-slide').addClass('activeFilter');
+    $('.info-slide').removeClass('activeFilter');
+    $('.ubi-slide').removeClass('activeFilter');
+  
   }
-  public ubi(idClinica, latitud, longitud){
-    $("#info"+idClinica).hide();
-    $("#comen"+idClinica).hide();
-    $("#ubi"+idClinica).show();
-
+  public ubi(idClinica, latitud, longitud) {
+    $("#info" + idClinica).hide();
+    $("#comen" + idClinica).hide();
+    $("#ubi" + idClinica).show();
+    $('.ubi-slide').addClass('activeFilter');
+    $('.com-slide').removeClass('activeFilter');
+    $('.info-slide').removeClass('activeFilter');
     this._MapService.generateMap(latitud, longitud, idClinica);
   }
-
+  //FILTROS DE CLINICAS
   filterOrderBy(deviceValue) {
-    var select=deviceValue.target.value;
-    var extra=0;
-    var newArray=[];
+    var select = deviceValue.target.value;
+    var extra = 0;
+    var newArray = [];
     this.response.sort();
-    if (select=="calificación"){
+    if (select == "calificación") {
       this.response.forEach(element => {
-        if(element.score<= extra ){
-          newArray.push(element);
-          extra=element.score;
-        }else{
+        if (element.score >= extra) {
+          newArray.unshift(element);
+          extra = element.score;
+        } else {
           newArray.push(element);
         }
       });
     }
-    else{
+    else {
       this.response.forEach(element => {
-        if(element.scoreQuantity<= extra ){
-          newArray.push(element);
-          extra=element.scoreQuantity;
-        }else{
+        if (element.scoreQuantity >= extra) {
+          newArray.unshift(element);
+          extra = element.scoreQuantity;
+        } else {
           newArray.push(element);
         }
       });
     }
-    this.response=[];
-   this.response=newArray;
+    this.response = [];
+    this.response = newArray;
   }
 
-  calculateStar(rating){
+  //FILTROS DE COMENTARIOS
+  filterComentariosOrderBy(deviceValue,clinicId) {
+    var select = deviceValue.target.value;
+    var extra = 0;
+    var comments=[];
+    var newArray = [];
+    
+    this.response.forEach(element => {
+      if(element.clinicId==clinicId){
+        comments.push(element.ratings);
+      }
+    });
+    this.response[0].ratings=[];
+
+    if (select == "calificación") {
+      var i;
+      for (i = 0; i < comments.length; i++) { 
+        if (comments[i].score >= extra) {
+          this.response[0].ratings[0].unshift(comments[i]);
+          extra = comments[i].score;
+        } else {
+          this.response[0].ratings.push(comments[i]);
+        }
+    }
+      comments.forEach(element => {
+      
+      });
+    }
+    else {
+      comments.forEach(element => {
+        if (element.scoreQuantity >= extra) {
+          newArray.unshift(element);
+          extra = element.scoreQuantity;
+        } else {
+          newArray.push(element);
+        }
+      });
+    }
+    console.log(newArray);
+    console.log(this.response);
+  }
+  calculateStar(rating) {
     return 2;
   }
 }
