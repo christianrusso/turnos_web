@@ -24,6 +24,9 @@ export class BuscadorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
+    console.log(this.busqueda);
+
     this.filtro = {
       "Cities": [],
       "Specialties": [],
@@ -31,11 +34,8 @@ export class BuscadorComponent implements OnInit {
       "MedicalInsurances": []
     }
     this.response = true;
-    this.loader = false;
     this.dontResult = false;
     this.getByFilter(this.filtro);
-    this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
-    console.log(this.busqueda);
   }
 
   public getByFilter(filtro) {
@@ -51,7 +51,7 @@ export class BuscadorComponent implements OnInit {
           this.dontResult = true;
           this.response = null;
         }
-        console.log(response);
+        console.log(this.response);
       },
       error => {
         // Manejar errores
@@ -96,7 +96,6 @@ export class BuscadorComponent implements OnInit {
       "MedicalInsurances": []
     }
     this.getByFilter(this.filtro);
-
   }
 
   // ACTIVADOR DE PESTAÑAS DE CADA CLINICA
@@ -130,9 +129,6 @@ export class BuscadorComponent implements OnInit {
   //FILTROS DE CLINICAS
   filterOrderBy(deviceValue) {
     var select = deviceValue.target.value;
-    var extra = 0;
-    var newArray = [];
-    this.response.sort();
     if (select == "calificación") {
       this.response.sort(function(a, b) {
         return b.score - a.score;
@@ -143,51 +139,29 @@ export class BuscadorComponent implements OnInit {
         return b.scoreQuantity - a.scoreQuantity;
       });
     }
-    
   }
 
   //FILTROS DE COMENTARIOS
   filterComentariosOrderBy(deviceValue,clinicId) {
     var select = deviceValue.target.value;
-    var extra = 0;
-    var comments=[];
-    var newArray = [];
-    
-    this.response.forEach(element => {
-      if(element.clinicId==clinicId){
-        comments.push(element.ratings);
-      }
-    });
-    this.response[0].ratings=[];
-
     if (select == "calificación") {
-      var i;
-      for (i = 0; i < comments.length; i++) { 
-        if (comments[i].score >= extra) {
-          this.response[0].ratings[0].unshift(comments[i]);
-          extra = comments[i].score;
-        } else {
-          this.response[0].ratings.push(comments[i]);
+      this.response.forEach(element => {
+        if(element.clinicId==clinicId){
+          element.ratings.sort(function(a, b) {
+            return b.score - a.score;
+          });
         }
-    }
-      comments.forEach(element => {
-      
       });
     }
     else {
-      comments.forEach(element => {
-        if (element.scoreQuantity >= extra) {
-          newArray.unshift(element);
-          extra = element.scoreQuantity;
-        } else {
-          newArray.push(element);
+      this.response.forEach(element => {
+        if(element.clinicId==clinicId){
+          element.ratings.sort(function(a, b) {
+            return b.score - a.score;
+          });
         }
       });
     }
-    console.log(newArray);
-    console.log(this.response);
   }
-  calculateStar(rating) {
-    return 2;
-  }
+
 }

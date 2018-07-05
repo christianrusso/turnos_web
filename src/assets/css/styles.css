@@ -2046,29 +2046,7 @@ a.see-more {
     margin-top: 10px;
     display: block;
 }
-a.delete-filters{
-  transition: all 0.3s ease-in-out;
-  border: 1px solid #fb1313;
-  color: #fb1313;
-  width: 84%;
-  display: block;
-  margin-left: 20px;
-  text-align: center;
-  height: 35px;
-  border-radius: 3px;
-  line-height: 35px;
-  font-family: Poppins;
-  margin-bottom: 15px;
-  margin-top: 20px;
-}
 
-a.delete-filters:hover{
-  transition: all 0.3s ease-in-out;
-
-background: #fb1313;
-
-color: #fff;
-}
 
 .range-slider__range::-moz-range-thumb:hover {
   background: #454edb;
@@ -2532,8 +2510,8 @@ color: gray;
 
 .stars-opiniones .fa.fa-star{
      color: #faca1d;
-    letter-spacing: 6px;
-    font-size: 13px; 
+    letter-spacing: 3px;
+    font-size: 14px; 
 }
 
 .stars-opiniones p{
@@ -3304,4 +3282,32 @@ a.nav-link.help {
     font-family: Poppins;
     font-size: 13px;
     margin-top: 5px;
+}
+
+#loading-bar-spinner {
+  text-align: center;
+  padding: 14px;
+  border-radius: 50%;
+  position: absolute !important;
+  top: 105px;
+  left: 50%;
+  margin-left: -28px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.16), 0 2px 10px rgba(0,0,0,0.12);
+  z-index: 999999;
+}
+
+#loading-bar-spinner .spinner-icon {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  float: left;
+  background: transparent !important;
+  border: 2px solid blue !important;
+  border-bottom-color: transparent !important;
+  border-radius: 100%;
+  -webkit-animation: ball-clip-rotate 0.75s linear infinite;
+  -o-animation: ball-clip-rotate 0.75s linear infinite;
+  animation: ball-clip-rotate 0.75s linear infinite;
 }

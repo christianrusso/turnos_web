@@ -8,9 +8,9 @@ $(document).ready(function() {
 });
 
 /* DATE PICKER */
-$('#datetimepicker1').datetimepicker({
-    format: 'DD/MM/YYYY'
-});
+// $('#datetimepicker1').datetimepicker({
+//     format: 'DD/MM/YYYY'
+// });
 
 /*	 MODALES LOGIN Y REGISTRO */
 

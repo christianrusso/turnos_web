@@ -1,0 +1,13 @@
+.pantalla-2  form#search_form .form-group  .enviar {
+    height: 40px;
+    width: 100px;
+    text-align: center;
+    background: #454edb;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-family: Poppins;
+    letter-spacing: 1px;
+    font-size: 15px;
+    transition: all 0.3s ease-in-out;
+}

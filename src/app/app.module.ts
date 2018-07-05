@@ -12,6 +12,9 @@ import { Select2Module } from 'ng2-select2';
 import { FormsModule } from '@angular/forms';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 
+//loading
+import { NgLoadingSpinnerModule, NgLoadingSpinnerInterceptor } from 'ng-loading-spinner';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
  
 
 @NgModule({
@@ -27,8 +30,11 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
     HttpModule,
     Select2Module,
     FormsModule,
+    HttpClientModule,
+    NgLoadingSpinnerModule
   ],
-  providers: [],
+  providers: [    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

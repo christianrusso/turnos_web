@@ -192,7 +192,7 @@
 
                         <div class="divider-filtros"></div>
 
-                        <a class="delete-filters" (click)="BorrarFiltros()">Borrar todos los filtros</a>
+                        <button  class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
 
                     </form>
 
@@ -250,7 +250,7 @@
 
                         <div class="divider-filtros"></div>
 
-                        <a href="" class="delete-filters">Borrar todos los filtros</a>
+                        <button  class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
 
                     </form>
 
@@ -276,8 +276,9 @@
                         </div>
                     </form>
                 </div>
-                <div class="text-center vertical" *ngIf="loader==true">
-                    <img src="/assets/img/loader.gif" class="img" alt="">
+                <div class="text-center ">
+                    <ng-loading-spinner  ></ng-loading-spinner>
+                    <!-- <img src="/assets/img/loader.gif" class="img" alt=""> -->
                 </div>
                 <div *ngIf="dontResult">
                     <h5 class="text-center text-danger vertical"> "No se han encontrado resultados para esta busqueda"</h5>

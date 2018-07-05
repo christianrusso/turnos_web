@@ -90,9 +90,10 @@
         <p>Encontrá lo que buscás cerca de vos en un solo lugar</p>
         <p class="bold">Fácil, rápido y gratis</p>
         <form #formCategoria="ngForm" (ngSubmit)="onSubmit()" id="search_form">
-          <div class="form-group ">
+
+          <div class="form-group col-sm-5">
             <label for="">Categorías</label>
-            <select2 id="Categorías">
+            <select2 id="Categorías" (valueChanged)="categoria($event)"  >
               <option value="1">Medicina</option>
               <option value="2">Peluquería</option>
               <option value="3">Estéticas</option>
@@ -101,7 +102,7 @@
               <option value="6">Servicios para el vehículo</option>
             </select2>
           </div>
-          <div class="form-group fecha">
+          <!-- <div class="form-group fecha">
             <div class='input-group date' id='datetimepicker2'>
               <span class="input-group-addon">
                 <i class="fa fa-calendar"></i>
@@ -109,14 +110,14 @@
 
               <input type='text' class="input-group-addon form-control" placeholder="22 de Mayo" />
             </div>
-          </div>
+          </div> -->
     
-          <div class="form-group donde">
+          <div class="form-group donde  ">
             <label for="">
               <i class="fa fa-map-marker"></i>
             </label>
 
-            <select2 id="lugar">
+            <select2 id="lugar"  (valueChanged)="lugar($event)">
               <option value="" selected="true" disabled="disabled">¿Dónde?</option>
               <option value="">Caballito</option>
               <option value="">Belgrano</option>
@@ -126,7 +127,7 @@
               <option value="">Villa Urquiza</option>
             </select2>
           </div>
-          <div class="form-group search">
+          <div class="form-group search col-md-3">
             <input type="submit" value="Buscar">
           </div>
         </form>

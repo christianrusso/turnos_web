@@ -38,16 +38,27 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
     });
 
     this.buscador = {
-      "categoria": "2",
-      "fecha": "2018/08/27",
-      "ubicacion":"asd",
+      "categoria": "",
+      "fecha": "",
+      "ubicacion":"",
     }
   }
 
   onSubmit() {
-      this.buscador={"categoria":$(".select2-hidden-accessible").val(),"fecha":this.buscador.fecha,"lugar":$(".select2-hidden-accessible").val()};
-      localStorage.setItem('busqueda', JSON.stringify(this.buscador));
-      this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
-      console.log (this.busqueda);
+    window.location.href = '/buscador';
+
   }
+
+  lugar(lugar){
+    this.buscador.lugar=lugar.data[0].text;
+    localStorage.setItem('busqueda', JSON.stringify(this.buscador));
+
+  }
+  categoria(categoria){
+    this.buscador.categoria=categoria.data[0].text;
+    localStorage.setItem('busqueda', JSON.stringify(this.buscador));
+
+  }
+
+
 }
