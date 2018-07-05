@@ -12,12 +12,11 @@ declare const google: any;
 })
 export class BuscadorComponent implements OnInit {
   public busqueda;
-  public response;
+  public clinicas;
   public filtro;
-  public loader = false;
   public coments;
   public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  public dontResult:Boolean;
+  public dontResult;
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService
@@ -28,30 +27,27 @@ export class BuscadorComponent implements OnInit {
     console.log(this.busqueda);
 
     this.filtro = {
-      "Cities": [],
+      "Cities": [this.busqueda.lugar],
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": []
     }
-    this.response = true;
     this.dontResult = false;
     this.getByFilter(this.filtro);
   }
 
   public getByFilter(filtro) {
-    this.loader = true;
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
-        this.loader = false;
         if (response.length != 0) {
           this.dontResult = false;
-          this.response = response;
+          this.clinicas = response;
         }
         else {
           this.dontResult = true;
-          this.response = null;
+          this.clinicas = null;
         }
-        console.log(this.response);
+        console.log(this.clinicas);
       },
       error => {
         // Manejar errores
@@ -60,7 +56,7 @@ export class BuscadorComponent implements OnInit {
   }
 
   public FiltrarEspecialidad(especialidad, deviceValue) {
-    this.response = [];
+    this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.Specialties.push(especialidad);
     } else {
@@ -74,7 +70,7 @@ export class BuscadorComponent implements OnInit {
   }
 
   public FiltrarSubEspecialidad(Subspecialties, deviceValue) {
-    this.response = [];
+    this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.Subspecialties.push(Subspecialties);
     }
@@ -129,13 +125,13 @@ export class BuscadorComponent implements OnInit {
   //FILTROS DE CLINICAS
   filterOrderBy(deviceValue) {
     var select = deviceValue.target.value;
-    if (select == "calificación") {
-      this.response.sort(function(a, b) {
+    if (select == 1) {
+      this.clinicas.sort(function(a, b) {
         return b.score - a.score;
       });
     }
     else {
-      this.response.sort(function(a, b) {
+      this.clinicas.sort(function(a, b) {
         return b.scoreQuantity - a.scoreQuantity;
       });
     }
@@ -144,8 +140,8 @@ export class BuscadorComponent implements OnInit {
   //FILTROS DE COMENTARIOS
   filterComentariosOrderBy(deviceValue,clinicId) {
     var select = deviceValue.target.value;
-    if (select == "calificación") {
-      this.response.forEach(element => {
+    if (select == 1) {
+      this.clinicas.forEach(element => {
         if(element.clinicId==clinicId){
           element.ratings.sort(function(a, b) {
             return b.score - a.score;
@@ -154,7 +150,7 @@ export class BuscadorComponent implements OnInit {
       });
     }
     else {
-      this.response.forEach(element => {
+      this.clinicas.forEach(element => {
         if(element.clinicId==clinicId){
           element.ratings.sort(function(a, b) {
             return b.score - a.score;

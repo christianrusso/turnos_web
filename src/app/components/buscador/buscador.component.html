@@ -160,19 +160,19 @@
                         </p>
                         <p>
                             <input type="checkbox" id="chebox2" value="se_checkbox">
-                            <label for="chebox2">Bs. As. G.B.A Norte
+                            <label for="chebox2">Nuñez
                                 <span class="small-number">(220)</span>
                             </label>
                         </p>
                         <p>
                             <input type="checkbox" id="chebox3" value="te_checkbox">
-                            <label for="chebox3">Bs. As. G.B.A Sur
+                            <label for="chebox3">Villa Bosch
                                 <span class="small-number">(120)</span>
                             </label>
                         </p>
                         <p>
                             <input type="checkbox" id="chebox4" value="cu_checkbox">
-                            <label for="chebox4">Bs. As. G.B.A Oeste
+                            <label for="chebox4">Colegiales
                                 <span class="small-number">(85)</span>
                             </label>
                         </p>
@@ -185,7 +185,7 @@
                         <!-- Distancia -->
                         <label>Distancia desde mi ubicación</label>
                         <div class="range-slider">
-                            <input class="range-slider__range" type="range" value="0" min="0" max="500">
+                            <input class="range-slider__range" type="range" value="0" min="0" max="100">
                             <span class="range-slider__value">0</span>
                         </div>
                         <input type="text" name="desplazo" placeholder="km" class="range-slider">
@@ -270,8 +270,8 @@
                         <div class="form-group ordenar-clinica">
                             <label for="">Ordenar por</label>
                             <select id="ordernarPor" class="form-control col-md-2 pull-right " name="ordenar-clinica" lang="es" (change)="filterOrderBy($event)">
-                                <option value="calificación">Mejor calificación</option>
-                                <option value="popular">Más popular</option>
+                                <option value="1">Mejor calificación</option>
+                                <option value="2">Más popular</option>
                             </select>
                         </div>
                     </form>
@@ -283,9 +283,9 @@
                 <div *ngIf="dontResult">
                     <h5 class="text-center text-danger vertical"> "No se han encontrado resultados para esta busqueda"</h5>
                 </div>
-                <div *ngFor="let row of response">
+                <div *ngFor="let row of clinicas">
                     <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <div class="col-xs-12 cluster-clinica  " *ngIf="loader==false">
+                        <div class="col-xs-12 cluster-clinica">
                             <div class="col-xs-12 col-sm-2 img-clin">
                                 <img src="{{row.logo}}" alt="Clinica">
                             </div>
@@ -414,8 +414,8 @@
                                 <div class="form-group comentarios form-inline">
                                     <label for="">Ordenar por</label>
                                     <select id="ordernarPor" class="form-control" name="comentarios" lang="es" (change)="filterComentariosOrderBy($event,row.clinicId)">
-                                        <option value="recientes">Más recientes</option>
-                                        <option value="calificación">Mejor calificación</option>
+                                        <option value="2">Más recientes</option>
+                                        <option value="1">Mejor calificación</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-12 comentarios-gral">
