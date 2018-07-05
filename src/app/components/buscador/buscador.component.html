@@ -146,8 +146,30 @@
                         <div class="divider-filtros"></div>
                         <!-- Obra Social -->
                         <label>Obra Social</label>
-                        <input type="text" name="" placeholder="¿Cuál es tu obra social?">
-
+                        <p>
+                            <input type="checkbox" id="chbox1o" value="primer_checkbox_obra" (click)="FiltrarObrasSocial('Galeno',$event)">
+                            <label for="chbox1o">Galeno</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="chbox2o" value="segundo_checkbox_obra" (click)="FiltrarObrasSocial('Osde',$event)">
+                            <label for="chbox2o">Osde</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="chbox3o" value="tercer_checkbox_obra" (click)="FiltrarObrasSocial('Swiss Medical',$event)">
+                            <label for="chbox3o">Swiss Medical</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="chbox4o" value="cuarto_checkbox_obra" (click)="FiltrarObrasSocial('Pami',$event)">
+                            <label for="chbox4o">Pami</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="chbox5o" value="quinto_checkbox_obra" (click)="FiltrarObrasSocial('Medicus',$event)">
+                            <label for="chbox5o">Medicus</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="chbox6o" value="sexto_checkbox_obra" (click)="FiltrarObrasSocial('Hospital Aleman',$event)">
+                            <label for="chbox6o">Hospital Aleman</label>
+                        </p>
                         <div class="divider-filtros"></div>
 
                         <!-- Ubicación -->
@@ -185,14 +207,14 @@
                         <!-- Distancia -->
                         <label>Distancia desde mi ubicación</label>
                         <div class="range-slider">
-                            <input class="range-slider__range" type="range" value="0" min="0" max="100">
-                            <span class="range-slider__value">0</span>
+                            <input class="range-slider__range" type="range" value="0" min="0" max="100" (change)="FiltrarDistancia($event)" >
+                            <span  class="range-slider__value">0</span >
                         </div>
-                        <input type="text" name="desplazo" placeholder="km" class="range-slider">
+                        <input id="Distancia" type="text" name="desplazo" placeholder="km" class="range-slider" >
 
                         <div class="divider-filtros"></div>
 
-                        <button  class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
+                        <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
 
                     </form>
 
@@ -250,7 +272,7 @@
 
                         <div class="divider-filtros"></div>
 
-                        <button  class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
+                        <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
 
                     </form>
 
@@ -277,7 +299,7 @@
                     </form>
                 </div>
                 <div class="text-center ">
-                    <ng-loading-spinner  ></ng-loading-spinner>
+                    <ng-loading-spinner></ng-loading-spinner>
                     <!-- <img src="/assets/img/loader.gif" class="img" alt=""> -->
                 </div>
                 <div *ngIf="dontResult">
@@ -310,7 +332,7 @@
                                 </div>
                                 <p class="descr-clin">{{row.description}}.</p>
 
-                                <div class="icon-clin">
+                                <!-- <div class="icon-clin">
                                     <span data-toggle="tooltip" title="Médico">
                                         <i class="fa fa-medkit" aria-hidden="true"></i>
                                     </span>
@@ -326,14 +348,14 @@
                                     <span data-toggle="tooltip" title="Médico">
                                         <i class="fa fa-medkit" aria-hidden="true"></i>
                                     </span>
-                                </div>
+                                </div> -->
 
                             </div>
                             <div class="col-xs-12 col-sm-4 ask-clin">
                                 <a href="" class="heart">
                                     <i class="fa fa-heart-o corazon"></i>
                                 </a>
-                                <h4>{{row.score }}</h4>
+                                <h4>{{row.score | number:'.1-5' }}</h4>
                                 <a href="" class="comments">
                                     <p>{{row.scoreQuantity}} comentarios</p>
                                 </a>
@@ -356,7 +378,7 @@
                             <div class="col-xs-12 info-cluster" id="info{{row.clinicId}}">
 
                                 <p>{{row.description}} </p>
-
+                                <!-- 
                                 <div class="divider-slide"></div>
 
                                 <h2> Servicios</h2>
@@ -375,7 +397,7 @@
                                 <div class="services-slide">
                                     <i class="fa fa-medkit" aria-hidden="true"></i>
                                     <span>Guardia</span>
-                                </div>
+                                </div> -->
 
                                 <div class="divider-slide"></div>
 
@@ -421,11 +443,15 @@
                                 <div class="col-xs-12 comentarios-gral">
                                     <div class="col-xs-12 comentario-single" *ngFor="let comment of row.ratings">
                                         <div class="puntuacion col-xs-4">
-                                            <p class="good">{{comment.score}}</p>
+                                            <p *ngIf="comment.score >= 7 " class="good">{{comment.score}}</p>
+                                            <p *ngIf="comment.score >= 4 && comment.score < 7 " class="warning">{{comment.score}}</p>
+                                            <p *ngIf="  comment.score < 4 " class="wrong">{{comment.score}}</p>
+
                                             <h3>Cristian Russo</h3>
                                             <span>26 de Mayo 2018</span>
                                         </div>
                                         <div class="comentario-text col-xs-8">
+
                                             <p>"{{comment.comment}}"
                                             </p>
                                         </div>

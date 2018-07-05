@@ -17,26 +17,34 @@ export class BuscadorComponent implements OnInit {
   public coments;
   public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public dontResult;
+  public distancia;
+
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService
   ) { }
 
   ngOnInit() {
+
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
     console.log(this.busqueda);
 
     this.filtro = {
-      "Cities": [this.busqueda.lugar],
+      "Cities": [this.busqueda.lugars],
       "Specialties": [],
       "Subspecialties": [],
-      "MedicalInsurances": []
+      "MedicalInsurances": [],
+
     }
     this.dontResult = false;
     this.getByFilter(this.filtro);
   }
 
   public getByFilter(filtro) {
+    $("#loading-bar-spinner").removeAttr('hidden');
+
+    $("#loading-bar-spinner").show();
+
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
         if (response.length != 0) {
@@ -46,7 +54,10 @@ export class BuscadorComponent implements OnInit {
         else {
           this.dontResult = true;
           this.clinicas = null;
+
         }
+        $("#loading-bar-spinner").hide();
+
         console.log(this.clinicas);
       },
       error => {
@@ -55,6 +66,7 @@ export class BuscadorComponent implements OnInit {
     );
   }
 
+  //Filtros
   public FiltrarEspecialidad(especialidad, deviceValue) {
     this.clinicas = [];
     if (deviceValue.target.checked) {
@@ -83,7 +95,51 @@ export class BuscadorComponent implements OnInit {
     }
     this.getByFilter(this.filtro);
   }
+  public FiltrarObrasSocial(obraSocial, deviceValue) {
+    this.clinicas = [];
+    if (deviceValue.target.checked) {
+      this.filtro.MedicalInsurances.push(obraSocial);
+    }
+    else {
+      for (let index = 0; index < this.filtro.MedicalInsurances.length; index++) {
+        if (obraSocial == this.filtro.MedicalInsurances[index]) {
+          this.filtro.MedicalInsurances.splice(index, 1);
+        }
+      }
+    }
+    this.getByFilter(this.filtro);
+  }
 
+  //filtro pro distancia
+  FiltrarDistancia(deviceValue) {
+    this.distancia= parseInt(deviceValue.target.value);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.showPosition(position);
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  showPosition(position) {
+    this.filtro = {
+      "Location": {
+        "Latitude": position.coords.latitude,
+        "Longitude": position.coords.longitude,
+        "RadiusInMeters": this.distancia,
+      },
+      "Cities": [this.busqueda.lugar],
+      "Specialties": this.filtro.Specialties,
+      "Subspecialties": this.filtro.Subspecialties,
+      "MedicalInsurances": this.filtro.MedicalInsurances
+    }
+    console.log(this.filtro);
+    this.getByFilter(this.filtro);
+  }
+  //fin filtro por distancia.
+
+  //Borrar los filtros
   public BorrarFiltros() {
     this.filtro = {
       "Cities": [],
@@ -110,7 +166,7 @@ export class BuscadorComponent implements OnInit {
     $('.com-slide').addClass('activeFilter');
     $('.info-slide').removeClass('activeFilter');
     $('.ubi-slide').removeClass('activeFilter');
-  
+
   }
   public ubi(idClinica, latitud, longitud) {
     $("#info" + idClinica).hide();
@@ -121,29 +177,29 @@ export class BuscadorComponent implements OnInit {
     $('.info-slide').removeClass('activeFilter');
     this._MapService.generateMap(latitud, longitud, idClinica);
   }
-  
+
   //FILTROS DE CLINICAS
   filterOrderBy(deviceValue) {
     var select = deviceValue.target.value;
     if (select == 1) {
-      this.clinicas.sort(function(a, b) {
+      this.clinicas.sort(function (a, b) {
         return b.score - a.score;
       });
     }
     else {
-      this.clinicas.sort(function(a, b) {
+      this.clinicas.sort(function (a, b) {
         return b.scoreQuantity - a.scoreQuantity;
       });
     }
   }
 
   //FILTROS DE COMENTARIOS
-  filterComentariosOrderBy(deviceValue,clinicId) {
+  filterComentariosOrderBy(deviceValue, clinicId) {
     var select = deviceValue.target.value;
     if (select == 1) {
       this.clinicas.forEach(element => {
-        if(element.clinicId==clinicId){
-          element.ratings.sort(function(a, b) {
+        if (element.clinicId == clinicId) {
+          element.ratings.sort(function (a, b) {
             return b.score - a.score;
           });
         }
@@ -151,8 +207,8 @@ export class BuscadorComponent implements OnInit {
     }
     else {
       this.clinicas.forEach(element => {
-        if(element.clinicId==clinicId){
-          element.ratings.sort(function(a, b) {
+        if (element.clinicId == clinicId) {
+          element.ratings.sort(function (a, b) {
             return b.score - a.score;
           });
         }
