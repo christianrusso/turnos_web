@@ -1,17 +1,4 @@
 
-/* CATEGORIAS */
-$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
-$(document).ready(function() {
-    $('.js-example-basic-single-2').select2();
-});
-
-/* DATE PICKER */
-$('#datetimepicker1').datetimepicker({
-    format: 'DD/MM/YYYY'
-});
-
 /*	 MODALES LOGIN Y REGISTRO */
 
 $('a#registrarte-link').click(function(e) {
@@ -23,7 +10,6 @@ $('a#login-link').click(function(e) {
   e.preventDefault();
 
 });
-
 /***
   LOGIN Y REGISTRO
 ***/

@@ -1,0 +1,26 @@
+button.delete-filters{
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #fb1313;
+    color: #fb1313;
+    width: 48%;
+    display: block;
+    margin-left: 20px;
+    text-align: center;
+    height: 35px;
+    border-radius: 3px;
+    line-height: 35px;
+    font-family: Poppins;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    font-size: 12px;
+    display: inline-block;
+    background-color:transparent;
+  }
+  
+  button.delete-filters:hover{
+    transition: all 0.3s ease-in-out;
+  
+  background: #fb1313;
+  
+  color: #fff;
+  }

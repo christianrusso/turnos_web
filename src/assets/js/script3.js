@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 /* CONTENIDO DE CADA CLINICA */
 $(document).ready(function() {
-    $(".button-collapse2222").click(function(e) {
+    $(".button-collapse").click(function(e) {
       e.preventDefault();
         $(this).nextAll('.collapse:first').slideToggle();
         $(this).toggleClass('borders');

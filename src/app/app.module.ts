@@ -11,10 +11,14 @@ import { IndexComponent } from './components/index/index.component';
 import { Select2Module } from 'ng2-select2';
 import { FormsModule } from '@angular/forms';
 import { BuscadorComponent } from './components/buscador/buscador.component';
+import { AyudaComponent } from './components/ayuda/ayuda.component';
 
 //loading
 import { NgLoadingSpinnerModule, NgLoadingSpinnerInterceptor } from 'ng-loading-spinner';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { VerMapaComponent } from './components/ver-mapa/ver-mapa.component';
+import { ReservaComponent } from './components/reserva/reserva.component';
  
 
 @NgModule({
@@ -22,7 +26,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AppComponent,
     HomeComponent,
     IndexComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    AyudaComponent,
+    NosotrosComponent,
+    VerMapaComponent,
+    ReservaComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +41,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     NgLoadingSpinnerModule
   ],
-  providers: [    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true }
+  providers: [    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

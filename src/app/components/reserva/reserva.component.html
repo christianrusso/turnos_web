@@ -1,0 +1,462 @@
+<header>
+    
+  <!-- Menú -->
+
+<nav class="navbar navbar-expand-lg navbar-light">
+<a class="navbar-brand" href="#"><img src="/assets/img/logo-white.png" alt="Logo"></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+  <form action="" class="nav-busqueda">
+      <input type="text">
+      <button type="submit"><i class="fa fa-search"></i></button>
+  </form>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle bell" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-bell-o"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      </div>
+    </li>
+    <div class="line-menu-header"></div>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle user" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       <img src="/assets/img/user.png" alt="Usuario">
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Editar datos</a>
+        <a class="dropdown-item" href="#">Configurar cuenta</a>
+        <a class="dropdown-item" href="#">Ayuda</a>
+      </div>
+    </li>
+      <li class="nav-item">
+      <a class="nav-link logout" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link help" href="#">Ayuda</a>
+    </li>
+  </ul>
+</div>
+</nav>
+  <!-- // menú -->
+</header>
+<!-- // header -->
+
+<section class="col col-xs-12 general reserva container-fluid">
+  
+  <div class="row reserva-align">
+      
+      <div class="col-sm-12 col-md-10 offset-sm-1">
+      
+          <div class="row">
+              <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 text-reserva">
+      
+                  <h2>Solicite su reserva</h2>
+                  <h3>Podrá ver los turnos disponibles durante el mes.</h3>
+
+              </div>
+              
+
+              <!-- Menú -->
+              <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 menu-reserva">
+                  <div class="row">
+                      <div class="col-xs-6 col-md-4 menu-reserva-single">
+                          <div class="row">
+                          <div class="col-xs-3 col-md-2"><span class="activeReserva" id="b1">1</span></div>
+                          <div class="col-xs-9 col-md-10">
+                              <p>Seleccione un día para poder visualizar <br>las diferentes opciones.</p>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="col-xs-6 col-md-4">
+                          <div class="row">
+                          <div class="col-xs-3 col-md-2"><span id="b2">2</span></div>
+                          <div class="col-xs-9 col-md-10">
+                              <p>Confirmación de reserva</p>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- // menu -->
+
+              <!-- FILTROS Y CALENDARIO -->
+              <div class="col-xs-12 filtros-calendario">
+                  
+                  <div class="row">
+                      
+                      <!-- Filtros -->
+                      <div class="col-xs-12 col-md-2 filters-turnos">
+                          <form>
+                          <div class="form-group">
+                              <label for="">Especialidad</label>
+                              <select class="js-example-basic-single-8" name="especialidad-turno" lang="es">
+                                  <option value="">Traumatología</option>
+                                  <option value="">Cardiología</option>
+                              </select>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="">Sub Especialidad</label>
+                              <select class="js-example-basic-single-9" name="subespecialidad-turno" lang="es">
+                                  <option value="">Columna</option>
+                                  <option value="">Rodilla</option>
+                              </select>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="">Médico</label>
+                              <select class="js-example-basic-single-10" name="medico-turno" lang="es">
+                                  <option value="">Cristian Russo</option>
+                                  <option value="">Constanza Arreche</option>
+                              </select>
+                          </div>
+
+                           <div class="form-group">
+                              <label for="">Horario</label>
+                              <select class="js-example-basic-single-11" name="horario-turno" lang="es">
+                                  <option value="">10:20</option>
+                                  <option value="">11:50</option>
+                              </select>
+                          </div>
+
+                          <a href="#" class="sig-turno">Siguiente</a>
+                          </form>
+                      </div>
+                     
+                      <!-- // filtros -->
+
+                      <!-- Calendario -->
+                      <div class="col-xs-12 col-md-10 calendario-turnos">
+                          
+                          <!-- Prev y Next -->
+                          <div class="prev-next">
+                              <a href="#" id="prev-btn"><i class="fa fa-caret-left"></i></a>
+                              <a href="#" id="next-btn"><i class="fa fa-caret-right"></i></a>
+                          </div>
+
+                          <!-- Meses -->
+                          <div class="dias col-xs-12">
+
+                              <!-- Mes puntual -->
+                              <div class="col-xs-12 div-puntual">
+                                  <div class="col-xs-12 div-fecha">Junio 2018</div>
+                                  <div class="col-xs-12 col-md-12 special-day">
+                                      <div class="row">
+                                          <div class="col-xs-12 col-md-1">Domingo</div>
+                                          <div class="col-xs-12 col-md-1">Lunes</div>
+                                          <div class="col-xs-12 col-md-1">Martes</div>
+                                          <div class="col-xs-12 col-md-1">Miércoles</div>
+                                          <div class="col-xs-12 col-md-1">Jueves</div>
+                                          <div class="col-xs-12 col-md-1">Viernes</div>
+                                          <div class="col-xs-12 col-md-1">Sábado</div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <!-- Días semana -->
+                              <div class="col-xs-12 div-contenido-fecha">
+
+                                  <div class="row">
+                                  
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">27</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">28</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">29</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">30</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">31</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">1</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">2</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">3</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">4</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">5</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">6</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">7</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">8</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">9</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">10</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">11</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">12</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">13</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">14</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">15</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">16</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">17</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">18</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">19</p>
+                                      </div>
+                                      <div class="col-md-1 bg-turnos">
+                                          <p class="n-dia">20</p>
+                                          <div class="t-disp">25 turnos <br> disponibles</div>
+                                      </div>
+                                      <div class="col-md-1 bg-turnos">
+                                          <p class="n-dia">21</p>
+                                          <div class="t-disp">12 turnos <br> disponibles</div>
+                                      </div>
+                                      <div class="col-md-1 bg-turnos">
+                                          <p class="n-dia">22</p>
+                                          <div class="t-disp">15 turnos <br> disponibles</div>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">23</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">24</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">25</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">26</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">27</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">28</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">29</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">30</p>
+                                      </div>
+                                  </div>
+
+                              </div>
+
+                          </div>
+
+
+
+                          <div class="dias col-xs-12">
+
+                              <!-- Mes puntual -->
+                              <div class="col-xs-12 div-puntual">
+                                  <div class="col-xs-12 div-fecha">Julio 2018</div>
+                                  <div class="col-xs-12 col-md-12 special-day">
+                                      <div class="row">
+                                          <div class="col-xs-12 col-md-1">Domingo</div>
+                                          <div class="col-xs-12 col-md-1">Lunes</div>
+                                          <div class="col-xs-12 col-md-1">Martes</div>
+                                          <div class="col-xs-12 col-md-1">Miércoles</div>
+                                          <div class="col-xs-12 col-md-1">Jueves</div>
+                                          <div class="col-xs-12 col-md-1">Viernes</div>
+                                          <div class="col-xs-12 col-md-1">Sábado</div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <!-- Días semana -->
+                              <div class="col-xs-12 div-contenido-fecha">
+
+                                  <div class="row">
+                                  
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">27</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">28</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">29</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">30</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia no-month">31</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">1</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">2</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">3</p>
+                                      </div>
+                                      <div class="col-md-1 bg-turnos">
+                                          <p class="n-dia">4</p>
+                                          <div class="t-disp">12 turnos <br> disponibles</div>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">5</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">6</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">7</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">8</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">9</p>
+                                      </div>
+                                      <div class="col-md-1 bg-turnos">
+                                          <p class="n-dia">10</p>
+                                          <div class="t-disp">21 turnos <br> disponibles</div>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">11</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">12</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">13</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">14</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">15</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">16</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">17</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">18</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">19</p>
+                                      </div>
+                                      <div class="col-md-1 bg-turnos">
+                                          <p class="n-dia">20</p>
+                                          <div class="t-disp">10 turnos <br> disponibles</div>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">21</p>
+                                      </div>
+                                      <div class="col-md-1 not-available">
+                                          <p class="n-dia">22</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">23</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">24</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">25</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">26</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">27</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">28</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">29</p>
+                                      </div>
+                                      <div class="col-md-1">
+                                          <p class="n-dia">30</p>
+                                      </div>
+                                  </div>
+
+                              </div>
+
+                          </div>
+
+                      <!-- // calendario -->
+
+                  </div>
+
+              </div>
+          </div>
+
+
+
+              <!-- CONFIRMACION RESERVA -->
+              <div class="col-xs-12 col-md-7 confirmacion-reserva">
+                      <h2>Confirme su reserva</h2>
+                      <div class="circle"></div>
+                      <div class="square"></div>
+                      <div class="col-xs-12 col-md-12 cluster-reserva-def">
+                          <h3>Clínica Bazterrica</h3>
+                          <h4>Juncal 3002, Ciudad Autónoma de Buenos Aires</h4>
+
+                          <h5>Especialidad</h5>
+                          <p>Dermatología</p>
+
+                          <h5>Profesional</h5>
+                          <p>Marini Mariano Gabriel</p>
+
+                          <h5>Fecha y hora de la reserva</h5>
+                          <p>Martes 03/07/2018 15:40</p>
+
+                          <div class="divider"></div>
+
+                          <div><h6>Nombre del paciente:</h6> <span>Christian Russo</span></div>
+                          <div><h6>Cobertura Médica:</h6> <span>OSDE</span></div>
+                          <div><h6>Plan:</h6> <span>Genérico (1545) </span></div>
+
+                          <a href="#" id="volver-turno">Volver</a>
+                          <a href="#" id="confirmacion-definitiva">Confirmar reserva</a>
+                      </div>
+
+                      <span>Ante cualquier consultam no dude en comunicarse con el Centro al que está reservando.</span>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+</section>

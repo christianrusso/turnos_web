@@ -30,7 +30,7 @@ export class BuscadorComponent implements OnInit {
     console.log(this.busqueda);
 
     this.filtro = {
-      "Cities": [this.busqueda.lugars],
+      "Cities": [this.busqueda.lugar],
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": [],

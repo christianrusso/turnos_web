@@ -26,7 +26,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
   }
 
    async ngAfterViewInit(): Promise<void> {
-    await this.loadScript('../assets/js/script2.js');
+    await this.loadScript('/assets/js/script2.js');
   }
 
   public buscador;
