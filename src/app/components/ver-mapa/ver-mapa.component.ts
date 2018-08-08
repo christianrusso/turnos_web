@@ -22,8 +22,12 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   public busqueda;
   public locations = [];
   public distancia;
+  public cantidadClinicas;
   public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
+  public noData;
+  public especialidades;
+  public subEspecialidades;
+  public obrasSociales;
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript('/assets/js/script6.js');
   }
@@ -34,18 +38,29 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": [],
+      "medicalPlans": []
 
     }
 
     this.getByFilter(this.filtro);
+    this.getSplecialties();
+    this.getSubSplecialties();
+    this.getMedicalInsurance();
 
   }
   public insertStart = [];
   public getByFilter(filtro) {
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
-        console.log(response);
+        console.log(response.length);
+        if(response.length==0){
+          this.noData=true;
+        }
+        else{
+          this.noData=false;
+        }
         this.clinicas = response;
+        this.cantidadClinicas = this.clinicas.length;
         this.locations = [];
         response.forEach(element => {
           this.score.forEach(star => {
@@ -57,8 +72,8 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
           this.locations.push(['<div class="col-xs-12 col-md-12 infow"><div class="row"><div class="col-xs-12 col-md-5"><img src=' + element.logo + '></div><div class="col-xs-12 col-md-7"><h3>' + element.name + '</h3><p class="location"><i class="fa fa-map-marker"></i>' + element.address + '</p><div class="punt">' + element.score + '</div><div class="stars">' + this.insertStart + '</div></div></div></div>', element.latitude, element.longitude]);
           this.insertStart = [];
         });
-        this._MapService.generateMap(1, 2, this.locations);
 
+       this._MapService.generateMap(this.locations,null);
 
       },
       error => {
@@ -69,8 +84,6 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   }
   //Filtros
   public FiltrarEspecialidad(especialidad, deviceValue) {
-    console.log("asda");
-    this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.Specialties.push(especialidad);
     } else {
@@ -80,10 +93,8 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
         }
       }
     }
-    this.getByFilter(this.filtro);
   }
   public FiltrarSubEspecialidad(Subspecialties, deviceValue) {
-    this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.Subspecialties.push(Subspecialties);
     }
@@ -94,10 +105,8 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
         }
       }
     }
-    this.getByFilter(this.filtro);
   }
   public FiltrarObrasSocial(obraSocial, deviceValue) {
-    this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.MedicalInsurances.push(obraSocial);
     }
@@ -108,7 +117,6 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
         }
       }
     }
-    this.getByFilter(this.filtro);
   }
   //filtro pro distancia
   FiltrarDistancia(deviceValue) {
@@ -134,18 +142,69 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
       "Subspecialties": this.filtro.Subspecialties,
       "MedicalInsurances": this.filtro.MedicalInsurances
     }
-    console.log(this.filtro);
     this.getByFilter(this.filtro);
   }
   //fin filtro por distancia.
   //Borrar los filtros
   public BorrarFiltros() {
+    $('.modal-filtros').fadeOut();
+
     this.filtro = {
       "Cities": [this.busqueda.lugar],
       "Specialties": [],
       "Subspecialties": [],
-      "MedicalInsurances": []
+      "MedicalInsurances": [],
+      "medicalPlans": []
+
     }
     this.getByFilter(this.filtro);
   }
+
+  public AplicarFiltros() {
+    this.clinicas = [];
+    $('.modal-filtros').fadeOut();
+
+    this.getByFilter(this.filtro);
+
+  }
+  public test;
+  public OpenMarkers(x) {
+    this._MapService.generateMap(this.locations,x);
+  }
+
+    //Specialidades
+    public  getSplecialties(){
+      this._BusquedaService.getSpeciality().subscribe(
+        response => {
+          this.especialidades=response;
+        },
+        error => {
+          // Manejar errores
+        }
+      );
+    }
+  
+    //SubEspecialidades
+    public  getSubSplecialties(){
+      this._BusquedaService.getSubSpeciality().subscribe(
+        response => {
+          this.subEspecialidades=response;
+        },
+        error => {
+          // Manejar errores
+        }
+      );
+    }
+  
+      //ObrasSociales
+      public getMedicalInsurance(){
+        this._BusquedaService.getMedicalInsurance().subscribe(
+          response => {
+            this.obrasSociales=response;
+          },
+          error => {
+            // Manejar errores
+          }
+        );
+      }
 }

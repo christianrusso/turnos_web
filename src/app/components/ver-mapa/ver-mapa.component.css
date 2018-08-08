@@ -24,3 +24,22 @@ button.delete-filters{
   
   color: #fff;
   }
+
+.aplicar-filters {
+    transition: all 0.3s ease-in-out;
+    /* border: 1px solid #fb1313; */
+    color: #fff;
+    background: #50ae20;
+    width: 35%;
+    display: block;
+    margin-left: 20px;
+    text-align: center;
+    height: 35px;
+    border-radius: 3px;
+    font-family: Poppins;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    font-size: 12px;
+    display: inline-block;
+    margin-left: 10px;
+}

@@ -18,6 +18,9 @@ export class BuscadorComponent implements OnInit {
   public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public dontResult;
   public distancia;
+  public especialidades;
+  public subEspecialidades;
+  public obrasSociales;
 
   constructor(
     private _BusquedaService: BusquedaService,
@@ -34,17 +37,55 @@ export class BuscadorComponent implements OnInit {
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": [],
+      "medicalPlans":[]
 
     }
     this.dontResult = false;
     this.getByFilter(this.filtro);
+    this.getSplecialties();
+    this.getSubSplecialties();
+    this.getMedicalInsurance();
+
   }
 
+  //Specialidades
+  public  getSplecialties(){
+    this._BusquedaService.getSpeciality().subscribe(
+      response => {
+        this.especialidades=response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
+
+  //SubEspecialidades
+  public  getSubSplecialties(){
+    this._BusquedaService.getSubSpeciality().subscribe(
+      response => {
+        this.subEspecialidades=response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
+
+    //ObrasSociales
+    public getMedicalInsurance(){
+      this._BusquedaService.getMedicalInsurance().subscribe(
+        response => {
+          this.obrasSociales=response;
+        },
+        error => {
+          // Manejar errores
+        }
+      );
+    }
   public getByFilter(filtro) {
     $("#loading-bar-spinner").removeAttr('hidden');
-
     $("#loading-bar-spinner").show();
-
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
         if (response.length != 0) {
