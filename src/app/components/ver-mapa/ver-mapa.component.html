@@ -92,7 +92,7 @@
                         <div *ngFor="let row of especialidades">
                             <p>
                                 <input type="checkbox" id="cbox{{row.id}}" value="first_checkbox" (click)="FiltrarEspecialidad(row.id,$event)">
-                                <label for="cbox{{row.id}}">{{row.description}}</label>
+                                <label for="cbox{{row.id}}">{{row.text}}</label>
                             </p>
                         </div>
 
@@ -103,7 +103,7 @@
                         <div *ngFor="let row of subEspecialidades">
                             <p>
                                 <input type="checkbox" id="chbox{{row.id}}" value="primer_checkbox" (click)="FiltrarSubEspecialidad(row.id,$event)">
-                                <label for="chbox{{row.id}}">{{row.description}}</label>
+                                <label for="chbox{{row.id}}">{{row.text}}</label>
                             </p>
                         </div>
 
@@ -114,37 +114,19 @@
                         <div *ngFor="let row of obrasSociales">
                             <p>
                                 <input type="checkbox" id="chbox{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarObrasSocial(row.id,$event)">
-                                <label for="chbox{{row.id}}o">{{row.description}}</label>
+                                <label for="chbox{{row.id}}o">{{row.text}}</label>
                             </p>
                         </div>
                         <div class="divider-filtros"></div>
 
                         <!-- Ubicación -->
                         <label>Ubicación</label>
-                        <p>
-                            <input type="checkbox" id="chebox1" value="pr_checkbox">
-                            <label for="chebox1">Capital Federal
-                                <span class="small-number">(352)</span>
-                            </label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="chebox2" value="se_checkbox">
-                            <label for="chebox2">Bs. As. G.B.A Norte
-                                <span class="small-number">(220)</span>
-                            </label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="chebox3" value="te_checkbox">
-                            <label for="chebox3">Bs. As. G.B.A Sur
-                                <span class="small-number">(120)</span>
-                            </label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="chebox4" value="cu_checkbox">
-                            <label for="chebox4">Bs. As. G.B.A Oeste
-                                <span class="small-number">(85)</span>
-                            </label>
-                        </p>
+                        <div *ngFor="let row of cities">
+                            <p>
+                                <input type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
+                                <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
+                            </p>
+                        </div>
 
                         <a href="" class="see-more">Ver más</a>
 

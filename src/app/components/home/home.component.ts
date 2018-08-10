@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { HomeService} from "../../services/home.service"
 import { busqueda } from '../../global/busqueda';
 import { BaseComponent } from '../../core/base.component';
+import { RegisterLoginService } from '../../services/register-login.service';
 
 declare const $: any;
 
@@ -10,16 +11,24 @@ declare const $: any;
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers:[HomeService]
+  providers:[HomeService,RegisterLoginService]
 })
 
 export class HomeComponent extends BaseComponent implements OnInit, AfterViewInit{
+ 
+  public buscador;
+  public register;
+  public login;
+  public user;
+  public token = localStorage.getItem('tokenTurnos');
   public busqueda: string;
-
+	public identity;
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
-    private _HomeService: HomeService
+    private _HomeService: HomeService,
+    private _RegisterLoginService: RegisterLoginService,
+
   ){
     super();
     this.busqueda = busqueda.categoria;
@@ -29,24 +38,67 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
     await this.loadScript('/assets/js/script2.js');
   }
 
-  public buscador;
 
   ngOnInit() {
     this._route.params.subscribe(params => {
       let id = +params["id"];
       $('select2 option[value=' + id + ']').attr("selected", true);
     });
-
+    this.identity = this._RegisterLoginService.getToken();
+    console.log(this.identity);
     this.buscador = {
       "categoria": "",
       "fecha": "",
       "ubicacion":"",
+    }
+    this.register={
+      "email":"",
+      "password":"",
+      "passwordSecond":""
+
+    }
+    this.login={
+      "email":"",
+      "password":""
     }
   }
 
   onSubmit() {
     window.location.href = '/buscador';
 
+  }
+
+  onRegister(){
+    console.log(this.register);
+    if(this.register.password==this.register.passwordSecond){
+
+      this._RegisterLoginService.onRegister(this.register).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          // Manejar errores
+        }
+      );
+      
+    }
+    else{
+
+    }
+
+  }
+  onLogin(){
+    this._RegisterLoginService.onLogin(this.login).subscribe(
+      response => {
+        this.identity =localStorage.setItem('tokenTurnos', JSON.stringify(response));
+        this.user=response.logo;
+        $('.modal-gral').fadeOut();
+
+      },
+      error => {
+        // Manejar errores
+      }
+    );
   }
 
   lugar(lugar){

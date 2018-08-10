@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Select2OptionData } from 'ng2-select2';
 import { BusquedaService } from '../../services/busqueda.service';
 import { MapService } from '../../services/map.service';
+import { RegisterLoginService } from '../../services/register-login.service';
+
 declare const google: any;
 
 @Component({
   selector: 'app-buscador',
   templateUrl: './buscador.component.html',
   styleUrls: ['./buscador.component.css'],
-  providers: [BusquedaService, MapService]
+  providers: [BusquedaService, MapService, RegisterLoginService]
 })
 export class BuscadorComponent implements OnInit {
   public busqueda;
@@ -21,38 +22,58 @@ export class BuscadorComponent implements OnInit {
   public especialidades;
   public subEspecialidades;
   public obrasSociales;
-
+  public cities;
+  public identity;
   constructor(
     private _BusquedaService: BusquedaService,
-    private _MapService: MapService
+    private _MapService: MapService,
+    private _RegisterLoginService: RegisterLoginService,
+
   ) { }
 
   ngOnInit() {
 
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
-    console.log(this.busqueda);
-
+    this.identity = localStorage.getItem('tokenTurnos');
+    console.log(this.identity.logo);
+    
     this.filtro = {
       "Cities": [this.busqueda.lugar],
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": [],
-      "medicalPlans":[]
+      "medicalPlans": []
 
     }
     this.dontResult = false;
     this.getByFilter(this.filtro);
     this.getSplecialties();
-    this.getSubSplecialties();
+    // this.getSubSplecialties();
     this.getMedicalInsurance();
+    this.getCities();
 
   }
 
   //Specialidades
-  public  getSplecialties(){
+  public getSplecialties() {
     this._BusquedaService.getSpeciality().subscribe(
       response => {
-        this.especialidades=response;
+        this.especialidades = response;
+        console.log(response);
+
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
+
+  //Citys
+  public getCities() {
+    this._BusquedaService.getCities().subscribe(
+      response => {
+        console.log(response);
+        this.cities = response;
       },
       error => {
         // Manejar errores
@@ -61,10 +82,11 @@ export class BuscadorComponent implements OnInit {
   }
 
   //SubEspecialidades
-  public  getSubSplecialties(){
+  public getSubSplecialties() {
     this._BusquedaService.getSubSpeciality().subscribe(
       response => {
-        this.subEspecialidades=response;
+        this.subEspecialidades = response;
+
       },
       error => {
         // Manejar errores
@@ -72,17 +94,19 @@ export class BuscadorComponent implements OnInit {
     );
   }
 
-    //ObrasSociales
-    public getMedicalInsurance(){
-      this._BusquedaService.getMedicalInsurance().subscribe(
-        response => {
-          this.obrasSociales=response;
-        },
-        error => {
-          // Manejar errores
-        }
-      );
-    }
+  //ObrasSociales
+  public getMedicalInsurance() {
+    this._BusquedaService.getMedicalInsurance().subscribe(
+      response => {
+        this.obrasSociales = response;
+        console.log(response);
+
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
   public getByFilter(filtro) {
     $("#loading-bar-spinner").removeAttr('hidden');
     $("#loading-bar-spinner").show();
@@ -151,9 +175,25 @@ export class BuscadorComponent implements OnInit {
     this.getByFilter(this.filtro);
   }
 
+  //filtro city
+  public FiltrarCities(Cities, deviceValue) {
+    this.clinicas = [];
+    if (deviceValue.target.checked) {
+      this.filtro.Cities.push(Cities);
+    }
+    else {
+      for (let index = 0; index < this.filtro.Cities.length; index++) {
+        if (Cities == this.filtro.Cities[index]) {
+          this.filtro.Cities.splice(index, 1);
+        }
+      }
+    }
+    this.getByFilter(this.filtro);
+  }
+
   //filtro pro distancia
   FiltrarDistancia(deviceValue) {
-    this.distancia= parseInt(deviceValue.target.value);
+    this.distancia = parseInt(deviceValue.target.value);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.showPosition(position);

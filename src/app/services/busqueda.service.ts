@@ -26,8 +26,7 @@ export class BusquedaService {
 
   //Specialty
   getSpeciality(){
-    this.headers.set('Authorization',this.token)
-    return this._http.post(this.url + 'Api/Specialty/GetByLetter',{letter: "*"},{headers: this.headers})
+    return this._http.post(this.url + 'api/Data/GetSpecialtiesForSelect',{},{headers: this.headers})
                     .map(res => res.json());
   }
    //SubSpecialty
@@ -39,9 +38,12 @@ export class BusquedaService {
 
   //ObrasSociales
   getMedicalInsurance(){
-    this.headers.set('Authorization',this.token)
-    return this._http.post(this.url + 'Api/MedicalInsurance/GetByLetter',{letter: "*"},{headers: this.headers})
+    return this._http.post(this.url + 'api/Data/GetMedicalInsurancesForSelect',{},{headers: this.headers})
                     .map(res => res.json());
   }
-  
+   //Ciudades
+   getCities(){
+    return this._http.post(this.url + 'api/Data/GetCitiesForSelect',{},{headers: this.headers})
+                    .map(res => res.json());
+  }
 }

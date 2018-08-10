@@ -17,7 +17,7 @@
             </button>
         </form>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="identity && identity != null">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle bell" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -31,7 +31,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle user" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <img src="/assets/img/user.png" alt="Usuario">
+                        <img src="{{identity.logo}}" alt="Usuario">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Editar datos</a>
@@ -108,7 +108,7 @@
                         <div *ngFor="let row of especialidades">
                             <p>
                                 <input type="checkbox" id="cbox{{row.id}}" value="first_checkbox" (click)="FiltrarEspecialidad(row.id,$event)">
-                                <label for="cbox{{row.id}}">{{row.description}}</label>
+                                <label for="cbox{{row.id}}">{{row.text}}</label>
                             </p>
                         </div>
 
@@ -119,7 +119,7 @@
                         <div *ngFor="let row of subEspecialidades">
                             <p>
                                 <input type="checkbox" id="chbox{{row.id}}" value="primer_checkbox" (click)="FiltrarSubEspecialidad(row.id,$event)">
-                                <label for="chbox{{row.id}}">{{row.description}}</label>
+                                <label for="chbox{{row.id}}">{{row.text}}</label>
                             </p>
                         </div>
 
@@ -130,7 +130,7 @@
                         <div *ngFor="let row of obrasSociales">
                             <p>
                                 <input type="checkbox" id="chbox{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarObrasSocial(row.id,$event)">
-                                <label for="chbox{{row.id}}o">{{row.description}}</label>
+                                <label for="chbox{{row.id}}o">{{row.text}}</label>
                             </p>
                         </div>
 
@@ -138,31 +138,12 @@
 
                         <!-- Ubicación -->
                         <label>Ubicación</label>
-                        <p>
-                            <input type="checkbox" id="chebox1" value="pr_checkbox">
-                            <label for="chebox1">Capital Federal
-                                <span class="small-number">(352)</span>
-                            </label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="chebox2" value="se_checkbox">
-                            <label for="chebox2">Nuñez
-                                <span class="small-number">(220)</span>
-                            </label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="chebox3" value="te_checkbox">
-                            <label for="chebox3">Villa Bosch
-                                <span class="small-number">(120)</span>
-                            </label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="chebox4" value="cu_checkbox">
-                            <label for="chebox4">Colegiales
-                                <span class="small-number">(85)</span>
-                            </label>
-                        </p>
-
+                        <div *ngFor="let row of cities">
+                            <p>
+                                <input type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
+                                <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
+                            </p>
+                        </div>
                         <a href="" class="see-more">Ver más</a>
 
                         <div class="divider-filtros"></div>

@@ -28,6 +28,7 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   public especialidades;
   public subEspecialidades;
   public obrasSociales;
+  public cities;
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript('/assets/js/script6.js');
   }
@@ -44,8 +45,9 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
 
     this.getByFilter(this.filtro);
     this.getSplecialties();
-    this.getSubSplecialties();
+    // this.getSubSplecialties();
     this.getMedicalInsurance();
+    this.getCities();
 
   }
   public insertStart = [];
@@ -117,6 +119,17 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
         }
       }
     }
+  }
+  public  getCities(){
+    this._BusquedaService.getCities().subscribe(
+      response => {
+        console.log(response);
+        this.cities=response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
   }
   //filtro pro distancia
   FiltrarDistancia(deviceValue) {
