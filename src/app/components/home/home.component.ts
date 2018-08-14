@@ -69,7 +69,8 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
   }
 
   onSubmit() {
-    this._router.navigate(['/buscador']);
+    // this._router.navigate(['/buscador']);
+    window.location.href = '/buscador';
 
   }
 
@@ -119,7 +120,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
       }
     );
   }
-  
+
  logout(){
     this._RegisterLoginService.onLogout().subscribe(
       response => {
