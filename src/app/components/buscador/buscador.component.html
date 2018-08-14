@@ -1,57 +1,4 @@
-<header>
 
-    <!-- Menú -->
-
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">
-            <img src="/assets/img/logo-white.png" alt="Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <form action="" class="nav-busqueda">
-            <input type="text">
-            <button type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-        </form>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="identity && identity != null">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle bell" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fa fa-bell-o"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    </div>
-                </li>
-                <div class="line-menu-header"></div>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle user" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img src="{{identity.logo}}" alt="Usuario">
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Editar datos</a>
-                        <a class="dropdown-item" href="#">Configurar cuenta</a>
-                        <a class="dropdown-item" href="#">Ayuda</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link logout" href="#">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link help" href="#">Ayuda</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- // menú -->
-</header>
 <!-- // header -->
 
 
@@ -167,10 +114,10 @@
 
                         <!-- Puntuación -->
                         <label>Puntuación de clientes</label>
-                        <p class="general-puntuacion">0</p>
-                        <p class="general-puntuacion wrong">1+</p>
-                        <p class="general-puntuacion medium">5+</p>
-                        <p class="general-puntuacion good">7+</p>
+                        <p class="general-puntuacion click" (click)="FiltrarScore(0)">0</p>
+                        <p class="general-puntuacion wrong click" (click)="FiltrarScore(1)">1+</p>
+                        <p class="general-puntuacion medium click" (click)="FiltrarScore(5)">5+</p>
+                        <p class="general-puntuacion good click" (click)="FiltrarScore(7)">7+</p>
 
                         <div class="divider-filtros"></div>
 
@@ -178,19 +125,19 @@
                         <!-- Cantidad de opiniones -->
                         <label>Cantidad de opiniones</label>
                         <p>
-                            <input type="checkbox" id="cfbox1" value="firstf_checkbox">
-                            <label for="cfbox1">0-10</label>
+                            <input type="checkbox" id="cfbox1" value="firstf_checkbox" name="fooby[2][]"  (click)="FiltrarScoreQuantity(0)">
+                            <label for="cfbox1">0+</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cfbox2" value="secondf_checkbox">
-                            <label for="cfbox2">10-30</label>
+                            <input type="checkbox" id="cfbox2" value="secondf_checkbox" name="fooby[2][]"  (click)="FiltrarScoreQuantity(10)">
+                            <label for="cfbox2">10+</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cfbox3" value="thirdf_checkbox">
-                            <label for="cfbox3">30-50</label>
+                            <input type="checkbox" id="cfbox3" value="thirdf_checkbox"  name="fooby[2][]" (click)="FiltrarScoreQuantity(30)">
+                            <label for="cfbox3">30+</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cfbox4" value="fourthf_checkbox">
+                            <input type="checkbox" id="cfbox4" value="fourthf_checkbox" (click)="FiltrarScoreQuantity(50)">
                             <label for="cfbox4">más de 50</label>
                         </p>
 

@@ -13,7 +13,6 @@ export class RegisterLoginService {
   
   constructor(private _http: Http) {
     this.url = global.url;
-    this.token = token.token;
 
   }
   onLogin(user){
@@ -26,6 +25,13 @@ export class RegisterLoginService {
                     .map(res => res.json());
   }
 
+
+  onLogout(){
+    this.headers.set('Authorization',"Bearer "+this.getToken().token);
+    return this._http.post(this.url + 'Api/account/logout',{},{headers: this.headers})
+    .map(res => res.json());
+  }
+ 
 	getToken(){
 		let token = localStorage.getItem('tokenTurnos');
 		if(token != "undefined"){
@@ -34,6 +40,6 @@ export class RegisterLoginService {
 			this.token = null;
 		}
 
-		return this.token;
+		return JSON.parse(this.token);
 	}
 }

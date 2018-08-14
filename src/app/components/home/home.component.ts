@@ -40,6 +40,8 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
 
 
   ngOnInit() {
+    $('header').hide();
+
     this._route.params.subscribe(params => {
       let id = +params["id"];
       $('select2 option[value=' + id + ']').attr("selected", true);
@@ -64,7 +66,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
   }
 
   onSubmit() {
-    window.location.href = '/buscador';
+    this._router.navigate(['/buscador']);
 
   }
 
@@ -75,12 +77,16 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
       this._RegisterLoginService.onRegister(this.register).subscribe(
         response => {
           console.log(response);
+
         },
         error => {
           // Manejar errores
         }
       );
-      
+      $(".modulo-inicio").css('display','block');
+      $(".modulo-registro").css('display','none');
+      $('#d-ini').addClass('activeInside');
+      $('#d-reg').removeClass('activeInside');
     }
     else{
 
@@ -90,7 +96,8 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
   onLogin(){
     this._RegisterLoginService.onLogin(this.login).subscribe(
       response => {
-        this.identity =localStorage.setItem('tokenTurnos', JSON.stringify(response));
+        localStorage.setItem('tokenTurnos', JSON.stringify(response));
+        this.identity = this._RegisterLoginService.getToken();
         this.user=response.logo;
         $('.modal-gral').fadeOut();
 

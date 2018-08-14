@@ -19,6 +19,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { VerMapaComponent } from './components/ver-mapa/ver-mapa.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
+import { NavComponent } from './components/nav/nav.component';
  
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ReservaComponent } from './components/reserva/reserva.component';
     AyudaComponent,
     NosotrosComponent,
     VerMapaComponent,
-    ReservaComponent
+    ReservaComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

@@ -4642,3 +4642,7 @@ a.aplicar-filters:hover {
     padding-right: 23px;
 
 }
+
+.click{
+    cursor: pointer;
+}

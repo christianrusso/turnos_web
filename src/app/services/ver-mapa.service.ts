@@ -20,7 +20,7 @@ export class VerMapService {
       // Map options
       var map = new google.maps.Map(document.getElementById('google-map'),
         {
-          zoom: 12,
+          zoom: 16,
           center: new google.maps.LatLng(-34.5432596, 5.762930),
           mapTypeControl: false,
           streetViewControl: false,
@@ -49,12 +49,13 @@ export class VerMapService {
           map: map,
           icon: '/assets/img/normal.png'
         });
-  
+
         markers.push(marker);
   
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
           return function () {
             infowindow.setContent(locations[i][0]);
+
             infowindow.open(map, marker);
             for (var j = 0; j < markers.length; j++) {
               markers[j].setIcon("/assets/img/normal.png");
@@ -75,6 +76,8 @@ export class VerMapService {
         });
         // Fit these bounds to the map
         map.fitBounds(bounds);
+        map.setZoom(16);
+
       }
       AutoCenter();
     

@@ -1,3 +1,157 @@
+<header>
+
+    <!-- Menú -->
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" [routerLink]="['']">
+            <img src="/assets/img/logo-white.png" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form action="" class="nav-busqueda">
+            <input type="text">
+            <button type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle bell" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fa fa-bell-o"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    </div>
+                </li>
+                <div class="line-menu-header"></div>
+
+                <li class="nav-item">
+                    <a  [routerLink]="['/nosotros']" class="special-link nav-link help">Sé parte de nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link help"[routerLink]="['/ayuda']">Ayuda</a>
+                </li>
+                <li class="nav-item" *ngIf="identity == null">
+                    <a href="" class="nav-link help" id="registrarte-link">Registrate</a>
+                </li>
+                <li class="nav-item" *ngIf="identity == null">
+                    <a class="nav-link help" href="" id="login-link">Iniciar sesión</a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="identity && identity != null">
+                    <a class="nav-link dropdown-toggle user" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <img *ngIf="identity.logo != '' " src="{{identity.logo}}" alt="Usuario">
+                        <img *ngIf="identity.logo == '' " src="assets/img/user.png" alt="Usuario">
+
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Editar datos</a>
+                        <a class="dropdown-item" href="#">Configurar cuenta</a>
+                        <a class="dropdown-item" href="#">Ayuda</a>
+                    </div>
+                </li>
+                <li class="nav-item" *ngIf="identity && identity != null">
+                    <a class="nav-link logout click" (click)="logout()">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="col col-xs-12 general pantalla-2 container-fluid">
+
+        <!-- Modal -->
+        <div class="col-xs-12 modal-gral">
+            <div class="col-xs-12 col-sm-8 col-md-5 col-sm-offset-2 col-md-offset-3 inside-modal">
+                <a class="click" id="close-modal">X</a>
+                <div class="col-xs-12 mod">
+                    <div class="col-xs-6 col-sm-6 click" id="d-ini">
+                        <a id="ini"> Iniciar sesión</a>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 click" id="d-reg">
+                        <a id="reg"> Registrarte</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 modulo-inicio">
+
+                    <form #formLogin="ngForm" (ngSubmit)="onLogin()">
+                        <input #email="ngModel" name="email" [(ngModel)]="login.email" type="text" placeholder="Email">
+                        <input #password="ngModel" name="password" [(ngModel)]="login.password" type="password" placeholder="Contraseña">
+                        <a href="">¿Olvidaste tu contraseña?</a>
+                        <input class="click" type="submit" value="Ingresar">
+                    </form>
+
+                    <div class="line-modal">
+                        <span>o</span>
+                    </div>
+
+                    <div class="btn-fcbk">
+                        <a href="">
+                            <p>
+                                <img src="/assets/img/fb.png" alt="Facebook">Iniciar sesión con Facebook </p>
+                        </a>
+                    </div>
+
+                    <div class="btn-google">
+                        <a href="">
+                            <p>
+                                <img src="/assets/img/g.png" alt="Google">Iniciar sesión con Google </p>
+                        </a>
+                    </div>
+
+                    <p class="small-letter">Al iniciar sesión en la cuenta aceptas nuestros
+                        <br>
+                        <a href="">Términos y condiciones y Política de privacidad</a>
+                    </p>
+                </div>
+
+                <div class="col-xs-12 modulo-registro">
+                    <form #formRegister="ngForm" (ngSubmit)="onRegister()">
+                        <input #email="ngModel" name="email" [(ngModel)]="register.email" type="text" placeholder="Email">
+                        <p class="text-center text-danger">{{errorMensageEmail}}</p>
+
+                        <p class="text-center text-danger">{{errorMensagePassword}}</p>
+                        <input #password="ngModel" name="password" [(ngModel)]="register.password" type="password" placeholder="Contraseña">
+                        <input #passwordSecond="ngModel" name="passwordSecond" [(ngModel)]="register.passwordSecond" type="password" placeholder="Confirmar contraseña">
+
+                        <a href="">¿Olvidaste tu contraseña?</a>
+                        <input class="click" type="submit" value="Ingresar">
+                    </form>
+
+                    <div class="line-modal">
+                        <span>o</span>
+                    </div>
+
+                    <div class="btn-fcbk">
+                        <a href="">
+                            <p>
+                                <img src="/assets/img/fb.png" alt="Facebook">Iniciar sesión con Facebook </p>
+                        </a>
+                    </div>
+
+                    <div class="btn-google">
+                        <a href="">
+                            <p>
+                                <img src="/assets/img/g.png" alt="Google">Iniciar sesión con Google </p>
+                        </a>
+                    </div>
+
+                    <p class="small-letter">Al iniciar sesión en la cuenta aceptas nuestros
+                        <br>
+                        <a href="">Términos y condiciones y Política de privacidad</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- // modal -->
+    </section>
+    <!-- // menú -->
+</header>
 
 <router-outlet>
 

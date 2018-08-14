@@ -8,15 +8,14 @@ $(document).ready(function() {
 });
 
 /* DATE PICKER */
-$('#datetimepicker1').datetimepicker({
-    format: 'DD/MM/YYYY'
-});
+// $('#datetimepicker1').datetimepicker({
+//     format: 'DD/MM/YYYY'
+// });
 
 /*	 MODALES LOGIN Y REGISTRO */
 
 $('a#registrarte-link').click(function(e) {
   e.preventDefault();
-
 });
 
 $('a#login-link').click(function(e) {

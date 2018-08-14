@@ -32,17 +32,18 @@ export class BuscadorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    $('header').show();
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
-    this.identity = localStorage.getItem('tokenTurnos');
-    console.log(this.identity.logo);
+    this.identity = this._RegisterLoginService.getToken();
     
     this.filtro = {
       "Cities": [this.busqueda.lugar],
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": [],
-      "medicalPlans": []
+      "medicalPlans": [],
+      "Score":"",
+      "ScoreQuantity":""
 
     }
     this.dontResult = false;
@@ -191,6 +192,21 @@ export class BuscadorComponent implements OnInit {
     this.getByFilter(this.filtro);
   }
 
+
+  //filtro Score
+  public FiltrarScore(score) {
+    this.clinicas = [];
+    this.filtro.Score=score;
+    this.getByFilter(this.filtro);
+  }
+ //filtro ScoreQuantity
+ public FiltrarScoreQuantity(ScoreQuantity) {
+   
+  this.clinicas = [];
+  this.filtro.ScoreQuantity=ScoreQuantity;
+  this.getByFilter(this.filtro);
+}
+
   //filtro pro distancia
   FiltrarDistancia(deviceValue) {
     this.distancia = parseInt(deviceValue.target.value);
@@ -297,4 +313,5 @@ export class BuscadorComponent implements OnInit {
     }
   }
 
+ 
 }
