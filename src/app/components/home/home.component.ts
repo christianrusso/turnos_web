@@ -22,7 +22,11 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
   public user;
   public token = localStorage.getItem('tokenTurnos');
   public busqueda: string;
-	public identity;
+  public identity;
+  public errorMensagePassword;
+  public errorMensageEmail;
+  public successMensage;
+
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -34,10 +38,9 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
     this.busqueda = busqueda.categoria;
   }
 
-   async ngAfterViewInit(): Promise<void> {
+  async ngAfterViewInit(): Promise<void> {
     await this.loadScript('/assets/js/script2.js');
   }
-
 
   ngOnInit() {
     $('header').hide();
@@ -71,26 +74,35 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
   }
 
   onRegister(){
-    console.log(this.register);
-    if(this.register.password==this.register.passwordSecond){
+    if(this.register.email!=''){
+      this.errorMensageEmail="";
 
-      this._RegisterLoginService.onRegister(this.register).subscribe(
-        response => {
-          console.log(response);
-
-        },
-        error => {
-          // Manejar errores
-        }
-      );
-      $(".modulo-inicio").css('display','block');
-      $(".modulo-registro").css('display','none');
-      $('#d-ini').addClass('activeInside');
-      $('#d-reg').removeClass('activeInside');
+      if(this.register.password==this.register.passwordSecond && this.register.password!= '' && this.register.password.length>8 ){
+        this._RegisterLoginService.onRegister(this.register).subscribe(
+          response => {
+            console.log(response);
+            
+  
+          },
+          error => {
+            // Manejar errores
+          }
+        );
+        this.successMensage="Cuentra creada con exito";
+        $(".modulo-inicio").css('display','block');
+        $(".modulo-registro").css('display','none');
+        $('#d-ini').addClass('activeInside');
+        $('#d-reg').removeClass('activeInside');
+      }
+      else{  
+        this.errorMensagePassword="Contraseña demasiada corta o las contraseñas no coinciden";
+      }
     }
     else{
+      this.errorMensageEmail="Complete los campos";
 
     }
+    
 
   }
   onLogin(){
@@ -107,17 +119,19 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
       }
     );
   }
+ logout(){
+    this._RegisterLoginService.onLogout().subscribe(
+      response => {
+        console.log(response);
 
-  lugar(lugar){
-    this.buscador.lugar=lugar.data[0].text;
-    localStorage.setItem('busqueda', JSON.stringify(this.buscador));
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+    localStorage.removeItem("tokenTurnos");
+    window.location.href = '/buscador';
 
   }
-  categoria(categoria){
-    this.buscador.categoria=categoria.data[0].text;
-    localStorage.setItem('busqueda', JSON.stringify(this.buscador));
-
-  }
-
 
 }

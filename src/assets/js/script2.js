@@ -76,3 +76,61 @@ $(document).keydown(function(e) {
        $('.modal-gral').fadeOut();
     }
 });
+
+
+$('a#registrarte-link').click(function(e) {
+  e.preventDefault();
+});
+
+$('a#login-link').click(function(e) {
+  e.preventDefault();
+
+});
+
+/***
+  LOGIN Y REGISTRO
+***/
+$('#login-link2').click(function(e) {
+  e.preventDefault();
+  $('.modal-gral').css('display','block');
+  $(".modulo-inicio").css('display','block');
+  $('#d-ini2').addClass('activeInside');
+  $('#d-reg2').removeClass('activeInside');
+
+  $(".modulo-registro").css('display','none');
+});
+
+$('#registrarte-link2').click(function(e) {
+  e.preventDefault();
+  $('.modal-gral').css('display','block');
+  $(".modulo-registro").css('display','block');
+  $('#d-reg2').addClass('activeInside');
+  $('#d-ini2').removeClass('activeInside');
+
+  $(".modulo-inicio").css('display','none');
+});
+
+$('#d-ini2').click(function(e) {
+  e.preventDefault();
+  $(this).addClass('activeInside');
+  $('#d-reg2').removeClass('activeInside');
+
+  $(".modulo-inicio").css('display','block');
+  $(".modulo-registro").css('display','none');
+});
+
+$('#d-reg2').click(function(e) {
+  e.preventDefault();
+  $(this).addClass('activeInside');
+  $('#d-ini2').removeClass('activeInside');
+
+  $(".modulo-registro").css('display','block');
+  $(".modulo-inicio").css('display','none');
+});
+
+
+$('.close-modal').click(function(e) {
+	e.preventDefault();
+	$('.modal-gral').fadeOut();
+});
+
