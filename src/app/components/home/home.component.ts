@@ -81,7 +81,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
         this._RegisterLoginService.onRegister(this.register).subscribe(
           response => {
             console.log(response);
-            
+
   
           },
           error => {
@@ -91,8 +91,8 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
         this.successMensage="Cuentra creada con exito";
         $(".modulo-inicio").css('display','block');
         $(".modulo-registro").css('display','none');
-        $('#d-ini').addClass('activeInside');
-        $('#d-reg').removeClass('activeInside');
+        $('#d-ini2').addClass('activeInside');
+        $('#d-reg2').removeClass('activeInside');
       }
       else{  
         this.errorMensagePassword="Contraseña demasiada corta o las contraseñas no coinciden";
@@ -119,6 +119,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
       }
     );
   }
+  
  logout(){
     this._RegisterLoginService.onLogout().subscribe(
       response => {
@@ -130,7 +131,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
       }
     );
     localStorage.removeItem("tokenTurnos");
-    window.location.href = '/buscador';
+    window.location.href = '';
 
   }
 
