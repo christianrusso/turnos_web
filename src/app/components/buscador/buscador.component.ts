@@ -35,21 +35,20 @@ export class BuscadorComponent implements OnInit {
     $('header').show();
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
     this.identity = this._RegisterLoginService.getToken();
-    
     this.filtro = {
-      "Cities": [this.busqueda.lugar],
+      "Cities": [this.busqueda.ubicacion],
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": [],
       "medicalPlans": [],
-      "Score":"",
-      "ScoreQuantity":""
+      "Score": "",
+      "ScoreQuantity": ""
 
     }
     this.dontResult = false;
     this.getByFilter(this.filtro);
     this.getSplecialties();
-    // this.getSubSplecialties();
+    this.getSubSplecialties();
     this.getMedicalInsurance();
     this.getCities();
 
@@ -60,8 +59,6 @@ export class BuscadorComponent implements OnInit {
     this._BusquedaService.getSpeciality().subscribe(
       response => {
         this.especialidades = response;
-        console.log(response);
-
       },
       error => {
         // Manejar errores
@@ -73,7 +70,6 @@ export class BuscadorComponent implements OnInit {
   public getCities() {
     this._BusquedaService.getCities().subscribe(
       response => {
-        console.log(response);
         this.cities = response;
       },
       error => {
@@ -81,11 +77,13 @@ export class BuscadorComponent implements OnInit {
       }
     );
   }
+  //Citys
 
   //SubEspecialidades
   public getSubSplecialties() {
     this._BusquedaService.getSubSpeciality().subscribe(
       response => {
+        console.log(response);
         this.subEspecialidades = response;
 
       },
@@ -100,8 +98,6 @@ export class BuscadorComponent implements OnInit {
     this._BusquedaService.getMedicalInsurance().subscribe(
       response => {
         this.obrasSociales = response;
-        console.log(response);
-
       },
       error => {
         // Manejar errores
@@ -144,9 +140,31 @@ export class BuscadorComponent implements OnInit {
         }
       }
     }
+    if(this.filtro.Specialties.length>0){
+      this.FiltrarSubEspecialidadOnEspecialidad(especialidad);
+
+    }else{
+      this.getSubSplecialties();
+
+    }
     this.getByFilter(this.filtro);
   }
 
+  //filtro cunado cambia la especialiad
+  public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
+    this.clinicas = [];
+    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
+      response => {
+        console.log(response);
+        this.subEspecialidades = response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+    
+    this.getByFilter(this.filtro);
+  }
   public FiltrarSubEspecialidad(Subspecialties, deviceValue) {
     this.clinicas = [];
     if (deviceValue.target.checked) {
@@ -196,16 +214,16 @@ export class BuscadorComponent implements OnInit {
   //filtro Score
   public FiltrarScore(score) {
     this.clinicas = [];
-    this.filtro.Score=score;
+    this.filtro.Score = score;
     this.getByFilter(this.filtro);
   }
- //filtro ScoreQuantity
- public FiltrarScoreQuantity(ScoreQuantity) {
-   
-  this.clinicas = [];
-  this.filtro.ScoreQuantity=ScoreQuantity;
-  this.getByFilter(this.filtro);
-}
+  //filtro ScoreQuantity
+  public FiltrarScoreQuantity(ScoreQuantity) {
+
+    this.clinicas = [];
+    this.filtro.ScoreQuantity = ScoreQuantity;
+    this.getByFilter(this.filtro);
+  }
 
   //filtro pro distancia
   FiltrarDistancia(deviceValue) {
@@ -313,5 +331,5 @@ export class BuscadorComponent implements OnInit {
     }
   }
 
- 
+
 }

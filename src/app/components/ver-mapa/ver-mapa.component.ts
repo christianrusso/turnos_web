@@ -35,7 +35,7 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   ngOnInit() {
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
     this.filtro = {
-      "Cities": [this.busqueda.lugar],
+      "Cities": [this.busqueda.ubicacion],
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": [],
@@ -45,7 +45,8 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
 
     this.getByFilter(this.filtro);
     this.getSplecialties();
-    // this.getSubSplecialties();
+    this.getSubSplecialties();
+
     this.getMedicalInsurance();
     this.getCities();
 
@@ -55,11 +56,11 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
         console.log(response.length);
-        if(response.length==0){
-          this.noData=true;
+        if (response.length == 0) {
+          this.noData = true;
         }
-        else{
-          this.noData=false;
+        else {
+          this.noData = false;
         }
         this.clinicas = response;
         this.cantidadClinicas = this.clinicas.length;
@@ -75,7 +76,7 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
           this.insertStart = [];
         });
 
-       this._MapService.generateMap(this.locations,null);
+        this._MapService.generateMap(this.locations, null);
 
       },
       error => {
@@ -86,6 +87,7 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   }
   //Filtros
   public FiltrarEspecialidad(especialidad, deviceValue) {
+    this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.Specialties.push(especialidad);
     } else {
@@ -95,8 +97,33 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
         }
       }
     }
+    if (this.filtro.Specialties.length > 0) {
+      this.FiltrarSubEspecialidadOnEspecialidad(especialidad);
+
+    } else {
+      this.getSubSplecialties();
+
+    }
+    this.getByFilter(this.filtro);
+  }
+
+  //filtro cunado cambia la especialiad
+  public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
+    this.clinicas = [];
+    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
+      response => {
+        console.log(response);
+        this.subEspecialidades = response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+
+    this.getByFilter(this.filtro);
   }
   public FiltrarSubEspecialidad(Subspecialties, deviceValue) {
+    this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.Subspecialties.push(Subspecialties);
     }
@@ -107,8 +134,10 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
         }
       }
     }
+    this.getByFilter(this.filtro);
   }
   public FiltrarObrasSocial(obraSocial, deviceValue) {
+    this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.MedicalInsurances.push(obraSocial);
     }
@@ -119,17 +148,23 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
         }
       }
     }
+    this.getByFilter(this.filtro);
   }
-  public  getCities(){
-    this._BusquedaService.getCities().subscribe(
-      response => {
-        console.log(response);
-        this.cities=response;
-      },
-      error => {
-        // Manejar errores
+
+  //filtro city
+  public FiltrarCities(Cities, deviceValue) {
+    this.clinicas = [];
+    if (deviceValue.target.checked) {
+      this.filtro.Cities.push(Cities);
+    }
+    else {
+      for (let index = 0; index < this.filtro.Cities.length; index++) {
+        if (Cities == this.filtro.Cities[index]) {
+          this.filtro.Cities.splice(index, 1);
+        }
       }
-    );
+    }
+    this.getByFilter(this.filtro);
   }
   //filtro pro distancia
   FiltrarDistancia(deviceValue) {
@@ -182,42 +217,53 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   }
   public test;
   public OpenMarkers(x) {
-    this._MapService.generateMap(this.locations,x);
+    this._MapService.generateMap(this.locations, x);
   }
 
-    //Specialidades
-    public  getSplecialties(){
-      this._BusquedaService.getSpeciality().subscribe(
-        response => {
-          this.especialidades=response;
-        },
-        error => {
-          // Manejar errores
-        }
-      );
-    }
-  
-    //SubEspecialidades
-    public  getSubSplecialties(){
-      this._BusquedaService.getSubSpeciality().subscribe(
-        response => {
-          this.subEspecialidades=response;
-        },
-        error => {
-          // Manejar errores
-        }
-      );
-    }
-  
-      //ObrasSociales
-      public getMedicalInsurance(){
-        this._BusquedaService.getMedicalInsurance().subscribe(
-          response => {
-            this.obrasSociales=response;
-          },
-          error => {
-            // Manejar errores
-          }
-        );
+  //Specialidades
+  public getSplecialties() {
+    this._BusquedaService.getSpeciality().subscribe(
+      response => {
+        this.especialidades = response;
+      },
+      error => {
+        // Manejar errores
       }
+    );
+  }
+
+  //SubEspecialidades
+  public getSubSplecialties() {
+    this._BusquedaService.getSubSpeciality().subscribe(
+      response => {
+        this.subEspecialidades = response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
+
+  //ObrasSociales
+  public getMedicalInsurance() {
+    this._BusquedaService.getMedicalInsurance().subscribe(
+      response => {
+        this.obrasSociales = response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
+   //Citys
+   public getCities() {
+    this._BusquedaService.getCities().subscribe(
+      response => {
+        this.cities = response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
 }
