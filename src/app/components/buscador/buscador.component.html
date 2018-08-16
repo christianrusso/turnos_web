@@ -1,4 +1,3 @@
-
 <!-- // header -->
 
 
@@ -7,19 +6,19 @@
     <p>Encontramos
         <span class="bold">25 lugares disponibles</span>
     </p>
-    <form id="resultados-form" action="" method="">
+    <form id="resultados-form" #formFecha="ngForm" (ngSubmit)="onFechaFilter()">
         <div class="form-group cats">
             <label for="">Categorías</label>
-            <select2 name="cats" lang="es">
-                <option value="" selected="">Medicina</option>
-                <option value="">Traumatología</option>
-                <option value="">Cardiología</option>
+            <select2 name="cats" lang="es" id="CategoríasSelect" (valueChanged)="categoria($event)">
+                <option value="1" selected="">Medicina</option>
+                <option value="2">Traumatología</option>
+                <option value="3">Cardiología</option>
             </select2>
         </div>
-        <div class="form-group fecha-reserva">
+        <div class="form-group fecha-reserva"  >
             <label>Fecha de reserva</label>
-            <div class='input-group date' id='datetimepicker2'>
-                <input type='text' class="input-group-addon form-control" placeholder="22 de Mayo" />
+            <div  class='input-group date' >
+                <input  #fecha="ngModel" name="fecha" [(ngModel)]="filtroFecha.fecha"  type='date' class="input-group-addon form-control" placeholder="22 de Mayo" />
             </div>
         </div>
         <input type="submit" name="" value="Buscar">
@@ -125,15 +124,15 @@
                         <!-- Cantidad de opiniones -->
                         <label>Cantidad de opiniones</label>
                         <p>
-                            <input type="checkbox" id="cfbox1" value="firstf_checkbox" name="fooby[2][]"  (click)="FiltrarScoreQuantity(0)">
+                            <input type="checkbox" id="cfbox1" value="firstf_checkbox" name="fooby[2][]" (click)="FiltrarScoreQuantity(0)">
                             <label for="cfbox1">0+</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cfbox2" value="secondf_checkbox" name="fooby[2][]"  (click)="FiltrarScoreQuantity(10)">
+                            <input type="checkbox" id="cfbox2" value="secondf_checkbox" name="fooby[2][]" (click)="FiltrarScoreQuantity(10)">
                             <label for="cfbox2">10+</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cfbox3" value="thirdf_checkbox"  name="fooby[2][]" (click)="FiltrarScoreQuantity(30)">
+                            <input type="checkbox" id="cfbox3" value="thirdf_checkbox" name="fooby[2][]" (click)="FiltrarScoreQuantity(30)">
                             <label for="cfbox3">30+</label>
                         </p>
                         <p>
@@ -190,16 +189,16 @@
                         </div>
                     </form>
                 </div>
-                <div class="text-center ">
-                    <ng-loading-spinner></ng-loading-spinner>
-                    <!-- <img src="/assets/img/loader.gif" class="img" alt=""> -->
-                </div>
+
                 <div *ngIf="dontResult">
                     <h5 class="text-center text-danger vertical"> "No se han encontrado resultados para esta busqueda"</h5>
                 </div>
+                <div class="text-center ">
+                    <ng-loading-spinner></ng-loading-spinner>
+                </div>
                 <div *ngFor="let row of clinicas">
-                    <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <div class="col-xs-12 cluster-clinica">
+                    <div class="col-xs-12 cluster-clinica">
+                        <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <div class="col-xs-12 col-sm-2 img-clin">
                                 <img src="{{row.logo}}" alt="Clinica">
                             </div>
@@ -243,20 +242,20 @@
                                 </div> -->
 
                             </div>
-                            <div class="col-xs-12 col-sm-4 ask-clin">
-                                <a href="" class="heart">
-                                    <i class="fa fa-heart-o corazon"></i>
-                                </a>
-                                <h4>{{row.score | number:'.1-5' }}</h4>
-                                <a href="" class="comments">
-                                    <p>{{row.scoreQuantity}} comentarios</p>
-                                </a>
+                        </a>
+                        <div class="col-xs-12 col-sm-4 ask-clin">
+                            <a href="" class="heart">
+                                <i class="fa fa-heart-o corazon"></i>
+                            </a>
+                            <h4>{{row.score | number:'.1-5' }}</h4>
+                            <a href="" class="comments">
+                                <p>{{row.scoreQuantity}} comentarios</p>
+                            </a>
 
-                                <a [routerLink]="['/reserva']" class="reservar">Reservar</a>
-                                <a href="" class="pagar">Pagar ahora</a>
-                            </div>
+                            <a (click)="Reservar()" class="reservar">Reservar</a>
+                            <!-- <a href="" class="pagar">Pagar ahora</a> -->
                         </div>
-                    </a>
+                    </div>
 
                     <div class="col-xs-12 slide-clinica collapse" id="collapseExample{{row.clinicId}}">
                         <div class="col-xs-12 menu-slide">

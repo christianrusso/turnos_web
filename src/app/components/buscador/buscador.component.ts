@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BusquedaService } from '../../services/busqueda.service';
 import { MapService } from '../../services/map.service';
 import { RegisterLoginService } from '../../services/register-login.service';
+import { Router } from "@angular/router";
 
 declare const google: any;
 
@@ -24,10 +25,12 @@ export class BuscadorComponent implements OnInit {
   public obrasSociales;
   public cities;
   public identity;
+  public filtroFecha;
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
     private _RegisterLoginService: RegisterLoginService,
+    private _router: Router,
 
   ) { }
 
@@ -42,8 +45,13 @@ export class BuscadorComponent implements OnInit {
       "MedicalInsurances": [],
       "medicalPlans": [],
       "Score": "",
-      "ScoreQuantity": ""
+      "ScoreQuantity": "",
+      "AvailableAppointmentDate":""
 
+    }
+    this.filtroFecha={
+      "categorias":this.busqueda.ubicacion,
+      "fecha":"",
     }
     this.dontResult = false;
     this.getByFilter(this.filtro);
@@ -83,7 +91,6 @@ export class BuscadorComponent implements OnInit {
   public getSubSplecialties() {
     this._BusquedaService.getSubSpeciality().subscribe(
       response => {
-        console.log(response);
         this.subEspecialidades = response;
 
       },
@@ -120,7 +127,6 @@ export class BuscadorComponent implements OnInit {
         }
         $("#loading-bar-spinner").hide();
 
-        console.log(this.clinicas);
       },
       error => {
         // Manejar errores
@@ -155,7 +161,6 @@ export class BuscadorComponent implements OnInit {
     this.clinicas = [];
     this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
       response => {
-        console.log(response);
         this.subEspecialidades = response;
       },
       error => {
@@ -249,7 +254,6 @@ export class BuscadorComponent implements OnInit {
       "Subspecialties": this.filtro.Subspecialties,
       "MedicalInsurances": this.filtro.MedicalInsurances
     }
-    console.log(this.filtro);
     this.getByFilter(this.filtro);
   }
   //fin filtro por distancia.
@@ -329,6 +333,32 @@ export class BuscadorComponent implements OnInit {
         }
       });
     }
+  }
+  // BOTON DE RESERVAR
+  Reservar(){
+    this.identity = this._RegisterLoginService.getToken();
+
+    if(this.identity!=null){
+    this._router.navigate(['/reserva']);
+    }
+    else{
+      $('.modal-gral').css('display','block');
+      $(".modulo-inicio").css('display','block');
+      $('#d-ini').addClass('activeInside');
+      $('#d-reg').removeClass('activeInside');
+    }
+  }
+  
+
+  onFechaFilter(){
+    this.filtro.AvailableAppointmentDate=this.filtroFecha.fecha;
+    console.log(this.filtro);
+    this.getByFilter(this.filtro);
+
+  }
+  categoria(id){
+    this.filtroFecha.categorias=id.value;
+
   }
 
 
