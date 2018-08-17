@@ -21,6 +21,14 @@ import { VerMapaComponent } from './components/ver-mapa/ver-mapa.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
 import { NavComponent } from './components/nav/nav.component';
  
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule } from 'angular-calendar';
+import { DemoUtilsModule } from './demo-utils/module';
+import { registerLocaleData } from '@angular/common';
+
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -35,6 +43,9 @@ import { NavComponent } from './components/nav/nav.component';
     NavComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    CalendarModule.forRoot(),
+    DemoUtilsModule,
     BrowserModule,
     routing,
     HttpModule,

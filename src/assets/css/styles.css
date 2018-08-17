@@ -4215,7 +4215,7 @@ cursor: pointer;
 
 .calendario-turnos .dias{
 
-margin-top: 35px;
+margin-top: 0px;
 
 border-radius: 8px;
 
@@ -4658,3 +4658,104 @@ a.aplicar-filters:hover {
     background: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.16), 0 2px 10px rgba(0,0,0,0.12);
 }
+.t-disp{
+
+    font-family: Poppins;
+    
+    color: #454edb;
+    
+    font-size: 17px;
+    
+    line-height: 15px;
+    
+    font-weight: 600;
+    
+    margin-top: 20px;
+    }
+
+.bg-turnos{
+
+background: #d1fbfa;
+}
+
+
+.calendario-turnos .dias .div-contenido-fecha div.col-md-1.bg-turnos.selectedTurno{
+    background: #8ef6f4;
+    border-left: 4px solid #454edb;
+}
+.n-dia{
+
+    
+    right: 13px;
+    
+    font-family: Poppins;
+    
+    font-size: 13px;
+    
+    top: 6px;
+    
+    margin-bottom: 0;
+    
+    color: #454edb;
+    }
+
+.cal-day-number {
+    font-size: 13px !important;
+        opacity: 222 !important;
+
+}
+
+.cal-month-view .cal-cell-top {
+    min-height: 25px !important;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 0 !important;
+}
+.special-day{
+    width: 100%;
+	max-width: 14.2857%;
+	flex: 0 0 14.285%;
+	height: 55px;
+	line-height: 55px;
+	font-family: Poppins;
+	font-size: 14px;
+	text-align: center;
+	color: #5a5a5a;
+	background: #f1f5fe;
+	position: relative;
+	z-index: 1;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.cal-month-view .cal-header .cal-cell {
+    width: 100%;
+	max-width: 14.2857%;
+	flex: 0 0 14.285%;
+	height: 55px;
+	line-height: 55px;
+	font-family: Poppins;
+	font-size: 14px;
+	text-align: center;
+	color: #5a5a5a;
+	background: #f1f5fe;
+	position: relative;
+	z-index: 1;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+
+}
+
+.selectedTurno{
+    background: #8ef6f4;
+	border-left: 4px solid #454edb;
+}
+
+.selectedTurno:hover {
+    background-color: #8ef6f4 !important;
+  }
+
+  .tamanioTexto{
+      font-size: 30px
+  }
+
+ 

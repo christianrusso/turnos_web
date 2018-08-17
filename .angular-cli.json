@@ -20,8 +20,8 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/select2/dist/css/select2.min.css"
-
+        "../node_modules/select2/dist/css/select2.min.css",
+        "../node_modules/angular-calendar/css/angular-calendar.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
