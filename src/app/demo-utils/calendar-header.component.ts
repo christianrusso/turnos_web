@@ -13,7 +13,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
      
   </div>
 </div>
-<br>
   `
 })
 export class CalendarHeaderComponent {

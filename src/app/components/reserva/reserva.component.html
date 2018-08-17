@@ -91,6 +91,8 @@
                         
                             <div class="dias col-xs-12 calendario-turnos" height="50px">
                                 <br>
+                            
+                                  
                                     <mwl-demo-utils-calendar-header
                                     [(view)]="view"
                                     [(viewDate)]="viewDate"  [locale]="locale" >
@@ -104,28 +106,33 @@
                                     <div class="t-disp"   style="margin: 5px" *ngIf="day.badgeTotal > 0">{{ day.events.length }} turnos <br> disponibles</div>
 
                                   </ng-template>
-                                  
-                                  <div [ngSwitch]="view">
-                                    <mwl-calendar-month-view
-                                      *ngSwitchCase="'month'"
-                                      [viewDate]="viewDate"
-                                      [events]="events"
-                                      [cellTemplate]="customCellTemplate"
-                                      (dayClicked)="dayClicked($event.day)"
-                                      
-                                      >
-                                    </mwl-calendar-month-view>
-                                    <mwl-calendar-week-view
-                                      *ngSwitchCase="'week'"
-                                      [viewDate]="viewDate"
-                                      [events]="events">
-                                    </mwl-calendar-week-view>
-                                    <mwl-calendar-day-view
-                                      *ngSwitchCase="'day'"
-                                      [viewDate]="viewDate"
-                                      [events]="events">
-                                    </mwl-calendar-day-view>
+                             
+                                  <div *ngIf="events">
+                                    <div [ngSwitch]="view" >
+                                        <mwl-calendar-month-view
+                                          *ngSwitchCase="'month'"
+                                          [viewDate]="viewDate"
+                                          [events]="events"
+                                          [activeDayIsOpen]="activeDayIsOpen"
+                                          [cellTemplate]="customCellTemplate"
+                                          (dayClicked)="dayClicked($event.day)"
+                                          [refresh]="refresh"
+
+                                          >
+                                        </mwl-calendar-month-view>
+                                        <mwl-calendar-week-view
+                                          *ngSwitchCase="'week'"
+                                          [viewDate]="viewDate"
+                                          [events]="events">
+                                        </mwl-calendar-week-view>
+                                        <mwl-calendar-day-view
+                                          *ngSwitchCase="'day'"
+                                          [viewDate]="viewDate"
+                                          [events]="events">
+                                        </mwl-calendar-day-view>
+                                      </div>
                                   </div>
+                                  
                             </div>
                         </div>
 
