@@ -115,5 +115,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     }
     }
     
-
+    nextDatas(data){
+      console.log(data);
+    }
 }
