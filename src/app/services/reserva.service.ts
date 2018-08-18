@@ -19,9 +19,9 @@ export class ReservaService {
 
   }
 
-  GetAvailableAppontmentsPerDay() {
+  GetAvailableAppontmentsPerDay(date) {
     this.headers.set('Authorization',"Bearer "+this.getToken().token);
-    return this._http.post(this.url + 'api/Appointment/GetAvailableAppointmentsPerDay', {"StartDate":"2018-08-1T21:10:58.509Z","EndDate":"2018-08-31T21:10:58.509Z"}, { headers: this.headers })
+    return this._http.post(this.url + 'api/Appointment/GetAvailableAppointmentsPerDay',date, { headers: this.headers })
       .map(res => res.json());
   }
 

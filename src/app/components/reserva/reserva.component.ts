@@ -18,10 +18,7 @@ import {
   endOfDay,
   format
 } from 'date-fns';
-interface Film {
-  title: string;
-  start: Date;
-}
+
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
@@ -38,7 +35,8 @@ interface Film {
 
 export class ReservaComponent extends BaseComponent implements OnInit, AfterViewInit {
   public backGround;
-  public test = [];
+  public loading;
+  public turnos = true;
   refresh: Subject<any> = new Subject();
 
 
@@ -51,25 +49,27 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   view: string = 'month';
   viewDate: Date = new Date();
 
-  events: CalendarEvent[]=[];
+  events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = false;
   ngOnInit() {
-
-    this._ReservaComponent.GetAvailableAppontmentsPerDay().subscribe(
+    this.loading = true;
+    this._ReservaComponent.GetAvailableAppontmentsPerDay({ "StartDate": new Date(), "EndDate": "2018-08-31T21:10:58.509Z" }).subscribe(
       response => {
         var i;
-
+        console.log(this.events);
         response.forEach(element => {
           for (i = 0; i < element.availableAppointments; i++) {
             this.events.push(
               { title: "manuel", start: new Date(element.day) }
-              
+
             );
 
           }
         });
         this.refresh.next();
+        this.loading = false;
+        $("#turnos").css("display", "block");
 
       },
       error => {
@@ -82,33 +82,38 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   addEvent(): void {
     this.refresh.next();
   }
- 
+
 
 
   locale: string = 'es';
+
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
   selectedMonthViewDay: CalendarMonthViewDay;
   selectedDays: any = [];
 
   dayClicked(day: CalendarMonthViewDay): void {
-
-    this.selectedDays.forEach(element => {
-      element.cssClass = ""
-    });
-    this.selectedDays = [];
-    this.selectedMonthViewDay = day;
-    const selectedDateTime = this.selectedMonthViewDay.date.getTime();
-    const dateIndex = this.selectedDays.findIndex(
-      selectedDay => selectedDay.date.getTime() === selectedDateTime
-    );
-    if (dateIndex > -1) {
-      delete this.selectedMonthViewDay.cssClass;
-      this.selectedDays.splice(dateIndex, 1);
-    } else {
-      this.selectedDays.push(this.selectedMonthViewDay);
-      day.cssClass = 'selectedTurno';
+    if(day.events.length>0){
+      this.selectedDays.forEach(element => {
+        element.cssClass = ""
+      });
+      console.log(day);
+      this.selectedDays = [];
       this.selectedMonthViewDay = day;
+      const selectedDateTime = this.selectedMonthViewDay.date.getTime();
+      const dateIndex = this.selectedDays.findIndex(
+        selectedDay => selectedDay.date.getTime() === selectedDateTime
+      );
+      if (dateIndex > -1) {
+        delete this.selectedMonthViewDay.cssClass;
+        this.selectedDays.splice(dateIndex, 1);
+      } else {
+        this.selectedDays.push(this.selectedMonthViewDay);
+         day.cssClass = 'selectedTurno';
+        this.selectedMonthViewDay = day;
+      }
     }
-  }
+    }
+    
+
 }

@@ -6,7 +6,8 @@ export class CustomDateFormatter extends CalendarDateFormatter {
   public weekViewTitle({ date, locale }: DateFormatterParams): string {
     const year: string = new DatePipe(locale).transform(date, 'y', locale);
     const weekNumber: number = getISOWeek(date);
-    console.log(weekNumber);
+    console.log("hola");
     return `Semaine ${weekNumber} en ${year}`;
   }
+
 }
