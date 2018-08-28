@@ -24,7 +24,11 @@ export class ReservaService {
     return this._http.post(this.url + 'api/Appointment/GetAvailableAppointmentsPerDay',date, { headers: this.headers })
       .map(res => res.json());
   }
-
+  GetDoctor(date) {
+    this.headers.set('Authorization',"Bearer "+this.getToken().token);
+    return this._http.post(this.url + 'api/Doctor/GetByFilter',date, { headers: this.headers })
+      .map(res => res.json());
+  }
   getToken(){
 		let token = localStorage.getItem('tokenTurnos');
 		if(token != "undefined"){
@@ -34,5 +38,11 @@ export class ReservaService {
 		}
 
 		return JSON.parse(this.token);
-	}
+  }
+  
+  GetAllAvailablesForDay(data){
+    this.headers.set('Authorization',"Bearer "+this.getToken().token);
+    return this._http.post(this.url + 'api/Appointment/GetAllAvailablesForDay',data, { headers: this.headers })
+      .map(res => res.json());
+  }
 }

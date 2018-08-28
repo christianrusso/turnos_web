@@ -335,11 +335,12 @@ export class BuscadorComponent implements OnInit {
     }
   }
   // BOTON DE RESERVAR
-  Reservar(){
+  Reservar(id){
+    console.log(id);
     this.identity = this._RegisterLoginService.getToken();
 
     if(this.identity!=null){
-    this._router.navigate(['/reserva']);
+    this._router.navigate(['/reserva/',id]);
     }
     else{
       $('.modal-gral').css('display','block');

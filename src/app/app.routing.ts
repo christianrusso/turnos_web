@@ -17,7 +17,7 @@ const appRoutes: Routes = [
   { path: 'ayuda', component: AyudaComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'ver-mapa', component: VerMapaComponent },
-  { path: 'reserva', component: ReservaComponent },
+  { path: 'reserva/:id', component: ReservaComponent },
 
 
 ];

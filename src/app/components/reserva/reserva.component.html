@@ -51,34 +51,34 @@
                             <form>
                                 <div class="form-group">
                                     <label for="">Especialidad</label>
-                                    <select class="js-example-basic-single-8" name="especialidad-turno" lang="es">
-                                        <option value="">Traumatología</option>
-                                        <option value="">Cardiología</option>
-                                    </select>
+                                    <select2 (valueChanged)="FiltrarEspecialidad($event)" name="especialidad-turno" lang="es">
+                                        <option value=""></option>
+                                        <option *ngFor="let row of especialidades" value="{{row.id}}">{{row.text}}</option>
+                                    </select2>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Sub Especialidad</label>
-                                    <select class="js-example-basic-single-9" name="subespecialidad-turno" lang="es">
-                                        <option value="">Columna</option>
-                                        <option value="">Rodilla</option>
-                                    </select>
+                                    <select2 (valueChanged)="FiltrarSubEspecialidad($event)" name="subespecialidad-turno" lang="es">
+                                        <option value=""></option>
+                                        <option *ngFor="let row of subEspecialidades" value="{{row.id}}">{{row.text}}</option>
+                                    </select2>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Médico</label>
-                                    <select class="js-example-basic-single-10" name="medico-turno" lang="es">
-                                        <option value="">Cristian Russo</option>
-                                        <option value="">Constanza Arreche</option>
-                                    </select>
+                                    <select2 (valueChanged)="FiltrarEspecialista($event)"  name="medico-turno" lang="es">
+                                        <option value=""></option>
+                                        <option *ngFor="let row of especialista" value="{{row.id}}">{{row.firstName}},{{row.lastName}} </option>
+                                    </select2>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Horario</label>
-                                    <select class="js-example-basic-single-11" name="horario-turno" lang="es">
-                                        <option value="">10:20</option>
-                                        <option value="">11:50</option>
-                                    </select>
+                                    <select2 name="horario-turno" lang="es">
+                                            <option *ngFor="let row of horarios; let i = index" value="{{row}}">{{row}} </option>
+
+                                    </select2>
                                 </div>
 
                                 <a href="#" class="sig-turno">Siguiente</a>
@@ -91,10 +91,19 @@
 
                             <div class="dias col-xs-12 calendario-turnos" height="50px">
                                 <br>
-
                                 <div>
-                                    <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
-                                    </mwl-demo-utils-calendar-header>
+                                    <div class="row text-center ">
+                                        <div class="col-md-4 ">
+                                        </div>
+                                        <div class=" col-md-4 ">
+                                            <p class="tamanioTexto ">
+                                                <i (click)="previus(viewDate)" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" class="fa fa-caret-left colorFlecha pointer "></i> {{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}
+                                                <i (click)="next(viewDate)" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" class=" pointer colorFlecha fa fa-caret-right"></i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
+                                    </mwl-demo-utils-calendar-header> -->
                                 </div>
 
                                 <ng-template #customCellTemplate let-day="day" let-locale="locale" class="col-md-1 bg-turnos  ">
