@@ -44,7 +44,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public subEspecialidades;
   public especialista;
   public fecha = new Date();
-  public horarios;
+  public horarios=[];
 
   public filter = {
     "StartDate": this.fecha,
