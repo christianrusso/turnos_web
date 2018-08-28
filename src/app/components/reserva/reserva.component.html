@@ -75,10 +75,13 @@
 
                                 <div class="form-group">
                                     <label for="">Horario</label>
-                                    <select2 name="horario-turno" lang="es">
+                                    <!-- <select2 name="horario-turno" lang="es">
                                             <option *ngFor="let row of horarios; let i = index" value="{{row}}">{{row}} </option>
 
-                                    </select2>
+                                    </select2> -->
+                                    <select name="appointment" class="js-example-basic-single-11">
+                                        <option *ngFor="let appointment of horarios" >{{appointment}}</option>
+                                    </select>   
                                 </div>
 
                                 <a href="#" class="sig-turno">Siguiente</a>

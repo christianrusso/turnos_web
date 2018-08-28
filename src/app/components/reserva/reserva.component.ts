@@ -44,7 +44,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public subEspecialidades;
   public especialista;
   public fecha = new Date();
-  public horarios=[];
+  public horarios = [];
 
   public filter = {
     "StartDate": this.fecha,
@@ -154,12 +154,14 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     this.GetAllAvailablesForDay();
   }
 
+
   GetAllAvailablesForDay() {
     this._ReservaComponent.GetAllAvailablesForDay(this.filterForDay).subscribe(
       response => {
-        this.horarios.push(response);
-        console.log(response);
-     
+        this.horarios = [];
+        response.forEach(appointment => {
+          this.horarios.push(this.getHour(appointment));
+        });
         this.refresh.next();
 
       },
@@ -168,7 +170,10 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       }
     );
   }
-
+  getHour(date: string): string {
+    let time = date.split('T')[1].split(':');
+    return time[0] + ':' + time[1];
+  }
 
   public getSplecialties() {
     this._BusquedaService.getSpeciality().subscribe(
