@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
-import { routing, appRoutingProviders } from './app.routing';
+import { routing, appRoutingProviders, appRoutes } from './app.routing';
 
 
 import { AppComponent } from './app.component';
@@ -30,6 +30,11 @@ import localeEs from '@angular/common/locales/es';
 
 registerLocaleData(localeEs,'es');
 
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { RouterModule } from '@angular/router';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +48,7 @@ registerLocaleData(localeEs,'es');
     NavComponent
   ],
   imports: [
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
     DemoUtilsModule,
@@ -52,8 +58,12 @@ registerLocaleData(localeEs,'es');
     Select2Module,
     FormsModule,
     HttpClientModule,
-    NgLoadingSpinnerModule
+    NgLoadingSpinnerModule,
+    HttpClientModule,
+    NgProgressModule.forRoot(),
+    NgProgressHttpModule
   ],
+  exports: [RouterModule],
   providers: [    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

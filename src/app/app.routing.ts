@@ -10,14 +10,14 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { VerMapaComponent } from './components/ver-mapa/ver-mapa.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'home/:id', component: HomeComponent },
-  { path: 'buscador', component: BuscadorComponent },
+  { path: 'buscador', component: BuscadorComponent,   runGuardsAndResolvers: 'always',},
   { path: 'ayuda', component: AyudaComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'ver-mapa', component: VerMapaComponent },
-  { path: 'reserva/:id', component: ReservaComponent },
+  { path: 'reserva/:id', component: ReservaComponent,   runGuardsAndResolvers: 'always'},
 
 
 ];

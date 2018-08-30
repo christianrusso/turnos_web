@@ -83,8 +83,9 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
     );
   }
   onSubmit() {
-    // this._router.navigate(['/buscador']);
     localStorage.setItem('busqueda', JSON.stringify(this.buscador));
+        // this._router.navigate(['/buscador']);
+
     window.location.href = '/buscador';
 
   }

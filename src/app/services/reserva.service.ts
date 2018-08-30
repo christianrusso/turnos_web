@@ -45,4 +45,14 @@ export class ReservaService {
     return this._http.post(this.url + 'api/Appointment/GetAllAvailablesForDay',data, { headers: this.headers })
       .map(res => res.json());
   }
+   //Specialty
+   getSpeciality(data) {
+    return this._http.post(this.url + 'api/Data/GetSpecialtiesForSelect', data, { headers: this.headers })
+      .map(res => res.json());
+  }
+  //SubSpecialty
+  getSubSpeciality(data) {
+    return this._http.post(this.url + 'api/Data/GetSubspecialtiesForSelect', data, { headers: this.headers })
+      .map(res => res.json());
+  }
 }

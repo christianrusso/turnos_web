@@ -2,8 +2,6 @@ import { Component, ChangeDetectionStrategy, OnInit, AfterViewInit, ViewEncapsul
 import { BaseComponent } from '../../core/base.component';
 import { CalendarEvent, CalendarDateFormatter, DAYS_OF_WEEK, CalendarEventAction, CalendarMonthViewDay } from 'angular-calendar';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
-import { HttpClient, HttpParams } from '@angular/common/http';
-
 import { ReservaService } from '../../services/reserva.service';
 import { Subject } from 'rxjs';
 import { BusquedaService } from '../../services/busqueda.service';
@@ -44,11 +42,11 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public subEspecialidades;
   public especialista;
   public fecha = new Date();
+  public endFecha= new Date(this.fecha.getFullYear(), this.fecha.getMonth() + 1, 0);
   public horarios = [];
-
   public filter = {
     "StartDate": this.fecha,
-    "EndDate": this.fecha.getFullYear() + "-" + (this.fecha.getMonth() + 1) + "-31T21:10:58.509Z",
+    "EndDate": this.endFecha,
     "ClinicId": "",
     "DoctorId": "",
     "SpecialtyId": "",
@@ -83,6 +81,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
 
   activeDayIsOpen: boolean = false;
   ngOnInit() {
+
     this._route.params.subscribe(params => {
       this.filter.ClinicId = params["id"];
     });
@@ -176,7 +175,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   }
 
   public getSplecialties() {
-    this._BusquedaService.getSpeciality().subscribe(
+    this._ReservaComponent.getSpeciality(this.filter).subscribe(
       response => {
         this.especialidades = response;
       },
@@ -188,7 +187,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
 
   //SubEspecialidades
   public getSubSplecialties() {
-    this._BusquedaService.getSubSpeciality().subscribe(
+    this._ReservaComponent.getSubSpeciality(this.filter).subscribe(
       response => {
         this.subEspecialidades = response;
       },
@@ -201,16 +200,18 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     this.filter.SpecialtyId = especialidad.value;
     this.filterDoctor.SpecialtyId = especialidad.value;
     this.filterDoctor.SubspecialtyId = null;
+    this.horarios=null;
+    this.especialista = null;
 
     this.FiltrarSubEspecialidadOnEspecialidad(especialidad.value);
     this.getAppointmentsPerDay(this.filter);
-    this.getDoctor();
   }
 
   //filtro cunado cambia la especialiad
   public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
     this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
       response => {
+        this.subEspecialidades=null;
         this.subEspecialidades = response;
       },
       error => {
@@ -219,11 +220,13 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     );
 
     this.getAppointmentsPerDay(this.filter);
+
   }
 
   public FiltrarSubEspecialidad(Subspecialties) {
     this.filter.SubSpecialtyId = Subspecialties.value;
     this.filterDoctor.SubspecialtyId = Subspecialties.value;
+    this.horarios=null;
     this.getAppointmentsPerDay(this.filter);
     this.getDoctor();
 
@@ -232,14 +235,18 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public FiltrarEspecialista(especialista) {
     this.filter.DoctorId = especialista.value;
     this.filterForDay.DoctorId = especialista.value;
-    this.getAppointmentsPerDay(this.filter);
+    this.horarios=null;
+    this.refresh.next();
+
 
   }
   public getDoctor() {
+    this.especialista = null;
     this._ReservaComponent.GetDoctor(this.filterDoctor).subscribe(
       response => {
-        console.log(response);
         this.especialista = response;
+        this.refresh.next();
+
       },
       error => {
         // Manejar errores
@@ -247,13 +254,13 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     );
   }
   previus(data) {
-    this.filter.EndDate = data.getFullYear() + "-" + (data.getMonth() + 1) + "-31T21:10:58.509Z";
+    this.filter.EndDate = new Date(data.getFullYear(), data.getMonth() + 1, 0);
     this.filter.StartDate = data;
     this.getAppointmentsPerDay(this.filter);
 
   }
   next(data) {
-    this.filter.EndDate = data.getFullYear() + "-" + (data.getMonth() + 1) + "-31T21:10:58.509Z";
+    this.filter.EndDate = new Date(data.getFullYear(), data.getMonth() + 1, 0);
     this.filter.StartDate = data;
     this.getAppointmentsPerDay(this.filter);
 

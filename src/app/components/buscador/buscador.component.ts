@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BusquedaService } from '../../services/busqueda.service';
 import { MapService } from '../../services/map.service';
 import { RegisterLoginService } from '../../services/register-login.service';
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 
 declare const google: any;
 
@@ -12,7 +12,7 @@ declare const google: any;
   styleUrls: ['./buscador.component.css'],
   providers: [BusquedaService, MapService, RegisterLoginService]
 })
-export class BuscadorComponent implements OnInit {
+export class BuscadorComponent implements OnInit, OnDestroy {
   public busqueda;
   public clinicas;
   public filtro;
@@ -26,16 +26,23 @@ export class BuscadorComponent implements OnInit {
   public cities;
   public identity;
   public filtroFecha;
+  navigationSubscription;
+
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
     private _RegisterLoginService: RegisterLoginService,
     private _router: Router,
 
-  ) { }
+  ) {
+
+
+  }
+
 
   ngOnInit() {
-    $('header').show();
+    //$('header').show();
+    
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
     this.identity = this._RegisterLoginService.getToken();
     this.filtro = {
@@ -46,12 +53,12 @@ export class BuscadorComponent implements OnInit {
       "medicalPlans": [],
       "Score": "",
       "ScoreQuantity": "",
-      "AvailableAppointmentDate":""
+      "AvailableAppointmentDate": ""
 
     }
-    this.filtroFecha={
-      "categorias":this.busqueda.ubicacion,
-      "fecha":"",
+    this.filtroFecha = {
+      "categorias": this.busqueda.ubicacion,
+      "fecha": "",
     }
     this.dontResult = false;
     this.getByFilter(this.filtro);
@@ -62,6 +69,11 @@ export class BuscadorComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
   //Specialidades
   public getSplecialties() {
     this._BusquedaService.getSpeciality().subscribe(
@@ -146,10 +158,10 @@ export class BuscadorComponent implements OnInit {
         }
       }
     }
-    if(this.filtro.Specialties.length>0){
+    if (this.filtro.Specialties.length > 0) {
       this.FiltrarSubEspecialidadOnEspecialidad(especialidad);
 
-    }else{
+    } else {
       this.getSubSplecialties();
 
     }
@@ -167,7 +179,7 @@ export class BuscadorComponent implements OnInit {
         // Manejar errores
       }
     );
-    
+
     this.getByFilter(this.filtro);
   }
   public FiltrarSubEspecialidad(Subspecialties, deviceValue) {
@@ -335,30 +347,32 @@ export class BuscadorComponent implements OnInit {
     }
   }
   // BOTON DE RESERVAR
-  Reservar(id){
+  Reservar(id) {
     console.log(id);
     this.identity = this._RegisterLoginService.getToken();
 
-    if(this.identity!=null){
-    this._router.navigate(['/reserva/',id]);
+    if (this.identity != null) {
+      //this._router.navigate(['/reserva/', id]);
+      window.location.href = "/reserva/"+id+"";
+
     }
-    else{
-      $('.modal-gral').css('display','block');
-      $(".modulo-inicio").css('display','block');
+    else {
+      $('.modal-gral').css('display', 'block');
+      $(".modulo-inicio").css('display', 'block');
       $('#d-ini').addClass('activeInside');
       $('#d-reg').removeClass('activeInside');
     }
   }
-  
 
-  onFechaFilter(){
-    this.filtro.AvailableAppointmentDate=this.filtroFecha.fecha;
+
+  onFechaFilter() {
+    this.filtro.AvailableAppointmentDate = this.filtroFecha.fecha;
     console.log(this.filtro);
     this.getByFilter(this.filtro);
 
   }
-  categoria(id){
-    this.filtroFecha.categorias=id.value;
+  categoria(id) {
+    this.filtroFecha.categorias = id.value;
 
   }
 
