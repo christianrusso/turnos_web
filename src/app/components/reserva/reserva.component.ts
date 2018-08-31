@@ -56,12 +56,12 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public filterDoctor = {
     "SpecialtyId": null,
     "SubspecialtyId": null,
-    "ClinicId": "1",
+    "ClinicId": null,
   };
   public filterForDay = {
     "Day": null,
     "DoctorId": null,
-    "ClinicId": 1
+    "ClinicId": null
   };
   refresh: Subject<any> = new Subject();
 
@@ -84,10 +84,13 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
 
   activeDayIsOpen: boolean = false;
   ngOnInit() {
-
+    console.log(this.fecha);
     this._route.params.subscribe(params => {
       this.clinicId=params["id"];
       this.filter.ClinicId = params["id"];
+      this.filterForDay.ClinicId=params["id"];
+      this.filterDoctor.ClinicId=params["id"];
+
     });
     this.loading = true;
     this.getAppointmentsPerDay(this.filter);
@@ -105,7 +108,6 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
         response.forEach(element => {
           for (i = 0; i < element.availableAppointments; i++) {
              var date=new Date(element.day);
-             console.log(date);
             this.events.push(
               { title: "manuel", start: date }
             );
