@@ -55,11 +55,13 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   };
   public filterDoctor = {
     "SpecialtyId": null,
-    "SubspecialtyId": null
+    "SubspecialtyId": null,
+    "ClinicId": "1",
   };
   public filterForDay = {
     "Day": null,
-    "DoctorId": null
+    "DoctorId": null,
+    "ClinicId": 1
   };
   refresh: Subject<any> = new Subject();
 
