@@ -9,6 +9,7 @@ import { AyudaComponent } from './components/ayuda/ayuda.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { VerMapaComponent } from './components/ver-mapa/ver-mapa.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
+import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.component';
 
 export const appRoutes: Routes = [
   { path: '', component: IndexComponent },
@@ -18,6 +19,7 @@ export const appRoutes: Routes = [
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'ver-mapa', component: VerMapaComponent },
   { path: 'reserva/:id', component: ReservaComponent,   runGuardsAndResolvers: 'always'},
+  { path: 'exito', component: ReservaExitoComponent },
 
 
 ];

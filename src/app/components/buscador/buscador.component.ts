@@ -129,6 +129,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
         if (response.length != 0) {
+          console.log(response);
           this.dontResult = false;
           this.clinicas = response;
         }
@@ -376,5 +377,34 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
   }
 
+  VerMapa(){
+    window.location.href = "/ver-mapa";
 
+  }
+
+    getDayName(day): string {
+      switch (day) {
+          case 0:
+              return "Domingo";
+          case 1:
+              return "Lunes";
+          case 2:
+              return "Martes";
+          case 3:
+              return "Miercoles";
+          case 5:
+              return "Jueves";
+          case 6:
+              return "Viernes";
+          case 7:
+              return "Sabado";
+          default:
+              return "Dia desconocido";
+      }
+  }
+  getHour(date) {
+    let time = date.split(':');
+
+     return time[0] + ':' + time[1];
+  }
 }

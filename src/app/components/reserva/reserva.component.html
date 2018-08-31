@@ -67,7 +67,7 @@
 
                                 <div class="form-group">
                                     <label for="">Médico</label>
-                                    <select2 (valueChanged)="FiltrarEspecialista($event)"  name="medico-turno" lang="es">
+                                    <select2 (valueChanged)="FiltrarEspecialista($event)" name="medico-turno" lang="es">
                                         <option value=""></option>
                                         <option *ngFor="let row of especialista" value="{{row.id}}">{{row.firstName}},{{row.lastName}} </option>
                                     </select2>
@@ -75,13 +75,14 @@
 
                                 <div class="form-group">
                                     <label for="">Horario</label>
-                                
-                                    <select (valueChanged)="FiltrarHoraSelect($event)"  name="appointment" class="js-example-basic-single-11">
-                                        <option  *ngFor="let appointment of horarios" (click)="FiltrarHora(appointment)">{{appointment}}</option>
-                                    </select>   
+
+                                    <select2 (valueChanged)="FiltrarHoraSelect($event)" name="appointment" lang="es">
+                                        <option value=""></option>
+                                        <option *ngFor="let appointment of horarios" value="{{appointment}}">{{appointment}}</option>
+                                    </select2>
                                 </div>
 
-                                <a (click)="Reservar()" class="sig-turno">Siguiente</a>
+                                <a (click)="Reservar()" class=" sig-turno text-white pointer">Siguiente</a>
                             </form>
                         </div>
                         <!-- // filtros -->
@@ -176,7 +177,7 @@
                         </div>
 
                         <a href="#" id="volver-turno">Volver</a>
-                        <button (click)="CheckPaciente()"   id="confirmacion-definitiva">Confirmar reserva</button>
+                        <button (click)="CheckPaciente()" class="btn btn-success pointer" id="confirmacion-definitiva">Confirmar reserva</button>
                     </div>
 
                     <span>Ante cualquier consultam no dude en comunicarse con el Centro al que está reservando.</span>
@@ -184,6 +185,82 @@
                 </div>
 
             </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class=" text-reserva">
+                        <h2 class="text-center">Complete los datos.</h2>
+
+                    </div>
+
+                    <form #formCategoria="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input #FirstName="ngModel" name="FirstName" [(ngModel)]="paciente.FirstName" type="text" class="form-control text-center"
+                                    placeholder="Nombre">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input #LastName="ngModel" name="LastName" [(ngModel)]="paciente.LastName" type="text" class="form-control text-center" placeholder="Apellido">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input #Address="ngModel" name="Address" [(ngModel)]="paciente.Address" type="text" class="form-control text-center" placeholder="Direccion">
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input #PhoneNumber="ngModel" name="PhoneNumber" [(ngModel)]="paciente.PhoneNumber" type="text" class="form-control text-center"
+                                    placeholder="Telefono">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input #Dni="ngModel" name="Dni" [(ngModel)]="paciente.Dni" type="text" class="form-control text-center" placeholder="DNI">
+                            </div>
+                        </div>
+                        <br>
+                        <div class=" row">
+                            <div class="col-md-12">
+                                    <h6 class="text-center" for="">Obra Social</h6>
+                                    <select pleceholder="obras" class="form-control" #MedicalPlanId="ngModel" name="MedicalPlanId" [(ngModel)]="paciente.MedicalPlanId"
+                                        type="text" name="appointment" lang="es">
+                                        <option value=""></option>
+                                        <option class="col-md-6" *ngFor="let obras of obrasSociales" value="{{obras.id}}">{{obras.text}}</option>
+                                    </select>
+
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+
+                            <div class="col-md-1 offset-sm-5">
+                                <input class="btn btn-success text-center" type="submit" value="aceptar">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </section>

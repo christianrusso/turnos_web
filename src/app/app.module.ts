@@ -33,6 +33,7 @@ registerLocaleData(localeEs,'es');
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { RouterModule } from '@angular/router';
+import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { RouterModule } from '@angular/router';
     NosotrosComponent,
     VerMapaComponent,
     ReservaComponent,
-    NavComponent
+    NavComponent,
+    ReservaExitoComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),

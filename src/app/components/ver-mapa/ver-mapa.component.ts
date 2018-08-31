@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '../../core/base.component';
 import { VerMapService } from '../../services/ver-mapa.service';
 import { BusquedaService } from '../../services/busqueda.service';
+import { RegisterLoginService } from '../../services/register-login.service';
 
 declare const google: any;
 
@@ -9,11 +10,13 @@ declare const google: any;
   selector: 'app-ver-mapa',
   templateUrl: './ver-mapa.component.html',
   styleUrls: ['./ver-mapa.component.css'],
-  providers: [VerMapService, BusquedaService]
+  providers: [VerMapService, BusquedaService,RegisterLoginService]
 })
 export class VerMapaComponent extends BaseComponent implements OnInit, AfterViewInit {
   constructor(private _MapService: VerMapService,
     private _BusquedaService: BusquedaService,
+    private _RegisterLoginService: RegisterLoginService,
+
   ) {
     super();
   }
@@ -29,11 +32,14 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   public subEspecialidades;
   public obrasSociales;
   public cities;
+  public identity;
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript('/assets/js/script6.js');
   }
   ngOnInit() {
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
+    this.identity = this._RegisterLoginService.getToken();
+
     this.filtro = {
       "Cities": [this.busqueda.ubicacion],
       "Specialties": [],
@@ -55,7 +61,7 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   public getByFilter(filtro) {
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
-        console.log(response.length);
+        console.log(response);
         if (response.length == 0) {
           this.noData = true;
         }
@@ -265,5 +271,26 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
         // Manejar errores
       }
     );
+  }
+  public volverBuscador(){
+    window.location.href = '/buscador';
+
+  }
+  // BOTON DE RESERVAR
+  Reservar(id) {
+    console.log(id);
+    this.identity = this._RegisterLoginService.getToken();
+
+    if (this.identity != null) {
+      //this._router.navigate(['/reserva/', id]);
+      window.location.href = "/reserva/"+id+"";
+
+    }
+    else {
+      $('.modal-gral').css('display', 'block');
+      $(".modulo-inicio").css('display', 'block');
+      $('#d-ini').addClass('activeInside');
+      $('#d-reg').removeClass('activeInside');
+    }
   }
 }

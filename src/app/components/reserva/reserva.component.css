@@ -162,3 +162,30 @@
 .fa-5x{
     color: #454edb;
 }
+
+#confirmacion-definitiva:hover{
+	opacity: .7;
+}
+
+
+#confirmacion-definitiva{
+
+background: #50ae20;
+
+color: #fff;
+
+width: 180px;
+}
+
+.pointer {cursor: pointer;}
+.modal-header{
+    background-color: #454edb;
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: auto !important;
+    pointer-events: none;
+    padding-top: 10%;
+}

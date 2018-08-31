@@ -43,3 +43,8 @@ button.delete-filters{
     display: inline-block;
     margin-left: 10px;
 }
+.pointer {cursor: pointer;}
+
+.reservara{
+  margin-left: 150px;
+}

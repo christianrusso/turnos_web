@@ -62,4 +62,21 @@ export class ReservaService {
     return this._http.post(this.url + 'api/Clinic/IsPatientOfClinic', {"Id":id}, { headers: this.headers })
       .map(res => res.json());
   }
+
+  //ObrasSociales
+  getMedicalInsurance() {
+    return this._http.post(this.url + 'api/Data/GetMedicalInsurancesForSelect', {}, { headers: this.headers })
+      .map(res => res.json());
+  }
+  RequestAppointmentByClient(data){
+    this.headers.set('Authorization',"Bearer "+this.getToken().token);
+    return this._http.post(this.url + 'api/Appointment/RequestAppointmentByClient',data, { headers: this.headers })
+      .map(res => res.json());
+  }
+  RequestAppointmentByPatient(data){
+    this.headers.set('Authorization',"Bearer "+this.getToken().token);
+    return this._http.post(this.url + 'api/Appointment/RequestAppointmentByPatient',data, { headers: this.headers })
+      .map(res => res.json());
+  }
+  
 }

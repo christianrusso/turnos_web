@@ -163,6 +163,7 @@
     <!-- BÚSQUEDA-->
     <div class="row">
         <section class="col-12 col-md-10 offset-md-1  search-section">
+                <img (click)="volverBuscador()" class="text-center pointer" height="40px" src="/assets/img/back.png" alt="">
 
             <div class="row">
                 <!-- Filtros -->
@@ -194,6 +195,7 @@
                                                             </span>
                                                         </span>
                                                     </div>
+                                                    <button (click)="Reservar(row.clinicId)" class="btn btn-success reservara">Reservar </button>
                                                 </div>
                                             </div>
 

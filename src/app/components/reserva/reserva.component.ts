@@ -6,6 +6,7 @@ import { ReservaService } from '../../services/reserva.service';
 import { Subject } from 'rxjs';
 import { BusquedaService } from '../../services/busqueda.service';
 import { Router, ActivatedRoute } from "@angular/router";
+declare const $: any;
 
 import {
   isSameMonth,
@@ -46,7 +47,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public horarios = [];
   public clinicId;
   public filter = {
-    "StartDate": this.fecha,
+    "StartDate":new Date(),
     "EndDate": this.endFecha,
     "ClinicId": "",
     "DoctorId": "",
@@ -63,10 +64,25 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     "DoctorId": null,
     "ClinicId": null
   };
+
+  public paciente={
+    "ClinicId":null,
+    "Day":null,
+    "Time":null,
+    "DoctorId":null,
+    "FirstName": null,
+    "LastName":null,
+    "Address":null,
+    "PhoneNumber": null,
+    "Dni":null,
+    "MedicalPlanId":null
+    };
   refresh: Subject<any> = new Subject();
 
 
   constructor(
+    private _router: Router,
+
     private _ReservaComponent: ReservaService,
     private _BusquedaService: BusquedaService,
     private _route: ActivatedRoute,
@@ -109,7 +125,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
           for (i = 0; i < element.availableAppointments; i++) {
              var date=new Date(element.day);
             this.events.push(
-              { title: "manuel", start: date }
+              { title: "manuel", start: new Date(date.setDate(date.getDate()+1)) }
             );
           }
         });
@@ -210,7 +226,9 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     this.filterDoctor.SubspecialtyId = null;
     this.horarios=null;
     this.especialista = null;
-
+    this.filter.SubSpecialtyId=null;
+    this.filter.DoctorId=null;
+    this.time=null;
     this.FiltrarSubEspecialidadOnEspecialidad(especialidad.value);
     this.getAppointmentsPerDay(this.filter);
   }
@@ -234,7 +252,11 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public FiltrarSubEspecialidad(Subspecialties) {
     this.filter.SubSpecialtyId = Subspecialties.value;
     this.filterDoctor.SubspecialtyId = Subspecialties.value;
+
     this.horarios=null;
+    this.filter.DoctorId=null;
+    this.time=null;
+
     this.getAppointmentsPerDay(this.filter);
     this.getDoctor();
 
@@ -243,7 +265,11 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public FiltrarEspecialista(especialista) {
     this.filter.DoctorId = especialista.value;
     this.filterForDay.DoctorId = especialista.value;
+
     this.horarios=null;
+     this.time=null;
+    this.getAppointmentsPerDay(this.filter);
+
     this.refresh.next();
 
 
@@ -287,14 +313,13 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       this.getAppointmentsPerDay(this.filter);
     }
   }
-  public hora="08:00";
-  public FiltrarHoraSelect(data){
-    console.log(data);
-    this.hora=data;
+  public time;
+  public FiltrarHoraSelect(hora){
+    this.time=hora.value;
   }
 
   Reservar(){
-    if( this.filter.SpecialtyId != null && this.filter.SubSpecialtyId != null && this.filter.DoctorId && this.hora !=null ){
+    if( this.filter.SpecialtyId != null && this.filter.SubSpecialtyId != null && this.filter.DoctorId && this.time !=null ){
       $('.filtros-calendario').fadeOut();
       $('.confirmacion-reserva').fadeIn();
       $('#b1').removeClass('activeReserva');
@@ -307,11 +332,57 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   CheckPaciente(){
     this._ReservaComponent.checkPaciente(this.clinicId).subscribe(
       response => {
-        console.log(response);
+        this.paciente.ClinicId=this.clinicId;
+        this.paciente.DoctorId=this.filter.DoctorId;
+        this.paciente.Day= this.filterForDay.Day;
+        this.paciente.Time=this.time;
+
+        if(response==false){
+          this.getMedicalInsurance();
+          $("#myModal").modal("show");
+
+        }else{
+          this._ReservaComponent.RequestAppointmentByPatient(this.paciente).subscribe(
+            response => {
+
+            },
+            error => {
+              // Manejar errores
+            }
+          );
+          this._router.navigate(['/exito']);
+
+        }
+
       },
       error => {
         // Manejar errores
       }
     );
+  }
+  public obrasSociales=[];
+  //ObrasSociales
+  public getMedicalInsurance() {
+    this._ReservaComponent.getMedicalInsurance().subscribe(
+      response => {
+        this.obrasSociales = response;
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
+  onSubmit(){
+    $("#myModal").modal("hide");
+    this._ReservaComponent.RequestAppointmentByClient(this.paciente).subscribe(
+      response => {
+
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+    this._router.navigate(['/exito']);
+
   }
 }
