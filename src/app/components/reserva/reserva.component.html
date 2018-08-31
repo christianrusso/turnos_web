@@ -75,16 +75,13 @@
 
                                 <div class="form-group">
                                     <label for="">Horario</label>
-                                    <!-- <select2 name="horario-turno" lang="es">
-                                            <option *ngFor="let row of horarios; let i = index" value="{{row}}">{{row}} </option>
-
-                                    </select2> -->
-                                    <select name="appointment" class="js-example-basic-single-11">
-                                        <option *ngFor="let appointment of horarios" >{{appointment}}</option>
+                                
+                                    <select (valueChanged)="FiltrarHoraSelect($event)"  name="appointment" class="js-example-basic-single-11">
+                                        <option  *ngFor="let appointment of horarios" (click)="FiltrarHora(appointment)">{{appointment}}</option>
                                     </select>   
                                 </div>
 
-                                <a href="#" class="sig-turno">Siguiente</a>
+                                <a (click)="Reservar()" class="sig-turno">Siguiente</a>
                             </form>
                         </div>
                         <!-- // filtros -->
@@ -179,7 +176,7 @@
                         </div>
 
                         <a href="#" id="volver-turno">Volver</a>
-                        <a href="#" id="confirmacion-definitiva">Confirmar reserva</a>
+                        <button (click)="CheckPaciente()"   id="confirmacion-definitiva">Confirmar reserva</button>
                     </div>
 
                     <span>Ante cualquier consultam no dude en comunicarse con el Centro al que está reservando.</span>

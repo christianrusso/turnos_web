@@ -24,6 +24,7 @@ export class ReservaService {
     return this._http.post(this.url + 'api/Appointment/GetAvailableAppointmentsPerDay',date, { headers: this.headers })
       .map(res => res.json());
   }
+  
   GetDoctor(date) {
     this.headers.set('Authorization',"Bearer "+this.getToken().token);
     return this._http.post(this.url + 'api/Doctor/GetByFilter',date, { headers: this.headers })
@@ -53,6 +54,12 @@ export class ReservaService {
   //SubSpecialty
   getSubSpeciality(data) {
     return this._http.post(this.url + 'api/Data/GetSubspecialtiesForSelect', data, { headers: this.headers })
+      .map(res => res.json());
+  }
+
+  //CheckPaciente
+  checkPaciente(id) {
+    return this._http.post(this.url + 'api/Clinic/IsPatientOfClinic', {"Id":id}, { headers: this.headers })
       .map(res => res.json());
   }
 }

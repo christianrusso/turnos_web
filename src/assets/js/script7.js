@@ -54,11 +54,7 @@ $(document).ready(function() {
 
 $('a.sig-turno').click(function(e) {
 
-    e.preventDefault();
-    $('.filtros-calendario').fadeOut();
-    $('.confirmacion-reserva').fadeIn();
-    $('#b1').removeClass('activeReserva');
-    $('#b2').addClass('activeReserva');
+ 
 });
 
 $('a#volver-turno').click(function(e) {

@@ -44,6 +44,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public fecha = new Date();
   public endFecha= new Date(this.fecha.getFullYear(), this.fecha.getMonth() + 1, 0);
   public horarios = [];
+  public clinicId;
   public filter = {
     "StartDate": this.fecha,
     "EndDate": this.endFecha,
@@ -83,6 +84,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   ngOnInit() {
 
     this._route.params.subscribe(params => {
+      this.clinicId=params["id"];
       this.filter.ClinicId = params["id"];
     });
     this.loading = true;
@@ -100,8 +102,10 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
         this.events = [];
         response.forEach(element => {
           for (i = 0; i < element.availableAppointments; i++) {
+             var date=new Date(element.day);
+             console.log(date);
             this.events.push(
-              { title: "manuel", start: new Date(element.day) }
+              { title: "manuel", start: date }
             );
           }
         });
@@ -254,16 +258,56 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     );
   }
   previus(data) {
-    this.filter.EndDate = new Date(data.getFullYear(), data.getMonth() + 1, 0);
-    this.filter.StartDate = data;
-    this.getAppointmentsPerDay(this.filter);
+    if(data.getMonth()==this.fecha.getMonth()){
+      this.filter.EndDate = this.endFecha;
+      this.filter.StartDate = this.fecha;
+      this.getAppointmentsPerDay(this.filter);
+
+    }else if(data.getMonth()>this.fecha.getMonth()){
+      this.filter.EndDate = data;
+      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth() , 1);
+      this.getAppointmentsPerDay(this.filter);
+
+    }
 
   }
   next(data) {
-    this.filter.EndDate = new Date(data.getFullYear(), data.getMonth() + 1, 0);
-    this.filter.StartDate = data;
-    this.getAppointmentsPerDay(this.filter);
+    if((data.getMonth()+1)==this.fecha.getMonth()+1){
+      this.filter.EndDate = this.endFecha;
+      this.filter.StartDate = this.fecha;
+      this.getAppointmentsPerDay(this.filter);
 
+    }else if((data.getMonth()+1)>this.fecha.getMonth()+1){
+      this.filter.EndDate = data;
+      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth() , 1);
+      this.getAppointmentsPerDay(this.filter);
+    }
+  }
+  public hora="08:00";
+  public FiltrarHoraSelect(data){
+    console.log(data);
+    this.hora=data;
+  }
 
+  Reservar(){
+    if( this.filter.SpecialtyId != null && this.filter.SubSpecialtyId != null && this.filter.DoctorId && this.hora !=null ){
+      $('.filtros-calendario').fadeOut();
+      $('.confirmacion-reserva').fadeIn();
+      $('#b1').removeClass('activeReserva');
+      $('#b2').addClass('activeReserva');
+    }else{
+      console.log("No entro");
+    }
+  }
+
+  CheckPaciente(){
+    this._ReservaComponent.checkPaciente(this.clinicId).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        // Manejar errores
+      }
+    );
   }
 }
