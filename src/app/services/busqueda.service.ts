@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { global } from '../global/global';
 import { token } from '../global/token';
-
-import 'rxjs/add/operator/map';
+import {map} from 'rxjs/operators'; 
+// import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BusquedaService {

@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { BusquedaService } from '../../services/busqueda.service';
 import { MapService } from '../../services/map.service';
 import { RegisterLoginService } from '../../services/register-login.service';
 import { Router, NavigationEnd } from "@angular/router";
+import { BaseComponent } from '../../core/base.component';
 
 declare const google: any;
 
@@ -12,8 +13,8 @@ declare const google: any;
   styleUrls: ['./buscador.component.css'],
   providers: [BusquedaService, MapService, RegisterLoginService]
 })
-export class BuscadorComponent implements OnInit, OnDestroy {
-  public busqueda;
+export class BuscadorComponent extends BaseComponent implements OnInit, AfterViewInit,OnDestroy {
+  public busqueda=null;
   public clinicas;
   public filtro;
   public coments;
@@ -26,7 +27,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   public cities;
   public identity;
   public filtroFecha;
-  navigationSubscription;
+  
 
   constructor(
     private _BusquedaService: BusquedaService,
@@ -34,14 +35,19 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     private _RegisterLoginService: RegisterLoginService,
     private _router: Router,
 
-  ) {
-
-
+  ){
+    super();
   }
 
+  async ngAfterViewInit(): Promise<void> {
+    await this.loadScript('/assets/js/script3.js');
+  }
+  ngOnDestroy() {
+   
+  }
 
   ngOnInit() {
-    //$('header').show();
+    $('header').show();
     
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
     this.identity = this._RegisterLoginService.getToken();
@@ -69,11 +75,6 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    if (this.navigationSubscription) {
-      this.navigationSubscription.unsubscribe();
-    }
-  }
   //Specialidades
   public getSplecialties() {
     this._BusquedaService.getSpeciality().subscribe(
@@ -353,8 +354,8 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     this.identity = this._RegisterLoginService.getToken();
 
     if (this.identity != null) {
-      //this._router.navigate(['/reserva/', id]);
-      window.location.href = "/reserva/"+id+"";
+      this._router.navigate(['/reserva/', id]);
+      //window.location.href = "/reserva/"+id+"";
 
     }
     else {
@@ -378,7 +379,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   }
 
   VerMapa(){
-    window.location.href = "/ver-mapa";
+    this._router.navigate(['/ver-mapa']);
 
   }
 

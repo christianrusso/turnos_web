@@ -3,6 +3,7 @@ import { BaseComponent } from '../../core/base.component';
 import { VerMapService } from '../../services/ver-mapa.service';
 import { BusquedaService } from '../../services/busqueda.service';
 import { RegisterLoginService } from '../../services/register-login.service';
+import { Router } from '@angular/router';
 
 declare const google: any;
 
@@ -16,6 +17,7 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   constructor(private _MapService: VerMapService,
     private _BusquedaService: BusquedaService,
     private _RegisterLoginService: RegisterLoginService,
+    private _router: Router,
 
   ) {
     super();
@@ -273,8 +275,7 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
     );
   }
   public volverBuscador(){
-    window.location.href = '/buscador';
-
+    this._router.navigate(['/buscador']);
   }
   // BOTON DE RESERVAR
   Reservar(id) {
@@ -282,8 +283,8 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
     this.identity = this._RegisterLoginService.getToken();
 
     if (this.identity != null) {
-      //this._router.navigate(['/reserva/', id]);
-      window.location.href = "/reserva/"+id+"";
+      this._router.navigate(['/reserva/', id]);
+      // window.location.href = "/reserva/"+id+"";
 
     }
     else {
