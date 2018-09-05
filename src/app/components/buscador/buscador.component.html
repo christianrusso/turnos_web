@@ -2,30 +2,8 @@
 
 
 <!-- Resultados -->
-<div class="col-xs-12 resultados-header">
-    <p>Encontramos
-        <span class="bold">25 lugares disponibles</span>
-    </p>
-    <form id="resultados-form" #formFecha="ngForm" (ngSubmit)="onFechaFilter()">
-        <div class="form-group cats">
-            <label for="">Categorías</label>
-            <select2 name="cats" lang="es" id="CategoríasSelect" (valueChanged)="categoria($event)">
-                <option value="1" selected="">Medicina</option>
-                <option value="2">Traumatología</option>
-                <option value="3">Cardiología</option>
-            </select2>
-        </div>
-        <div class="form-group fecha-reserva"  >
-            <label>Fecha de reserva</label>
-            <div  class='input-group date' >
-                <input  #fecha="ngModel" name="fecha" [(ngModel)]="filtroFecha.fecha"  type='date' class="input-group-addon form-control" placeholder="22 de Mayo" />
-            </div>
-        </div>
-        <input type="submit" name="" value="Buscar">
-    </form>
-</div>
 <!-- // resultados -->
-<div class="container-fluid">
+<div class="container-fluid  ">
     <!-- BÚSQUEDA-->
     <div class="row">
         <section class="col-12 col-md-10 offset-md-1  search-section">
@@ -39,7 +17,7 @@
                 <div class="image-ubication">
                     <img src="/assets/img/lugares.png">
                     <p>
-                        <a class="pointer" (click)="VerMapa()" >Ver Centros en el mapa</a>
+                        <a class="pointer" (click)="VerMapa()">Ver Centros en el mapa</a>
                     </p>
                 </div>
 
@@ -51,46 +29,72 @@
                     <form action="" method="" class="form-filter">
                         <!-- Especialidad -->
                         <label>Especialidad</label>
-                        <div *ngFor="let row of especialidades">
-                            <p>
+                        <div *ngFor="let row of especialidades; let i = index">
+                            <p [hidden]="i >= limitForEspecialidad">
                                 <input type="checkbox" id="cbox{{row.id}}" value="first_checkbox" (click)="FiltrarEspecialidad(row.id,$event)">
                                 <label for="cbox{{row.id}}">{{row.text}}</label>
                             </p>
+
                         </div>
-
+                        <!-- filtros para ver mas o menos -->
+                        <p *ngIf="especialidades?.length >= 6 && limitForEspecialidad !=100">
+                            <a (click)="verMasEspecialista(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForEspecialidad==100 ">
+                            <a (click)="verMasEspecialista(false)" class="see-more">Ver menos</a>
+                        </p>
+                        <!-- fin filtros -->
                         <div class="divider-filtros"></div>
-
                         <!-- Sub especialidad -->
                         <label>Sub especialidad</label>
-                        <div *ngFor="let row of subEspecialidades">
-                            <p>
+                        <div *ngFor="let row of subEspecialidades;let i = index">
+                            <p [hidden]="i >= limitForSubEspecialidad">
                                 <input type="checkbox" id="chbox{{row.id}}" value="primer_checkbox" (click)="FiltrarSubEspecialidad(row.id,$event)">
                                 <label for="chbox{{row.id}}">{{row.text}}</label>
                             </p>
                         </div>
-
-
+                        <!-- filtros para ver mas o menos -->
+                        <p *ngIf="subEspecialidades?.length >= 6 && limitForSubEspecialidad !=100 ">
+                            <a (click)="verMasSubEspecialista(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForSubEspecialidad==100 ">
+                            <a (click)="verMasSubEspecialista(false)" class="see-more">Ver menos</a>
+                        </p>
+                        <!-- fin filtros -->
                         <div class="divider-filtros"></div>
                         <!-- Obra Social -->
                         <label>Obra Social</label>
-                        <div *ngFor="let row of obrasSociales">
-                            <p>
+                        <div *ngFor="let row of obrasSociales;let i = index">
+                            <p [hidden]="i >= limitForObraSocial">
                                 <input type="checkbox" id="chbox{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarObrasSocial(row.id,$event)">
                                 <label for="chbox{{row.id}}o">{{row.text}}</label>
                             </p>
                         </div>
-
+                        <!-- filtros para ver mas o menos -->
+                        <p *ngIf="obrasSociales?.length >= 6 && limitForObraSocial !=100 ">
+                            <a (click)="verMasObraSocial(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForObraSocial==100 ">
+                            <a (click)="verMasObraSocial(false)" class="see-more">Ver menos</a>
+                        </p>
+                        <!-- fin filtros -->
                         <div class="divider-filtros"></div>
-
                         <!-- Ubicación -->
                         <label>Ubicación</label>
-                        <div *ngFor="let row of cities">
-                            <p>
+                        <div *ngFor="let row of cities;let i = index">
+                            <p [hidden]="i >= limitForUbicacion">
                                 <input type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
                                 <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
                             </p>
                         </div>
-                        <a href="" class="see-more">Ver más</a>
+                        <!-- filtros para ver mas o menos -->
+                        <p *ngIf="cities?.length >= 6 && limitForUbicacion !=100">
+                            <a (click)="verMasUbicacion(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForUbicacion==100 ">
+                            <a (click)="verMasUbicacion(false)" class="see-more">Ver menos</a>
+                        </p>
+                        <!-- fin filtros -->
 
                         <div class="divider-filtros"></div>
 
@@ -196,9 +200,9 @@
                 <div class="text-center ">
                 </div>
                 <div *ngFor="let row of clinicas">
-                        <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
 
-                    <div class="col-xs-12 cluster-clinica">
+                        <div class="col-xs-12 cluster-clinica">
                             <div class="col-xs-12 col-sm-2 img-clin">
                                 <img src="{{row.logo}}" alt="Clinica">
                             </div>
@@ -242,20 +246,20 @@
                                 </div> -->
 
                             </div>
-                        <div class="col-xs-12 col-sm-4 ask-clin">
-                            <a href="" class="heart">
-                                <i class="fa fa-heart-o corazon"></i>
-                            </a>
-                            <h4>{{row.score | number:'.1-5' }}</h4>
-                            <a href="" class="comments">
-                                <p>{{row.scoreQuantity}} comentarios</p>
-                            </a>
+                            <div class="col-xs-12 col-sm-4 ask-clin">
+                                <a href="" class="heart">
+                                    <i class="fa fa-heart-o corazon"></i>
+                                </a>
+                                <h4>{{row.score | number:'.1-5' }}</h4>
+                                <a href="" class="comments">
+                                    <p>{{row.scoreQuantity}} comentarios</p>
+                                </a>
 
-                            <a (click)="Reservar(row.clinicId)" class="reservar">Reservar</a>
-                            <!-- <a href="" class="pagar">Pagar ahora</a> -->
+                                <a (click)="Reservar(row.clinicId)" class="reservar">Reservar</a>
+                                <!-- <a href="" class="pagar">Pagar ahora</a> -->
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
 
                     <div class="col-xs-12 slide-clinica collapse" id="collapseExample{{row.clinicId}}">
@@ -294,8 +298,8 @@
                                 <div class="divider-slide"></div>
 
                                 <h2>Horarios de atención</h2>
-                                <div *ngFor="let day of row.openCloseHours" >
-                                        <p>{{getDayName(day.dayNumber) }}  de {{getHour(day.start)}}hs a {{getHour(day.end)}}hs</p>
+                                <div *ngFor="let day of row.openCloseHours">
+                                    <p>{{getDayName(day.dayNumber) }} de {{getHour(day.start)}}hs a {{getHour(day.end)}}hs</p>
                                 </div>
                                 <p>Feriados: Cerrado</p>
                             </div>

@@ -1,5 +1,3 @@
-
-
 <!-- Resultados -->
 <div class="col-xs-12 resultados-header">
     <p>Encontramos
@@ -37,46 +35,71 @@
                     <form action="" method="" class="form-filter">
                         <!-- Especialidad -->
                         <label>Especialidad</label>
-                        <div *ngFor="let row of especialidades">
-                            <p>
+                        <div *ngFor="let row of especialidades; let i = index">
+                            <p [hidden]="i >= limitForEspecialidad">
                                 <input type="checkbox" id="cbox{{row.id}}" value="first_checkbox" (click)="FiltrarEspecialidad(row.id,$event)">
                                 <label for="cbox{{row.id}}">{{row.text}}</label>
                             </p>
+
                         </div>
-
+                        <!-- filtros para ver mas o menos -->
+                        <p *ngIf="especialidades?.length >= 6 && limitForEspecialidad !=100">
+                            <a (click)="verMasEspecialista(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForEspecialidad==100 ">
+                            <a (click)="verMasEspecialista(false)" class="see-more">Ver menos</a>
+                        </p>
+                        <!-- fin filtros -->
                         <div class="divider-filtros"></div>
-
                         <!-- Sub especialidad -->
                         <label>Sub especialidad</label>
-                        <div *ngFor="let row of subEspecialidades">
-                            <p>
+                        <div *ngFor="let row of subEspecialidades;let i = index">
+                            <p [hidden]="i >= limitForSubEspecialidad">
                                 <input type="checkbox" id="chbox{{row.id}}" value="primer_checkbox" (click)="FiltrarSubEspecialidad(row.id,$event)">
                                 <label for="chbox{{row.id}}">{{row.text}}</label>
                             </p>
                         </div>
-
-
+                        <!-- filtros para ver mas o menos -->
+                        <p *ngIf="subEspecialidades?.length >= 6 && limitForSubEspecialidad !=100 ">
+                            <a (click)="verMasSubEspecialista(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForSubEspecialidad==100 ">
+                            <a (click)="verMasSubEspecialista(false)" class="see-more">Ver menos</a>
+                        </p>
+                        <!-- fin filtros -->
                         <div class="divider-filtros"></div>
                         <!-- Obra Social -->
                         <label>Obra Social</label>
-                        <div *ngFor="let row of obrasSociales">
-                            <p>
+                        <div *ngFor="let row of obrasSociales;let i = index">
+                            <p [hidden]="i >= limitForObraSocial">
                                 <input type="checkbox" id="chbox{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarObrasSocial(row.id,$event)">
                                 <label for="chbox{{row.id}}o">{{row.text}}</label>
                             </p>
                         </div>
+                        <!-- filtros para ver mas o menos -->
+                        <p *ngIf="obrasSociales?.length >= 6 && limitForObraSocial !=100 ">
+                            <a (click)="verMasObraSocial(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForObraSocial==100 ">
+                            <a (click)="verMasObraSocial(false)" class="see-more">Ver menos</a>
+                        </p>
+                        <!-- fin filtros -->
                         <div class="divider-filtros"></div>
-
                         <!-- Ubicación -->
                         <label>Ubicación</label>
-                        <div *ngFor="let row of cities">
-                            <p>
+                        <div *ngFor="let row of cities;let i = index">
+                            <p [hidden]="i >= limitForUbicacion">
                                 <input type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
                                 <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
                             </p>
                         </div>
-
-                        <a href="" class="see-more">Ver más</a>
+                        <!-- filtros para ver mas o menos -->
+                        <p *ngIf="cities?.length >= 6 && limitForUbicacion !=100">
+                            <a (click)="verMasUbicacion(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForUbicacion==100 ">
+                            <a (click)="verMasUbicacion(false)" class="see-more">Ver menos</a>
+                        </p>
 
                         <div class="divider-filtros"></div>
 
@@ -92,7 +115,7 @@
                         <div class="divider-filtros"></div>
 
                         <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
-                        <button  (click)="AplicarFiltros()" class=" btn btn-success aplicar-filters">Aplicar todos</button>
+                        <button (click)="AplicarFiltros()" class=" btn btn-success aplicar-filters">Aplicar todos</button>
 
                     </form>
 
@@ -163,8 +186,11 @@
     <!-- BÚSQUEDA-->
     <div class="row">
         <section class="col-12 col-md-10 offset-md-1  search-section">
-                <img (click)="volverBuscador()" class="text-center pointer" height="40px" src="/assets/img/back.png" alt="">
-
+            <div class="image-ubication">
+                <p>
+                    <a (click)="volverBuscador()" id="more-filters" class="pointer">Volver a la busqueda</a>
+                </p>
+            </div>
             <div class="row">
                 <!-- Filtros -->
                 <div class="col-12 col-md-4 float-left filter-search mapa-filter">

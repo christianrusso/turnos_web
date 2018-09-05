@@ -180,6 +180,8 @@ width: 180px;
 .pointer {cursor: pointer;}
 .modal-header{
     background-color: #454edb;
+    border-top-left-radius: 0rem !important;
+    border-top-right-radius: 0rem !important;
 }
 
 .modal-dialog {
@@ -189,3 +191,45 @@ width: 180px;
     pointer-events: none;
     padding-top: 10%;
 }
+
+.horariosModal label{
+    display: block;
+font-size: 14px;
+letter-spacing: 0px;
+color: #191919;
+margin-top: 20px;
+font-family: Poppins;
+font-weight: 500;
+padding-left: 0;
+text-transform: uppercase;
+}
+
+.horariosModal  .select2-container{
+width:100%!important;
+}
+
+.horariosModal  .select2-container--default .select2-selection--single .select2-selection__arrow {
+height: 35px;
+position: absolute;
+top: 1px;
+right: 1px;
+width: 20px;
+}
+
+.horariosModal  .select2-container--default .select2-selection--single .select2-selection__rendered {
+color: #6f6f6f;
+line-height: 28px;
+font-family: Poppins;
+font-size: 13px;
+margin-top: 4px;
+}
+.horariosModal .select2-container--default .select2-selection--single {
+background-color: #fff;
+border: 1px solid #aaa;
+border-radius: 4px;
+height: 35px;
+}
+.horariosModal  .form-group{
+margin-bottom: 30px;
+}
+

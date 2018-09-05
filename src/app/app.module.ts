@@ -36,6 +36,9 @@ import { RouterModule } from '@angular/router';
 import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.component';
 
 
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +53,6 @@ import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.
     ReservaExitoComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
     DemoUtilsModule,
@@ -63,10 +65,14 @@ import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.
     NgLoadingSpinnerModule,
     HttpClientModule,
     NgProgressModule.forRoot(),
-    NgProgressHttpModule
+    NgProgressHttpModule,
+
+    
   ],
   exports: [RouterModule],
-  providers: [    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true}
+  providers: [    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true},   
+     {provide: LocationStrategy, useClass: HashLocationStrategy}
+
   ],
   bootstrap: [AppComponent]
 })

@@ -48,8 +48,8 @@ export class ReservaService {
       .map(res => res.json());
   }
    //Specialty
-   getSpeciality(data) {
-    return this._http.post(this.url + 'api/Data/GetSpecialtiesForSelect', data, { headers: this.headers })
+   getSpeciality(id) {
+    return this._http.post(this.url + 'Api/Specialty/GetAllByClinic', {"Id":id}, { headers: this.headers })
       .map(res => res.json());
   }
   //SubSpecialty
@@ -65,8 +65,8 @@ export class ReservaService {
   }
 
   //ObrasSociales
-  getMedicalInsurance() {
-    return this._http.post(this.url + 'api/Data/GetMedicalInsurancesForSelect', {}, { headers: this.headers })
+  getMedicalInsurance(id) {
+    return this._http.post(this.url + 'api/MedicalInsurance/GetAllByClinic',  {"Id":id}, { headers: this.headers })
       .map(res => res.json());
   }
   RequestAppointmentByClient(data){

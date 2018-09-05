@@ -13,8 +13,8 @@ declare const google: any;
   styleUrls: ['./buscador.component.css'],
   providers: [BusquedaService, MapService, RegisterLoginService]
 })
-export class BuscadorComponent extends BaseComponent implements OnInit, AfterViewInit,OnDestroy {
-  public busqueda=null;
+export class BuscadorComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
+  public busqueda = null;
   public clinicas;
   public filtro;
   public coments;
@@ -27,7 +27,10 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
   public cities;
   public identity;
   public filtroFecha;
-  
+  public limitForEspecialidad = 5;
+  public limitForSubEspecialidad = 5;
+  public limitForObraSocial = 5;
+  public limitForUbicacion = 5;
 
   constructor(
     private _BusquedaService: BusquedaService,
@@ -35,7 +38,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     private _RegisterLoginService: RegisterLoginService,
     private _router: Router,
 
-  ){
+  ) {
     super();
   }
 
@@ -43,12 +46,12 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     await this.loadScript('/assets/js/script3.js');
   }
   ngOnDestroy() {
-   
+
   }
 
   ngOnInit() {
     $('header').show();
-    
+
     this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
     this.identity = this._RegisterLoginService.getToken();
     this.filtro = {
@@ -378,34 +381,69 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
 
   }
 
-  VerMapa(){
+  VerMapa() {
     this._router.navigate(['/ver-mapa']);
 
   }
 
-    getDayName(day): string {
-      switch (day) {
-          case 0:
-              return "Domingo";
-          case 1:
-              return "Lunes";
-          case 2:
-              return "Martes";
-          case 3:
-              return "Miercoles";
-          case 5:
-              return "Jueves";
-          case 6:
-              return "Viernes";
-          case 7:
-              return "Sabado";
-          default:
-              return "Dia desconocido";
-      }
+  getDayName(day): string {
+    switch (day) {
+      case 0:
+        return "Domingo";
+      case 1:
+        return "Lunes";
+      case 2:
+        return "Martes";
+      case 3:
+        return "Miercoles";
+      case 5:
+        return "Jueves";
+      case 6:
+        return "Viernes";
+      case 7:
+        return "Sabado";
+      default:
+        return "Dia desconocido";
+    }
   }
   getHour(date) {
     let time = date.split(':');
 
-     return time[0] + ':' + time[1];
+    return time[0] + ':' + time[1];
+  }
+
+  // ver mas
+
+  verMasEspecialista(status) {
+    if(status==true){
+      this.limitForEspecialidad = 100;
+    }
+    else{
+      this.limitForEspecialidad = 5;
+    }
+  }
+  verMasSubEspecialista(status) {
+    if(status==true){
+      this.limitForSubEspecialidad = 100;
+    }
+    else{
+      this.limitForSubEspecialidad = 5;
+    }
+  }
+  verMasObraSocial(status) {
+    if(status==true){
+      this.limitForObraSocial = 100;
+    }
+    else{
+      this.limitForObraSocial = 5;
+    }
+  }
+  verMasUbicacion(status){
+    if(status==true){
+      this.limitForUbicacion=100;
+    }
+    else{
+      this.limitForUbicacion=5;
+    }
   }
 }

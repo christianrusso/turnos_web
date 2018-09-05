@@ -98,9 +98,9 @@ $(document).ready(function () {
 
 /* Fecha de reserva */
 /* DATE PICKER */
-$('#datetimepicker2').datetimepicker({
-    format: 'DD/MM/YYYY'
-});
+// $('#datetimepicker2').datetimepicker({
+//     format: 'DD/MM/YYYY'
+// });
 
 /* Filtros */
 

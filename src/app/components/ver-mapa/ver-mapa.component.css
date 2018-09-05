@@ -46,5 +46,15 @@ button.delete-filters{
 .pointer {cursor: pointer;}
 
 .reservara{
-  margin-left: 150px;
+  margin-left: 15%;
+}
+
+.see-more {
+  color: #803aec !important;
+  font-family: Poppins;
+  font-size: 12px;
+  margin-left: 20px;
+  margin-top: 10px;
+  display: block;
+  cursor: pointer;
 }

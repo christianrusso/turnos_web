@@ -35,6 +35,10 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   public obrasSociales;
   public cities;
   public identity;
+  public limitForEspecialidad = 5;
+  public limitForSubEspecialidad = 5;
+  public limitForObraSocial = 5;
+  public limitForUbicacion = 5;
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript('/assets/js/script6.js');
   }
@@ -93,6 +97,8 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
 
     );
   }
+
+ 
   //Filtros
   public FiltrarEspecialidad(especialidad, deviceValue) {
     this.clinicas = [];
@@ -292,6 +298,39 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
       $(".modulo-inicio").css('display', 'block');
       $('#d-ini').addClass('activeInside');
       $('#d-reg').removeClass('activeInside');
+    }
+  }
+
+  verMasEspecialista(status) {
+    if(status==true){
+      this.limitForEspecialidad = 100;
+    }
+    else{
+      this.limitForEspecialidad = 5;
+    }
+  }
+  verMasSubEspecialista(status) {
+    if(status==true){
+      this.limitForSubEspecialidad = 100;
+    }
+    else{
+      this.limitForSubEspecialidad = 5;
+    }
+  }
+  verMasObraSocial(status) {
+    if(status==true){
+      this.limitForObraSocial = 100;
+    }
+    else{
+      this.limitForObraSocial = 5;
+    }
+  }
+  verMasUbicacion(status){
+    if(status==true){
+      this.limitForUbicacion=100;
+    }
+    else{
+      this.limitForUbicacion=5;
     }
   }
 }

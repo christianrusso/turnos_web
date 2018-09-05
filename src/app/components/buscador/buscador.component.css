@@ -40,4 +40,16 @@ button.delete-filters{
   
   color: #fff;
   }
-  
+  .container-fluid{
+    margin: 0%;
+  }
+
+  .see-more {
+    color: #803aec !important;
+    font-family: Poppins;
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 10px;
+    display: block;
+    cursor: pointer;
+}
