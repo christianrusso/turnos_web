@@ -47,7 +47,8 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public endFecha= new Date(this.fecha.getFullYear(), this.fecha.getMonth() + 1, 0);
   public horarios;
   public clinicId;
-
+  public doctorBlock=false;
+  public dontAvailable;
   public filter = {
     "StartDate":new Date(),
     "EndDate": this.endFecha,
@@ -176,16 +177,27 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       }
     }
     this.filterForDay.Day = day.date;
-    if(this.filter.DoctorId!=null){
+    this.refresh.next();
+
+    if(this.filter.DoctorId!=null && this.doctorBlock==true){
+      this.filter.DoctorId=null;
       this.GetAllAvailablesForDay();
+    }else{
+      this.GetAllAvailablesForDay();
+
     }
-    $("#horario").modal("show");
+   // $("#horario").modal("show");
 
   }
 
   GetAllAvailablesForDay() {
     this._ReservaComponent.GetAllAvailablesForDay(this.filterForDay).subscribe(
       response => {
+        if(response.length==0){
+          this.dontAvailable=true;
+        }else{
+          this.dontAvailable=false;
+        }
        this.horarios=[];
         response.forEach(appointment => {
           this.horarios.push(this.getHour(appointment));
@@ -268,17 +280,13 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   }
 
   public FiltrarEspecialista(especialista) {
-    console.log(especialista.value);
     this.filter.DoctorId = especialista.value;
     this.filterForDay.DoctorId = especialista.value;
-
     this.horarios=null;
     this.time=null;
     this.refresh.next();
 
-    if(this.filterForDay.Day !=null){
-      this.GetAllAvailablesForDay();
-    }
+    this.GetAllAvailablesForDay();
 
 
 
@@ -330,6 +338,9 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   Paso2(){
     if( this.filter.SpecialtyId != null && this.filter.SubSpecialtyId != null  ){
       this.getAppointmentsPerDay(this.filter);
+      if(this.filter.DoctorId==null){
+        this.doctorBlock=true;
+      }
       $(".filters-turnos").css("display", "none");
       $(".calendario-confirmacion").css("display", "none");
       $('.calendario').css("display", "block");
@@ -392,6 +403,8 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     this._ReservaComponent.getMedicalInsurance(this.clinicId).subscribe(
       response => {
         this.obrasSociales = response;
+        this.refresh.next();
+
       },
       error => {
         // Manejar errores
