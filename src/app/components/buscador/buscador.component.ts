@@ -266,10 +266,12 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
         "Longitude": position.coords.longitude,
         "RadiusInMeters": this.distancia,
       },
-      "Cities": [this.busqueda.lugar],
+      "Cities": [this.busqueda.ubicacion],
       "Specialties": this.filtro.Specialties,
       "Subspecialties": this.filtro.Subspecialties,
-      "MedicalInsurances": this.filtro.MedicalInsurances
+      "MedicalInsurances": this.filtro.MedicalInsurances,
+      "MedicalPlans": [],
+
     }
     this.getByFilter(this.filtro);
   }
