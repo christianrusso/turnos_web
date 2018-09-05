@@ -264,7 +264,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
       "Location": {
         "Latitude": position.coords.latitude,
         "Longitude": position.coords.longitude,
-        "RadiusInMeters": this.distancia,
+        "RadiusInMeters": this.distancia*100,
       },
       "Cities": [this.busqueda.ubicacion],
       "Specialties": this.filtro.Specialties,
