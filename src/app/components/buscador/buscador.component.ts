@@ -4,6 +4,7 @@ import { MapService } from '../../services/map.service';
 import { RegisterLoginService } from '../../services/register-login.service';
 import { Router, NavigationEnd } from "@angular/router";
 import { BaseComponent } from '../../core/base.component';
+import { and } from '@angular/router/src/utils/collection';
 
 declare const google: any;
 
@@ -130,10 +131,11 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
   public getByFilter(filtro) {
     $("#loading-bar-spinner").removeAttr('hidden');
     $("#loading-bar-spinner").show();
+    console.log(this.filtro);
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
-        if (response.length != 0) {
-          console.log(response);
+        console.log(response.length);
+        if (response.length != 0 && filtro.Cities.length!=0) {
           this.dontResult = false;
           this.clinicas = response;
         }
@@ -280,11 +282,20 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
   //Borrar los filtros
   public BorrarFiltros() {
     this.filtro = {
-      "Cities": [],
+      "Cities": [this.busqueda.ubicacion],
       "Specialties": [],
       "Subspecialties": [],
-      "MedicalInsurances": []
+      "MedicalInsurances": [],
+      "medicalPlans": [],
+      "Score": "",
+      "ScoreQuantity": "",
+      "AvailableAppointmentDate": ""
     }
+
+    $('input[type=checkbox]').prop('checked',false);
+    $('.range-slider').val(0);
+    $('.range-slider__range').val(0);
+    $('.range-slider__value').text(0);
     this.getByFilter(this.filtro);
   }
 
@@ -355,7 +366,6 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
   }
   // BOTON DE RESERVAR
   Reservar(id) {
-    console.log(id);
     this.identity = this._RegisterLoginService.getToken();
 
     if (this.identity != null) {
@@ -374,7 +384,6 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
 
   onFechaFilter() {
     this.filtro.AvailableAppointmentDate = this.filtroFecha.fecha;
-    console.log(this.filtro);
     this.getByFilter(this.filtro);
 
   }

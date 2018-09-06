@@ -140,30 +140,12 @@
                             <label for="cfbox3">30+</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="cfbox4" value="fourthf_checkbox" (click)="FiltrarScoreQuantity(50)">
+                            <input type="checkbox" id="cfbox4" value="fourthf_checkbox" name="fooby[2][]" (click)="FiltrarScoreQuantity(50)">
                             <label for="cfbox4">más de 50</label>
                         </p>
 
-                        <div class="divider-filtros"></div>
 
-                        <!-- Servicios -->
-                        <label for="">Servicios</label>
-                        <p class="general-servicios">
-                            <i class="fa fa-medkit" aria-hidden="true"></i>
-                            <span>Guardia</span>
-                        </p>
-                        <p class="general-servicios">
-                            <i class="fa fa-medkit" aria-hidden="true"></i>
-                            <span>Radiografías</span>
-                        </p>
-                        <p class="general-servicios">
-                            <i class="fa fa-medkit" aria-hidden="true"></i>
-                            <span>Internación</span>
-                        </p>
-                        <p class="general-servicios">
-                            <i class="fa fa-medkit" aria-hidden="true"></i>
-                            <span>WiFi</span>
-                        </p>
+                   
 
                         <div class="divider-filtros"></div>
 
@@ -347,7 +329,6 @@
                                             <span>{{comment.dateTime | date: 'd/M/yy' }}</span>
                                         </div>
                                         <div class="comentario-text col-xs-8">
-
                                             <p>"{{comment.comment}}"
                                             </p>
                                         </div>
@@ -368,7 +349,6 @@
                                     </div>
                                     <div class="line-button">
                                         <a href="">Cómo llegar</a>
-
                                     </div>
                                 </div>
                                 <div id="regularMap{{row.clinicId}}" class="col-xs-12 map"></div>

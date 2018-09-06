@@ -1,0 +1,44 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<section class=" col-xs-12 general reserva container-fluid">
+
+  <div class="col-xs-12 col-md-12 calendario-turnos  calendario">
+
+    <div class="dias col-md-8 offset-2 calendario-turnos" height="50px">
+      <br>
+      <div id="turnos">
+        <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
+        </mwl-demo-utils-calendar-header>
+      
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div class="btn btn-primary" (click)="view = 'month'" [class.active]="view === 'month'" >
+              Mes
+            </div>
+            <div class="btn btn-primary" (click)="view = 'week'" [class.active]="view === 'week'" >
+              Semana
+            </div>
+            <div class="btn btn-primary" (click)="view = 'day'" [class.active]="view === 'day'" >
+              Día
+            </div>
+          </div>
+        </div>
+        <br>
+        <div [ngSwitch]="view">
+          <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [activeDayIsOpen]="true" [locale]="locale"
+            [refresh]="refresh">
+          </mwl-calendar-month-view>
+          <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale" [refresh]="refresh">
+          </mwl-calendar-week-view>
+          <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale">
+          </mwl-calendar-day-view>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>

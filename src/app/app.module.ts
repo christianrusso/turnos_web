@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'angular-calendar';
 import { DemoUtilsModule } from './demo-utils/module';
 import { registerLocaleData } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import localeEs from '@angular/common/locales/es';
 
@@ -37,6 +38,7 @@ import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.
 
 
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { MisturnosComponent } from './components/misturnos/misturnos.component';
 
 
 @NgModule({
@@ -50,9 +52,11 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     VerMapaComponent,
     ReservaComponent,
     NavComponent,
-    ReservaExitoComponent
+    ReservaExitoComponent,
+    MisturnosComponent
   ],
   imports: [
+    CommonModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
     DemoUtilsModule,

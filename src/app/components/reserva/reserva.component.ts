@@ -334,9 +334,17 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public FiltrarHoraSelect(hora){
     this.time=hora.value;
   }
-
+  Paso1(){
+    $(".filters-turnos").css("display", "block");
+    $(".calendario-confirmacion").css("display", "none");
+    $('.calendario').css("display", "none");
+    $('#b1').addClass('activeReserva');
+    $('#b3').removeClass('activeReserva');
+    $('#b2').removeClass('activeReserva');
+  }
   Paso2(){
-    if( this.filter.SpecialtyId != null && this.filter.SubSpecialtyId != null  ){
+    console.log(this.filter.SpecialtyId,this.filter.SpecialtyId)
+    if( this.filter.SpecialtyId != '' && this.filter.SubSpecialtyId != ''  ){
       this.getAppointmentsPerDay(this.filter);
       if(this.filter.DoctorId==null){
         this.doctorBlock=true;
@@ -353,8 +361,9 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     }
   }
   Paso3(){
-    if( this.filter.SpecialtyId != null && this.filter.SubSpecialtyId != null  ){
+    if( this.filter.SpecialtyId != '' && this.filter.SubSpecialtyId != '' && this.filter.DoctorId !=null  ){
       this.getAppointmentsPerDay(this.filter);
+      $(".filters-turnos").css("display", "none");
       $(".calendario").css("display", "none");
       $('.calendario-confirmacion').css("display", "block");
       $('#b1').removeClass('activeReserva');
