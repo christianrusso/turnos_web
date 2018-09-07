@@ -136,7 +136,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
         console.log(response.length);
-        if (response.length != 0 && filtro.Cities.length!=0) {
+        if (response.length != 0) {
           this.dontResult = false;
           this.clinicas = response;
         }
