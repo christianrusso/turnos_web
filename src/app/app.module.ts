@@ -39,6 +39,7 @@ import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.
 
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { MisturnosComponent } from './components/misturnos/misturnos.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 
 
 @NgModule({
@@ -70,8 +71,8 @@ import { MisturnosComponent } from './components/misturnos/misturnos.component';
     HttpClientModule,
     NgProgressModule.forRoot(),
     NgProgressHttpModule,
-
-    
+    NgbModalModule.forRoot(),
+    CalendarModule.forRoot()
   ],
   exports: [RouterModule],
   providers: [    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true},   

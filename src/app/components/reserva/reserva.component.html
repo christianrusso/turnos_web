@@ -139,9 +139,7 @@
                                 </mwl-calendar-day-view>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
 
 
@@ -151,17 +149,17 @@
                     <div class="circle"></div>
                     <div class="square"></div>
                     <div class="col-xs-12 col-md-12 cluster-reserva-def">
-                        <h3>Clínica Bazterrica</h3>
-                        <h4>Juncal 3002, Ciudad Autónoma de Buenos Aires</h4>
+                        <h3>{{dataClinica?.description}}</h3>
+                        <h4>{{dataClinica?.address}}, {{dataClinica?.city}} </h4>
 
                         <h5>Especialidad</h5>
-                        <p>Dermatología</p>
+                        <p>{{especialidadText}}</p>
 
                         <h5>Profesional</h5>
-                        <p>Marini Mariano Gabriel</p>
+                        <p>{{especialistaText}}</p>
 
                         <h5>Fecha y hora de la reserva</h5>
-                        <p>Martes 03/07/2018 15:40</p>
+                        <p>{{filterForDay.Day | date:'EEEE' : format:locale }} {{filterForDay.Day | date:'d/M/yy'}} {{time}}</p>
 
                      
 

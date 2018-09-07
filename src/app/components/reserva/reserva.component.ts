@@ -109,6 +109,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       this.filter.ClinicId = params["id"];
       this.filterForDay.ClinicId=params["id"];
       this.filterDoctor.ClinicId=params["id"];
+      this.GetByFilterClinic();
 
     });
     this.loading = true;
@@ -239,7 +240,10 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       }
     );
   }
+  public especialidadText;
+
   public FiltrarEspecialidad(especialidad) {
+    this.especialidadText=especialidad.data[0].text;
     this.filter.SpecialtyId = especialidad.value;
     this.filterDoctor.SpecialtyId = especialidad.value;
     this.filterDoctor.SubspecialtyId = null;
@@ -278,8 +282,9 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     this.getDoctor();
 
   }
-
+  public especialistaText;
   public FiltrarEspecialista(especialista) {
+    this.especialistaText=especialista.data[0].text;
     this.filter.DoctorId = especialista.value;
     this.filterForDay.DoctorId = especialista.value;
     this.horarios=null;
@@ -297,7 +302,6 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       response => {
         this.especialista = response;
         this.refresh.next();
-
       },
       error => {
         // Manejar errores
@@ -369,10 +373,22 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       $('#b1').removeClass('activeReserva');
       $('#b2').removeClass('activeReserva');
       $('#b3').addClass('activeReserva');
-
     }else{
       console.log("No entro");
     }
+  }
+  public dataClinica;
+  public GetByFilterClinic() {
+    const data={"ClinicId":this.clinicId,"Cities": [],"Specialties":[],"Subspecialties":[],"MedicalPlans":[],"MedicalInsurances":[]};
+    this._ReservaComponent.GetByFilterClinic(data).subscribe(
+      response => {
+        this.dataClinica=response[0];
+        console.log(response);
+      },
+      error => {
+        // Manejar errores
+      }
+    );
   }
 
   CheckPaciente(){

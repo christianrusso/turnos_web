@@ -183,3 +183,11 @@ width: 180px;
 mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-today.cal-in-month.cal-has-events.cal-open.ng-star-inserted:hover {
     background: #8ef6f4 !important;
 }
+h3 {
+    margin: 0 0 10px;
+  }
+  
+  pre {
+    background-color: #f5f5f5;
+    padding: 15px;
+  }

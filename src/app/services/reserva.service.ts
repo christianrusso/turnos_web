@@ -79,5 +79,11 @@ export class ReservaService {
     return this._http.post(this.url + 'api/Appointment/RequestAppointmentByPatient',data, { headers: this.headers })
       .map(res => res.json());
   }
+
+  GetByFilterClinic(data){
+    this.headers.set('Authorization',"Bearer "+this.getToken().token);
+    return this._http.post(this.url + 'Api/Clinic/GetByFilter',data, { headers: this.headers })
+      .map(res => res.json());
+  }
   
 }
