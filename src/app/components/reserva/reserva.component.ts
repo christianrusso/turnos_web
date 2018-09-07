@@ -315,7 +315,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       this.getAppointmentsPerDay(this.filter);
 
     }else if(data.getMonth()>this.fecha.getMonth()){
-      this.filter.EndDate = data;
+      this.filter.EndDate = new Date(data.getFullYear(), data.getMonth()+1 , 0);
       this.filter.StartDate = new Date(data.getFullYear(), data.getMonth() , 1);
       this.getAppointmentsPerDay(this.filter);
 
@@ -329,8 +329,9 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
       this.getAppointmentsPerDay(this.filter);
 
     }else if((data.getMonth()+1)>this.fecha.getMonth()+1){
-      this.filter.EndDate = data;
+      this.filter.EndDate = new Date(data.getFullYear(), data.getMonth()+1 , 0);
       this.filter.StartDate = new Date(data.getFullYear(), data.getMonth() , 1);
+      console.log(this.filter.StartDate,this.filter.EndDate);
       this.getAppointmentsPerDay(this.filter);
     }
   }

@@ -209,16 +209,21 @@ export class VerMapaComponent extends BaseComponent implements OnInit, AfterView
   //fin filtro por distancia.
   //Borrar los filtros
   public BorrarFiltros() {
-    $('.modal-filtros').fadeOut();
-
     this.filtro = {
-      "Cities": [this.busqueda.lugar],
+      "Cities": [this.busqueda.ubicacion],
       "Specialties": [],
       "Subspecialties": [],
       "MedicalInsurances": [],
-      "medicalPlans": []
-
+      "medicalPlans": [],
+      "Score": "",
+      "ScoreQuantity": "",
+      "AvailableAppointmentDate": ""
     }
+
+    $('input[type=checkbox]').prop('checked',false);
+    $('.range-slider').val(0);
+    $('.range-slider__range').val(0);
+    $('.range-slider__value').text(0);
     this.getByFilter(this.filtro);
   }
 

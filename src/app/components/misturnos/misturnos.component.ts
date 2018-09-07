@@ -2,7 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,ViewEncapsulation, OnInit
 } from '@angular/core';
 import {
   startOfDay,
@@ -19,8 +19,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {
   CalendarEvent,
   CalendarEventAction,
-  CalendarEventTimesChangedEvent
+  CalendarEventTimesChangedEvent,CalendarDateFormatter
 } from 'angular-calendar';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { Router, ActivatedRoute } from "@angular/router";
+import { Location } from '@angular/common';
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -35,17 +39,32 @@ const colors: any = {
     secondary: '#FDF1BA'
   }
 };
+
 @Component({
   selector: 'app-misturnos',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './misturnos.component.html',
   styleUrls: ['./misturnos.component.css'],
-  
+  providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter
+    }, 
+  ],
+  encapsulation: ViewEncapsulation.None
 })
-export class MisturnosComponent  {
+export class MisturnosComponent implements OnInit {
+  constructor(private modal: NgbModal,    private location: Location,    private _route: ActivatedRoute,
 
+  ) {}
+  ngOnInit() {
+
+
+  }
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
-
+  Volver() {
+    this.location.back(); // <-- go back to previous location on cancel
+  }
   view: string = 'month';
 
   viewDate: Date = new Date();
@@ -73,24 +92,22 @@ export class MisturnosComponent  {
   ];
 
   refresh: Subject<any> = new Subject();
-
+    public date= new Date();
   events: CalendarEvent[] = [
     {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
+      start: new Date(this.date.setDate(this.date.getDate()+1)),
       title: 'Turno con doctor manuel',
       color: colors.yellow,
       actions: this.actions
     },
     {
-      start: startOfDay(new Date()),
+      start: new Date(this.date.setDate(this.date.getDate()+1)),
       title: 'Turno con yamil',
       color: colors.yellow,
       actions: this.actions
     },
     {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
+      start: new Date(this.date.setDate(this.date.getDate()+1)),
       title: 'Turno con pedro ',
       color: colors.blue
     },
@@ -110,7 +127,7 @@ export class MisturnosComponent  {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+ 
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {

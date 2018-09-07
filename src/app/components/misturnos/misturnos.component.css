@@ -1,10 +1,11 @@
-
-  .pointer {cursor: pointer;}
+.pointer {cursor: pointer;}
 .calendario-turnos .dias .div-contenido-fecha div.col-md-1.bg-turnos.selectedTurno{
     background: #8ef6f4;
     border-left: 4px solid #454edb;
 }
 .n-dia{
+
+    
     right: 13px;
     
     font-family: Poppins;
@@ -20,7 +21,8 @@
 
 .cal-day-number {
     font-size: 13px !important;
-    opacity: 222 !important;
+        opacity: 222 !important;
+
 }
 
 .cal-month-view .cal-cell-top {
@@ -147,9 +149,6 @@
     border-right: 1px solid #e1e1e1;
     background: white;
 }
-.cal-month-view:hover{
-    border-right: 1px solid #e1e1e1;
-}
 .cal-month-view .cal-day-cell:not(:last-child).cal-has-events{
     border-right: 1px solid #e1e1e1;
     background: white !important;
@@ -179,15 +178,72 @@ width: 180px;
 }
 
 .pointer {cursor: pointer;}
+.modal-header{
+    background-color: #454edb;
+    border-top-left-radius: 0rem !important;
+    border-top-right-radius: 0rem !important;
+}
 
-mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-today.cal-in-month.cal-has-events.cal-open.ng-star-inserted:hover {
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: auto !important;
+    pointer-events: none;
+    padding-top: 10%;
+}
+
+.horariosModal label{
+    display: block;
+font-size: 14px;
+letter-spacing: 0px;
+color: #191919;
+margin-top: 20px;
+font-family: Poppins;
+font-weight: 500;
+padding-left: 0;
+text-transform: uppercase;
+}
+
+.horariosModal  .select2-container{
+width:100%!important;
+}
+
+.horariosModal  .select2-container--default .select2-selection--single .select2-selection__arrow {
+height: 35px;
+position: absolute;
+top: 1px;
+right: 1px;
+width: 20px;
+}
+
+.horariosModal  .select2-container--default .select2-selection--single .select2-selection__rendered {
+color: #6f6f6f;
+line-height: 28px;
+font-family: Poppins;
+font-size: 13px;
+margin-top: 4px;
+}
+.horariosModal .select2-container--default .select2-selection--single {
+background-color: #fff;
+border: 1px solid #aaa;
+border-radius: 4px;
+height: 35px;
+}
+.horariosModal  .form-group{
+margin-bottom: 30px;
+}
+
+
+mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-today.cal-in-month.ng-star-inserted.cal-has-events:hover {
     background: #8ef6f4 !important;
 }
-h3 {
-    margin: 0 0 10px;
-  }
-  
-  pre {
-    background-color: #f5f5f5;
-    padding: 15px;
-  }
+mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-future.cal-in-month.ng-star-inserted.cal-has-events:hover {
+    background: #8ef6f4 !important;
+}
+
+
+.backBtn{
+    background-color:#454edb !important;
+    border-color: #454edb !important;
+    background: #454edb !important;
+}
