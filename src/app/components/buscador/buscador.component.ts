@@ -96,6 +96,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this._BusquedaService.getCities().subscribe(
       response => {
         this.cities = response;
+      
       },
       error => {
         // Manejar errores

@@ -68,7 +68,8 @@
                         <label>Ubicación</label>
                         <div *ngFor="let row of cities;let i = index">
                             <p [hidden]="i >= limitForUbicacion">
-                                <input type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
+                                    <input *ngIf="row.id==busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)" checked="checked">
+                                    <input *ngIf="row.id!=busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)" >
                                 <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
                             </p>
                         </div>
