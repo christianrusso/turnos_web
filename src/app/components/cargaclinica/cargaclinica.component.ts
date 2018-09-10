@@ -5,7 +5,6 @@ import { ClinicaService } from '../../services/clinica.service';
 import { RegisterLoginService } from '../../services/register-login.service';
 import { MapsAPILoader } from '@agm/core';
 
-declare const google: any;
 
 @Component({
   selector: 'app-cargaclinica',
