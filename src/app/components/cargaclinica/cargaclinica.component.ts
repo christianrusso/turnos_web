@@ -16,6 +16,8 @@ declare const google: any;
 
 })
 export class CargaclinicaComponent implements OnInit {
+  @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('search') public searchElement: ElementRef;
 
   constructor(  
     private _ClinicaService: ClinicaService,
@@ -35,6 +37,7 @@ export class CargaclinicaComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.getCities();
     this.mapsAPILoader.load().then(
       () => {
         let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types: ["address"] });
@@ -59,22 +62,33 @@ export class CargaclinicaComponent implements OnInit {
       }
     );
   }
-  @ViewChild('fileInput') fileInput: ElementRef;
-  @ViewChild('search') public searchElement: ElementRef;
-
-  onPost() {
-    const formModel = this.form.value;
-    this.clinica.Logo = formModel.avatar.value;
-    console.log(this.clinica);
-    this._ClinicaService.PostRegisterClinic(this.clinica).subscribe(
+   //Citys
+   public cities;
+   public getCities() {
+    this._ClinicaService.getCities().subscribe(
       response => {
+        this.cities = response;
         console.log(response);
-
       },
       error => {
         // Manejar errores
       }
     );
+  }
+
+  onPost() {
+    const formModel = this.form.value;
+    this.clinica.Logo = formModel.avatar.value;
+    console.log(this.clinica);
+    // this._ClinicaService.PostRegisterClinic(this.clinica).subscribe(
+    //   response => {
+    //     console.log(response);
+
+    //   },
+    //   error => {
+    //     // Manejar errores
+    //   }
+    // );
   }
   // convertir imagen noticia en base64
   onFileChange(event) {
@@ -84,9 +98,9 @@ export class CargaclinicaComponent implements OnInit {
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.form.get('avatar').setValue({
-          filename: file.name,
-          filetype: file.type,
-          value: reader.result.split(',')[1]
+          filename:file.name,
+          filetype:file.type,
+          value: "data:image/png;base64,"+  reader.result.split(',')[1]
         })
       };
     }

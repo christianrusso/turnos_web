@@ -46,6 +46,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
 
   ngOnInit() {
     $('header').hide();
+    this.getCities();
 
     this._route.params.subscribe(params => {
       let id = +params["id"];
@@ -68,7 +69,6 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterViewIni
       "password": ""
     }
 
-    this.getCities();
   }
   //Citys
   public getCities() {

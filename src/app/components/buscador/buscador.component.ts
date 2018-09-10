@@ -139,6 +139,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
         if (response.length != 0) {
           this.dontResult = false;
           this.clinicas = response;
+          console.log(response);
         }
         else {
           this.dontResult = true;

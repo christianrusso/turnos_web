@@ -21,6 +21,11 @@ export class ClinicaService {
     return this._http.post(this.url + 'Api/account/registery',clinica, { headers: this.headers })
       .map(res => res.json());
   }
+   //Ciudades
+   getCities() {
+    return this._http.post(this.url + 'api/Data/GetCitiesForSelect', {}, { headers: this.headers })
+      .map(res => res.json());
+  }
   getToken(){
 		let token = localStorage.getItem('tokenTurnos');
 		if(token != "undefined"){
