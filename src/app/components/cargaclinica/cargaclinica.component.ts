@@ -80,15 +80,15 @@ export class CargaclinicaComponent implements OnInit {
     const formModel = this.form.value;
     this.clinica.Logo = formModel.avatar.value;
     console.log(this.clinica);
-    // this._ClinicaService.PostRegisterClinic(this.clinica).subscribe(
-    //   response => {
-    //     console.log(response);
+    this._ClinicaService.PostRegisterClinic(this.clinica).subscribe(
+      response => {
+        console.log(response);
 
-    //   },
-    //   error => {
-    //     // Manejar errores
-    //   }
-    // );
+      },
+      error => {
+        // Manejar errores
+      }
+    );
   }
   // convertir imagen noticia en base64
   onFileChange(event) {
