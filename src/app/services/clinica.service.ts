@@ -17,8 +17,7 @@ export class ClinicaService {
   }
 
  PostRegisterClinic(clinica) {
-    this.headers.set('Authorization',"Bearer "+this.getToken());
-    return this._http.post(this.url + 'Api/account/registery',clinica, { headers: this.headers })
+    return this._http.post(this.url + 'Api/account/register',clinica, { headers: this.headers })
       .map(res => res.json());
   }
    //Ciudades
