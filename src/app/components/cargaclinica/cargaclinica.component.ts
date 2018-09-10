@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ClinicaService } from '../../services/clinica.service';
 import { RegisterLoginService } from '../../services/register-login.service';
 import { MapsAPILoader } from '@agm/core';
+import {} from '@types/googlemaps';
 
+declare const google: any;
 
 @Component({
   selector: 'app-cargaclinica',
