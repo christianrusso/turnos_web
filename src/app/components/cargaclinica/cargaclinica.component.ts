@@ -51,7 +51,7 @@ export class CargaclinicaComponent implements OnInit {
               if (place.address_components.length >= 4) {
                this.clinica.Latitude =place.geometry.location.lat();
                this.clinica.Longitude=place.geometry.location.lng();
-               this.clinica.Addres = place.address_components[1].long_name + " " + place.address_components[0].long_name + " " + place.address_components[2].long_name + " " + place.address_components[4].long_name + " " + place.address_components[5].long_name;
+               this.clinica.Address = place.address_components[1].long_name + " " + place.address_components[0].long_name + " " + place.address_components[2].long_name + " " + place.address_components[4].long_name + " " + place.address_components[5].long_name;
               }
             }
             if (place.geometry === undefined || place.geometry === null) {
