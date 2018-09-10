@@ -40,6 +40,8 @@ import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { MisturnosComponent } from './components/misturnos/misturnos.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import { CargaclinicaComponent } from './components/cargaclinica/cargaclinica.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
     ReservaComponent,
     NavComponent,
     ReservaExitoComponent,
-    MisturnosComponent
+    MisturnosComponent,
+    CargaclinicaComponent
   ],
   imports: [
     CommonModule,
@@ -72,7 +75,12 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
     NgProgressModule.forRoot(),
     NgProgressHttpModule,
     NgbModalModule.forRoot(),
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCyCX2-eJssZgvNucxJBPMKYpyTTaVa610',
+      libraries: ["places"]
+    })
+    
   ],
   exports: [RouterModule],
   providers: [    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true},   

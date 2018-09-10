@@ -1,0 +1,114 @@
+<section class="section section-skew">
+  <div class="container">
+      <form #formNoticia="ngForm" (ngSubmit)="onPost()" class="form" method="" action="" role="form">
+          <div class="card card-profile shadow mt--300">
+              <br>
+              <h2 class="mb-5 text-center">
+                  <span>Nueva Publicacion ;)</span>
+              </h2>
+              <div class="px-4">
+                  <div class="text-center ">
+                      <h6 class="text-center text-success">Email </h6>
+                      <div class="form-group">
+                          <div class="input-group input-group-alternative mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="ni ni-hat-3"></i>
+                                  </span>
+                              </div>
+                              <input #Email="ngModel" name="Email" [(ngModel)]="clinica.Email" class="form-control" placeholder="email" type="text">
+                          </div>
+                      </div>
+                      <div class="h6 mt-4 ">
+                          <h6 class="text-center text-success">Password </h6>
+                          <i class="ni business_briefcase-24 mr-2"></i>
+                          <div class="form-group">
+                              <div class="input-group input-group-alternative mb-3">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">
+                                          <i class="ni ni-email-83"></i>
+                                      </span>
+                                  </div>
+                                  <input #Password="ngModel" name="Password" [(ngModel)]="clinica.Password" type="password" class="form-control" placeholder="password"
+                                    >
+                              </div>
+                          </div>
+                      </div>
+                      <div class="h6 mt-4 ">
+                        <h6 class="text-center text-success">Name </h6>
+                        <i class="ni business_briefcase-24 mr-2"></i>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="ni ni-email-83"></i>
+                                    </span>
+                                </div>
+                                <input #Name="ngModel" name="Name" [(ngModel)]="clinica.Name" type="text" class="form-control" placeholder="name"
+                                   >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h6 mt-4 ">
+                      <h6 class="text-center text-success">addres </h6>
+                      <i class="ni business_briefcase-24 mr-2"></i>
+                      <div class="form-group">
+                          <div class="input-group input-group-alternative mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="ni ni-email-83"></i>
+                                  </span>
+                              </div>
+                              <input #Addres="ngModel" name="Addres" [(ngModel)]="clinica.Addres" type="text" class="form-control" placeholder="addres"
+                              autocorrect="off"
+                                autocapitalize="off" spellcheck="off"  #search  >
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+                  <div class="mt-5 py-5 border-top text-center">
+                      <div class="row justify-content-center">
+                          <div class="col-lg-9">
+                              <br>
+                              <br>
+                              <h6 class="text-center text-success">Imagen</h6>
+                              <div class="form-group">
+                                  <div class="input-group input-group-alternative">
+                                      <input class="form-control" placeholder="Imagen" type="file" id="avatar" (change)="onFileChange($event)"  #fileInput>
+                                  </div>
+                              </div>
+                              <br>
+                              <h6 class="text-center text-success">Description</h6>
+                           
+                          </div>
+                      </div>
+                  </div>
+                  <div class="mt-5 py-2 text-justify">
+                      <div class="row justify-content-center">
+                          <div class="col-lg-9">
+                              <br>
+                              <h6 class="text-center text-success">Contenido </h6>
+                              <div class="form-group">
+                                  <div class="input-group input-group-alternative">
+                                      <textarea #Description="ngModel" name="Description" [(ngModel)]="clinica.Description" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                          placeholder="Texto ..."></textarea>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+             
+            
+           
+                  <div class="mt-5 py-5 border-top text-center">
+                      <div class="row justify-content-center">
+                          <div class="col-lg-9">
+                              <button type="submit" class="btn btn-success btn-sm">Crear clinica</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+  </div>
+</section>
