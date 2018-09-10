@@ -105,4 +105,8 @@ export class CargaclinicaComponent implements OnInit {
       };
     }
   }
+  lugar(event) {
+    this.clinica.City = event.value;
+
+    }
 }
