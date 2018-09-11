@@ -5,7 +5,7 @@ export class Clinica {
     public Description: string;
     public Address: string;
     public Logo:  string|any;
-    public City:number,
+    public City:number;
     public Latitude: number;
     public Longitude: number;
 }
