@@ -1,15 +1,18 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject } from "@angular/core/testing";
 
-import { MiturnoService } from './miturno.service';
+import { MiturnoService } from "./miturno.service";
 
-describe('MiturnoService', () => {
+describe("MiturnoService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [MiturnoService]
     });
   });
 
-  it('should be created', inject([MiturnoService], (service: MiturnoService) => {
-    expect(service).toBeTruthy();
-  }));
+  it("should be created", inject(
+    [MiturnoService],
+    (service: MiturnoService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

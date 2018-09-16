@@ -1,13 +1,25 @@
-import { Component, ChangeDetectionStrategy, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { BaseComponent } from '../../core/base.component';
-import { CalendarEvent, CalendarDateFormatter, DAYS_OF_WEEK, CalendarEventAction, CalendarMonthViewDay } from 'angular-calendar';
-import { CustomDateFormatter } from './custom-date-formatter.provider';
-import { ReservaService } from '../../services/reserva.service';
-import { Subject } from 'rxjs';
-import { BusquedaService } from '../../services/busqueda.service';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  AfterViewInit,
+  ViewEncapsulation
+} from "@angular/core";
+import { BaseComponent } from "../../core/base.component";
+import {
+  CalendarEvent,
+  CalendarDateFormatter,
+  DAYS_OF_WEEK,
+  CalendarEventAction,
+  CalendarMonthViewDay
+} from "angular-calendar";
+import { CustomDateFormatter } from "./custom-date-formatter.provider";
+import { ReservaService } from "../../services/reserva.service";
+import { Subject } from "rxjs";
+import { BusquedaService } from "../../services/busqueda.service";
 import { Router, ActivatedRoute } from "@angular/router";
 declare const $: any;
-import {Observable} from "rxjs/Rx";
+import { Observable } from "rxjs/Rx";
 
 import {
   isSameMonth,
@@ -20,23 +32,25 @@ import {
   endOfDay,
   format,
   isThisSecond
-} from 'date-fns';
+} from "date-fns";
 
 @Component({
-  selector: 'app-reserva',
-  templateUrl: './reserva.component.html',
+  selector: "app-reserva",
+  templateUrl: "./reserva.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./reserva.component.css'],
+  styleUrls: ["./reserva.component.css"],
   providers: [
     {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter
-    }, ReservaService, BusquedaService
+    },
+    ReservaService,
+    BusquedaService
   ],
   encapsulation: ViewEncapsulation.None
 })
-
-export class ReservaComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class ReservaComponent extends BaseComponent
+  implements OnInit, AfterViewInit {
   public backGround;
   public loading;
   public turnos = true;
@@ -44,59 +58,62 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public subEspecialidades;
   public especialista;
   public fecha = new Date();
-  public endFecha= new Date(this.fecha.getFullYear(), this.fecha.getMonth() + 1, 0);
+  public endFecha = new Date(
+    this.fecha.getFullYear(),
+    this.fecha.getMonth() + 1,
+    0
+  );
   public horarios;
   public clinicId;
-  public doctorBlock=false;
+  public doctorBlock = false;
   public dontAvailable;
   public filter = {
-    "StartDate":new Date(),
-    "EndDate": this.endFecha,
-    "ClinicId": "",
-    "DoctorId": "",
-    "SpecialtyId": "",
-    "SubSpecialtyId": ""
+    StartDate: new Date(),
+    EndDate: this.endFecha,
+    ClinicId: "",
+    DoctorId: "",
+    SpecialtyId: "",
+    SubSpecialtyId: ""
   };
   public filterDoctor = {
-    "SpecialtyId": null,
-    "SubspecialtyId": null,
-    "ClinicId": null,
+    SpecialtyId: null,
+    SubspecialtyId: null,
+    ClinicId: null
   };
   public filterForDay = {
-    "Day": null,
-    "DoctorId": null,
-    "ClinicId": null
+    Day: null,
+    DoctorId: null,
+    ClinicId: null
   };
 
-  public paciente={
-    "ClinicId":null,
-    "Day":null,
-    "Time":null,
-    "DoctorId":null,
-    "FirstName": null,
-    "LastName":null,
-    "Address":null,
-    "PhoneNumber": null,
-    "Dni":null,
-    "MedicalPlanId":null
-    };
+  public paciente = {
+    ClinicId: null,
+    Day: null,
+    Time: null,
+    DoctorId: null,
+    FirstName: null,
+    LastName: null,
+    Address: null,
+    PhoneNumber: null,
+    Dni: null,
+    MedicalPlanId: null
+  };
   refresh: Subject<any> = new Subject();
-  public items:Observable<Array<any>>;
+  public items: Observable<Array<any>>;
 
   constructor(
     private _router: Router,
-
     private _ReservaComponent: ReservaService,
     private _BusquedaService: BusquedaService,
-    private _route: ActivatedRoute,
-
-
-  ) { super(); }
+    private _route: ActivatedRoute
+  ) {
+    super();
+  }
   async ngAfterViewInit(): Promise<void> {
-    await this.loadScript('/assets/js/script7.js');
+    await this.loadScript("/assets/js/script7.js");
   }
 
-  view: string = 'month';
+  view: string = "month";
   viewDate: Date = new Date();
 
   events: CalendarEvent[] = [];
@@ -105,18 +122,16 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   ngOnInit() {
     console.log(this.fecha);
     this._route.params.subscribe(params => {
-      this.clinicId=params["id"];
+      this.clinicId = params["id"];
       this.filter.ClinicId = params["id"];
-      this.filterForDay.ClinicId=params["id"];
-      this.filterDoctor.ClinicId=params["id"];
+      this.filterForDay.ClinicId = params["id"];
+      this.filterDoctor.ClinicId = params["id"];
       this.GetByFilterClinic();
-
     });
     this.loading = true;
     //this.getAppointmentsPerDay(this.filter);
     this.getSplecialties();
     this.getSubSplecialties();
-
   }
 
   getAppointmentsPerDay(filtro) {
@@ -127,10 +142,11 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
         this.events = [];
         response.forEach(element => {
           for (i = 0; i < element.availableAppointments; i++) {
-             var date=new Date(element.day);
-            this.events.push(
-              { title: "manuel", start: new Date(date.setDate(date.getDate()+1)) }
-            );
+            var date = new Date(element.day);
+            this.events.push({
+              title: "manuel",
+              start: new Date(date.setDate(date.getDate() + 1))
+            });
           }
         });
         this.refresh.next();
@@ -143,14 +159,11 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     );
   }
 
-
   addEvent(): void {
     this.refresh.next();
   }
 
-
-
-  locale: string = 'es';
+  locale: string = "es";
 
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
@@ -160,7 +173,7 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   dayClicked(day: CalendarMonthViewDay): void {
     if (day.events.length > 0) {
       this.selectedDays.forEach(element => {
-        element.cssClass = ""
+        element.cssClass = "";
       });
       this.selectedDays = [];
       this.selectedMonthViewDay = day;
@@ -173,33 +186,31 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
         this.selectedDays.splice(dateIndex, 1);
       } else {
         this.selectedDays.push(this.selectedMonthViewDay);
-        day.cssClass = 'selectedTurno';
+        day.cssClass = "selectedTurno";
         this.selectedMonthViewDay = day;
       }
     }
     this.filterForDay.Day = day.date;
     this.refresh.next();
 
-    if(this.filter.DoctorId!=null && this.doctorBlock==true){
-      this.filter.DoctorId=null;
+    if (this.filter.DoctorId != null && this.doctorBlock == true) {
+      this.filter.DoctorId = null;
       this.GetAllAvailablesForDay();
-    }else{
+    } else {
       this.GetAllAvailablesForDay();
-
     }
-   // $("#horario").modal("show");
-
+    // $("#horario").modal("show");
   }
 
   GetAllAvailablesForDay() {
     this._ReservaComponent.GetAllAvailablesForDay(this.filterForDay).subscribe(
       response => {
-        if(response.length==0){
-          this.dontAvailable=true;
-        }else{
-          this.dontAvailable=false;
+        if (response.length == 0) {
+          this.dontAvailable = true;
+        } else {
+          this.dontAvailable = false;
         }
-       this.horarios=[];
+        this.horarios = [];
         response.forEach(appointment => {
           this.horarios.push(this.getHour(appointment));
         });
@@ -211,8 +222,8 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     );
   }
   getHour(date: string): string {
-    let time = date.split('T')[1].split(':');
-    return time[0] + ':' + time[1];
+    let time = date.split("T")[1].split(":");
+    return time[0] + ":" + time[1];
   }
 
   public getSplecialties() {
@@ -221,7 +232,6 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
         console.log(response);
         this.especialidades = response;
         this.refresh.next();
-
       },
       error => {
         // Manejar errores
@@ -243,15 +253,15 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public especialidadText;
 
   public FiltrarEspecialidad(especialidad) {
-    this.especialidadText=especialidad.data[0].text;
+    this.especialidadText = especialidad.data[0].text;
     this.filter.SpecialtyId = especialidad.value;
     this.filterDoctor.SpecialtyId = especialidad.value;
     this.filterDoctor.SubspecialtyId = null;
-    this.horarios=null;
+    this.horarios = null;
     this.especialista = null;
-    this.filter.SubSpecialtyId=null;
-    this.filter.DoctorId=null;
-    this.time=null;
+    this.filter.SubSpecialtyId = null;
+    this.filter.DoctorId = null;
+    this.time = null;
     this.FiltrarSubEspecialidadOnEspecialidad(especialidad.value);
   }
 
@@ -259,42 +269,35 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
   public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
     this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
       response => {
-        this.subEspecialidades=null;
+        this.subEspecialidades = null;
         this.subEspecialidades = response;
         this.refresh.next();
-
       },
       error => {
         // Manejar errores
       }
     );
-
-
   }
 
   public FiltrarSubEspecialidad(Subspecialties) {
     this.filter.SubSpecialtyId = Subspecialties.value;
     this.filterDoctor.SubspecialtyId = Subspecialties.value;
 
-    this.horarios=null;
-    this.filter.DoctorId=null;
-    this.time=null;
+    this.horarios = null;
+    this.filter.DoctorId = null;
+    this.time = null;
     this.getDoctor();
-
   }
   public especialistaText;
   public FiltrarEspecialista(especialista) {
-    this.especialistaText=especialista.data[0].text;
+    this.especialistaText = especialista.data[0].text;
     this.filter.DoctorId = especialista.value;
     this.filterForDay.DoctorId = especialista.value;
-    this.horarios=null;
-    this.time=null;
+    this.horarios = null;
+    this.time = null;
     this.refresh.next();
 
     this.GetAllAvailablesForDay();
-
-
-
   }
   public getDoctor() {
     this.especialista = null;
@@ -309,81 +312,95 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     );
   }
   previus(data) {
-    if(data.getMonth()==this.fecha.getMonth()){
+    if (data.getMonth() == this.fecha.getMonth()) {
       this.filter.EndDate = this.endFecha;
       this.filter.StartDate = this.fecha;
       this.getAppointmentsPerDay(this.filter);
-
-    }else if(data.getMonth()>this.fecha.getMonth()){
-      this.filter.EndDate = new Date(data.getFullYear(), data.getMonth()+1 , 0);
-      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth() , 1);
+    } else if (data.getMonth() > this.fecha.getMonth()) {
+      this.filter.EndDate = new Date(
+        data.getFullYear(),
+        data.getMonth() + 1,
+        0
+      );
+      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
       this.getAppointmentsPerDay(this.filter);
-
     }
-
   }
   next(data) {
-    if((data.getMonth()+1)==this.fecha.getMonth()+1){
+    if (data.getMonth() + 1 == this.fecha.getMonth() + 1) {
       this.filter.EndDate = this.endFecha;
       this.filter.StartDate = this.fecha;
       this.getAppointmentsPerDay(this.filter);
-
-    }else if((data.getMonth()+1)>this.fecha.getMonth()+1){
-      this.filter.EndDate = new Date(data.getFullYear(), data.getMonth()+1 , 0);
-      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth() , 1);
-      console.log(this.filter.StartDate,this.filter.EndDate);
+    } else if (data.getMonth() + 1 > this.fecha.getMonth() + 1) {
+      this.filter.EndDate = new Date(
+        data.getFullYear(),
+        data.getMonth() + 1,
+        0
+      );
+      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
+      console.log(this.filter.StartDate, this.filter.EndDate);
       this.getAppointmentsPerDay(this.filter);
     }
   }
   public time;
-  public FiltrarHoraSelect(hora){
-    this.time=hora.value;
+  public FiltrarHoraSelect(hora) {
+    this.time = hora.value;
   }
-  Paso1(){
+  Paso1() {
     $(".filters-turnos").css("display", "block");
     $(".calendario-confirmacion").css("display", "none");
-    $('.calendario').css("display", "none");
-    $('#b1').addClass('activeReserva');
-    $('#b3').removeClass('activeReserva');
-    $('#b2').removeClass('activeReserva');
+    $(".calendario").css("display", "none");
+    $("#b1").addClass("activeReserva");
+    $("#b3").removeClass("activeReserva");
+    $("#b2").removeClass("activeReserva");
   }
-  Paso2(){
-    console.log(this.filter.SpecialtyId,this.filter.SpecialtyId)
-    if( this.filter.SpecialtyId != '' && this.filter.SubSpecialtyId != ''  ){
+  Paso2() {
+    console.log(this.filter.SpecialtyId, this.filter.SpecialtyId);
+    if (this.filter.SpecialtyId != "" && this.filter.SubSpecialtyId != "") {
       this.getAppointmentsPerDay(this.filter);
-      if(this.filter.DoctorId==null){
-        this.doctorBlock=true;
+      if (this.filter.DoctorId == null) {
+        this.doctorBlock = true;
       }
       $(".filters-turnos").css("display", "none");
       $(".calendario-confirmacion").css("display", "none");
-      $('.calendario').css("display", "block");
-      $('#b1').removeClass('activeReserva');
-      $('#b3').removeClass('activeReserva');
-      $('#b2').addClass('activeReserva');
-
-    }else{
+      $(".calendario").css("display", "block");
+      $("#b1").removeClass("activeReserva");
+      $("#b3").removeClass("activeReserva");
+      $("#b2").addClass("activeReserva");
+    } else {
       console.log("No entro");
     }
   }
-  Paso3(){
-    if( this.filter.SpecialtyId != '' && this.filter.SubSpecialtyId != '' && this.filter.DoctorId !=null  ){
+  Paso3() {
+    if (
+      this.filter.SpecialtyId != "" &&
+      this.filter.SubSpecialtyId != "" &&
+      this.filter.DoctorId != null
+    ) {
       this.getAppointmentsPerDay(this.filter);
       $(".filters-turnos").css("display", "none");
       $(".calendario").css("display", "none");
-      $('.calendario-confirmacion').css("display", "block");
-      $('#b1').removeClass('activeReserva');
-      $('#b2').removeClass('activeReserva');
-      $('#b3').addClass('activeReserva');
-    }else{
+      $(".calendario-confirmacion").css("display", "block");
+      $("#b1").removeClass("activeReserva");
+      $("#b2").removeClass("activeReserva");
+      $("#b3").addClass("activeReserva");
+    } else {
       console.log("No entro");
     }
   }
   public dataClinica;
   public GetByFilterClinic() {
-    const data={"ClinicId":this.clinicId,"Cities": [],"Specialties":[],"Subspecialties":[],"MedicalPlans":[],"MedicalInsurances":[]};
+    const data = {
+      ClinicId: this.clinicId,
+      Cities: [],
+      Specialties: [],
+      Subspecialties: [],
+      MedicalPlans: [],
+      MedicalInsurances: []
+    };
     this._ReservaComponent.GetByFilterClinic(data).subscribe(
       response => {
-        this.dataClinica=response[0];
+        this.dataClinica = response[0];
         console.log(response);
       },
       error => {
@@ -392,62 +409,55 @@ export class ReservaComponent extends BaseComponent implements OnInit, AfterView
     );
   }
 
-  CheckPaciente(){
+  CheckPaciente() {
     this._ReservaComponent.checkPaciente(this.clinicId).subscribe(
       response => {
-        this.paciente.ClinicId=this.clinicId;
-        this.paciente.DoctorId=this.filter.DoctorId;
-        this.paciente.Day= this.filterForDay.Day;
-        this.paciente.Time=this.time;
+        this.paciente.ClinicId = this.clinicId;
+        this.paciente.DoctorId = this.filter.DoctorId;
+        this.paciente.Day = this.filterForDay.Day;
+        this.paciente.Time = this.time;
 
-        if(response==false){
+        if (response == false) {
           this.getMedicalInsurance();
           $("#myModal").modal("show");
-
-        }else{
-          this._ReservaComponent.RequestAppointmentByPatient(this.paciente).subscribe(
-            response => {
-
-            },
-            error => {
-              // Manejar errores
-            }
-          );
-          this._router.navigate(['/exito']);
-
+        } else {
+          this._ReservaComponent
+            .RequestAppointmentByPatient(this.paciente)
+            .subscribe(
+              response => {},
+              error => {
+                // Manejar errores
+              }
+            );
+          this._router.navigate(["/exito"]);
         }
-
       },
       error => {
         // Manejar errores
       }
     );
   }
-  public obrasSociales=[];
+  public obrasSociales = [];
   //ObrasSociales
   public getMedicalInsurance() {
     this._ReservaComponent.getMedicalInsurance(this.clinicId).subscribe(
       response => {
         this.obrasSociales = response;
         this.refresh.next();
-
       },
       error => {
         // Manejar errores
       }
     );
   }
-  onSubmit(){
+  onSubmit() {
     $("#myModal").modal("hide");
     this._ReservaComponent.RequestAppointmentByClient(this.paciente).subscribe(
-      response => {
-
-      },
+      response => {},
       error => {
         // Manejar errores
       }
     );
-    this._router.navigate(['/exito']);
-
+    this._router.navigate(["/exito"]);
   }
 }

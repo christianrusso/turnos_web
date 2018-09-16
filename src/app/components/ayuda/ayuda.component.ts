@@ -1,21 +1,18 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
-import { BaseComponent } from '../../core/base.component';
+import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { BaseComponent } from "../../core/base.component";
 
 @Component({
-  selector: 'app-ayuda',
-  templateUrl: './ayuda.component.html',
-  styleUrls: ['./ayuda.component.css']
+  selector: "app-ayuda",
+  templateUrl: "./ayuda.component.html",
+  styleUrls: ["./ayuda.component.css"]
 })
-export class AyudaComponent extends BaseComponent implements OnInit, AfterViewInit {
-
-  constructor() {   
-     super();
+export class AyudaComponent extends BaseComponent
+  implements OnInit, AfterViewInit {
+  constructor() {
+    super();
   }
   async ngAfterViewInit(): Promise<void> {
-    await this.loadScript('/assets/js/script5.js');
+    await this.loadScript("/assets/js/script5.js");
   }
-  ngOnInit() {
-    
-  }
-
+  ngOnInit() {}
 }

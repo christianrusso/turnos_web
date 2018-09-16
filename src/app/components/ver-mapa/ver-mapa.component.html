@@ -68,8 +68,10 @@
                         <label>Ubicación</label>
                         <div *ngFor="let row of cities;let i = index">
                             <p [hidden]="i >= limitForUbicacion">
-                                    <input *ngIf="row.id==busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)" checked="checked">
-                                    <input *ngIf="row.id!=busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)" >
+                                <input *ngIf="row.id==busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o"
+                                    value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)" checked="checked">
+                                <input *ngIf="row.id!=busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o"
+                                    value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
                                 <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
                             </p>
                         </div>
@@ -94,7 +96,8 @@
 
                         <div class="divider-filtros"></div>
 
-                        <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
+                        <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos
+                            los filtros</button>
                         <button (click)="AplicarFiltros()" class=" btn btn-success aplicar-filters">Aplicar todos</button>
 
                     </form>
@@ -201,7 +204,8 @@
                                                             </span>
                                                         </span>
                                                     </div>
-                                                    <button (click)="Reservar(row.clinicId)" class="btn btn-success reservara">Reservar </button>
+                                                    <button (click)="Reservar(row.clinicId)" class="btn btn-success reservara">Reservar
+                                                    </button>
                                                 </div>
                                             </div>
 

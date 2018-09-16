@@ -1,5 +1,7 @@
 img.text-center {
-    /* padding-right: 241px; */
-    margin: 30px;
+  /* padding-right: 241px; */
+  margin: 30px;
 }
-.pointer {cursor: pointer;}
+.pointer {
+  cursor: pointer;
+}

@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { VerMapaComponent } from './ver-mapa.component';
+import { VerMapaComponent } from "./ver-mapa.component";
 
-describe('VerMapaComponent', () => {
+describe("VerMapaComponent", () => {
   let component: VerMapaComponent;
   let fixture: ComponentFixture<VerMapaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VerMapaComponent ]
-    })
-    .compileComponents();
+      declarations: [VerMapaComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('VerMapaComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

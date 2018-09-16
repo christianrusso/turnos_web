@@ -16,7 +16,8 @@
                                         <i class="ni ni-hat-3"></i>
                                     </span>
                                 </div>
-                                <input #Email="ngModel" name="Email" [(ngModel)]="clinica.Email" class="form-control" placeholder="email" type="text">
+                                <input #Email="ngModel" name="Email" [(ngModel)]="clinica.Email" class="form-control"
+                                    placeholder="email" type="text">
                             </div>
                         </div>
                         <div class="h6 mt-4 ">
@@ -29,7 +30,8 @@
                                             <i class="ni ni-email-83"></i>
                                         </span>
                                     </div>
-                                    <input #Password="ngModel" name="Password" [(ngModel)]="clinica.Password" type="password" class="form-control" placeholder="password">
+                                    <input #Password="ngModel" name="Password" [(ngModel)]="clinica.Password" type="password"
+                                        class="form-control" placeholder="password">
                                 </div>
                             </div>
                         </div>
@@ -43,18 +45,19 @@
                                             <i class="ni ni-email-83"></i>
                                         </span>
                                     </div>
-                                    <input #Name="ngModel" name="Name" [(ngModel)]="clinica.Name" type="text" class="form-control" placeholder="name">
+                                    <input #Name="ngModel" name="Name" [(ngModel)]="clinica.Name" type="text" class="form-control"
+                                        placeholder="name">
                                 </div>
                             </div>
                         </div>
                         <div class="h6 mt-4 ">
                             <h6 class="text-center text-success">City </h6>
                             <div class="form-group col-md-12">
-                                
-                                    <select2  width="100%" (valueChanged)="lugar($event)" >
-                                        <option  value="" selected="true" disabled="disabled">¿Dónde?</option>
-                                        <option  *ngFor="let row of cities" value="{{row.id}}">{{row.text}}</option>
-                                    </select2>
+
+                                <select2 width="100%" (valueChanged)="lugar($event)">
+                                    <option value="" selected="true" disabled="disabled">¿Dónde?</option>
+                                    <option *ngFor="let row of cities" value="{{row.id}}">{{row.text}}</option>
+                                </select2>
                             </div>
                         </div>
                         <div class="h6 mt-4 ">
@@ -67,8 +70,9 @@
                                             <i class="ni ni-email-83"></i>
                                         </span>
                                     </div>
-                                    <input #Address="ngModel" name="Address" [(ngModel)]="clinica.Address" type="text" class="form-control" placeholder="addres"
-                                        autocorrect="off" autocapitalize="off" spellcheck="off" #search>
+                                    <input #Address="ngModel" name="Address" [(ngModel)]="clinica.Address" type="text"
+                                        class="form-control" placeholder="addres" autocorrect="off" autocapitalize="off"
+                                        spellcheck="off" #search>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +85,8 @@
                                 <h6 class="text-center text-success">Imagen</h6>
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
-                                        <input class="form-control" placeholder="Imagen" type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+                                        <input class="form-control" placeholder="Imagen" type="file" id="avatar"
+                                            (change)="onFileChange($event)" #fileInput>
                                     </div>
                                 </div>
                                 <br>
@@ -97,8 +102,8 @@
                                 <h6 class="text-center text-success">Contenido </h6>
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
-                                        <textarea #Description="ngModel" name="Description" [(ngModel)]="clinica.Description" class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3" placeholder="Texto ..."></textarea>
+                                        <textarea #Description="ngModel" name="Description" [(ngModel)]="clinica.Description"
+                                            class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Texto ..."></textarea>
                                     </div>
                                 </div>
                             </div>

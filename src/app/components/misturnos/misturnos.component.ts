@@ -2,8 +2,10 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef, ViewEncapsulation, OnInit
-} from '@angular/core';
+  TemplateRef,
+  ViewEncapsulation,
+  OnInit
+} from "@angular/core";
 import {
   startOfDay,
   endOfDay,
@@ -13,49 +15,52 @@ import {
   isSameDay,
   isSameMonth,
   addHours
-} from 'date-fns';
-import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
+} from "date-fns";
+import { Subject } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap/modal/modal.module";
 import {
   CalendarEvent,
   CalendarEventAction,
-  CalendarEventTimesChangedEvent, CalendarDateFormatter
-} from 'angular-calendar';
-import { CustomDateFormatter } from './custom-date-formatter.provider';
+  CalendarEventTimesChangedEvent,
+  CalendarDateFormatter
+} from "angular-calendar";
+import { CustomDateFormatter } from "./custom-date-formatter.provider";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Location } from '@angular/common';
-import { MiturnoService } from '../../services/miturno.service';
+import { Location } from "@angular/common";
+import { MiturnoService } from "../../services/miturno.service";
 
 const colors: any = {
   red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
+    primary: "#ad2121",
+    secondary: "#FAE3E3"
   },
   blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
+    primary: "#1e90ff",
+    secondary: "#D1E8FF"
   },
   yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
+    primary: "#e3bc08",
+    secondary: "#FDF1BA"
   }
 };
 
 @Component({
-  selector: 'app-misturnos',
+  selector: "app-misturnos",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './misturnos.component.html',
-  styleUrls: ['./misturnos.component.css'],
+  templateUrl: "./misturnos.component.html",
+  styleUrls: ["./misturnos.component.css"],
   providers: [
     {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter
-    }, MiturnoService
+    },
+    MiturnoService
   ],
   encapsulation: ViewEncapsulation.None
 })
 export class MisturnosComponent implements OnInit {
-  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+  @ViewChild("modalContent")
+  modalContent: TemplateRef<any>;
   refresh: Subject<any> = new Subject();
 
   constructor(
@@ -63,37 +68,37 @@ export class MisturnosComponent implements OnInit {
     private location: Location,
     private _route: ActivatedRoute,
     private _MiTurno: MiturnoService
-
-  ) { }
+  ) {}
   public date = new Date();
   public fecha = new Date();
-  public endFecha= new Date(this.fecha.getFullYear(), this.fecha.getMonth() + 1, 0);
+  public endFecha = new Date(
+    this.fecha.getFullYear(),
+    this.fecha.getMonth() + 1,
+    0
+  );
   public filter = {
-    "StartDate":  new Date(),
-    "EndDate":this.endFecha,
+    StartDate: new Date(),
+    EndDate: this.endFecha
   };
   ngOnInit() {
-
     this.getTurns();
   }
-  public misturns=[];
+  public misturns = [];
   public getTurns() {
     this._MiTurno.GetWeekForClient(this.filter).subscribe(
       response => {
-        
         response.forEach(element => {
-          if(element.appointments.length>0){
+          if (element.appointments.length > 0) {
             element.appointments.forEach(appoint => {
-              var date=new Date(appoint.dateTime);
+              var date = new Date(appoint.dateTime);
 
-              this.events.push(
-                { title: appoint.specialty, start: new Date(date.setDate(date.getDate()+1)),actions:this.actions }
-  
-              );
+              this.events.push({
+                title: appoint.specialty,
+                start: new Date(date.setDate(date.getDate() + 1)),
+                actions: this.actions
+              });
               this.refresh.next();
-
             });
-          
           }
         });
 
@@ -108,10 +113,10 @@ export class MisturnosComponent implements OnInit {
   Volver() {
     this.location.back(); // <-- go back to previous location on cancel
   }
-  view: string = 'month';
+  view: string = "month";
 
   viewDate: Date = new Date();
-  locale: string = 'es';
+  locale: string = "es";
 
   modalData: {
     action: string;
@@ -122,23 +127,19 @@ export class MisturnosComponent implements OnInit {
     {
       label: '<i class="fa fa-fw fa-check"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        this.handleEvent("Edited", event);
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.handleEvent("Deleted", event);
       }
     }
   ];
 
- 
-
   activeDayIsOpen: boolean = true;
-
-
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -191,18 +192,18 @@ export class MisturnosComponent implements OnInit {
   }: CalendarEventTimesChangedEvent): void {
     event.start = newStart;
     event.end = newEnd;
-    this.handleEvent('Dropped or resized', event);
+    this.handleEvent("Dropped or resized", event);
     this.refresh.next();
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.modal.open(this.modalContent, { size: "lg" });
   }
 
   addEvent(): void {
     this.events.push({
-      title: 'New event',
+      title: "New event",
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
       color: colors.red,

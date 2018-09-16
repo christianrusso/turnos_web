@@ -35,8 +35,9 @@
         </div>
         <div class=" col-md-4 ">
           <p class="tamanioTexto ">
-            <i mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" class="fa fa-caret-left colorFlecha pointer "></i> {{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}
-            <i  mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" class=" pointer colorFlecha fa fa-caret-right"></i>
+            <i mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" class="fa fa-caret-left colorFlecha pointer "></i>
+            {{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}
+            <i mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" class=" pointer colorFlecha fa fa-caret-right"></i>
           </p>
         </div>
       </div>
@@ -44,7 +45,7 @@
       <div class="row text-center">
         <div class="col-md-6">
           <div class="btn-group">
-            <div class="btn btn-primary backBtn"  (click)="Volver()">
+            <div class="btn btn-primary backBtn" (click)="Volver()">
               Volver atras
             </div>
           </div>
@@ -70,21 +71,24 @@
           <!-- <span class="cal-day-badge " *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span> -->
           <span class="cal-day-number n-dia">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
         </div>
-        <div class="t-disp" style="margin: 5px" *ngIf="day.badgeTotal > 0" data-toggle="modal" data-target="#horario">{{ day.events.length }} turnos
+        <div class="t-disp" style="margin: 5px" *ngIf="day.badgeTotal > 0" data-toggle="modal" data-target="#horario">{{
+          day.events.length }} turnos
           <br> disponibles</div>
 
       </ng-template>
       <div id="turnos">
         <div [ngSwitch]="view">
-          <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
-            (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-            [locale]="locale">
+          <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)" [locale]="locale">
           </mwl-calendar-month-view>
-          <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)" [locale]="locale">
+          <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+            [locale]="locale">
           </mwl-calendar-week-view>
-          <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)" [locale]="locale">
+          <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+            [locale]="locale">
           </mwl-calendar-day-view>
         </div>
       </div>

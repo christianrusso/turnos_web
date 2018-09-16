@@ -1,20 +1,21 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { BusquedaService } from '../../services/busqueda.service';
-import { MapService } from '../../services/map.service';
-import { RegisterLoginService } from '../../services/register-login.service';
+import { Component, OnInit, OnDestroy, AfterViewInit } from "@angular/core";
+import { BusquedaService } from "../../services/busqueda.service";
+import { MapService } from "../../services/map.service";
+import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd } from "@angular/router";
-import { BaseComponent } from '../../core/base.component';
-import { and } from '@angular/router/src/utils/collection';
+import { BaseComponent } from "../../core/base.component";
+import { and } from "@angular/router/src/utils/collection";
 
 declare const google: any;
 
 @Component({
-  selector: 'app-buscador',
-  templateUrl: './buscador.component.html',
-  styleUrls: ['./buscador.component.css'],
+  selector: "app-buscador",
+  templateUrl: "./buscador.component.html",
+  styleUrls: ["./buscador.component.css"],
   providers: [BusquedaService, MapService, RegisterLoginService]
 })
-export class BuscadorComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BuscadorComponent extends BaseComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   public busqueda = null;
   public clinicas;
   public filtro;
@@ -37,46 +38,41 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
     private _RegisterLoginService: RegisterLoginService,
-    private _router: Router,
-
+    private _router: Router
   ) {
     super();
   }
 
   async ngAfterViewInit(): Promise<void> {
-    await this.loadScript('/assets/js/script3.js');
+    await this.loadScript("/assets/js/script3.js");
   }
-  ngOnDestroy() {
-
-  }
+  ngOnDestroy() {}
 
   ngOnInit() {
-    $('header').show();
+    $("header").show();
 
-    this.busqueda = JSON.parse(localStorage.getItem('busqueda'));
+    this.busqueda = JSON.parse(localStorage.getItem("busqueda"));
     this.identity = this._RegisterLoginService.getToken();
     this.filtro = {
-      "Cities": [this.busqueda.ubicacion],
-      "Specialties": [],
-      "Subspecialties": [],
-      "MedicalInsurances": [],
-      "medicalPlans": [],
-      "Score": "",
-      "ScoreQuantity": "",
-      "AvailableAppointmentDate": ""
-
-    }
+      Cities: [this.busqueda.ubicacion],
+      Specialties: [],
+      Subspecialties: [],
+      MedicalInsurances: [],
+      medicalPlans: [],
+      Score: "",
+      ScoreQuantity: "",
+      AvailableAppointmentDate: ""
+    };
     this.filtroFecha = {
-      "categorias": this.busqueda.ubicacion,
-      "fecha": "",
-    }
+      categorias: this.busqueda.ubicacion,
+      fecha: ""
+    };
     this.dontResult = false;
     this.getByFilter(this.filtro);
     this.getSplecialties();
     this.getSubSplecialties();
     this.getMedicalInsurance();
     this.getCities();
-
   }
 
   //Specialidades
@@ -96,7 +92,6 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this._BusquedaService.getCities().subscribe(
       response => {
         this.cities = response;
-      
       },
       error => {
         // Manejar errores
@@ -110,7 +105,6 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this._BusquedaService.getSubSpeciality().subscribe(
       response => {
         this.subEspecialidades = response;
-
       },
       error => {
         // Manejar errores
@@ -130,7 +124,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     );
   }
   public getByFilter(filtro) {
-    $("#loading-bar-spinner").removeAttr('hidden');
+    $("#loading-bar-spinner").removeAttr("hidden");
     $("#loading-bar-spinner").show();
     console.log(this.filtro);
     this._BusquedaService.getByFilter(filtro).subscribe(
@@ -140,14 +134,11 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
           this.dontResult = false;
           this.clinicas = response;
           console.log(response);
-        }
-        else {
+        } else {
           this.dontResult = true;
           this.clinicas = null;
-
         }
         $("#loading-bar-spinner").hide();
-
       },
       error => {
         // Manejar errores
@@ -169,10 +160,8 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     }
     if (this.filtro.Specialties.length > 0) {
       this.FiltrarSubEspecialidadOnEspecialidad(especialidad);
-
     } else {
       this.getSubSplecialties();
-
     }
     this.getByFilter(this.filtro);
   }
@@ -195,8 +184,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.Subspecialties.push(Subspecialties);
-    }
-    else {
+    } else {
       for (let index = 0; index < this.filtro.Subspecialties.length; index++) {
         if (Subspecialties == this.filtro.Subspecialties[index]) {
           this.filtro.Subspecialties.splice(index, 1);
@@ -209,9 +197,12 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.MedicalInsurances.push(obraSocial);
-    }
-    else {
-      for (let index = 0; index < this.filtro.MedicalInsurances.length; index++) {
+    } else {
+      for (
+        let index = 0;
+        index < this.filtro.MedicalInsurances.length;
+        index++
+      ) {
         if (obraSocial == this.filtro.MedicalInsurances[index]) {
           this.filtro.MedicalInsurances.splice(index, 1);
         }
@@ -225,8 +216,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this.clinicas = [];
     if (deviceValue.target.checked) {
       this.filtro.Cities.push(Cities);
-    }
-    else {
+    } else {
       for (let index = 0; index < this.filtro.Cities.length; index++) {
         if (Cities == this.filtro.Cities[index]) {
           this.filtro.Cities.splice(index, 1);
@@ -236,7 +226,6 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this.getByFilter(this.filtro);
   }
 
-
   //filtro Score
   public FiltrarScore(score) {
     this.clinicas = [];
@@ -245,7 +234,6 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
   }
   //filtro ScoreQuantity
   public FiltrarScoreQuantity(ScoreQuantity) {
-
     this.clinicas = [];
     this.filtro.ScoreQuantity = ScoreQuantity;
     this.getByFilter(this.filtro);
@@ -255,7 +243,7 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
   FiltrarDistancia(deviceValue) {
     this.distancia = parseInt(deviceValue.target.value);
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(position => {
         this.showPosition(position);
       });
     } else {
@@ -265,18 +253,17 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
 
   showPosition(position) {
     this.filtro = {
-      "Location": {
-        "Latitude": position.coords.latitude,
-        "Longitude": position.coords.longitude,
-        "RadiusInMeters": this.distancia*100,
+      Location: {
+        Latitude: position.coords.latitude,
+        Longitude: position.coords.longitude,
+        RadiusInMeters: this.distancia * 100
       },
-      "Cities": [this.busqueda.ubicacion],
-      "Specialties": this.filtro.Specialties,
-      "Subspecialties": this.filtro.Subspecialties,
-      "MedicalInsurances": this.filtro.MedicalInsurances,
-      "MedicalPlans": [],
-
-    }
+      Cities: [this.busqueda.ubicacion],
+      Specialties: this.filtro.Specialties,
+      Subspecialties: this.filtro.Subspecialties,
+      MedicalInsurances: this.filtro.MedicalInsurances,
+      MedicalPlans: []
+    };
     this.getByFilter(this.filtro);
   }
   //fin filtro por distancia.
@@ -284,20 +271,20 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
   //Borrar los filtros
   public BorrarFiltros() {
     this.filtro = {
-      "Cities": [this.busqueda.ubicacion],
-      "Specialties": [],
-      "Subspecialties": [],
-      "MedicalInsurances": [],
-      "medicalPlans": [],
-      "Score": "",
-      "ScoreQuantity": "",
-      "AvailableAppointmentDate": ""
-    }
+      Cities: [this.busqueda.ubicacion],
+      Specialties: [],
+      Subspecialties: [],
+      MedicalInsurances: [],
+      medicalPlans: [],
+      Score: "",
+      ScoreQuantity: "",
+      AvailableAppointmentDate: ""
+    };
 
-    $('input[type=checkbox]').prop('checked',false);
-    $('.range-slider').val(0);
-    $('.range-slider__range').val(0);
-    $('.range-slider__value').text(0);
+    $("input[type=checkbox]").prop("checked", false);
+    $(".range-slider").val(0);
+    $(".range-slider__range").val(0);
+    $(".range-slider__value").text(0);
     this.getByFilter(this.filtro);
   }
 
@@ -306,26 +293,25 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     $("#info" + idClinica).show();
     $("#comen" + idClinica).hide();
     $("#ubi" + idClinica).hide();
-    $('.info-slide').addClass('activeFilter');
-    $('.com-slide').removeClass('activeFilter');
-    $('.ubi-slide').removeClass('activeFilter');
+    $(".info-slide").addClass("activeFilter");
+    $(".com-slide").removeClass("activeFilter");
+    $(".ubi-slide").removeClass("activeFilter");
   }
   public comen(idClinica) {
     $("#info" + idClinica).hide();
     $("#comen" + idClinica).show();
     $("#ubi" + idClinica).hide();
-    $('.com-slide').addClass('activeFilter');
-    $('.info-slide').removeClass('activeFilter');
-    $('.ubi-slide').removeClass('activeFilter');
-
+    $(".com-slide").addClass("activeFilter");
+    $(".info-slide").removeClass("activeFilter");
+    $(".ubi-slide").removeClass("activeFilter");
   }
   public ubi(idClinica, latitud, longitud) {
     $("#info" + idClinica).hide();
     $("#comen" + idClinica).hide();
     $("#ubi" + idClinica).show();
-    $('.ubi-slide').addClass('activeFilter');
-    $('.com-slide').removeClass('activeFilter');
-    $('.info-slide').removeClass('activeFilter');
+    $(".ubi-slide").addClass("activeFilter");
+    $(".com-slide").removeClass("activeFilter");
+    $(".info-slide").removeClass("activeFilter");
     this._MapService.generateMap(latitud, longitud, idClinica);
   }
 
@@ -333,12 +319,11 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
   filterOrderBy(deviceValue) {
     var select = deviceValue.target.value;
     if (select == 1) {
-      this.clinicas.sort(function (a, b) {
+      this.clinicas.sort(function(a, b) {
         return b.score - a.score;
       });
-    }
-    else {
-      this.clinicas.sort(function (a, b) {
+    } else {
+      this.clinicas.sort(function(a, b) {
         return b.scoreQuantity - a.scoreQuantity;
       });
     }
@@ -350,16 +335,15 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     if (select == 1) {
       this.clinicas.forEach(element => {
         if (element.clinicId == clinicId) {
-          element.ratings.sort(function (a, b) {
+          element.ratings.sort(function(a, b) {
             return b.score - a.score;
           });
         }
       });
-    }
-    else {
+    } else {
       this.clinicas.forEach(element => {
         if (element.clinicId == clinicId) {
-          element.ratings.sort(function (a, b) {
+          element.ratings.sort(function(a, b) {
             return b.score - a.score;
           });
         }
@@ -371,32 +355,26 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     this.identity = this._RegisterLoginService.getToken();
 
     if (this.identity != null) {
-      this._router.navigate(['/reserva/', id]);
+      this._router.navigate(["/reserva/", id]);
       //window.location.href = "/reserva/"+id+"";
-
-    }
-    else {
-      $('.modal-gral').css('display', 'block');
-      $(".modulo-inicio").css('display', 'block');
-      $('#d-ini').addClass('activeInside');
-      $('#d-reg').removeClass('activeInside');
+    } else {
+      $(".modal-gral").css("display", "block");
+      $(".modulo-inicio").css("display", "block");
+      $("#d-ini").addClass("activeInside");
+      $("#d-reg").removeClass("activeInside");
     }
   }
-
 
   onFechaFilter() {
     this.filtro.AvailableAppointmentDate = this.filtroFecha.fecha;
     this.getByFilter(this.filtro);
-
   }
   categoria(id) {
     this.filtroFecha.categorias = id.value;
-
   }
 
   VerMapa() {
-    this._router.navigate(['/ver-mapa']);
-
+    this._router.navigate(["/ver-mapa"]);
   }
 
   getDayName(day): string {
@@ -420,43 +398,39 @@ export class BuscadorComponent extends BaseComponent implements OnInit, AfterVie
     }
   }
   getHour(date) {
-    let time = date.split(':');
+    let time = date.split(":");
 
-    return time[0] + ':' + time[1];
+    return time[0] + ":" + time[1];
   }
 
   // ver mas
 
   verMasEspecialista(status) {
-    if(status==true){
+    if (status == true) {
       this.limitForEspecialidad = 100;
-    }
-    else{
+    } else {
       this.limitForEspecialidad = 5;
     }
   }
   verMasSubEspecialista(status) {
-    if(status==true){
+    if (status == true) {
       this.limitForSubEspecialidad = 100;
-    }
-    else{
+    } else {
       this.limitForSubEspecialidad = 5;
     }
   }
   verMasObraSocial(status) {
-    if(status==true){
+    if (status == true) {
       this.limitForObraSocial = 100;
-    }
-    else{
+    } else {
       this.limitForObraSocial = 5;
     }
   }
-  verMasUbicacion(status){
-    if(status==true){
-      this.limitForUbicacion=100;
-    }
-    else{
-      this.limitForUbicacion=5;
+  verMasUbicacion(status) {
+    if (status == true) {
+      this.limitForUbicacion = 100;
+    } else {
+      this.limitForUbicacion = 5;
     }
   }
 }

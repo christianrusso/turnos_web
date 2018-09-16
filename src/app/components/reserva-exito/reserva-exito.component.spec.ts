@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ReservaExitoComponent } from './reserva-exito.component';
+import { ReservaExitoComponent } from "./reserva-exito.component";
 
-describe('ReservaExitoComponent', () => {
+describe("ReservaExitoComponent", () => {
   let component: ReservaExitoComponent;
   let fixture: ComponentFixture<ReservaExitoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReservaExitoComponent ]
-    })
-    .compileComponents();
+      declarations: [ReservaExitoComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ReservaExitoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
