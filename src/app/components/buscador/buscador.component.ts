@@ -264,18 +264,34 @@ export class BuscadorComponent extends BaseComponent
   }
 
   showPosition(position) {
-    this.filtro = {
-      Location: {
-        Latitude: position.coords.latitude,
-        Longitude: position.coords.longitude,
-        RadiusInMeters: this.distancia * 100
-      },
-      Cities: [this.busqueda.ubicacion],
-      Specialties: this.filtro.Specialties,
-      Subspecialties: this.filtro.Subspecialties,
-      MedicalInsurances: this.filtro.MedicalInsurances,
-      MedicalPlans: []
-    };
+    if(this.busqueda.ubicacion!=""){
+      this.filtro = {
+        Location: {
+          Latitude: position.coords.latitude,
+          Longitude: position.coords.longitude,
+          RadiusInMeters: this.distancia * 100
+        },
+        Cities: [this.busqueda.ubicacion],
+        Specialties: this.filtro.Specialties,
+        Subspecialties: this.filtro.Subspecialties,
+        MedicalInsurances: this.filtro.MedicalInsurances,
+        MedicalPlans: []
+      };
+    }else{
+      this.filtro = {
+        Location: {
+          Latitude: position.coords.latitude,
+          Longitude: position.coords.longitude,
+          RadiusInMeters: this.distancia * 100
+        },
+        Cities: [],
+        Specialties: this.filtro.Specialties,
+        Subspecialties: this.filtro.Subspecialties,
+        MedicalInsurances: this.filtro.MedicalInsurances,
+        MedicalPlans: []
+      };
+    }
+ 
     this.getByFilter(this.filtro);
   }
   //fin filtro por distancia.
