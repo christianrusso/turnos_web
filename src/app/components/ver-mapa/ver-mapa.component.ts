@@ -66,7 +66,6 @@ export class VerMapaComponent extends BaseComponent
   public getByFilter(filtro) {
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
-        console.log(response);
         if (response.length == 0) {
           this.noData = true;
         } else {
@@ -133,7 +132,6 @@ export class VerMapaComponent extends BaseComponent
     this.clinicas = [];
     this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
       response => {
-        console.log(response);
         this.subEspecialidades = response;
       },
       error => {
@@ -297,7 +295,6 @@ export class VerMapaComponent extends BaseComponent
   }
   // BOTON DE RESERVAR
   Reservar(id) {
-    console.log(id);
     this.identity = this._RegisterLoginService.getToken();
 
     if (this.identity != null) {

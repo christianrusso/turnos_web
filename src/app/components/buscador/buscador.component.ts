@@ -5,8 +5,8 @@ import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { BaseComponent } from "../../core/base.component";
 import { and } from "@angular/router/src/utils/collection";
+declare var google: any;
 
-declare const google: any;
 
 @Component({
   selector: "app-buscador",
@@ -45,6 +45,7 @@ export class BuscadorComponent extends BaseComponent
 
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript("/assets/js/script3.js");
+
   }
   ngOnDestroy() {}
 
@@ -53,16 +54,30 @@ export class BuscadorComponent extends BaseComponent
 
     this.busqueda = JSON.parse(localStorage.getItem("busqueda"));
     this.identity = this._RegisterLoginService.getToken();
-    this.filtro = {
-      Cities: [this.busqueda.ubicacion],
-      Specialties: [],
-      Subspecialties: [],
-      MedicalInsurances: [],
-      medicalPlans: [],
-      Score: "",
-      ScoreQuantity: "",
-      AvailableAppointmentDate: ""
-    };
+    if(this.busqueda.ubicacion!=""){
+      this.filtro = {
+        Cities: [this.busqueda.ubicacion],
+        Specialties: [],
+        Subspecialties: [],
+        MedicalInsurances: [],
+        medicalPlans: [],
+        Score: "",
+        ScoreQuantity: "",
+        AvailableAppointmentDate: ""
+      };
+    }else{
+      this.filtro = {
+        Cities: [],
+        Specialties: [],
+        Subspecialties: [],
+        MedicalInsurances: [],
+        medicalPlans: [],
+        Score: "",
+        ScoreQuantity: "",
+        AvailableAppointmentDate: ""
+      };
+    }
+   
     this.filtroFecha = {
       categorias: this.busqueda.ubicacion,
       fecha: ""
@@ -126,14 +141,11 @@ export class BuscadorComponent extends BaseComponent
   public getByFilter(filtro) {
     $("#loading-bar-spinner").removeAttr("hidden");
     $("#loading-bar-spinner").show();
-    console.log(this.filtro);
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
-        console.log(response.length);
         if (response.length != 0) {
           this.dontResult = false;
           this.clinicas = response;
-          console.log(response);
         } else {
           this.dontResult = true;
           this.clinicas = null;
@@ -270,17 +282,29 @@ export class BuscadorComponent extends BaseComponent
 
   //Borrar los filtros
   public BorrarFiltros() {
-    this.filtro = {
-      Cities: [this.busqueda.ubicacion],
-      Specialties: [],
-      Subspecialties: [],
-      MedicalInsurances: [],
-      medicalPlans: [],
-      Score: "",
-      ScoreQuantity: "",
-      AvailableAppointmentDate: ""
-    };
-
+    if(this.busqueda.ubicacion!=""){
+      this.filtro = {
+        Cities: [this.busqueda.ubicacion],
+        Specialties: [],
+        Subspecialties: [],
+        MedicalInsurances: [],
+        medicalPlans: [],
+        Score: "",
+        ScoreQuantity: "",
+        AvailableAppointmentDate: ""
+      };
+    }else{
+      this.filtro = {
+        Cities: [],
+        Specialties: [],
+        Subspecialties: [],
+        MedicalInsurances: [],
+        medicalPlans: [],
+        Score: "",
+        ScoreQuantity: "",
+        AvailableAppointmentDate: ""
+      };
+    }
     $("input[type=checkbox]").prop("checked", false);
     $(".range-slider").val(0);
     $(".range-slider__range").val(0);

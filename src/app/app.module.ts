@@ -76,10 +76,10 @@ import { AgmCoreModule } from "@agm/core";
     NgProgressHttpModule,
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
-    AgmCoreModule.forRoot({
-      apiKey: "AIzaSyCyCX2-eJssZgvNucxJBPMKYpyTTaVa610",
-      libraries: ["places"]
-    })
+    // AgmCoreModule.forRoot({
+    //   apiKey: "AIzaSyCeS0Tku62WXG03D8NKXgMxA6RNuBKbrSI",
+    //   libraries: ["places"]
+    // })
   ],
   exports: [RouterModule],
   providers: [

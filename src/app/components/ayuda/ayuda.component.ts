@@ -14,5 +14,6 @@ export class AyudaComponent extends BaseComponent
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript("/assets/js/script5.js");
   }
+  
   ngOnInit() {}
 }
