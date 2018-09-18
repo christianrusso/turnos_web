@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
-declare const google: any;
+
+declare var google: any;
 import { Observable } from "rxjs";
 
 @Injectable()

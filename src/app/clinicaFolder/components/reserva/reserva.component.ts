@@ -120,7 +120,6 @@ export class ReservaComponent extends BaseComponent
 
   activeDayIsOpen: boolean = false;
   ngOnInit() {
-    console.log(this.fecha);
     this._route.params.subscribe(params => {
       this.clinicId = params["id"];
       this.filter.ClinicId = params["id"];
@@ -229,7 +228,6 @@ export class ReservaComponent extends BaseComponent
   public getSplecialties() {
     this._ReservaComponent.getSpeciality(this.clinicId).subscribe(
       response => {
-        console.log(response);
         this.especialidades = response;
         this.refresh.next();
       },
@@ -338,7 +336,6 @@ export class ReservaComponent extends BaseComponent
         0
       );
       this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
-      console.log(this.filter.StartDate, this.filter.EndDate);
       this.getAppointmentsPerDay(this.filter);
     }
   }
@@ -355,7 +352,6 @@ export class ReservaComponent extends BaseComponent
     $("#b2").removeClass("activeReserva");
   }
   Paso2() {
-    console.log(this.filter.SpecialtyId, this.filter.SpecialtyId);
     if (this.filter.SpecialtyId != "" && this.filter.SubSpecialtyId != "") {
       this.getAppointmentsPerDay(this.filter);
       if (this.filter.DoctorId == null) {
@@ -368,7 +364,6 @@ export class ReservaComponent extends BaseComponent
       $("#b3").removeClass("activeReserva");
       $("#b2").addClass("activeReserva");
     } else {
-      console.log("No entro");
     }
   }
   Paso3() {
@@ -385,7 +380,6 @@ export class ReservaComponent extends BaseComponent
       $("#b2").removeClass("activeReserva");
       $("#b3").addClass("activeReserva");
     } else {
-      console.log("No entro");
     }
   }
   public dataClinica;
@@ -401,7 +395,6 @@ export class ReservaComponent extends BaseComponent
     this._ReservaComponent.GetByFilterClinic(data).subscribe(
       response => {
         this.dataClinica = response[0];
-        console.log(response);
       },
       error => {
         // Manejar errores

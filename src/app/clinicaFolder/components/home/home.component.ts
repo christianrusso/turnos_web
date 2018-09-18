@@ -71,7 +71,6 @@ export class HomeComponent extends BaseComponent
     this._BusquedaService.getCities().subscribe(
       response => {
         this.cities = response;
-        console.log(response);
       },
       error => {
         // Manejar errores
@@ -96,7 +95,6 @@ export class HomeComponent extends BaseComponent
       ) {
         this._RegisterLoginService.onRegister(this.register).subscribe(
           response => {
-            console.log(response);
           },
           error => {
             // Manejar errores
@@ -132,7 +130,6 @@ export class HomeComponent extends BaseComponent
   logout() {
     this._RegisterLoginService.onLogout().subscribe(
       response => {
-        console.log(response);
       },
       error => {
         // Manejar errores
