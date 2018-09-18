@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { BaseComponent } from "./core/base.component";
-import { RegisterLoginService } from "./services/register-login.service";
+import { BaseComponent } from "./clinicaFolder/core/base.component";
+import { RegisterLoginService } from "./clinicaFolder/services/register-login.service";
 
 declare const $: any;
 

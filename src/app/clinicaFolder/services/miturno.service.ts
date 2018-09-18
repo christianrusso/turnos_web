@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
-import { global } from "../global/global";
-import { token } from "../global/token";
+import { global } from "../../global/global";
+import { token } from "../../global/token";
 import { map } from "rxjs/operators";
 
 @Injectable()

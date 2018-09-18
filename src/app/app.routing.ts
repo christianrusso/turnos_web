@@ -2,16 +2,16 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { IndexComponent } from './components/index/index.component';
-import { BuscadorComponent } from './components/buscador/buscador.component';
-import { AyudaComponent } from './components/ayuda/ayuda.component';
-import { NosotrosComponent } from './components/nosotros/nosotros.component';
-import { VerMapaComponent } from './components/ver-mapa/ver-mapa.component';
-import { ReservaComponent } from './components/reserva/reserva.component';
-import { ReservaExitoComponent } from './components/reserva-exito/reserva-exito.component';
-import { MisturnosComponent } from './components/misturnos/misturnos.component';
-import { CargaclinicaComponent } from './components/cargaclinica/cargaclinica.component';
+import { HomeComponent } from './clinicaFolder/components/home/home.component';
+import { IndexComponent } from './clinicaFolder/components/index/index.component';
+import { BuscadorComponent } from './clinicaFolder/components/buscador/buscador.component';
+import { AyudaComponent } from './clinicaFolder/components/ayuda/ayuda.component';
+import { NosotrosComponent } from './clinicaFolder/components/nosotros/nosotros.component';
+import { VerMapaComponent } from './clinicaFolder/components/ver-mapa/ver-mapa.component';
+import { ReservaComponent } from './clinicaFolder/components/reserva/reserva.component';
+import { ReservaExitoComponent } from './clinicaFolder/components/reserva-exito/reserva-exito.component';
+import { MisturnosComponent } from './clinicaFolder/components/misturnos/misturnos.component';
+import { CargaclinicaComponent } from './clinicaFolder/components/cargaclinica/cargaclinica.component';
 
 export const appRoutes: Routes = [
   { path: '', component: IndexComponent },

@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { HomeService } from "../../services/home.service";
-import { busqueda } from "../../global/busqueda";
+import { busqueda } from "../../../global/busqueda";
 import { BaseComponent } from "../../core/base.component";
 import { RegisterLoginService } from "../../services/register-login.service";
 import { BusquedaService } from "../../services/busqueda.service";

@@ -5,12 +5,12 @@ import { HttpModule } from "@angular/http";
 import { routing, appRoutingProviders, appRoutes } from "./app.routing";
 
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./components/home/home.component";
-import { IndexComponent } from "./components/index/index.component";
+import { HomeComponent } from "./clinicaFolder/components/home/home.component";
+import { IndexComponent } from "./clinicaFolder/components/index/index.component";
 import { Select2Module } from "ng2-select2";
 import { FormsModule } from "@angular/forms";
-import { BuscadorComponent } from "./components/buscador/buscador.component";
-import { AyudaComponent } from "./components/ayuda/ayuda.component";
+import { BuscadorComponent } from "./clinicaFolder/components/buscador/buscador.component";
+import { AyudaComponent } from "./clinicaFolder/components/ayuda/ayuda.component";
 
 //loading
 import {
@@ -18,14 +18,14 @@ import {
   NgLoadingSpinnerInterceptor
 } from "ng-loading-spinner";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { NosotrosComponent } from "./components/nosotros/nosotros.component";
-import { VerMapaComponent } from "./components/ver-mapa/ver-mapa.component";
-import { ReservaComponent } from "./components/reserva/reserva.component";
-import { NavComponent } from "./components/nav/nav.component";
+import { NosotrosComponent } from "./clinicaFolder/components/nosotros/nosotros.component";
+import { VerMapaComponent } from "./clinicaFolder/components/ver-mapa/ver-mapa.component";
+import { ReservaComponent } from "./clinicaFolder/components/reserva/reserva.component";
+import { NavComponent } from "./clinicaFolder/components/nav/nav.component";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CalendarModule } from "angular-calendar";
-import { DemoUtilsModule } from "./demo-utils/module";
+import { DemoUtilsModule } from "./clinicaFolder/demo-utils/module";
 import { registerLocaleData } from "@angular/common";
 import { CommonModule } from "@angular/common";
 
@@ -36,12 +36,11 @@ registerLocaleData(localeEs, "es");
 import { NgProgressModule } from "@ngx-progressbar/core";
 import { NgProgressHttpModule } from "@ngx-progressbar/http";
 import { RouterModule } from "@angular/router";
-import { ReservaExitoComponent } from "./components/reserva-exito/reserva-exito.component";
-
+import { ReservaExitoComponent } from "./clinicaFolder/components/reserva-exito/reserva-exito.component";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
-import { MisturnosComponent } from "./components/misturnos/misturnos.component";
+import { MisturnosComponent } from "./clinicaFolder/components/misturnos/misturnos.component";
 import { NgbModalModule } from "@ng-bootstrap/ng-bootstrap/modal/modal.module";
-import { CargaclinicaComponent } from "./components/cargaclinica/cargaclinica.component";
+import { CargaclinicaComponent } from "./clinicaFolder/components/cargaclinica/cargaclinica.component";
 import { AgmCoreModule } from "@agm/core";
 
 @NgModule({

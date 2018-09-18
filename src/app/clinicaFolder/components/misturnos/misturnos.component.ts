@@ -59,8 +59,10 @@ const colors: any = {
   encapsulation: ViewEncapsulation.None
 })
 export class MisturnosComponent implements OnInit {
-  @ViewChild("modalContent")
-  modalContent: TemplateRef<any>;
+  @ViewChild("modalContent") modalContent: TemplateRef<any>;
+  @ViewChild("modalCanel") modalCanel: TemplateRef<any>;
+  @ViewChild("modalConfrim") modalConfrim: TemplateRef<any>;
+
   refresh: Subject<any> = new Subject();
 
   constructor(
@@ -101,8 +103,7 @@ export class MisturnosComponent implements OnInit {
             });
           }
         });
-
-        console.log(this.events);
+        console.log(response);
       },
       error => {
         // Manejar errores
@@ -127,19 +128,19 @@ export class MisturnosComponent implements OnInit {
     {
       label: '<i class="fa fa-fw fa-check"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent("Edited", event);
+        this.handleEventConfirm("Edited", event);
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent("Deleted", event);
+        //this.events = this.events.filter(iEvent => iEvent !== event);
+        this.handleEventCanel("Deleted", event);
       }
     }
   ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = false;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -154,37 +155,7 @@ export class MisturnosComponent implements OnInit {
       }
     }
   }
-  events: CalendarEvent[] = [
-    // {
-    //   start: new Date(this.date.setDate(this.date.getDate() + 1)),
-    //   title: 'Turno con doctor manuel',
-    //   color: colors.yellow,
-    //   actions: this.actions
-    // },
-    // {
-    //   start: new Date(this.date.setDate(this.date.getDate() + 1)),
-    //   title: 'Turno con yamil',
-    //   color: colors.yellow,
-    //   actions: this.actions
-    // },
-    // {
-    //   start: new Date(this.date.setDate(this.date.getDate() + 1)),
-    //   title: 'Turno con pedro ',
-    //   color: colors.blue
-    // },
-    // {
-    //   start: addHours(startOfDay(new Date()), 2),
-    //   end: new Date(),
-    //   title: 'Turnos con alguien',
-    //   color: colors.yellow,
-    //   actions: this.actions,
-    //   resizable: {
-    //     beforeStart: true,
-    //     afterEnd: true
-    //   },
-    //   draggable: true
-    // }
-  ];
+  events: CalendarEvent[] = [];
   eventTimesChanged({
     event,
     newStart,
@@ -200,6 +171,14 @@ export class MisturnosComponent implements OnInit {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: "lg" });
   }
+  handleEventCanel(action: string, event: CalendarEvent): void {
+    this.modalData = { event, action };
+    this.modal.open(this.modalCanel, { size: "lg" });
+  }
+  handleEventConfirm(action: string, event: CalendarEvent): void {
+    this.modalData = { event, action };
+    this.modal.open(this.modalConfrim, { size: "lg" });
+  }
 
   addEvent(): void {
     this.events.push({
@@ -214,5 +193,12 @@ export class MisturnosComponent implements OnInit {
       }
     });
     this.refresh.next();
+  }
+
+  onComfirm(){
+
+  }
+  onCancel(){
+
   }
 }

@@ -4,7 +4,6 @@ import { MapService } from "../../services/map.service";
 import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { BaseComponent } from "../../core/base.component";
-import { and } from "@angular/router/src/utils/collection";
 
 declare const google: any;
 
