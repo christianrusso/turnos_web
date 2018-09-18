@@ -4,12 +4,8 @@ import { MapService } from "../../services/map.service";
 import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { BaseComponent } from "../../core/base.component";
-<<<<<<< HEAD:src/app/clinicaFolder/components/buscador/buscador.component.ts
-=======
-import { and } from "@angular/router/src/utils/collection";
-declare var google: any;
->>>>>>> refs/remotes/origin/master:src/app/components/buscador/buscador.component.ts
 
+declare const google: any;
 
 @Component({
   selector: "app-buscador",
@@ -48,7 +44,6 @@ export class BuscadorComponent extends BaseComponent
 
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript("/assets/js/script3.js");
-
   }
   ngOnDestroy() {}
 
@@ -79,8 +74,7 @@ export class BuscadorComponent extends BaseComponent
         ScoreQuantity: "",
         AvailableAppointmentDate: ""
       };
-    }
-   
+    }    
     this.filtroFecha = {
       categorias: this.busqueda.ubicacion,
       fecha: ""
@@ -293,9 +287,8 @@ export class BuscadorComponent extends BaseComponent
         MedicalInsurances: this.filtro.MedicalInsurances,
         MedicalPlans: []
       };
-    }
- 
-    this.getByFilter(this.filtro);
+    }   
+     this.getByFilter(this.filtro);
   }
   //fin filtro por distancia.
 
@@ -324,7 +317,7 @@ export class BuscadorComponent extends BaseComponent
         AvailableAppointmentDate: ""
       };
     }
-    $("input[type=checkbox]").prop("checked", false);
+        $("input[type=checkbox]").prop("checked", false);
     $(".range-slider").val(0);
     $(".range-slider__range").val(0);
     $(".range-slider__value").text(0);
