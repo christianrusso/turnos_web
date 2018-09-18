@@ -294,30 +294,19 @@ export class BuscadorComponent extends BaseComponent
 
   //Borrar los filtros
   public BorrarFiltros() {
-    if(this.busqueda.ubicacion!=""){
-      this.filtro = {
-        Cities: [this.busqueda.ubicacion],
-        Specialties: [],
-        Subspecialties: [],
-        MedicalInsurances: [],
-        medicalPlans: [],
-        Score: "",
-        ScoreQuantity: "",
-        AvailableAppointmentDate: ""
-      };
-    }else{
-      this.filtro = {
-        Cities: [],
-        Specialties: [],
-        Subspecialties: [],
-        MedicalInsurances: [],
-        medicalPlans: [],
-        Score: "",
-        ScoreQuantity: "",
-        AvailableAppointmentDate: ""
-      };
-    }
-        $("input[type=checkbox]").prop("checked", false);
+ 
+    this.filtro = {
+      Cities: [],
+      Specialties: [],
+      Subspecialties: [],
+      MedicalInsurances: [],
+      medicalPlans: [],
+      Score: "",
+      ScoreQuantity: "",
+      AvailableAppointmentDate: ""
+    };
+    
+    $("input[type=checkbox]").prop("checked", false);
     $(".range-slider").val(0);
     $(".range-slider__range").val(0);
     $(".range-slider__value").text(0);

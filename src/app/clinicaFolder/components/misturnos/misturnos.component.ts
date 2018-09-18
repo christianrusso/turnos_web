@@ -103,7 +103,6 @@ export class MisturnosComponent implements OnInit {
             });
           }
         });
-        console.log(response);
       },
       error => {
         // Manejar errores
