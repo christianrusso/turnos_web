@@ -80,7 +80,7 @@ export class MisturnosComponent implements OnInit {
     0
   );
   public filter = {
-    StartDate: new Date(),
+    StartDate: new Date(this.date.getFullYear(), this.date.getMonth(), 1),
     EndDate: this.endFecha
   };
   ngOnInit() {
@@ -97,7 +97,7 @@ export class MisturnosComponent implements OnInit {
               var date = new Date(appoint.dateTime);
               this.events.push({
                 title: appoint.specialty,
-                start: new Date(date.setDate(date.getDate() + 1)),
+                start: new Date(date.setDate(date.getDate())),
                 actions: this.actions,
                 id:appoint.id
               });
