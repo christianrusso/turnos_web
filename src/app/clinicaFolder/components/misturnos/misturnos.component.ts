@@ -88,6 +88,8 @@ export class MisturnosComponent implements OnInit {
   }
   public misturns = [];
   public getTurns() {
+    this.events=[];
+
     this._MiTurno.GetWeekForClient(this.filter).subscribe(
       response => {
         response.forEach(element => {
@@ -218,7 +220,6 @@ export class MisturnosComponent implements OnInit {
       );
       document.getElementById("confirmCancelButton").click(); // Click on the checkbox
       this.completeData=false;
-      this.events=[];
 
       this.getTurns();
 
@@ -240,12 +241,24 @@ export class MisturnosComponent implements OnInit {
       );
       document.getElementById("cancelCancelButton").click(); // Click on the checkbox
       this.completeData=false;
-      this.events=[];
       this.getTurns();
 
 
     }else{
       this.completeData=true;
     }
+  }
+
+  previus(data) {
+      this.filter.EndDate = new Date(data.getFullYear(),data.getMonth() + 1,0);
+      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
+      this.getTurns();
+    
+  }
+  next(data) {
+      this.filter.EndDate = new Date(data.getFullYear(),data.getMonth() + 1,0);
+      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
+      this.getTurns();
+    
   }
 }
