@@ -65,6 +65,7 @@ export class MisturnosComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
+  public confirmTurn={Id:null,Score:"",Comment:""};
   constructor(
     private modal: NgbModal,
     private location: Location,
@@ -92,12 +93,13 @@ export class MisturnosComponent implements OnInit {
         response.forEach(element => {
           if (element.appointments.length > 0) {
             element.appointments.forEach(appoint => {
+              this.misturns.push(appoint);
               var date = new Date(appoint.dateTime);
-
               this.events.push({
                 title: appoint.specialty,
                 start: new Date(date.setDate(date.getDate() + 1)),
-                actions: this.actions
+                actions: this.actions,
+                id:appoint.id
               });
               this.refresh.next();
             });
@@ -153,6 +155,8 @@ export class MisturnosComponent implements OnInit {
         this.activeDayIsOpen = true;
       }
     }
+    this.completeData=false;
+
   }
   events: CalendarEvent[] = [];
   eventTimesChanged({
@@ -165,16 +169,24 @@ export class MisturnosComponent implements OnInit {
     this.handleEvent("Dropped or resized", event);
     this.refresh.next();
   }
-
+  public turn;
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
+    this.misturns.forEach(element => {
+      if(element.id==event.id){
+        this.turn=element;
+      }
+    });
     this.modal.open(this.modalContent, { size: "lg" });
   }
   handleEventCanel(action: string, event: CalendarEvent): void {
+    this.confirmTurn.Id=event.id;
     this.modalData = { event, action };
     this.modal.open(this.modalCanel, { size: "lg" });
+
   }
   handleEventConfirm(action: string, event: CalendarEvent): void {
+    this.confirmTurn.Id=event.id;
     this.modalData = { event, action };
     this.modal.open(this.modalConfrim, { size: "lg" });
   }
@@ -193,11 +205,47 @@ export class MisturnosComponent implements OnInit {
     });
     this.refresh.next();
   }
+  public completeData=false;
+  onConfirm(){
+    if(this.confirmTurn.Comment!='' && this.confirmTurn.Score){
+      this._MiTurno.confirmTurn(this.confirmTurn).subscribe(
+        response => {
+          this.confirmTurn={Id:null,Score:"",Comment:""};
+        },
+        error => {
+          // Manejar errores
+        }
+      );
+      document.getElementById("confirmCancelButton").click(); // Click on the checkbox
+      this.completeData=false;
+      this.events=[];
 
-  onComfirm(){
+      this.getTurns();
 
+
+    }else{
+      this.completeData=true;
+    }
+  
   }
   onCancel(){
+    if(this.confirmTurn.Comment!=''){
+      this._MiTurno.cancelTurn(this.confirmTurn).subscribe(
+        response => {
+          this.confirmTurn={Id:null,Score:"",Comment:""};
+        },
+        error => {
+          // Manejar errores
+        }
+      );
+      document.getElementById("cancelCancelButton").click(); // Click on the checkbox
+      this.completeData=false;
+      this.events=[];
+      this.getTurns();
 
+
+    }else{
+      this.completeData=true;
+    }
   }
 }

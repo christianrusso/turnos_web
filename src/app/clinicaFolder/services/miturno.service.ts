@@ -21,6 +21,22 @@ export class MiturnoService {
       })
       .map(res => res.json());
   }
+  confirmTurn(data) {
+    this.headers.set("Authorization", "Bearer " + this.getToken().token);
+    return this._http
+      .post(this.url + "api/Appointment/CompleteAppointment", data, {
+        headers: this.headers
+      })
+      .map(res => res.json());
+  }
+  cancelTurn(data) {
+    this.headers.set("Authorization", "Bearer " + this.getToken().token);
+    return this._http
+      .post(this.url + "api/Appointment/CancelAppointment", data, {
+        headers: this.headers
+      })
+      .map(res => res.json());
+  }
   getToken() {
     let token = localStorage.getItem("tokenTurnos");
     if (token != "undefined") {
@@ -31,4 +47,6 @@ export class MiturnoService {
 
     return JSON.parse(this.token);
   }
+
+
 }

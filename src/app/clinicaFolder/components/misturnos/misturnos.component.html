@@ -15,14 +15,22 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body text-center">
           <div>
-            Action:
-            <pre>{{ modalData?.action }}</pre>
+            Clinica:
+            <pre>{{ turn?.clinic }}</pre>
           </div>
           <div>
-            Event:
-            <pre>{{ modalData?.event | json }}</pre>
+            Doctor:
+            <pre>{{ turn?.doctor  }}</pre>
+          </div>
+          <div>
+            Especialidad:
+            <pre>{{ turn?.specialty  }}</pre>
+          </div>
+          <div *ngIf="turn.subspecialty">
+            Sub Especialidad:
+            <pre>{{ turn?.subspecialty  }}</pre>
           </div>
         </div>
         <div class="modal-footer">
@@ -46,16 +54,20 @@
                 <h3 class="text-center ">Cancelar turno </h3>
                 <div class="form-group">
                   <div class="input-group input-group-alternative">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comentario ..."></textarea>
+                    <textarea #Comment="ngModel" name="Comment" [(ngModel)]="confirmTurn.Comment" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Motivo ..."></textarea>
                   </div>
                 </div>
+                <div class="form-group" *ngIf="completeData">
+                    <p class="text-center text-danger">Complete los datos</p>
+                </div>
               </div>
+           
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger" (click)="close()">Cancelar</button>
-          <button type="submit" class="btn btn-outline-success" (click)="close()">Confirmar</button>
+          <button type="button" class="btn btn-outline-danger" id="cancelCancelButton" (click)="close()">Cancelar</button>
+          <button type="submit" class="btn btn-outline-success" >Confirmar</button>
 
         </div>
         </form>
@@ -70,7 +82,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form #formConfirm="ngForm" (ngSubmit)="onConfirm()" class="form" method="" action="" role="form">
+        <form #formConfirmar="ngForm" (ngSubmit)="onConfirm()" class="form" method="" action="" role="form">
 
         <div class="modal-body">
           <div class=" text-justify">
@@ -79,7 +91,7 @@
                 <h3 class="text-center ">Confirmar turno </h3>
                 <div class="form-group">
                     <label   class=" text-center" for="">Puntaje</label>
-                    <select class="form-control" name="medico-turno" lang="es">
+                    <select class="form-control" #Score="ngModel" name="Score" [(ngModel)]="confirmTurn.Score" name="medico-turno" lang="es">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -95,16 +107,19 @@
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-alternative">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comentario ..."></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" #Comment="ngModel" name="Comment" [(ngModel)]="confirmTurn.Comment" rows="3" placeholder="Comentario ..."></textarea>
                   </div>
+                </div>
+                <div class="form-group" *ngIf="completeData">
+                    <p class="text-center text-danger">Complete los datos</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger" (click)="close()">Cancelar</button>
-          <button type="submit" class="btn btn-outline-success" (click)="close()">Confirmar</button>
+          <button type="button" class="btn btn-outline-danger" id="confirmCancelButton" (click)="close()">Cancelar</button>
+          <button type="submit" class="btn btn-outline-success" >Confirmar</button>
         </div>
         </form>
       </ng-template>
