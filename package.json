@@ -28,6 +28,7 @@
     "@types/googlemaps": "^3.30.13",
     "angular-calendar": "^0.24.1",
     "angularx-flatpickr": "^6.0.0",
+    "angularx-social-login": "^1.2.3",
     "core-js": "^2.4.1",
     "google-maps": "^3.3.0",
     "google-maps-api-loader": "^1.1.1",
