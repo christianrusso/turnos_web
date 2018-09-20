@@ -1,6 +1,9 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { BaseComponent } from "./clinicaFolder/core/base.component";
-import { RegisterLoginService } from "./clinicaFolder/services/register-login.service";
+import { BaseComponent } from "./clinic/core/base.component";
+import { RegisterLoginService } from "./clinic/services/register-login.service";
+import { AuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
+ 
 
 declare const $: any;
 
@@ -21,7 +24,7 @@ export class AppComponent extends BaseComponent
   public errorMensageEmail;
   public successMensage;
 
-  constructor(private _RegisterLoginService: RegisterLoginService) {
+  constructor(private _RegisterLoginService: RegisterLoginService,private authService: AuthService) {
     super();
   }
 
@@ -96,5 +99,29 @@ export class AppComponent extends BaseComponent
     );
     localStorage.removeItem("tokenTurnos");
     window.location.href = "/buscador";
+  }
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+      (userData) => {
+        this.register.email=userData.email;
+        this.register.password=userData.authToken;
+        this.register.passwordSecond=userData.authToken;
+
+        console.log(this.login);
+        this._RegisterLoginService.onRegister(this.register).subscribe(
+          response => {
+            console.log(response);
+          },
+          error => {
+            // Manejar errores
+          }
+        );
+        
+        console.log(" sign in data : " , userData);
+        // Now sign-in with userData
+        // ...
+            
+      }
+    );
   }
 }

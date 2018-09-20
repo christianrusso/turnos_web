@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { HomeService } from "../../services/home.service";
-import { busqueda } from "../../../global/busqueda";
-import { BaseComponent } from "../../core/base.component";
-import { RegisterLoginService } from "../../services/register-login.service";
-import { BusquedaService } from "../../services/busqueda.service";
+import { HomeService } from "../../clinic/services/home.service";
+import { busqueda } from "../../global/busqueda";
+import { BaseComponent } from "../../clinic/core/base.component";
+import { RegisterLoginService } from "../../clinic/services/register-login.service";
+import { BusquedaService } from "../../clinic/services/busqueda.service";
 
 declare const $: any;
 

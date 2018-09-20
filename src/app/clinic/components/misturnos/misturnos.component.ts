@@ -95,14 +95,32 @@ export class MisturnosComponent implements OnInit {
         response.forEach(element => {
           if (element.appointments.length > 0) {
             element.appointments.forEach(appoint => {
+              console.log(appoint);
               this.misturns.push(appoint);
               var date = new Date(appoint.dateTime);
-              this.events.push({
-                title: appoint.specialty,
-                start: new Date(date.setDate(date.getDate())),
-                actions: this.actions,
-                id:appoint.id
-              });
+              if(appoint.state==1){
+                this.events.push({
+                  title: appoint.specialty,
+                  start: new Date(date.setDate(date.getDate())),
+                  actions: this.actions,
+                  id:appoint.id
+                });
+              }else if (appoint.state==3){
+                this.events.push({
+                  title: appoint.specialty,
+                  start: new Date(date.setDate(date.getDate())),
+                  actions: this.actionsCancel,
+                  id:appoint.id
+                });
+              }else{
+                this.events.push({
+                  title: appoint.specialty,
+                  start: new Date(date.setDate(date.getDate())),
+                  actions: this.actionsConfirm,
+                  id:appoint.id
+                });
+              }
+              
               this.refresh.next();
             });
           }
@@ -142,7 +160,22 @@ export class MisturnosComponent implements OnInit {
       }
     }
   ];
-
+  actionsCancel: CalendarEventAction[] = [ 
+    {
+      label: '<i class="text-danger">Cancelado</i>',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+ 
+      }
+    }
+  ];
+  actionsConfirm: CalendarEventAction[] = [ 
+    {
+      label: '<i class="text-success">Confirmado</i>',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+ 
+      }
+    }
+  ];
   activeDayIsOpen: boolean = false;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
