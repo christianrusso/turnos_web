@@ -12,11 +12,12 @@ import { ReservaComponent } from './clinic/components/reserva/reserva.component'
 import { ReservaExitoComponent } from './clinic/components/reserva-exito/reserva-exito.component';
 import { MisturnosComponent } from './clinic/components/misturnos/misturnos.component';
 import { CargaclinicaComponent } from './clinic/components/cargaclinica/cargaclinica.component';
+import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
 
 export const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'home/:id', component: HomeComponent },
-  { path: 'buscador', component: BuscadorComponent,   runGuardsAndResolvers: 'always',},
+  { path: 'clinica/buscador', component: BuscadorComponent,   runGuardsAndResolvers: 'always',},
   { path: 'ayuda', component: AyudaComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'ver-mapa', component: VerMapaComponent },
@@ -24,6 +25,7 @@ export const appRoutes: Routes = [
   { path: 'exito', component: ReservaExitoComponent },
   { path: 'misturnos', component: MisturnosComponent },
   { path: 'clinica', component: CargaclinicaComponent },
+  { path: 'peluqueria/buscador', component: BuscadorPeluqueriaComponent},
 
 
 ];

@@ -27,6 +27,7 @@ export class HomeComponent extends BaseComponent
   public errorMensageEmail;
   public successMensage;
   public cities;
+  public redirectTo;
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -48,6 +49,7 @@ export class HomeComponent extends BaseComponent
 
     this._route.params.subscribe(params => {
       let id = +params["id"];
+      this.redirectTo=params["id"];
       $("select2 option[value=" + id + "]").attr("selected", true);
     });
     this.identity = this._RegisterLoginService.getToken();
@@ -79,8 +81,14 @@ export class HomeComponent extends BaseComponent
   }
   onSubmit() {
     localStorage.setItem("busqueda", JSON.stringify(this.buscador));
-    this._router.navigate(["/buscador"]);
-
+    switch (parseInt(this.redirectTo )) {
+      case 1:
+      return this._router.navigate(["clinica/buscador"]);
+      case 2:
+       return this._router.navigate(["peluqueria/buscador"]);
+      default:
+      return this._router.navigate(["clinica/buscador"]);
+    }
     //window.location.href = '/buscador';
   }
 
@@ -144,5 +152,6 @@ export class HomeComponent extends BaseComponent
   }
   categoria(id) {
     this.buscador.categoria = id.value;
+    this.redirectTo=id.value;
   }
 }

@@ -3,7 +3,8 @@ import { BaseComponent } from "./clinic/core/base.component";
 import { RegisterLoginService } from "./clinic/services/register-login.service";
 import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
- 
+import { MiturnoService } from "./clinic/services/miturno.service";
+
 
 declare const $: any;
 
@@ -11,7 +12,7 @@ declare const $: any;
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-  providers: [RegisterLoginService]
+  providers: [RegisterLoginService,MiturnoService]
 })
 export class AppComponent extends BaseComponent
   implements OnInit, AfterViewInit {
@@ -23,8 +24,15 @@ export class AppComponent extends BaseComponent
   public errorMensagePassword;
   public errorMensageEmail;
   public successMensage;
+ 
+  public alertTurn=[];
 
-  constructor(private _RegisterLoginService: RegisterLoginService,private authService: AuthService) {
+  public filter = {
+    StartDate: new Date(),
+    EndDate: new Date()
+  };
+  constructor(private _RegisterLoginService: RegisterLoginService,private authService: AuthService,    private _MiTurno: MiturnoService
+  ) {
     super();
   }
 
@@ -43,12 +51,29 @@ export class AppComponent extends BaseComponent
       email: "",
       password: ""
     };
+    this.getTurns();
   }
+  public getTurns() {
+    this._MiTurno.GetWeekForClient(this.filter).subscribe(
+      response => {
+          response.forEach(element => {
+            if (element.appointments.length > 0) {
+              element.appointments.forEach(appoint => {
+                this.alertTurn.push(appoint);
+              })
+            }
+          })
+          console.log(this.alertTurn);
 
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
   onRegister() {
     if (this.register.email != "") {
       this.errorMensageEmail = "";
-
       if (
         this.register.password == this.register.passwordSecond &&
         this.register.password != "" &&
@@ -82,6 +107,8 @@ export class AppComponent extends BaseComponent
         this.identity = this._RegisterLoginService.getToken();
         this.user = response.logo;
         $(".modal-gral").fadeOut();
+        this.getTurns();
+
       },
       error => {
         // Manejar errores

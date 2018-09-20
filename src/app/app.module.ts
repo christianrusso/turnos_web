@@ -44,7 +44,8 @@ import { CargaclinicaComponent } from "./clinic/components/cargaclinica/cargacli
 import { AgmCoreModule } from "@agm/core";
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
- 
+import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
+
 let config = new AuthServiceConfig([
   // {
   //   id: GoogleLoginProvider.PROVIDER_ID,
@@ -80,7 +81,8 @@ export function provideConfig() {
     NavComponent,
     ReservaExitoComponent,
     MisturnosComponent,
-    CargaclinicaComponent
+    CargaclinicaComponent,
+    BuscadorPeluqueriaComponent
   ],
   imports: [
     CommonModule,
