@@ -171,7 +171,7 @@
         <section class="col-12 col-md-10 offset-md-1  search-section">
             <div class="image-ubication">
                 <p>
-                    <a (click)="volverBuscador()" id="more-filters" class="pointer">Volver a la busqueda</a>
+                    <a [routerLink]="['/clinica/buscador']" id="more-filtersBack" class="pointer">Volver a la busqueda</a>
                 </p>
             </div>
             <div class="row">
@@ -181,7 +181,6 @@
                         <h2>Filtros aplicados actualmente ({{cantidadClinicas}})</h2>
                         <a href="#" id="more-filters">Filtrar más</a>
                     </div>
-
                     <div class="col-xs-12 clinicas-scroll">
                         <div class="col-xs-12 inside-scroll">
                             <div *ngIf="noData == false">

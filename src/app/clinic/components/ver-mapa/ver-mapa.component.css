@@ -60,3 +60,62 @@ button.delete-filters:hover {
   display: block;
   cursor: pointer;
 }
+
+
+.custom-control-container {
+  margin: 5px;
+}
+.custom-control {
+  cursor: pointer;
+  direction: ltr;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  color: rgb(0, 0, 0);
+  font-family: "Roboto", Arial, sans-serif;
+  -webkit-user-select: none;
+  font-size: 11px !important;
+  background-color: rgb(255, 255, 255);
+  padding: 1px 6px;
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.14902);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+  min-width: 28px;
+  font-weight: 500;
+}
+
+.custom-control:hover {
+  font-weight: 900 !important;
+}
+
+#google-map{
+  height: 474px;
+margin-top: 40px;
+border-radius: 6px;
+margin-left: 30px;
+}
+
+a#more-filtersBack {
+  color: #454edb;
+  font-family: Poppins;
+  text-align: center;
+  display: inline-block;
+  padding: 5px 25px;
+  font-size: 11px;
+  border: 1px solid #454edb;
+  margin-left: 10px;
+  border-radius: 4px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transform: translateY(-5px);
+}
+
+a#more-filtersBack:hover {
+  color: #fff;
+  background: #454edb ;
+
+}

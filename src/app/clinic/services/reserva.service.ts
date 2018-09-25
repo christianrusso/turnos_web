@@ -9,7 +9,6 @@ import "rxjs/add/operator/map";
 export class ReservaService {
   public url: string;
   public token: string;
-
   private headers = new Headers({ "Content-Type": "application/json" });
 
   constructor(private _http: Http) {
@@ -118,4 +117,18 @@ export class ReservaService {
       })
       .map(res => res.json());
   }
+
+
+  //GetMedicalPlans
+  GetMedicalPlans(id) {
+    return this._http
+      .post(
+        this.url + "api/MedicalPlan/GetAll",
+        { Id: id },
+        { headers: this.headers }
+      )
+      .map(res => res.json());
+  }
+
+
 }

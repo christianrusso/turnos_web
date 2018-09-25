@@ -3902,6 +3902,10 @@ color: #fac917;
 margin-left: 10px;
 }
 
+
+
+
+
 .clinicas-scroll a .box{
 	transition: all 0.3s ease-in-out;
 } 
@@ -3938,9 +3942,17 @@ margin-left: 10px;
 }
 
 .gm-style img {
-    width: 100%!important; 
     border-radius: 8px!important; 
 }
+
+
+.gm-style img {
+    width: 100%;
+    max-width: none;
+}
+
+
+
 
 .infow  h3 {
     font-size: 17px;

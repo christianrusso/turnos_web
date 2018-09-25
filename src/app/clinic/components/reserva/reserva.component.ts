@@ -100,6 +100,7 @@ export class ReservaComponent extends BaseComponent
   };
   refresh: Subject<any> = new Subject();
   public items: Observable<Array<any>>;
+  public medicalPlans;
 
   constructor(
     private _router: Router,
@@ -452,5 +453,20 @@ export class ReservaComponent extends BaseComponent
       }
     );
     this._router.navigate(["/exito"]);
+  }
+
+  FiltrarObraSocial(obra){
+    this._ReservaComponent.GetMedicalPlans(obra.value).subscribe(
+      response => {
+        this.medicalPlans = response;
+        this.refresh.next();
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+  }
+  SelectMedicalPlans(medicalPlans){
+      this.paciente.MedicalPlanId=medicalPlans.value;
   }
 }

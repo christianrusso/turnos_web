@@ -17,19 +17,29 @@ export class VerMapService {
     var map = new google.maps.Map(document.getElementById("google-map"), {
       zoom: 16,
       center: new google.maps.LatLng(-34.5432596, 5.76293),
-      mapTypeControl: false,
-      streetViewControl: false,
       panControl: false,
       scrollwheel: false,
       navigationControl: false,
-      scaleControl: false,
+   
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: google.maps.ControlPosition.TOP_CENTER
+      },
+      zoomControl: true,
       zoomControlOptions: {
-        position: google.maps.ControlPosition.LEFT_BOTTOM
-      }
+          position: google.maps.ControlPosition.LEFT_CENTER
+      },
+      scaleControl: true,
+      streetViewControl: true,
+      streetViewControlOptions: {
+          position: google.maps.ControlPosition.LEFT_TOP
+      },
+      fullscreenControl: true
     });
 
     var infowindow = new google.maps.InfoWindow({
-      maxWidth: 300
+      maxWidth: 200
     });
 
     var marker;
@@ -87,5 +97,6 @@ export class VerMapService {
     if (markerClick != null) {
       google.maps.event.trigger(markers[markerClick], "click");
     }
+   
   }
 }

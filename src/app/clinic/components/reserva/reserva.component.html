@@ -239,15 +239,22 @@
                         <div class=" row">
                             <div class="col-md-12">
                                 <h6 class="text-center" for="">Obra Social</h6>
-                                <select pleceholder="obras" class="form-control" #MedicalPlanId="ngModel" name="MedicalPlanId"
-                                    [(ngModel)]="paciente.MedicalPlanId" type="text" name="appointment" lang="es">
+                                <select2 (valueChanged)="FiltrarObraSocial($event)" pleceholder="obras" class="form-control"  name="MedicalPlanId" type="text" name="appointment" lang="es">
                                     <option value=""></option>
                                     <option class="col-md-6" *ngFor="let obras of obrasSociales" value="{{obras.id}}">{{obras.description}}</option>
-                                </select>
-
+                                </select2>
                             </div>
                         </div>
-
+                        <div class=" row">
+                            <div class="col-md-12">
+                                <h6 class="text-center" for="">Plan</h6>
+                                <select2  (valueChanged)="SelectMedicalPlans($event)" pleceholder="obras" class="form-control" #MedicalPlanId="ngModel" name="MedicalPlanId"
+                                    [(ngModel)]="paciente.MedicalPlanId" type="text" name="appointment" lang="es">
+                                    <option value=""></option>
+                                    <option class="col-md-6" *ngFor="let medical of medicalPlans" value="{{medical.id}}">{{medical.description}}</option>
+                                </select2>
+                            </div>
+                        </div>
                         <br>
                         <div class="row">
 
