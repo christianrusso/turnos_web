@@ -24,7 +24,6 @@ import { ReservaComponent } from "./clinic/components/reserva/reserva.component"
 import { NavComponent } from "./clinic/components/nav/nav.component";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { CalendarModule } from "angular-calendar";
 import { DemoUtilsModule } from "./clinic/demo-utils/module";
 import { registerLocaleData } from "@angular/common";
 import { CommonModule } from "@angular/common";
@@ -45,6 +44,7 @@ import { AgmCoreModule } from "@agm/core";
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
+import { CalendarModule } from 'angular-calendar';
 
 let config = new AuthServiceConfig([
   // {
@@ -101,7 +101,8 @@ export function provideConfig() {
     NgProgressHttpModule,
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
-    SocialLoginModule
+    SocialLoginModule,
+ 
     // AgmCoreModule.forRoot({
     //   apiKey: "AIzaSyCeS0Tku62WXG03D8NKXgMxA6RNuBKbrSI",
     //   libraries: ["places"]

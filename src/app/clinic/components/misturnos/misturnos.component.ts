@@ -232,7 +232,7 @@ export class MisturnosComponent implements OnInit {
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
       color: colors.red,
-      draggable: true,
+      draggable: false,
       resizable: {
         beforeStart: true,
         afterEnd: true
