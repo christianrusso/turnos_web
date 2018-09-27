@@ -45,6 +45,7 @@ export class BuscadorComponent extends BaseComponent
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript("/assets/js/script3.js");
   }
+  
   ngOnDestroy() {}
 
   ngOnInit() {
@@ -266,7 +267,7 @@ export class BuscadorComponent extends BaseComponent
         Location: {
           Latitude: position.coords.latitude,
           Longitude: position.coords.longitude,
-          RadiusInMeters: this.distancia * 100
+          RadiusInMeters: this.distancia * 1000
         },
         Cities: [this.busqueda.ubicacion],
         Specialties: this.filtro.Specialties,
@@ -279,7 +280,7 @@ export class BuscadorComponent extends BaseComponent
         Location: {
           Latitude: position.coords.latitude,
           Longitude: position.coords.longitude,
-          RadiusInMeters: this.distancia * 100
+          RadiusInMeters: this.distancia * 1000
         },
         Cities: [],
         Specialties: this.filtro.Specialties,
