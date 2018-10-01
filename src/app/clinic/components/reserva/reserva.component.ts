@@ -266,7 +266,7 @@ export class ReservaComponent extends BaseComponent
 
   //filtro cunado cambia la especialiad
   public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
-    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
+    this._ReservaComponent.getSubSpecialityOnEspeciality(especialidad).subscribe(
       response => {
         this.subEspecialidades = null;
         this.subEspecialidades = response;
