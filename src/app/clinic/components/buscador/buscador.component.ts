@@ -5,7 +5,6 @@ import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { BaseComponent } from "../../core/base.component";
 
-declare const google: any;
 
 @Component({
   selector: "app-buscador",
@@ -28,16 +27,17 @@ export class BuscadorComponent extends BaseComponent
   public cities;
   public identity;
   public filtroFecha;
-  public limitForEspecialidad = 5;
-  public limitForSubEspecialidad = 5;
-  public limitForObraSocial = 5;
-  public limitForUbicacion = 5;
+  public limitForEspecialidad = 115;
+  public limitForSubEspecialidad = 115;
+  public limitForObraSocial = 115;
+  public limitForUbicacion = 115;
 
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
     private _RegisterLoginService: RegisterLoginService,
-    private _router: Router
+    private _router: Router,
+
   ) {
     super();
   }
@@ -249,16 +249,18 @@ export class BuscadorComponent extends BaseComponent
   }
 
   //filtro pro distancia
-  FiltrarDistancia(deviceValue) {
-    this.distancia = parseInt(deviceValue.target.value);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.showPosition(position);
-      });
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
+  public geolocation;
+FiltrarDistancia(deviceValue) {
+  this.distancia = parseInt(deviceValue.target.value);
+  if (navigator.geolocation) {
+ 
+    navigator.geolocation.watchPosition(position => {
+      this.showPosition(position);
+    });
+  } else {
+    alert("Geolocation is not supported by this browser.");
   }
+}
 
   showPosition(position) {
     if(this.busqueda.ubicacion!=""){

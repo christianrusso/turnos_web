@@ -4,6 +4,7 @@ import { global } from "../../global/global";
 import { token } from "../../global/token";
 import { map } from "rxjs/operators";
 // import 'rxjs/add/operator/map';
+import { Observable } from "rxjs";
 
 @Injectable()
 export class BusquedaService {

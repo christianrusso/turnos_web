@@ -19,7 +19,7 @@ export class BusquedaService {
 
   getByFilter(filtro) {
     return this._http
-      .post(this.url + "Api/Clinic/GetByFilter", filtro, {
+      .post(this.url + "Api/Hairdressing/Hairdressing/GetByFilter", filtro, {
         headers: this.headers
       })
       .map(res => res.json());

@@ -53,7 +53,6 @@ export class CargaclinicaComponent implements OnInit {
         this.ngZone.run(() => {
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
           if (place.address_components === undefined) {
-            console.log(place);
           } else {
             if (place.address_components.length >= 4) {
               this.clinica.Latitude = place.geometry.location.lat();
@@ -83,7 +82,7 @@ export class CargaclinicaComponent implements OnInit {
     this._ClinicaService.getCities().subscribe(
       response => {
         this.cities = response;
-        console.log(response);
+
       },
       error => {
         // Manejar errores
@@ -94,10 +93,11 @@ export class CargaclinicaComponent implements OnInit {
   onPost() {
     const formModel = this.form.value;
     this.clinica.Logo = formModel.avatar.value;
-    console.log(this.clinica);
     this._ClinicaService.PostRegisterClinic(this.clinica).subscribe(
       response => {
         console.log(response);
+        this.clinica = new Clinica();
+
       },
       error => {
         // Manejar errores

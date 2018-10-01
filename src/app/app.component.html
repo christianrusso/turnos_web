@@ -1,74 +1,76 @@
-<header>
+<header >
 
     <!-- Menú -->
-
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" [routerLink]="['']">
-            <img src="/assets/img/logo-white.png" alt="Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle bell notification" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <!-- <span class="badge badge-default" *ngIf="alertTurn.length > 0">{{alertTurn.length}}</span> -->
-
-
-                        <span>
-                            <i class="fa fa-bell-o">
-                            </i>
-                        </span>
-                        <span class="badge" *ngIf="alertTurn.length > 0">{{alertTurn.length}}</span>
-
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <p class="dropdown-item text-white" *ngFor="let row of alertTurn; let i = index">Turno en: {{row.clinic}}</p>
-                    </div>
-                </li>
-                <div class="line-menu-header"></div>
-
-                <li class="nav-item">
-                    <a [routerLink]="['/nosotros']" class="special-link nav-link help">Sé parte de nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link help" [routerLink]="['/ayuda']">Ayuda</a>
-                </li>
-                <li class="nav-item" *ngIf="identity == null">
-                    <a href="" class="nav-link help" id="registrarte-link">Registrate</a>
-                </li>
-                <li class="nav-item" *ngIf="identity == null">
-                    <a class="nav-link help" href="" id="login-link">Iniciar sesión</a>
-                </li>
-                <li class="nav-item dropdown" *ngIf="identity && identity != null">
-                    <a class="nav-link dropdown-toggle user" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img *ngIf="identity.logo != '' " src="{{identity.logo}}" alt="Usuario">
-                        <img *ngIf="identity.logo == '' " src="assets/img/user.png" alt="Usuario">
-
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                        <a class="dropdown-item" [routerLink]="['/misturnos']">Mis turnos</a>
-
-                        <a class="dropdown-item" href="#">Editar datos</a>
-                        <a class="dropdown-item" href="#">Configurar cuenta</a>
-                        <a class="dropdown-item" href="#">Ayuda</a>
-                    </div>
-                </li>
-                <li class="nav-item" *ngIf="identity && identity != null">
-                    <a class="nav-link logout click" (click)="logout()">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="container ">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <a class="navbar-brand" [routerLink]="['']">
+                <img  src="/assets/img/logo-white.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle bell notification" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <!-- <span class="badge badge-default" *ngIf="alertTurn.length > 0">{{alertTurn.length}}</span> -->
+    
+    
+                            <span>
+                                <i class="fa fa-bell-o">
+                                </i>
+                            </span>
+                            <span class="badge" *ngIf="alertTurn.length > 0">{{alertTurn.length}}</span>
+    
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <p class="dropdown-item text-white" *ngFor="let row of alertTurn; let i = index">Turno en: {{row.clinic}}</p>
+                        </div>
+                    </li>
+                    <div class="line-menu-header"></div>
+    
+                    <li class="nav-item">
+                        <a [routerLink]="['/nosotros']" class=" nav-link help">Sé parte de nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link help" [routerLink]="['/ayuda']">Ayuda</a>
+                    </li>
+                    <li class="nav-item" *ngIf="identity == null">
+                        <a href="" class="nav-link help" id="registrarte-link">Registrate</a>
+                    </li>
+                    <li class="nav-item" *ngIf="identity == null">
+                        <a class="nav-link help special-link" href="" id="login-link">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item dropdown" *ngIf="identity && identity != null">
+                        <a class="nav-link dropdown-toggle user" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <img class="imgLogo" *ngIf="identity.logo != null " src="{{identity.logo}}" alt="Usuario">
+                            <img class="imgLogo" *ngIf="identity.logo == null " src="assets/img/user.png" alt="Usuario">
+    
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    
+                            <a class="dropdown-item" [routerLink]="['/misturnos']">Mis turnos</a>
+    
+                            <a class="dropdown-item" href="#">Editar datos</a>
+                            <a class="dropdown-item" href="#">Configurar cuenta</a>
+                            <a class="dropdown-item" href="#">Ayuda</a>
+                        </div>
+                    </li>
+                    <li class="nav-item" *ngIf="identity && identity != null">
+                        <a class="nav-link logout click" (click)="logout()">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    
+    </div>
 
     <!-- // menú -->
 </header>

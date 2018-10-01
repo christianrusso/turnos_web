@@ -24,7 +24,7 @@ export const appRoutes: Routes = [
   { path: 'reserva/:id', component: ReservaComponent,   runGuardsAndResolvers: 'always'},
   { path: 'exito', component: ReservaExitoComponent },
   { path: 'misturnos', component: MisturnosComponent },
-  { path: 'clinica', component: CargaclinicaComponent },
+  { path: 'carga', component: CargaclinicaComponent },
   { path: 'peluqueria/buscador', component: BuscadorPeluqueriaComponent},
 
 

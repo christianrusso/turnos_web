@@ -169,8 +169,8 @@
                 <li class="nav-item dropdown" *ngIf="identity && identity != null">
                     <a class="nav-link dropdown-toggle user" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <img *ngIf="identity.logo != '' " src="{{identity.logo}}" alt="Usuario">
-                        <img *ngIf="identity.logo == '' " src="assets/img/user.png" alt="Usuario">
+                        <img class="imgLogo" *ngIf="identity.logo != null " src="{{identity.logo}}" alt="Usuario">
+                        <img class="imgLogo" *ngIf="identity.logo == null " src="assets/img/user.png" alt="Usuario">
 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">

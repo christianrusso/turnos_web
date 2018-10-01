@@ -8,4 +8,5 @@ export class Clinica {
     public City:number;
     public Latitude: number;
     public Longitude: number;
+    public BusinessType:string;
 }

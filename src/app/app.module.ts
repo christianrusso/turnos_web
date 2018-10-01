@@ -103,10 +103,10 @@ export function provideConfig() {
     CalendarModule.forRoot(),
     SocialLoginModule,
  
-    // AgmCoreModule.forRoot({
-    //   apiKey: "AIzaSyCeS0Tku62WXG03D8NKXgMxA6RNuBKbrSI",
-    //   libraries: ["places"]
-    // })
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyCeS0Tku62WXG03D8NKXgMxA6RNuBKbrSI",
+      libraries: ["places"]
+    })
   ],
   exports: [RouterModule],
   providers: [

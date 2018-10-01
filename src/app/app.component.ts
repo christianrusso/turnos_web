@@ -63,7 +63,6 @@ export class AppComponent extends BaseComponent
               })
             }
           })
-          console.log(this.alertTurn);
 
       },
       error => {
@@ -81,7 +80,6 @@ export class AppComponent extends BaseComponent
       ) {
         this._RegisterLoginService.onRegister(this.register).subscribe(
           response => {
-            console.log(response);
           },
           error => {
             // Manejar errores
@@ -118,7 +116,6 @@ export class AppComponent extends BaseComponent
   logout() {
     this._RegisterLoginService.onLogout().subscribe(
       response => {
-        console.log(response);
       },
       error => {
         // Manejar errores
@@ -134,10 +131,8 @@ export class AppComponent extends BaseComponent
         this.register.password=userData.authToken;
         this.register.passwordSecond=userData.authToken;
 
-        console.log(this.login);
         this._RegisterLoginService.onRegister(this.register).subscribe(
           response => {
-            console.log(response);
           },
           error => {
             // Manejar errores
