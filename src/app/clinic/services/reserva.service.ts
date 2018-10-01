@@ -71,6 +71,16 @@ export class ReservaService {
       .map(res => res.json());
   }
 
+  getSubSpecialityOnEspeciality(id) {
+    return this._http
+      .post(
+        this.url + "api/SubSpecialty/GetAllOfSpecialtyNoUserID",
+        { id: id },
+        { headers: this.headers }
+      )
+      .map(res => res.json());
+  }
+
   //CheckPaciente
   checkPaciente(id) {
     return this._http
