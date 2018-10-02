@@ -1,3 +1,3 @@
 export let global = {
-  url: 'http://localhost:5000/'
+  url: 'http://www.orbitsa.xyz:5000/'
 };

@@ -50,12 +50,13 @@
                             aria-expanded="false">
                             <img class="imgLogo" *ngIf="identity.logo != null " src="{{identity.logo}}" alt="Usuario">
                             <img class="imgLogo" *ngIf="identity.logo == null " src="assets/img/user.png" alt="Usuario">
-    
+
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     
                             <a class="dropdown-item" [routerLink]="['/misturnos']">Mis turnos</a>
-    
+                            <a class="dropdown-item" [routerLink]="['/favoritos']">Mis favoritos</a>
+
                             <a class="dropdown-item" href="#">Editar datos</a>
                             <a class="dropdown-item" href="#">Configurar cuenta</a>
                             <a class="dropdown-item" href="#">Ayuda</a>

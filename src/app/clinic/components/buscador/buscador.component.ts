@@ -50,9 +50,9 @@ export class BuscadorComponent extends BaseComponent
 
   ngOnInit() {
     $("header").show();
-
     this.busqueda = JSON.parse(localStorage.getItem("busqueda"));
     this.identity = this._RegisterLoginService.getToken();
+    console.log(this.identity);
     if(this.busqueda.ubicacion!=""){
       this.filtro = {
         Cities: [this.busqueda.ubicacion],
@@ -460,5 +460,25 @@ FiltrarDistancia(deviceValue) {
     } else {
       this.limitForUbicacion = 5;
     }
+  }
+   public favorite=[]
+  favorito(index,id){
+    this._BusquedaService.favorito(id).subscribe(
+      response => {
+       console.log(response);
+      },
+      error => {
+        // Manejar errores
+      }
+    );
+    if(this.favorite.includes(index)){
+      this.favorite.splice(index, 1);
+      $("#icon"+id).removeClass("fa fa-heart corazon").addClass("fa fa-heart-o corazon");
+    }else{
+      this.favorite.push(index);
+      $("#icon"+id).removeClass("fa fa-heart-o corazon").addClass("fa fa-heart corazon");
+      
+    }
+
   }
 }

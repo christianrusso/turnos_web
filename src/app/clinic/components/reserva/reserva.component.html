@@ -239,7 +239,7 @@
                         <div class=" row">
                             <div class="col-md-12">
                                 <h6 class="text-center" for="">Obra Social</h6>
-                                <select2 (valueChanged)="FiltrarObraSocial($event)" pleceholder="obras" class="form-control"  name="MedicalPlanId" type="text" name="appointment" lang="es">
+                                <select2 (valueChanged)="FiltrarObraSocial($event)" pleceholder="obras" class="form-control"  name="MedicalPlanId" type="text" name="obrasSociales" lang="es">
                                     <option value=""></option>
                                     <option class="col-md-6" *ngFor="let obras of obrasSociales" value="{{obras.id}}">{{obras.description}}</option>
                                 </select2>
@@ -300,7 +300,7 @@
 
                             <div class="form-group">
                                 <label class=" text-center" for="">Horario</label>
-                                <select2 [data]="horarios" (valueChanged)="FiltrarHoraSelect($event)" name="appointment"
+                                <select2 [data]="horarios" (valueChanged)="FiltrarHoraSelect($event)" name="appointmentHorario"
                                     lang="es">
 
                                 </select2>

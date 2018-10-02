@@ -45,6 +45,7 @@ import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
 import { CalendarModule } from 'angular-calendar';
+import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
 
 let config = new AuthServiceConfig([
   // {
@@ -82,7 +83,8 @@ export function provideConfig() {
     ReservaExitoComponent,
     MisturnosComponent,
     CargaclinicaComponent,
-    BuscadorPeluqueriaComponent
+    BuscadorPeluqueriaComponent,
+    FavoritosComponent
   ],
   imports: [
     CommonModule,
