@@ -1,3 +1,3 @@
 export let global = {
-  url: 'http://www.orbitsa.xyz:5000/'
+  url: 'http://45.55.35.40:5000/'
 };
