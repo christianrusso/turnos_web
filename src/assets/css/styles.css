@@ -57,12 +57,12 @@ header {
 }
 .turnos-bg{
   height: 100vh;
-  background: #454edb;
+  background: #F9F9F9;
 }
 
 .inicio-bg {
   height: 100vh;
-  background: #fff;
+  background: #454EDB;
 }
 
 .inicio-bg h1{
@@ -93,8 +93,8 @@ header {
 
 .inicio-bg p{
     font-family: Poppins;
-    margin-left: 45px;
-    margin-top: 20px;
+    margin-left: 150px;
+    margin-top: -15px;
     color: #454edb;
     font-size: 24px;
     font-weight: 300;
@@ -109,7 +109,7 @@ header {
 
 background: #fff;
 
-height: 140px;
+height: 137px;
 
 margin-bottom: 25px;
 
@@ -123,7 +123,7 @@ padding-top: 20px;
 
 border-radius: 4px;
 
-border: 1px solid #454edb;
+border: 3px solid transparent;
 
 box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.25);
 
@@ -135,7 +135,6 @@ overflow: hidden;
 
 
 .boxes-inicio div:hover{
-transition: all 0.3s ease-in-out;
 border: 3px solid #1fefeb;
 cursor: pointer;
 }
@@ -939,20 +938,20 @@ textarea:focus{
 }
 .turnos-bg{
   height: 100vh;
-  background: #454edb;
+  background: #F9F9F9;
   float: left;
 }
 
 .inicio-bg {
   height: 100vh;
-  background: #fff;
+  background: #454EDB;
   display: inline-block;
   vertical-align: top;
   float: left;
 }
 
 .inicio-bg h1{
-  margin-left: 50px;
+  margin-left: 150px;
   margin-top: 0;
 }
 .inicio-bg h1 img{
@@ -979,8 +978,8 @@ textarea:focus{
 
 .inicio-bg p{
     font-family: Poppins;
-    margin-left: 45px;
-    margin-top: 20px;
+    margin-left: 150px;
+    margin-top: -15px;
     color: #454edb;
     font-size: 20px;
     font-weight: 300;
@@ -996,45 +995,42 @@ textarea:focus{
 
 .boxes-inicio div{
 
-background: #fff;
+    background: #fff;
 
-height: 160px;
+    height: 140px;
 
-width: 160px!important;
+    width: 160px!important;
 
-margin-bottom: 25px;
+    margin-bottom: 25px;
 
-margin-right: 35px;
+    margin-right: 35px;
 
-width: 21%;
+    width: 21%;
 
-text-align: center;
+    text-align: center;
 
-padding-top: 20px;
+    padding-top: 20px;
 
-border-radius: 4px;
+    border-radius: 4px;
 
-border: 1px solid #454edb;
+    border: 3px solid transparent;
 
-box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.25);
 
-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
-overflow: hidden;
+    overflow: hidden;
 
-/* float: left; */
+    /* float: left; */
 
-display: inline-block;
+    display: inline-block;
 
-position: relative;
-
-padding-top: 25px;
+    position: relative;
 }
 
 
 
 .boxes-inicio div:hover{
-transition: all 0.3s ease-in-out;
 border: 3px solid #1fefeb;
 cursor: pointer;
 }
@@ -1395,6 +1391,17 @@ transition: all 0.3s ease-in-out;
 .download img{
   width: 120px;
   margin-right: 20px;
+}
+
+.downloadIndex {
+    position: absolute;
+    bottom: 15.2%;
+    margin-left: 163px;
+}
+
+.downloadIndex img{
+    width: 120px;
+    margin-right: 20px;
 }
 
 .pantalla-2 ul{
@@ -3072,9 +3079,13 @@ form#resultados-form input[type="submit"]{
 }
 .outter{
   position: absolute;
-  top: 50%;
+  top: 76.7%;
   transform: translate(0%,-60%);
   z-index: 1;
+  height: 100%;
+}
+.logoBottomDistance {
+    margin-bottom: 132px;
 }
 section.search-section {
     margin-top: 120px;
@@ -4690,5 +4701,26 @@ a.aplicar-filters:hover {
 .bg-turnos{
 
 background: #d1fbfa;
+}
+
+.colorWhite {
+    color: white !important;
+}
+
+@font-face {
+    font-family: 'SfUiDisplayLight';
+    src: url('../fonts/SF UI Display Light.otf');
+}
+@font-face {
+    font-family: 'SfUiDisplayRegular';
+    src: url('../fonts/SF UI Display Regular.otf');
+}
+@font-face {
+    font-family: 'SfUiDisplayThin';
+    src: url('../fonts/SF UI Display Thin.otf');
+}
+@font-face {
+    font-family: 'SfUiDisplayBold';
+    src: url('../fonts/SF UI Display Bold.otf');
 }
 
