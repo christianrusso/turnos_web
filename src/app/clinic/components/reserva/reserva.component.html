@@ -124,8 +124,7 @@
                                 <span class="cal-day-number n-dia">{{ day.date |
                                     calendarDate:'monthViewDayNumber':locale }}</span>
                             </div>
-                            <div class="t-disp" style="margin: 5px" *ngIf="day.badgeTotal > 0" data-toggle="modal"
-                                data-target="#horario">{{ day.events.length }} turnos
+                            <div class="t-disp" style="margin: 1px" *ngIf="day.badgeTotal > 0" >{{ day.events.length }} turnos
                                 <br> disponibles</div>
 
                         </ng-template>
@@ -140,7 +139,8 @@
                                 <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
                                     [activeDayIsOpen]="activeDayIsOpen" [cellTemplate]="customCellTemplate"
                                     (dayClicked)="dayClicked($event.day)" [refresh]="refresh" [cellTemplate]="monthCellTemplate"
-                                    [locale]="locale" [ngClass]="day?.cssClass">
+                                    [locale]="locale" [ngClass]="day?.cssClass" data-toggle="modal"
+                                    data-target="#horario">
                                 </mwl-calendar-month-view>
                                 <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events">
                                 </mwl-calendar-week-view>

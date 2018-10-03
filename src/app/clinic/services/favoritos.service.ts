@@ -18,10 +18,10 @@ export class FavoritosService {
 
   //favoritos
   getAll() {
+    this.headers.set("Authorization", "Bearer " + this.getToken().token);
     return this._http
-      .post(
+      .get(
         this.url + "Api/Client/GetFavoriteClinics",
-        {},
         { headers: this.headers }
       )
       .map(res => res.json());

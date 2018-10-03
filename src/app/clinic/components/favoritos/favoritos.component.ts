@@ -12,16 +12,16 @@ export class FavoritosComponent implements OnInit {
 
   constructor(    private _FavoritosService: FavoritosService,
   ) { }
-
+    public favoritos;
   ngOnInit() {
     this.getFavorite();
   }
- //Specialidades
+ //favoritos
  public getFavorite() {
   this._FavoritosService.getAll().subscribe(
     response => {
-      console.log(response);
-      console.log("hola");
+      this.favoritos=response;
+   
     },
     error => {
       // Manejar errores

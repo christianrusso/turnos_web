@@ -16,16 +16,16 @@
       <section class="col-12 col-sm-7 turnos-bg">
 
         <div class="col-xs-12 boxes-inicio">
-          <a [routerLink]="['/home', 1]">
+          <a (click)="redirectToPage(1)" >
             <div class="col-xs-3">
               <img src="/assets/img/medicos.png" alt="Médicos">
               <p>Médicos</p>
             </div>
           </a>
 
-          <a [routerLink]="['/home', 2]">
+          <a (click)="redirectToPage(2)">
             <div class="col-xs-3">
-              <img src="/assets/img/estetica.png" alt="Estéticas">
+              <img src="/assets/img/peluquerias.png" alt="Estéticas">
               <p>Estéticas</p>
             </div>
           </a>
@@ -36,9 +36,10 @@
           </div>
 
           <div class="col-xs-3 proximamente">
-            <img src="/assets/img/peluquerias-p.png" alt="Peluquerías">
+            <img src="/assets/img/estetica.png" alt="Peluquerías">
             <p>Peluquerías</p>
           </div>
+
           <a [routerLink]="['/home', 4]">
             <div class="col-xs-3">
               <img src="/assets/img/resto.png" alt="Restaurantes">

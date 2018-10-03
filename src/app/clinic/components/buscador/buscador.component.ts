@@ -37,7 +37,6 @@ export class BuscadorComponent extends BaseComponent
     private _MapService: MapService,
     private _RegisterLoginService: RegisterLoginService,
     private _router: Router,
-
   ) {
     super();
   }
@@ -52,7 +51,6 @@ export class BuscadorComponent extends BaseComponent
     $("header").show();
     this.busqueda = JSON.parse(localStorage.getItem("busqueda"));
     this.identity = this._RegisterLoginService.getToken();
-    console.log(this.identity);
     if(this.busqueda.ubicacion!=""){
       this.filtro = {
         Cities: [this.busqueda.ubicacion],

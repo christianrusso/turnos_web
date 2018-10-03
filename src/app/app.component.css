@@ -54,3 +54,12 @@
 
 }
 
+@media (min-width: 768px){
+  .navbar-nav>li {
+    float: initial!important;
+    display: inline-block!important;
+    margin-right: 9PX;
+    margin-bottom: -28px;
+}
+
+}

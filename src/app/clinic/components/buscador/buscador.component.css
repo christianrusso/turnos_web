@@ -73,9 +73,9 @@ button.delete-filters:hover {
     padding-right: 30px;
 
 }
-.form-group.mb-2.distancia {
+/* .form-group.mb-2.distancia {
   padding-right: 38px;
-}
+} */
 .butttonBuscar{
 
   border: 1px solid #454edb !important;
@@ -124,7 +124,7 @@ div.ex3 {
     display: none;
 }
 
-.buscadorSelect {
+/* .buscadorSelect {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: inline-block;
@@ -133,4 +133,11 @@ div.ex3 {
   vertical-align: middle;
   width: 0px !important;
   height: 30px !important;
+} */
+.form-group.mx-sm-1.mb-2.distancia.button {
+  margin-top: 11px;
+}
+
+.comments{
+  color: #454edb;
 }

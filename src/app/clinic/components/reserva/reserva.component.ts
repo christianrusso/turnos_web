@@ -193,7 +193,6 @@ export class ReservaComponent extends BaseComponent
     }
     this.filterForDay.Day = day.date;
     this.refresh.next();
-    console.log(this.filter.DoctorId);
     if (this.filter.DoctorId != null) {
       // this.filter.DoctorId = null;
       this.GetAllAvailablesForDay();
