@@ -105,7 +105,7 @@ export class MisturnosComponent implements OnInit {
                   actions: this.actions,
                   id:appoint.id
                 });
-              }else if (appoint.state==3){
+              }else if (appoint.state==2){
                 this.events.push({
                   title: appoint.specialty,
                   start: new Date(date.setDate(date.getDate())),

@@ -1830,6 +1830,9 @@ div.filter-search .white{
   padding-bottom: 10px;
   padding-right: 10px;
   margin-top: 25px;
+  border: 1px solid #454edb;
+  border-radius: 10px;
+
 }
 
 div.filter-search h2{
@@ -1858,11 +1861,9 @@ margin-bottom: 30px;
 }
 
 div.filter-search .image-ubication{
-  background: #fff;
     padding: 8px;
     border-radius: 10px;
     margin-bottom: 20px;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.39);
 }
 
 
@@ -1872,12 +1873,11 @@ text-align: center;
     color: #454edb;
     border: 1px solid #454edb;
     border-radius: 6px;
-    margin-top: 10px;
+    margin-top: 25px;
     font-size: 12px;
-    height: 30px;
-    line-height: 30px;
-    transition: all 0.3s ease-in-out
-    padding-left:0;
+    transition: all 0.3s ease-in-out;
+    height: 42px;
+    line-height: 42px;
 }
 
 div.filter-search .image-ubication p:hover{
@@ -2429,16 +2429,16 @@ padding-left: 20px;
 }
 
 .cluster-clinica .ask-clin h4{
-    font-size: 20px;
+    font-size: 26px;
     color: #fff;
     letter-spacing: 2px;
     font-weight: 600;
     text-align: center;
     background: #454edb;
-    height: 40px;
+    height: 45px;
     font-family: Poppins;
-    line-height: 40px;
-    padding: 0px 8px;
+    line-height: 45px;
+    padding: 0px 9px;
     text-align: center;
     border-radius: 7px;
     display: inline-block;
@@ -2463,7 +2463,7 @@ padding-left: 20px;
 background: #50ae20;
 
 color: #fff;
-
+border-radius: 50px;
 padding: 10px 3px;
     transition: all 0.3s ease-in-out
 }
@@ -2606,6 +2606,13 @@ border-radius: 0;
 }
 
 a i.fa.fa-heart-o.corazon {
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    font-size: 20px;
+    color: #ff6161;
+}
+a i.fa.fa-heart.corazon {
     position: absolute;
     right: 10px;
     top: -10px;
@@ -3145,7 +3152,7 @@ margin-right: 10px;
 }
 
 .map {
-    height: 200px;
+    height: 300px;
     width: 93%;
     margin: auto;
 }

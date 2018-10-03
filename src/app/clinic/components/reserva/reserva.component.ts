@@ -171,6 +171,7 @@ export class ReservaComponent extends BaseComponent
   selectedDays: any = [];
 
   dayClicked(day: CalendarMonthViewDay): void {
+    this.horarios=[];
     if (day.events.length > 0) {
       this.selectedDays.forEach(element => {
         element.cssClass = "";
@@ -192,13 +193,10 @@ export class ReservaComponent extends BaseComponent
     }
     this.filterForDay.Day = day.date;
     this.refresh.next();
-
-    if (this.filter.DoctorId != null && this.doctorBlock == true) {
-      this.filter.DoctorId = null;
+    if (this.filter.DoctorId != null) {
+      // this.filter.DoctorId = null;
       this.GetAllAvailablesForDay();
-    } else {
-      this.GetAllAvailablesForDay();
-    }
+    } 
     // $("#horario").modal("show");
   }
 
@@ -211,8 +209,8 @@ export class ReservaComponent extends BaseComponent
           this.dontAvailable = false;
         }
         this.horarios = [];
-        response.forEach(appointment => {
-          this.horarios.push(this.getHour(appointment));
+        response.forEach(appointmentElement => {
+          this.horarios.push(this.getHour(appointmentElement));
         });
         this.refresh.next();
       },
@@ -295,8 +293,10 @@ export class ReservaComponent extends BaseComponent
     this.horarios = null;
     this.time = null;
     this.refresh.next();
+    if(this.filterForDay.Day !=null){
+      this.GetAllAvailablesForDay();
 
-    this.GetAllAvailablesForDay();
+    }
   }
   public getDoctor() {
     this.especialista = null;

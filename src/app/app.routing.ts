@@ -13,6 +13,7 @@ import { ReservaExitoComponent } from './clinic/components/reserva-exito/reserva
 import { MisturnosComponent } from './clinic/components/misturnos/misturnos.component';
 import { CargaclinicaComponent } from './clinic/components/cargaclinica/cargaclinica.component';
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
+import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
 
 export const appRoutes: Routes = [
   { path: '', component: IndexComponent },
@@ -24,8 +25,9 @@ export const appRoutes: Routes = [
   { path: 'reserva/:id', component: ReservaComponent,   runGuardsAndResolvers: 'always'},
   { path: 'exito', component: ReservaExitoComponent },
   { path: 'misturnos', component: MisturnosComponent },
-  { path: 'clinica', component: CargaclinicaComponent },
+  { path: 'carga', component: CargaclinicaComponent },
   { path: 'peluqueria/buscador', component: BuscadorPeluqueriaComponent},
+  { path: 'favoritos', component: FavoritosComponent},
 
 
 ];

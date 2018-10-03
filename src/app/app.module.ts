@@ -45,6 +45,7 @@ import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
 import { CalendarModule } from 'angular-calendar';
+import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
 
 let config = new AuthServiceConfig([
   // {
@@ -53,7 +54,7 @@ let config = new AuthServiceConfig([
   // },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("281832435873706")
+    provider: new FacebookLoginProvider("240194963313041")
    }
    //,
   // {
@@ -82,7 +83,8 @@ export function provideConfig() {
     ReservaExitoComponent,
     MisturnosComponent,
     CargaclinicaComponent,
-    BuscadorPeluqueriaComponent
+    BuscadorPeluqueriaComponent,
+    FavoritosComponent
   ],
   imports: [
     CommonModule,
@@ -103,10 +105,10 @@ export function provideConfig() {
     CalendarModule.forRoot(),
     SocialLoginModule,
  
-    // AgmCoreModule.forRoot({
-    //   apiKey: "AIzaSyCeS0Tku62WXG03D8NKXgMxA6RNuBKbrSI",
-    //   libraries: ["places"]
-    // })
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyCeS0Tku62WXG03D8NKXgMxA6RNuBKbrSI",
+      libraries: ["places"]
+    })
   ],
   exports: [RouterModule],
   providers: [

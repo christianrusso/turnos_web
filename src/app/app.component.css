@@ -26,3 +26,40 @@
     background-color: red;
     color: white;
   }
+
+  .imgLogo{
+    width: 100%;
+    max-width: 60px;
+    /* width: 120px; */
+    max-height: 140px;
+    border-radius: 10%;
+    display: block;
+    text-align: center;
+    margin: auto;
+  }
+
+  @media (min-width: 1200px){
+    .container {
+      max-width: 87%;
+  }
+  }
+
+  .container {
+    max-width: 87%;
+}
+
+.special-link{
+  border: 1px solid #fff !important;
+  border-radius: 50px;
+
+}
+
+@media (min-width: 768px){
+  .navbar-nav>li {
+    float: initial!important;
+    display: inline-block!important;
+    margin-right: 9PX;
+    margin-bottom: -28px;
+}
+
+}

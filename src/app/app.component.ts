@@ -19,7 +19,7 @@ export class AppComponent extends BaseComponent
   title = "app";
   public register;
   public login;
-  public identity;
+  public identity=null;
   public user;
   public errorMensagePassword;
   public errorMensageEmail;
@@ -63,7 +63,6 @@ export class AppComponent extends BaseComponent
               })
             }
           })
-          console.log(this.alertTurn);
 
       },
       error => {
@@ -81,7 +80,6 @@ export class AppComponent extends BaseComponent
       ) {
         this._RegisterLoginService.onRegister(this.register).subscribe(
           response => {
-            console.log(response);
           },
           error => {
             // Manejar errores
@@ -108,6 +106,7 @@ export class AppComponent extends BaseComponent
         this.user = response.logo;
         $(".modal-gral").fadeOut();
         this.getTurns();
+        window.location.href = "/clinica/buscador";
 
       },
       error => {
@@ -118,32 +117,31 @@ export class AppComponent extends BaseComponent
   logout() {
     this._RegisterLoginService.onLogout().subscribe(
       response => {
-        console.log(response);
       },
       error => {
         // Manejar errores
       }
     );
     localStorage.removeItem("tokenTurnos");
-    window.location.href = "/buscador";
+    window.location.href = "/clinica/buscador";
   }
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
       (userData) => {
         this.register.email=userData.email;
-        this.register.password=userData.authToken;
-        this.register.passwordSecond=userData.authToken;
-
-        console.log(this.login);
+        this.register.password=userData.id;
+        this.login.email=userData.email;
+        this.login.password=userData.id;
         this._RegisterLoginService.onRegister(this.register).subscribe(
           response => {
-            console.log(response);
+       
           },
           error => {
             // Manejar errores
           }
         );
-        
+        this.onLogin();
+
         console.log(" sign in data : " , userData);
         // Now sign-in with userData
         // ...

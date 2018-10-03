@@ -124,8 +124,7 @@
                                 <span class="cal-day-number n-dia">{{ day.date |
                                     calendarDate:'monthViewDayNumber':locale }}</span>
                             </div>
-                            <div class="t-disp" style="margin: 5px" *ngIf="day.badgeTotal > 0" data-toggle="modal"
-                                data-target="#horario">{{ day.events.length }} turnos
+                            <div class="t-disp" style="margin: 1px" *ngIf="day.badgeTotal > 0" >{{ day.events.length }} turnos
                                 <br> disponibles</div>
 
                         </ng-template>
@@ -140,7 +139,8 @@
                                 <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
                                     [activeDayIsOpen]="activeDayIsOpen" [cellTemplate]="customCellTemplate"
                                     (dayClicked)="dayClicked($event.day)" [refresh]="refresh" [cellTemplate]="monthCellTemplate"
-                                    [locale]="locale" [ngClass]="day?.cssClass">
+                                    [locale]="locale" [ngClass]="day?.cssClass" data-toggle="modal"
+                                    data-target="#horario">
                                 </mwl-calendar-month-view>
                                 <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events">
                                 </mwl-calendar-week-view>
@@ -239,7 +239,7 @@
                         <div class=" row">
                             <div class="col-md-12">
                                 <h6 class="text-center" for="">Obra Social</h6>
-                                <select2 (valueChanged)="FiltrarObraSocial($event)" pleceholder="obras" class="form-control"  name="MedicalPlanId" type="text" name="appointment" lang="es">
+                                <select2 (valueChanged)="FiltrarObraSocial($event)" pleceholder="obras" class="form-control"  name="MedicalPlanId" type="text" name="obrasSociales" lang="es">
                                     <option value=""></option>
                                     <option class="col-md-6" *ngFor="let obras of obrasSociales" value="{{obras.id}}">{{obras.description}}</option>
                                 </select2>
@@ -300,7 +300,7 @@
 
                             <div class="form-group">
                                 <label class=" text-center" for="">Horario</label>
-                                <select2 [data]="horarios" (valueChanged)="FiltrarHoraSelect($event)" name="appointment"
+                                <select2 [data]="horarios" (valueChanged)="FiltrarHoraSelect($event)" name="appointmentHorario"
                                     lang="es">
 
                                 </select2>

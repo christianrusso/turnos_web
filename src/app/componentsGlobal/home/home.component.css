@@ -11,3 +11,9 @@
   font-size: 15px;
   transition: all 0.3s ease-in-out;
 }
+.imgLogo{
+  width: 100%;
+  max-width: 60px;
+  border-radius: 10%;
+
+}

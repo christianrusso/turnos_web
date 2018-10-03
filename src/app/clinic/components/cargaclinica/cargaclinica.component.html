@@ -7,6 +7,24 @@
                     <span>Nueva Publicacion ;)</span>
                 </h2>
                 <div class="px-4">
+                    <div class="h6 mt-4 ">
+                        <h6 class="text-center text-success">Rubro </h6>
+                        <i class="ni business_briefcase-24 mr-2"></i>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="ni ni-email-83"></i>
+                                    </span>
+                                </div>
+                                <select  #BusinessType="ngModel" name="BusinessType"  [(ngModel)]="clinica.BusinessType"  class="form-control"  id="">
+                                    <option value="1">Clinica</option>
+                                    <option value="2">Peluqueria</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="text-center ">
                         <h6 class="text-center text-success">Email </h6>
                         <div class="form-group">
@@ -16,8 +34,7 @@
                                         <i class="ni ni-hat-3"></i>
                                     </span>
                                 </div>
-                                <input #Email="ngModel" name="Email" [(ngModel)]="clinica.Email" class="form-control"
-                                    placeholder="email" type="text">
+                                <input #Email="ngModel" name="Email" [(ngModel)]="clinica.Email" class="form-control" placeholder="email" type="text">
                             </div>
                         </div>
                         <div class="h6 mt-4 ">
@@ -30,8 +47,7 @@
                                             <i class="ni ni-email-83"></i>
                                         </span>
                                     </div>
-                                    <input #Password="ngModel" name="Password" [(ngModel)]="clinica.Password" type="password"
-                                        class="form-control" placeholder="password">
+                                    <input #Password="ngModel" name="Password" [(ngModel)]="clinica.Password" type="password" class="form-control" placeholder="password">
                                 </div>
                             </div>
                         </div>
@@ -45,8 +61,7 @@
                                             <i class="ni ni-email-83"></i>
                                         </span>
                                     </div>
-                                    <input #Name="ngModel" name="Name" [(ngModel)]="clinica.Name" type="text" class="form-control"
-                                        placeholder="name">
+                                    <input #Name="ngModel" name="Name" [(ngModel)]="clinica.Name" type="text" class="form-control" placeholder="name">
                                 </div>
                             </div>
                         </div>
@@ -70,9 +85,8 @@
                                             <i class="ni ni-email-83"></i>
                                         </span>
                                     </div>
-                                    <input #Address="ngModel" name="Address" [(ngModel)]="clinica.Address" type="text"
-                                        class="form-control" placeholder="addres" autocorrect="off" autocapitalize="off"
-                                        spellcheck="off" #search>
+                                    <input #Address="ngModel" name="Address" [(ngModel)]="clinica.Address" type="text" class="form-control" placeholder="addres"
+                                        autocorrect="off" autocapitalize="off" spellcheck="off" #search>
                                 </div>
                             </div>
                         </div>
@@ -85,8 +99,7 @@
                                 <h6 class="text-center text-success">Imagen</h6>
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
-                                        <input class="form-control" placeholder="Imagen" type="file" id="avatar"
-                                            (change)="onFileChange($event)" #fileInput>
+                                        <input class="form-control" placeholder="Imagen" type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
                                     </div>
                                 </div>
                                 <br>
@@ -102,8 +115,8 @@
                                 <h6 class="text-center text-success">Contenido </h6>
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
-                                        <textarea #Description="ngModel" name="Description" [(ngModel)]="clinica.Description"
-                                            class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Texto ..."></textarea>
+                                        <textarea #Description="ngModel" name="Description" [(ngModel)]="clinica.Description" class="form-control" id="exampleFormControlTextarea1"
+                                            rows="3" placeholder="Texto ..."></textarea>
                                     </div>
                                 </div>
                             </div>
