@@ -3,6 +3,34 @@
 	RESPONSIVE
 ***/
 
+@media screen and (max-width: 1100px) and (min-width: 550px) {
+	.logoBottomDistance {
+		margin-bottom: 130px;
+	}
+	.inicio-bg p{
+		font-family: Poppins;
+		margin-left: 13px;
+		margin-top: -15px;
+		color: #454edb;
+		font-size: 24px;
+		font-weight: 300;
+	}
+	.inicio-bg h1{
+		margin-left: 13px;
+		margin-top: 0;
+	}
+	.downloadIndex {
+		position: absolute;
+		bottom: 15.2%;
+		margin-left: 26px;
+	}
+
+	.downloadIndex img{
+		width: 120px;
+		margin-right: 20px;
+	}
+}
+
 @media (min-width: 768px){
 	.navbar-nav>li {
     	float: initial!important;
@@ -20,6 +48,9 @@
 	}
 }
 @media only screen and (max-width: 768px) {
+	.logoBottomDistance {
+		margin-bottom: 30px;
+	}
 	.inicio-bg{
 		height: auto;
 		width: 100%;
@@ -330,4 +361,32 @@ section.search-section {
     margin-right: 15px;
     width: 100%;
 }
+}
+
+@media screen and (max-width: 450px) and (min-width: 400px) {
+	.downloadIndex {
+		position: absolute;
+		bottom: 15.2%;
+		margin-left: 62px;
+		top: 1286px;
+	}
+
+	.downloadIndex img{
+		width: 120px;
+		margin-right: 20px;
+	}
+}
+
+@media screen and (max-width: 550px) and (min-width: 450px) {
+	.downloadIndex {
+		position: absolute;
+		bottom: 15.2%;
+		margin-left: 102px;
+		top: 1286px;
+	}
+
+	.downloadIndex img{
+		width: 120px;
+		margin-right: 20px;
+	}
 }

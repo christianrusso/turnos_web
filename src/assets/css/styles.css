@@ -4707,6 +4707,16 @@ background: #d1fbfa;
     color: white !important;
 }
 
+.bienvenidoText {
+    font-family: SfUiDisplayRegular !important;;
+    font-size: 18pt !important;;
+}
+
+.reservarText {
+    font-family: SfUiDisplayThin !important;
+    font-size: 23pt !important;;
+}
+
 @font-face {
     font-family: 'SfUiDisplayLight';
     src: url('../fonts/SF UI Display Light.otf');
