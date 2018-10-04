@@ -49,7 +49,7 @@ export class AppComponent extends BaseComponent
     };
     this.login = {
       email: "",
-      password: ""
+      password: "",
     };
     this.getTurns();
   }
@@ -128,11 +128,7 @@ export class AppComponent extends BaseComponent
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
       (userData) => {
-        this.register.email=userData.email;
-        this.register.password=userData.id;
-        this.login.email=userData.email;
-        this.login.password=userData.id;
-        this._RegisterLoginService.onRegister(this.register).subscribe(
+        this._RegisterLoginService.onRegisterFacebook({"Email":userData.email,"UserId":userData.id}).subscribe(
           response => {
        
           },
@@ -140,13 +136,20 @@ export class AppComponent extends BaseComponent
             // Manejar errores
           }
         );
-        this.onLogin();
 
         console.log(" sign in data : " , userData);
         // Now sign-in with userData
         // ...
             
       }
+    );
+  }
+  signInWithGoogle(): void {
+    console.log("hola");
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+    (userData)=>{
+      console.log(userData);
+    }
     );
   }
 }

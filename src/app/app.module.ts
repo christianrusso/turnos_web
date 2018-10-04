@@ -48,10 +48,10 @@ import { CalendarModule } from 'angular-calendar';
 import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
 
 let config = new AuthServiceConfig([
-  // {
-  //   id: GoogleLoginProvider.PROVIDER_ID,
-  //   provider: new GoogleLoginProvider("Google-OAuth-Client-Id")
-  // },
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("458288243226-7b22v58jthqvvg0o2c2nhaiim9aninmg.apps.googleusercontent.com")
+  },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
     provider: new FacebookLoginProvider("240194963313041")
