@@ -158,7 +158,7 @@ export class AppComponent extends BaseComponent
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
       (userData) => {
-        this._RegisterLoginService.onRegisterFacebook({"Email":userData.email,"UserId":userData.id}).subscribe(
+        this._RegisterLoginService.onRegisterFacebook({"email":userData.email,"userid":userData.id}).subscribe(
           response => {
        
           },

@@ -48,7 +48,7 @@ export class VerMapaComponent extends BaseComponent
     this.identity = this._RegisterLoginService.getToken();
 
     this.filtro = {
-      Cities: [this.busqueda.ubicacion],
+      Cities: [],
       Specialties: [],
       Subspecialties: [],
       MedicalInsurances: [],
