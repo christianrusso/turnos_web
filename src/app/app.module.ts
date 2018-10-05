@@ -41,31 +41,49 @@ import { MisturnosComponent } from "./clinic/components/misturnos/misturnos.comp
 import { NgbModalModule } from "@ng-bootstrap/ng-bootstrap/modal/modal.module";
 import { CargaclinicaComponent } from "./clinic/components/cargaclinica/cargaclinica.component";
 import { AgmCoreModule } from "@agm/core";
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
+// import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+// import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
 import { CalendarModule } from 'angular-calendar';
 import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
 
-let config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("458288243226-7b22v58jthqvvg0o2c2nhaiim9aninmg.apps.googleusercontent.com")
-  },
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("240194963313041")
-   }
-   //,
-  // {
-  //   id: LinkedInLoginProvider.PROVIDER_ID,
-  //   provider: new LinkedInLoginProvider("LinkedIn-client-Id", false, 'en_US')
-  // }
-]);
- 
-export function provideConfig() {
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "angular-6-social-login";
+
+// let config = new AuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider("458288243226-7b22v58jthqvvg0o2c2nhaiim9aninmg.apps.googleusercontent.com")
+//   },
+//   {
+//     id: FacebookLoginProvider.PROVIDER_ID,
+//     provider: new FacebookLoginProvider("240194963313041")
+//    }
+
+// ]);
+ // Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("240194963313041")
+        },
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("649988480621-85ku3pjo7s7gl5a4nra14obp36kkm8mp.apps.googleusercontent.com")
+        }
+      ]
+  );
   return config;
 }
+// export function provideConfig() {
+//   return config;
+// }
 
 
 
@@ -104,7 +122,7 @@ export function provideConfig() {
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
     SocialLoginModule,
- 
+    
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCeS0Tku62WXG03D8NKXgMxA6RNuBKbrSI",
       libraries: ["places"]
@@ -114,14 +132,13 @@ export function provideConfig() {
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useFactory: provideConfig,
       useClass: NgLoadingSpinnerInterceptor,
       multi: true
     },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
+      useFactory: getAuthServiceConfigs
     }
   ],
   bootstrap: [AppComponent]
