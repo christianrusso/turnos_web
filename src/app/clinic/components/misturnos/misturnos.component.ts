@@ -65,13 +65,13 @@ export class MisturnosComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  public confirmTurn={Id:null,Score:"",Comment:""};
+  public confirmTurn = { Id: null, Score: "", Comment: "" };
   constructor(
     private modal: NgbModal,
     private location: Location,
     private _route: ActivatedRoute,
     private _MiTurno: MiturnoService
-  ) {}
+  ) { }
   public date = new Date();
   public fecha = new Date();
   public endFecha = new Date(
@@ -88,39 +88,56 @@ export class MisturnosComponent implements OnInit {
   }
   public misturns = [];
   public getTurns() {
-    this.events=[];
+    this.events = [];
 
     this._MiTurno.GetWeekForClient(this.filter).subscribe(
       response => {
         response.forEach(element => {
           if (element.appointments.length > 0) {
             element.appointments.forEach(appoint => {
-              console.log(appoint);
               this.misturns.push(appoint);
               var date = new Date(appoint.dateTime);
-              if(appoint.state==1){
-                this.events.push({
-                  title: appoint.specialty,
-                  start: new Date(date.setDate(date.getDate())),
-                  actions: this.actions,
-                  id:appoint.id
-                });
-              }else if (appoint.state==2){
+              if (appoint.state == 1) {
+                if (new Date().getTime() + (1 * 24 * 60 * 60 * 1000) <= new Date(date.setDate(date.getDate())).getTime()) {
+                  this.events.push({
+                    title: appoint.specialty,
+                    start: new Date(date.setDate(date.getDate())),
+                    actions: this.actions24HoursCancel,
+                    id: appoint.id
+                  });
+                }
+                else if (new Date().getTime() > new Date(date.setDate(date.getDate())).getTime()) {
+                  this.events.push({
+                    title: appoint.specialty,
+                    start: new Date(date.setDate(date.getDate())),
+                    actions: this.actions24HoursConfirm,
+                    id: appoint.id
+                  });
+                }
+                else{
+                  this.events.push({
+                    title: appoint.specialty,
+                    start: new Date(date.setDate(date.getDate())),
+                    id:appoint.id
+                  });
+
+                }
+              } else if (appoint.state == 2) {
                 this.events.push({
                   title: appoint.specialty,
                   start: new Date(date.setDate(date.getDate())),
                   actions: this.actionsCancel,
-                  id:appoint.id
+                  id: appoint.id
                 });
-              }else{
+              } else {
                 this.events.push({
                   title: appoint.specialty,
                   start: new Date(date.setDate(date.getDate())),
                   actions: this.actionsConfirm,
-                  id:appoint.id
+                  id: appoint.id
                 });
               }
-              
+
               this.refresh.next();
             });
           }
@@ -144,14 +161,7 @@ export class MisturnosComponent implements OnInit {
     action: string;
     event: CalendarEvent;
   };
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fa fa-fw fa-check"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEventConfirm("Edited", event);
-      }
-    },
+  actions24HoursCancel: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
@@ -160,19 +170,28 @@ export class MisturnosComponent implements OnInit {
       }
     }
   ];
-  actionsCancel: CalendarEventAction[] = [ 
+  actions24HoursConfirm: CalendarEventAction[] = [
     {
-      label: '<i class="text-danger">Cancelado</i>',
+      label: '<i class="fa fa-fw fa-check"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
- 
+        this.handleEventConfirm("Edited", event);
+
       }
     }
   ];
-  actionsConfirm: CalendarEventAction[] = [ 
+  actionsCancel: CalendarEventAction[] = [
+    {
+      label: '<i class="text-danger">Cancelado</i>',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+
+      }
+    }
+  ];
+  actionsConfirm: CalendarEventAction[] = [
     {
       label: '<i class="text-success">Confirmado</i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
- 
+
       }
     }
   ];
@@ -190,7 +209,7 @@ export class MisturnosComponent implements OnInit {
         this.activeDayIsOpen = true;
       }
     }
-    this.completeData=false;
+    this.completeData = false;
 
   }
   events: CalendarEvent[] = [];
@@ -208,20 +227,20 @@ export class MisturnosComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.misturns.forEach(element => {
-      if(element.id==event.id){
-        this.turn=element;
+      if (element.id == event.id) {
+        this.turn = element;
       }
     });
     this.modal.open(this.modalContent, { size: "lg" });
   }
   handleEventCanel(action: string, event: CalendarEvent): void {
-    this.confirmTurn.Id=event.id;
+    this.confirmTurn.Id = event.id;
     this.modalData = { event, action };
     this.modal.open(this.modalCanel, { size: "lg" });
 
   }
   handleEventConfirm(action: string, event: CalendarEvent): void {
-    this.confirmTurn.Id=event.id;
+    this.confirmTurn.Id = event.id;
     this.modalData = { event, action };
     this.modal.open(this.modalConfrim, { size: "lg" });
   }
@@ -240,58 +259,58 @@ export class MisturnosComponent implements OnInit {
     });
     this.refresh.next();
   }
-  public completeData=false;
-  onConfirm(){
-    if(this.confirmTurn.Comment!='' && this.confirmTurn.Score){
+  public completeData = false;
+  onConfirm() {
+    if (this.confirmTurn.Comment != '' && this.confirmTurn.Score) {
       this._MiTurno.confirmTurn(this.confirmTurn).subscribe(
         response => {
-          this.confirmTurn={Id:null,Score:"",Comment:""};
+          this.confirmTurn = { Id: null, Score: "", Comment: "" };
         },
         error => {
           // Manejar errores
         }
       );
       document.getElementById("confirmCancelButton").click(); // Click on the checkbox
-      this.completeData=false;
+      this.completeData = false;
 
       this.getTurns();
 
 
-    }else{
-      this.completeData=true;
+    } else {
+      this.completeData = true;
     }
-  
+
   }
-  onCancel(){
-    if(this.confirmTurn.Comment!=''){
+  onCancel() {
+    if (this.confirmTurn.Comment != '') {
       this._MiTurno.cancelTurn(this.confirmTurn).subscribe(
         response => {
-          this.confirmTurn={Id:null,Score:"",Comment:""};
+          this.confirmTurn = { Id: null, Score: "", Comment: "" };
         },
         error => {
           // Manejar errores
         }
       );
       document.getElementById("cancelCancelButton").click(); // Click on the checkbox
-      this.completeData=false;
+      this.completeData = false;
       this.getTurns();
 
 
-    }else{
-      this.completeData=true;
+    } else {
+      this.completeData = true;
     }
   }
 
   previus(data) {
-      this.filter.EndDate = new Date(data.getFullYear(),data.getMonth() + 1,0);
-      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
-      this.getTurns();
-    
+    this.filter.EndDate = new Date(data.getFullYear(), data.getMonth() + 1, 0);
+    this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
+    this.getTurns();
+
   }
   next(data) {
-      this.filter.EndDate = new Date(data.getFullYear(),data.getMonth() + 1,0);
-      this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
-      this.getTurns();
-    
+    this.filter.EndDate = new Date(data.getFullYear(), data.getMonth() + 1, 0);
+    this.filter.StartDate = new Date(data.getFullYear(), data.getMonth(), 1);
+    this.getTurns();
+
   }
 }

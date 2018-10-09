@@ -59,7 +59,12 @@ export class AppComponent extends BaseComponent
         // ...
         this._RegisterLoginService.onRegisterFacebook({"Email":userData.email,"UserId":userData.id}).subscribe(
           response => {
-       
+            localStorage.setItem("tokenTurnos", JSON.stringify(response));
+            this.identity = this._RegisterLoginService.getToken();
+            this.user = response.logo;
+            $(".modal-gral").fadeOut();
+            window.location.href = "/#/clinica/buscador";
+
           },
           error => {
             // Manejar errores
@@ -81,7 +86,10 @@ export class AppComponent extends BaseComponent
       email: "",
       password: "",
     };
-    this.getTurns();
+    if(this._RegisterLoginService.getToken()){
+      this.getTurns();
+
+    }
   }
   public getTurns() {
     this._MiTurno.GetWeekForClient(this.filter).subscribe(
@@ -136,7 +144,7 @@ export class AppComponent extends BaseComponent
         this.user = response.logo;
         $(".modal-gral").fadeOut();
         this.getTurns();
-        window.location.href = "/clinica/buscador";
+        window.location.href = "/#/clinica/buscador";
 
       },
       error => {
@@ -155,31 +163,5 @@ export class AppComponent extends BaseComponent
     localStorage.removeItem("tokenTurnos");
     window.location.href = "/clinica/buscador";
   }
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
-      (userData) => {
-        this._RegisterLoginService.onRegisterFacebook({"email":userData.email,"userid":userData.id}).subscribe(
-          response => {
-       
-          },
-          error => {
-            // Manejar errores
-          }
-        );
 
-        console.log(" sign in data : " , userData);
-        // Now sign-in with userData
-        // ...
-            
-      }
-    );
-  }
-  signInWithGoogle(): void {
-    console.log("hola");
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
-    (userData)=>{
-      console.log(userData);
-    }
-    );
-  }
 }
