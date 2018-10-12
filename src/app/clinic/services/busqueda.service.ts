@@ -27,21 +27,21 @@ export class BusquedaService {
   }
 
   //Specialty
-  getSpeciality() {
+  getSpeciality(id) {
     return this._http
       .post(
         this.url + "api/Data/GetSpecialtiesForSelect",
-        {},
+        {"id":id},
         { headers: this.headers }
       )
       .map(res => res.json());
   }
   //SubSpecialty
-  getSubSpeciality() {
+  getSubSpeciality(id) {
     return this._http
       .post(
         this.url + "api/Data/GetSubspecialtiesForSelect",
-        {},
+        {"rubro":id},
         { headers: this.headers }
       )
       .map(res => res.json());
@@ -80,7 +80,7 @@ export class BusquedaService {
   }
 
    //Favorito
-   favorito(id) {
+   addFavorito(id) {
     this.headers.set("Authorization", "Bearer " + this.getToken().token);
 
     return this._http
@@ -91,7 +91,16 @@ export class BusquedaService {
       )
       .map(res => res.json());
   }
-
+  removeFavorito(id) {
+    this.headers.set("Authorization", "Bearer " + this.getToken().token);
+    return this._http
+      .post(
+        this.url + "api/Client/RemoveFavoriteClinic",
+        { id: id },
+        { headers: this.headers }
+      )
+      .map(res => res.json());
+  }
   getToken() {
     let token = localStorage.getItem("tokenTurnos");
     if (token != "undefined") {

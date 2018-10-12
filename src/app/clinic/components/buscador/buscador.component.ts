@@ -31,7 +31,7 @@ export class BuscadorComponent extends BaseComponent
   public limitForSubEspecialidad = 115;
   public limitForObraSocial = 115;
   public limitForUbicacion = 115;
-
+  public idRubro= 1;
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
@@ -88,7 +88,7 @@ export class BuscadorComponent extends BaseComponent
 
   //Specialidades
   public getSplecialties() {
-    this._BusquedaService.getSpeciality().subscribe(
+    this._BusquedaService.getSpeciality(this.idRubro).subscribe(
       response => {
         this.especialidades = response;
       },
@@ -113,7 +113,7 @@ export class BuscadorComponent extends BaseComponent
 
   //SubEspecialidades
   public getSubSplecialties() {
-    this._BusquedaService.getSubSpeciality().subscribe(
+    this._BusquedaService.getSubSpeciality(this.idRubro).subscribe(
       response => {
         this.subEspecialidades = response;
       },
@@ -461,21 +461,31 @@ FiltrarDistancia(deviceValue) {
   }
    public favorite=[]
   favorito(index,id){
-    this._BusquedaService.favorito(id).subscribe(
-      response => {
-       console.log(response);
-      },
-      error => {
-        // Manejar errores
-      }
-    );
+   
     if(this.favorite.includes(index)){
       this.favorite.splice(index, 1);
       $("#icon"+id).removeClass("fa fa-heart corazon").addClass("fa fa-heart-o corazon");
+      this._BusquedaService.removeFavorito(id).subscribe(
+        response => {
+         console.log(response);
+        },
+        error => {
+          // Manejar errores
+        }
+      );
+
     }else{
       this.favorite.push(index);
       $("#icon"+id).removeClass("fa fa-heart-o corazon").addClass("fa fa-heart corazon");
-      
+      this._BusquedaService.addFavorito(id).subscribe(
+        response => {
+         console.log(response);
+        },
+        error => {
+          // Manejar errores
+        }
+      );
+
     }
 
   }

@@ -126,7 +126,7 @@
                         <div class="divider-filtros"></div>
                         <!-- Ubicación -->
                         <label>Ubicación</label>
-                        <div class="">
+                        <div class="ex3">
                             <div *ngFor="let row of cities;let i = index">
                                 <p [hidden]="i >= limitForUbicacion">
                                     <input *ngIf="row.id==busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)"

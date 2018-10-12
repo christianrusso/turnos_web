@@ -96,6 +96,7 @@ export class MisturnosComponent implements OnInit {
           if (element.appointments.length > 0) {
             element.appointments.forEach(appoint => {
               this.misturns.push(appoint);
+              console.log(appoint);
               var date = new Date(appoint.dateTime);
               if (appoint.state == 1) {
                 if (new Date().getTime() + (1 * 24 * 60 * 60 * 1000) <= new Date(date.setDate(date.getDate())).getTime()) {
