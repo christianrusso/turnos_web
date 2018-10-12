@@ -34,6 +34,12 @@ export class RegisterLoginService {
       .map(res => res.json());
   }
 
+  onRegisterFacebook(user){
+    return this._http
+    .post(this.url + "api/account/LoginFacebook", user, { headers: this.headers })
+    .map(res => res.json());
+  }
+
   getToken() {
     let token = localStorage.getItem("tokenTurnos");
     if (token != "undefined") {

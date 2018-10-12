@@ -26,6 +26,7 @@
     "@ngx-progressbar/core": "^5.0.1",
     "@ngx-progressbar/http": "^5.0.1",
     "@types/googlemaps": "^3.30.13",
+    "angular-6-social-login": "^1.1.1",
     "angular-calendar": "^0.24.1",
     "angular-draggable-droppable": "^4.0.2",
     "angularx-flatpickr": "^6.0.0",

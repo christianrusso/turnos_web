@@ -20,7 +20,7 @@ export class HomeComponent extends BaseComponent
   public register;
   public login;
   public user;
-  public token = localStorage.getItem("tokenTurnos");
+  public token  ;
   public busqueda: string;
   public identity;
   public errorMensagePassword;
@@ -46,6 +46,9 @@ export class HomeComponent extends BaseComponent
   ngOnInit() {
     $("header").hide();
     this.getCities();
+    if(localStorage.getItem("tokenTurnos")){
+      this.token=localStorage.getItem("tokenTurnos");
+    }
 
     this._route.params.subscribe(params => {
       let id = +params["id"];

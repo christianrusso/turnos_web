@@ -1,10 +1,15 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { BaseComponent } from "./clinic/core/base.component";
 import { RegisterLoginService } from "./clinic/services/register-login.service";
-import { AuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
+// import { AuthService } from "angularx-social-login";
+// import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
 import { MiturnoService } from "./clinic/services/miturno.service";
 
+import {
+  AuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from 'angular-6-social-login';
 
 declare const $: any;
 
@@ -31,13 +36,43 @@ export class AppComponent extends BaseComponent
     StartDate: new Date(),
     EndDate: new Date()
   };
-  constructor(private _RegisterLoginService: RegisterLoginService,private authService: AuthService,    private _MiTurno: MiturnoService
+  constructor(private _RegisterLoginService: RegisterLoginService,private authService: AuthService,  private socialAuthService: AuthService,   private _MiTurno: MiturnoService
   ) {
     super();
   }
 
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript("/assets/js/script2.js");
+  }
+  public socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    if(socialPlatform == "facebook"){
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    }else if(socialPlatform == "google"){
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    } 
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        console.log(socialPlatform+" sign in data : " , userData);
+        // Now sign-in with userData
+        // ...
+        this._RegisterLoginService.onRegisterFacebook({"Email":userData.email,"UserId":userData.id}).subscribe(
+          response => {
+            localStorage.setItem("tokenTurnos", JSON.stringify(response));
+            this.identity = this._RegisterLoginService.getToken();
+            this.user = response.logo;
+            $(".modal-gral").fadeOut();
+            window.location.href = "/#/clinica/buscador";
+
+          },
+          error => {
+            // Manejar errores
+          }
+        );
+
+      }
+    );
   }
   ngOnInit() {
     this.identity = this._RegisterLoginService.getToken();
@@ -49,9 +84,12 @@ export class AppComponent extends BaseComponent
     };
     this.login = {
       email: "",
-      password: ""
+      password: "",
     };
-    this.getTurns();
+    if(this._RegisterLoginService.getToken()){
+      this.getTurns();
+
+    }
   }
   public getTurns() {
     this._MiTurno.GetWeekForClient(this.filter).subscribe(
@@ -98,6 +136,7 @@ export class AppComponent extends BaseComponent
       this.errorMensageEmail = "Complete los campos";
     }
   }
+  public errorLogin;
   onLogin() {
     this._RegisterLoginService.onLogin(this.login).subscribe(
       response => {
@@ -106,11 +145,15 @@ export class AppComponent extends BaseComponent
         this.user = response.logo;
         $(".modal-gral").fadeOut();
         this.getTurns();
-        window.location.href = "/clinica/buscador";
+        this.errorLogin=null;
+
+        window.location.href = "/#/clinica/buscador";
 
       },
       error => {
+        console.log("hola");
         // Manejar errores
+        this.errorLogin="Email o password incorrecto";
       }
     );
   }
@@ -125,28 +168,5 @@ export class AppComponent extends BaseComponent
     localStorage.removeItem("tokenTurnos");
     window.location.href = "/clinica/buscador";
   }
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
-      (userData) => {
-        this.register.email=userData.email;
-        this.register.password=userData.id;
-        this.login.email=userData.email;
-        this.login.password=userData.id;
-        this._RegisterLoginService.onRegister(this.register).subscribe(
-          response => {
-       
-          },
-          error => {
-            // Manejar errores
-          }
-        );
-        this.onLogin();
 
-        console.log(" sign in data : " , userData);
-        // Now sign-in with userData
-        // ...
-            
-      }
-    );
-  }
 }
