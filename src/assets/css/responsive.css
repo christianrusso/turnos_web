@@ -34,6 +34,9 @@
 		flex: 0 0 73.6%;
 		max-width: none;
 	}
+	.ayudaQuestions {
+		width: 100%;
+	}
 }
 
 @media (min-width: 768px){
@@ -400,6 +403,9 @@ section.search-section {
 		flex: 0 0 78%;
 		max-width: none;
 	}
+	.ayudaQuestions {
+		width: 100%;
+	}
 }
 
 @media screen and (max-width: 550px) {
@@ -415,5 +421,8 @@ section.search-section {
 		height: 526px;
 		padding-left: 10px;
 		padding-right: 17px;
+	}
+	.ayudaQuestions {
+		width: 61%;
 	}
 }

@@ -3634,7 +3634,7 @@ border:2px solid #454edb;
 
 /* AYUDA */
 section.general.ayuda {
-    background: #fff;
+    background: #f3f3f3;
     padding-bottom: 50px;
 }
 .row.ayuda-align {
@@ -3673,17 +3673,11 @@ padding-left: 20px;
 	
 margin-bottom: 30px;
 	
-font-family: Poppins;
+font-family: SfUiDisplaySemiBold;
 	
-color: #454edb;
-	
-box-shadow: 0px 1px 12px rgb(183, 183, 183);
+color: #040404;
 	
 border-radius: 6px;
-	
-border: 2px solid transparent;
-	
-border-left: none;
 	
 transition: all 0.3s ease-in-out;
 	
@@ -3695,20 +3689,18 @@ z-index: 2;
 	position: absolute;
 	width: 5px;
 	height: 63px;
-	background: #454edb;
+	#background: #454edb;
 	left: 0px;
 	margin-top: -1px;
 	transition: all 0.3s ease-in-out;
 }
 .text-ayuda a.preguntas-ayuda:hover, .text-ayuda a.preguntas-ayuda.activePregunta{
-    border: 2px solid #1fefeb;
     border-left: none;
     transition: all 0.3s ease-in-out;
 }
 
 .text-ayuda a.preguntas-ayuda:hover:before, .text-ayuda a.preguntas-ayuda.activePregunta:before{
 	height: 63px;
-	background:#1fefeb;
 	margin-top: -1px;
 	transition: all 0.3s ease-in-out;
 }
@@ -4818,6 +4810,10 @@ background: #d1fbfa;
 
 .nosotrosFormLineHeight {
     line-height: 55px;
+}
+
+.ayudaQuestions {
+    width: 84%;
 }
 
 @font-face {
