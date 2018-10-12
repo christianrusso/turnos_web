@@ -177,7 +177,7 @@ export class BuscadorComponent extends BaseComponent
   //filtro cunado cambia la especialiad
   public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
     this.clinicas = [];
-    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
+    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad,this.idRubro).subscribe(
       response => {
         this.subEspecialidades = response;
       },

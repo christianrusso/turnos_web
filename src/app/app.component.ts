@@ -136,6 +136,7 @@ export class AppComponent extends BaseComponent
       this.errorMensageEmail = "Complete los campos";
     }
   }
+  public errorLogin;
   onLogin() {
     this._RegisterLoginService.onLogin(this.login).subscribe(
       response => {
@@ -144,11 +145,15 @@ export class AppComponent extends BaseComponent
         this.user = response.logo;
         $(".modal-gral").fadeOut();
         this.getTurns();
+        this.errorLogin=null;
+
         window.location.href = "/#/clinica/buscador";
 
       },
       error => {
+        console.log("hola");
         // Manejar errores
+        this.errorLogin="Email o password incorrecto";
       }
     );
   }

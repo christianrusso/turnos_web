@@ -40,6 +40,8 @@ export class VerMapaComponent extends BaseComponent
   public limitForSubEspecialidad = 5;
   public limitForObraSocial = 5;
   public limitForUbicacion = 5;
+  public idRubro= 1;
+
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript("/assets/js/script6.js");
   }
@@ -130,7 +132,7 @@ export class VerMapaComponent extends BaseComponent
   //filtro cunado cambia la especialiad
   public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
     this.clinicas = [];
-    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
+    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad,this.idRubro).subscribe(
       response => {
         this.subEspecialidades = response;
       },
@@ -246,7 +248,7 @@ export class VerMapaComponent extends BaseComponent
 
   //Specialidades
   public getSplecialties() {
-    this._BusquedaService.getSpeciality().subscribe(
+    this._BusquedaService.getSpeciality(this.idRubro).subscribe(
       response => {
         this.especialidades = response;
       },
@@ -258,7 +260,7 @@ export class VerMapaComponent extends BaseComponent
 
   //SubEspecialidades
   public getSubSplecialties() {
-    this._BusquedaService.getSubSpeciality().subscribe(
+    this._BusquedaService.getSubSpeciality(this.idRubro).subscribe(
       response => {
         this.subEspecialidades = response;
       },

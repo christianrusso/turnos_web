@@ -69,11 +69,11 @@ export class BusquedaService {
   }
 
   //SubSpecialty
-  getSubSpecialityOnEspeciality(id) {
+  getSubSpecialityOnEspeciality(id,idrubro) {
     return this._http
       .post(
         this.url + "api/Data/GetSubspecialtiesForSelect",
-        { id: id },
+        { id: id,rubro: idrubro },
         { headers: this.headers }
       )
       .map(res => res.json());
