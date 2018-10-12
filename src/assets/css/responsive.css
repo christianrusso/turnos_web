@@ -29,6 +29,11 @@
 		width: 120px;
 		margin-right: 20px;
 	}
+	.nosotrosFormParent {
+		margin-left: 135px;
+		flex: 0 0 73.6%;
+		max-width: none;
+	}
 }
 
 @media (min-width: 768px){
@@ -388,5 +393,27 @@ section.search-section {
 	.downloadIndex img{
 		width: 120px;
 		margin-right: 20px;
+	}
+
+	.nosotrosFormParent {
+		margin-left: 74px;
+		flex: 0 0 78%;
+		max-width: none;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.nosotrosFormParent {
+		margin-left: 0px;
+		flex: 0 0 100%;
+		max-width: none;
+	}
+	.nosotrosForm {
+		background-color: white;
+		padding-top: 11px;
+		border-radius: 10px;
+		height: 526px;
+		padding-left: 10px;
+		padding-right: 17px;
 	}
 }

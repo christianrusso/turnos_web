@@ -933,7 +933,7 @@ textarea:focus{
 **/
 .general{
   padding: 0;
-  overflow-y: hidden;
+  #overflow-y: hidden;
   overflow-x: hidden;
 }
 .turnos-bg{
@@ -3357,7 +3357,7 @@ a.nav-link.help {
 
 /* NOSOTROS */
 section.general.nosotros {
-    background: #fff;
+    background: #f3f3f3;
 }
 .row.nosotros-align{
 	margin-top: 150px;
@@ -3366,9 +3366,7 @@ section.general.nosotros {
 
 .row.nosotros-align .text-nosotros{
 
-padding-left: 0;
-
-padding-right: 30px;
+#padding-left: 0;
 }
 
 .row.nosotros-align .text-nosotros h2{
@@ -3469,13 +3467,15 @@ margin-left: 25px;
 
 .form-nosotros{
 
-padding-right: 0;
+#padding-right: 0;
 }
 
 
 .form-nosotros input{
 	transition: all 0.3s ease-in-out;
-border: 1px solid #454edb;
+border: none;
+
+border-bottom: 1px #f3f3f3 solid;
 	
 height: 35px;
 	
@@ -3492,6 +3492,45 @@ border-radius: 3px;
 letter-spacing: 0.5px;
 }
 
+.form-nosotros input::-webkit-input-placeholder {
+    font-family: SfUiDisplayLight;
+    color: #000000 !important;
+}
+
+.form-nosotros input:-ms-input-placeholder {
+    font-family: SfUiDisplayLight;
+    color: #000000 !important;
+}
+
+.form-nosotros input:-moz-placeholder {
+    font-family: SfUiDisplayLight;
+    color: #000000 !important;
+}
+
+.form-nosotros input::-moz-placeholder {
+    font-family: SfUiDisplayLight;
+    color: #000000 !important;
+}
+
+.form-nosotros textarea::-webkit-input-placeholder {
+    font-family: SfUiDisplayLight;
+    color: #000000 !important;
+}
+
+.form-nosotros textarea:-ms-input-placeholder {
+    font-family: SfUiDisplayLight;
+    color: #000000 !important;
+}
+
+.form-nosotros textarea:-moz-placeholder {
+    font-family: SfUiDisplayLight;
+    color: #000000 !important;
+}
+
+.form-nosotros textarea::-moz-placeholder {
+    font-family: SfUiDisplayLight;
+    color: #000000 !important;
+}
 
 .form-nosotros input[type="submit"]{
 	
@@ -3532,9 +3571,9 @@ width: 100%;
 	
 resize: none;
 	
-height: 200px;
+height: 100px;
 	
-border: 1px solid #454edb;
+border: 1px solid #f3f3f3;
 	
 border-radius: 4px;
 	
@@ -4724,6 +4763,63 @@ background: #d1fbfa;
     font-size: 23pt !important;;
 }
 
+.Agrega-tus-servicios {
+    width: 100%;
+    font-family: SfUiDisplayLight;
+    font-size: 30px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #454edb;
+}
+
+.Agrega-tus-servicios-text {
+    width: 100%;
+    font-family: SfUiDisplayLight;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #040404;
+}
+
+.asesoramiento {
+    font-family: SfUiDisplaySemiBold;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #454edb;
+}
+
+.nosotrosForm {
+    background-color: white;
+    padding-top: 11px;
+    border-radius: 10px;
+    height: 88%;
+    padding-left: 10px;
+    padding-right: 17px;
+}
+
+.nosotrosFormParent {
+    margin-left: 149px;
+    flex: 0 0 79%;
+    max-width: none;
+}
+
+.nosotrosFormLineHeight {
+    line-height: 55px;
+}
+
 @font-face {
     font-family: 'SfUiDisplayLight';
     src: url('../fonts/SF UI Display Light.otf');
@@ -4739,5 +4835,9 @@ background: #d1fbfa;
 @font-face {
     font-family: 'SfUiDisplayBold';
     src: url('../fonts/SF UI Display Bold.otf');
+}
+@font-face {
+    font-family: 'SfUiDisplaySemiBold';
+    src: url('../fonts/SF UI Display Semibold.otf');
 }
 
