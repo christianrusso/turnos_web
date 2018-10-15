@@ -10,9 +10,9 @@
             <div class="card">
                 <div class="row card-body">
                     <form class="form-inline">
-                        <div class="form-group   distancia">
-                            <label class="textCardTop" for="staticEmail2">CATEGORIA</label>
-                            <select class=" form-control form-inline" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail2">
+                        <div class="form-group">
+                            <label class="textCardTop" for="staticEmail2" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">CATEGORIA</label>
+                            <select class=" form-control form-inline" style="font-family: SfUiDisplayLight;" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail2">
                                 <option value="1">Medicina</option>
                                 <option value="2">Peluquería</option>
                                 <option value="3">Estéticas</option>
@@ -21,9 +21,9 @@
                                 <option value="6">Servicios para el vehículo</option>
                             </select>
                         </div> 
-                        <div class="form-group mx-sm-2  distancia">
-                            <label class="textCardTop" for="staticEmail3">UBICACIÓN</label>
-                            <select class=" form-control form-inline" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail3">
+                        <div class="form-group">
+                            <label class="textCardTop" for="staticEmail3" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">UBICACIÓN</label>
+                            <select class=" form-control form-inline" style="font-family: SfUiDisplayLight;" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail3">
                                 <option value="1">¿Donde?</option>
                                 <option value="2">Peluquería</option>
                                 <option value="3">Estéticas</option>
@@ -32,9 +32,9 @@
                                 <option value="6">Servicios para el vehículo</option>
                             </select>
                         </div>
-                        <div class="form-group mx-sm-2  distancia">
-                            <label class="textCardTop" for="staticEmail5">FECHA</label>
-                            <select class=" form-control form-inline" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail5">
+                        <div class="form-group" style="margin-right: 20px;">
+                            <label class="textCardTop" for="staticEmail5" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">FECHA</label>
+                            <select class=" form-control form-inline" style="font-family: SfUiDisplayLight;" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail5">
                                 <option value="1">¿Cuando?</option>
                                 <option value="2">Peluquería</option>
                                 <option value="3">Estéticas</option>
@@ -43,8 +43,8 @@
                                 <option value="6">Servicios para el vehículo</option>
                             </select>
                         </div>
-                        <div class="form-group mx-sm-1 mb-2 distancia button">
-                            <button type="submit" class="btn btn-transparent btn-round-lg special-link butttonBuscar textCardTop">BUSCAR</button>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-transparent btn-round-lg special-link butttonBuscar textCardTop" style="font-family: SfUiDisplaySemiBold; font-size: 13px; width: 132px; height: 40px;">BUSCAR</button>
 
                         </div>
                     </form>
@@ -62,12 +62,12 @@
 
                 <div class="col-xs-12 white">
                     <div class="menu-filters">
-                        <a href="" class="activeFilters" id="filtro-simple">Filtros</a>
-                        <a href="" id="filtro-extra">Filtros extras</a>
+                        <a href="" class="activeFilters" id="filtro-simple">FILTROS</a>
+                        <a href="" id="filtro-extra">FILTROS EXTRAS</a>
                     </div>
-                    <form action="" method="" class="form-filter">
+                    <form action="" method="" class="form-filter" style="margin-left: 38px;">
                         <!-- Especialidad -->
-                        <label>Especialidad</label>
+                        <label style="font-family: SfUiDisplaySemiBold;">Especialidad</label>
                         <div class="ex3">
                             <div *ngFor="let row of especialidades; let i = index">
                                 <p>
@@ -86,7 +86,7 @@
                         <!-- fin filtros -->
                         <div class="divider-filtros"></div>
                         <!-- Sub especialidad -->
-                        <label>Sub especialidad</label>
+                        <label style="font-family: SfUiDisplaySemiBold;">Sub especialidad</label>
                         <div class="ex3">
                             <div *ngFor="let row of subEspecialidades;let i = index">
                                 <p>
@@ -105,7 +105,7 @@
                         <!-- fin filtros -->
                         <div class="divider-filtros"></div>
                         <!-- Obra Social -->
-                        <label>Obra Social</label>
+                        <label style="font-family: SfUiDisplaySemiBold;">Obra Social</label>
                         <div class="ex3">
                             <div *ngFor="let row of obrasSociales;let i = index">
                                 <p [hidden]="i >= limitForObraSocial">
@@ -125,7 +125,7 @@
                         <!-- fin filtros -->
                         <div class="divider-filtros"></div>
                         <!-- Ubicación -->
-                        <label>Ubicación</label>
+                        <label style="font-family: SfUiDisplaySemiBold;">Ubicación</label>
                         <div class="ex3">
                             <div *ngFor="let row of cities;let i = index">
                                 <p [hidden]="i >= limitForUbicacion">
@@ -150,7 +150,7 @@
 
 
                         <!-- Distancia -->
-                        <label>Distancia desde mi ubicación</label>
+                        <label style="font-family: SfUiDisplaySemiBold;">Distancia desde mi ubicación</label>
                         <div class="range-slider">
                             <input class="range-slider__range" type="range" value="0" min="0" max="100" (change)="FiltrarDistancia($event)">
                             <span class="range-slider__value">0</span>
@@ -159,11 +159,11 @@
 
                         <div class="divider-filtros"></div>
 
-                        <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
+                        <button class="delete-filters btn-transparent pointer" style="margin-left: 0px !important; width: 100%;" (click)="BorrarFiltros()">Borrar todos los filtros</button>
 
                     </form>
 
-                    <form action="" method="" class="form-filter-extra">
+                    <form action="" method="" class="form-filter-extra" style="margin-left: 38px;">
 
                         <!-- Puntuación -->
                         <label>Puntuación de clientes</label>
@@ -199,7 +199,7 @@
 
                         <div class="divider-filtros"></div>
 
-                        <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos los filtros</button>
+                        <button class="delete-filters btn-transparent pointer" style="margin-left: 0px !important; width: 100%;" (click)="BorrarFiltros()">Borrar todos los filtros</button>
 
                     </form>
 
@@ -236,7 +236,7 @@
                 <div *ngFor="let row of clinicas; let i = index">
                     <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
 
-                        <div class="col-xs-12 cluster-clinica">
+                        <div class="col-xs-12 cluster-clinica" style="display: flex;">
                             <div class="col-xs-12 col-sm-2 img-clin">
                                 <img class="logoimg" src="{{row.logo}}" alt="Clinica">
                             </div>
@@ -256,10 +256,12 @@
                                         </span>
                                     </span>
 
-                                    <p>Ver comentarios</p>
+                                    <!--<p>Ver comentarios</p>-->
 
                                 </div>
-                                <p class="descr-clin"> {{ (row.description.length>150)? (row.description | slice:0:150)+'..':(row.description) }}</p>
+                                <div style="margin: 5px 0px;">
+                                    <p class="descr-clin"> {{ (row.description.length>150)? (row.description | slice:0:150)+'..':(row.description) }}</p>
+                                </div>
 
                                 <!-- <div class="icon-clin">
                                     <span data-toggle="tooltip" title="Médico">
@@ -290,7 +292,7 @@
                                     <p class="comments">{{row.scoreQuantity}} comentarios</p>
                                 </a>
 
-                                <a (click)="Reservar(row.clinicId)" class="reservar btn-round-lg">Reservar</a>
+                                <a (click)="Reservar(row.clinicId)" class="reservar btn-round-lg">RESERVAR</a>
                                 <!-- <a href="" class="pagar">Pagar ahora</a> -->
                             </div>
                         </div>
