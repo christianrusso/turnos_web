@@ -345,7 +345,7 @@ export class ReservaComponent extends BaseComponent
     this.time = hora.value;
   }
   Paso1() {
-    $(".filters-turnos").css("display", "block");
+    $(".filtros-calendario").css("display", "block");
     $(".calendario-confirmacion").css("display", "none");
     $(".calendario").css("display", "none");
     $("#b1").addClass("activeReserva");
@@ -358,7 +358,7 @@ export class ReservaComponent extends BaseComponent
       if (this.filter.DoctorId == null) {
         this.doctorBlock = true;
       }
-      $(".filters-turnos").css("display", "none");
+      $(".filtros-calendario").css("display", "none");
       $(".calendario-confirmacion").css("display", "none");
       $(".calendario").css("display", "block");
       $("#b1").removeClass("activeReserva");
@@ -374,7 +374,7 @@ export class ReservaComponent extends BaseComponent
       this.filter.DoctorId != null
     ) {
       this.getAppointmentsPerDay(this.filter);
-      $(".filters-turnos").css("display", "none");
+      $(".filtros-calendario").css("display", "none");
       $(".calendario").css("display", "none");
       $(".calendario-confirmacion").css("display", "block");
       $("#b1").removeClass("activeReserva");

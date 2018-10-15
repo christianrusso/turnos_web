@@ -4154,15 +4154,15 @@ margin-bottom: 5px;
 }
 
 .menu-reserva {
-    border-bottom: 2px solid #454edb;
+    border-left: 2px solid #454edb;
     margin-top: 30px;
 }
 
 .menu-reserva p{
     margin-bottom: 0;
-    font-family: Poppins;
+    font-family: SfUiDisplayLight;
     font-size: 12px;
-    color: #454edb;
+    color: #040405;
     line-height: 16px;
     margin-left: -10px;
     display: inline-block;
@@ -4199,13 +4199,13 @@ font-weight: 500;
 	position: absolute;
 	width: 0;
 	height: 0;
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-	border-bottom: 8px solid #454edb;
 	border:;
-	bottom: -20px;
-	margin-left: -12px;
-	opacity: 0;
+    bottom: 10px;
+    margin-left: -52px;
+    opacity: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #454edb;
 }
 .menu-reserva span.activeReserva:after{
 		opacity: 1;
@@ -4240,7 +4240,7 @@ cursor: pointer;
 }
 
 .menu-reserva-single {
-    margin-bottom: 20px;
+    margin-bottom: 100px;
 }
 
 
@@ -4414,11 +4414,11 @@ background: #d1fbfa;
 
 .filters-turnos label{
 	    display: block;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 0px;
     color: #191919;
-    margin-top: 20px;
-    font-family: Poppins;
+    margin-top: 9px;
+    font-family: SfUiDisplayLight;
     font-weight: 500;
     padding-left: 0;
     text-transform: uppercase;
@@ -4439,7 +4439,7 @@ background: #d1fbfa;
 .filters-turnos  .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #6f6f6f;
     line-height: 28px;
-    font-family: Poppins;
+    font-family: SfUiDisplayLight;
     font-size: 13px;
     margin-top: 4px;
 }
@@ -4454,17 +4454,17 @@ background: #d1fbfa;
 }
 
 a.sig-turno {
-    width: 100%;
+    width: 117px;
     background: #454edb;
     display: block;
     height: 35px;
-    border-radius: 4px;
     text-align: center;
     color: #fff;
-    font-family: Poppins;
+    font-family: SfUiDisplayRegular;
     font-size: 14px;
     line-height: 35px;
     letter-spacing: 0.5px;
+    border-radius: 12px;
 }
 
 a.sig-turno:hover {

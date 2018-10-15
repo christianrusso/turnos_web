@@ -426,3 +426,17 @@ section.search-section {
 		width: 61%;
 	}
 }
+
+@media screen and (min-width: 700px) {
+	.reservaLine {
+		display: flex;
+	}
+	.subEspecialidadLarge {
+		width: 180px;
+	}
+	.reservaFilters {
+		margin-top: 36px;
+		margin-left: 26px;
+		margin-bottom: 36px;
+	}
+}

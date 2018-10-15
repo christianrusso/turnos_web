@@ -7,94 +7,129 @@
             <div class="">
                 <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 text-reserva">
 
-                    <h2>Solicite su reserva</h2>
-                    <h3>Podrá ver los turnos disponibles durante el mes.</h3>
+                    <h2 style="font-family: SfUiDisplaySemiBold;">Solicitá tu turno</h2>
+                    <h3 style="font-family: SfUiDisplayLight;">Podrá ver los turnos disponibles durante el mes</h3>
 
                 </div>
 
 
-                <!-- Menú -->
-                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 menu-reserva">
-                    <div class="row">
-                        <div class="col-xs-6 col-md-4 menu-reserva-single">
-                            <div class="row">
-                                <div class="col-xs-3 col-md-2" (click)="Paso1()">
-                                    <span class="activeReserva" id="b1">1</span>
-                                </div>
-                                <div class="col-xs-9 col-md-10">
-                                    <p>Seleccione un día para poder visualizar
-                                        <br>las diferentes opciones.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-md-4">
-                            <div class="row">
-                                <div class="col-xs-3 col-md-2" (click)="Paso2()">
-                                    <span id="b2">2</span>
-                                </div>
-                                <div class="col-xs-9 col-md-10">
-                                    <p>Seleccione día y hora</p>
+                <div style="display: flex;">
+                    <!-- Menú -->
+                    <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5 menu-reserva">
+                        <div class="">
+                            <div class="col-xs-6 col-md-12 menu-reserva-single">
+                                <div class="row" style="flex-wrap: inherit;">
+                                    <div class="col-xs-3 col-md-2" (click)="Paso1()">
+                                        <span class="activeReserva" id="b1">1</span>
+                                    </div>
+                                    <div class="col-xs-9 col-md-12">
+                                        <p style="font-family: SfUiDisplaySemiBold; color: #040405;">Seleccione un día para poder visualizar
+                                            <br>las diferentes opciones.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-6 col-md-4">
-                            <div class="row">
-                                <div class="col-xs-3 col-md-2" (click)="Paso3()">
-                                    <span id="b3">3</span>
+                            <div class="col-xs-6 col-md-12 menu-reserva-single">
+                                <div class="row" style="flex-wrap: inherit;">
+                                    <div class="col-xs-3 col-md-2" (click)="Paso2()">
+                                        <span id="b2">2</span>
+                                    </div>
+                                    <div class="col-xs-9 col-md-12">
+                                        <p style="font-family: SfUiDisplayLight;">Seleccione día y hora</p>
+                                    </div>
                                 </div>
-                                <div class="col-xs-9 col-md-10">
-                                    <p>Confirmación de reserva</p>
+                            </div>
+                            <div class="col-xs-6 col-md-12 menu-reserva-single">
+                                <div class="row" style="flex-wrap: inherit;">
+                                    <div class="col-xs-3 col-md-2" (click)="Paso3()">
+                                        <span id="b3">3</span>
+                                    </div>
+                                    <div class="col-xs-9 col-md-12">
+                                        <p style="font-family: SfUiDisplayLight;">Confirmación de reserva</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- // menu -->
+                    <!-- // menu -->
 
-                <!-- FILTROS Y CALENDARIO -->
-                <div class="col-xs-12 filtros-calendario">
+                    <!-- FILTROS Y CALENDARIO -->
+                    <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5 filtros-calendario" style="background-color: white; border-radius: 12px; height: 100%;">
 
-                    <div class="row">
+                        <div class="row reservaFilters">
 
-                        <!-- Filtros -->
-                        <div class="col-xs-4 col-md-2 filters-turnos">
-                            <form>
-                                <div class="form-group">
-                                    <label for="">Especialidad</label>
-                                    <select2 (valueChanged)="FiltrarEspecialidad($event)" name="especialidad-turno"
-                                        lang="es">
-                                        <option value=""></option>
-                                        <option *ngFor="let row of especialidades" value="{{row.id}}">{{row.description}}</option>
-                                    </select2>
-                                </div>
+                            <!-- Filtros -->
+                            <div class="col-xs-5 col-md-5 col-sm-5 col-lg-11 filters-turnos">
+                                <form>
+                                    <div class="form-group reservaLine">
+                                        <label style="margin-right: 16px; font-family: SfUiDisplaySemiBold;" for="">Especialidad</label>
+                                        <select2 (valueChanged)="FiltrarEspecialidad($event)" name="especialidad-turno"
+                                            lang="es" style="width: 100%; font-family: SfUiDisplayLight;">
+                                            <option value=""></option>
+                                            <option *ngFor="let row of especialidades" value="{{row.id}}">{{row.description}}</option>
+                                        </select2>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="">Sub Especialidad</label>
-                                    <select2 (valueChanged)="FiltrarSubEspecialidad($event)" name="subespecialidad-turno"
-                                        lang="es">
-                                        <option value=""></option>
-                                        <option *ngFor="let row of subEspecialidades" value="{{row.id}}">{{row.description}}</option>
-                                    </select2>
-                                </div>
+                                    <div><hr></div>
 
-                                <div class="form-group">
-                                    <label for="">Médico</label>
-                                    <select2 (valueChanged)="FiltrarEspecialista($event)" name="medico-turno" lang="es">
-                                        <option value="">NINGUNO</option>
-                                        <option *ngFor="let row of especialista" value="{{row.id}}">{{row.firstName}},{{row.lastName}}
-                                        </option>
-                                    </select2>
-                                </div>
+                                    <div class="form-group reservaLine">
+                                        <label style="margin-right: 16px; font-family: SfUiDisplaySemiBold;" class="subEspecialidadLarge" for="">Sub Especialidad</label>
+                                        <select2 style="width: 100%; font-family: SfUiDisplayLight;" (valueChanged)="FiltrarSubEspecialidad($event)" name="subespecialidad-turno"
+                                            lang="es">
+                                            <option value=""></option>
+                                            <option *ngFor="let row of subEspecialidades" value="{{row.id}}">{{row.description}}</option>
+                                        </select2>
+                                    </div>
+
+                                    <div><hr></div>
+
+                                    <div class="form-group reservaLine">
+                                        <label style="margin-right: 16px; font-family: SfUiDisplaySemiBold;" for="">Médico</label>
+                                        <select2 style="width: 100%; font-family: SfUiDisplayLight;" (valueChanged)="FiltrarEspecialista($event)" name="medico-turno" lang="es">
+                                            <option value="">NINGUNO</option>
+                                            <option *ngFor="let row of especialista" value="{{row.id}}">{{row.firstName}},{{row.lastName}}
+                                            </option>
+                                        </select2>
+                                    </div>
 
 
 
-                                <a (click)="Paso2()" class=" sig-turno text-white pointer">Siguiente</a>
-                            </form>
+                                    <a (click)="Paso2()" class=" sig-turno text-white pointer" style="margin: 0 auto;">SIGUIENTE</a>
+                                </form>
+                            </div>
+                            <!-- // filtros -->
+
+                            <!-- Calendario -->
+
+
                         </div>
-                        <!-- // filtros -->
+                    </div>
 
-                        <!-- Calendario -->
+                    <!-- CONFIRMACION RESERVA -->
+                    <div class="col-xs-12 col-md-7 calendario-confirmacion confirmacion-reserva" style="display: none;">
+                        <h2>Confirme su reserva</h2>
+                        <div class="circle"></div>
+                        <div class="square"></div>
+                        <div class="col-xs-12 col-md-12 cluster-reserva-def">
+                            <h3>{{dataClinica?.description}}</h3>
+                            <h4>{{dataClinica?.address}}, {{dataClinica?.city}} </h4>
 
+                            <h5>Especialidad</h5>
+                            <p>{{especialidadText}}</p>
+
+                            <h5>Profesional</h5>
+                            <p>{{especialistaText}}</p>
+
+                            <h5>Fecha y hora de la reserva</h5>
+                            <p>{{filterForDay.Day | date:'EEEE' : locale }} {{filterForDay.Day | date:'d/M/yy'}} {{time}}</p>
+
+
+
+                            <a href="#" (click)="Paso2()" id="volver-turno">Volver</a>
+                            <button (click)="CheckPaciente()" class="btn btn-success pointer" id="confirmacion-definitiva">Confirmar
+                                reserva</button>
+                        </div>
+
+                        <span>Ante cualquier consultam no dude en comunicarse con el Centro al que está reservando.</span>
 
                     </div>
                 </div>
@@ -149,36 +184,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                <!-- CONFIRMACION RESERVA -->
-                <div class="col-xs-12 col-md-7 calendario-confirmacion confirmacion-reserva" style="display: none;">
-                    <h2>Confirme su reserva</h2>
-                    <div class="circle"></div>
-                    <div class="square"></div>
-                    <div class="col-xs-12 col-md-12 cluster-reserva-def">
-                        <h3>{{dataClinica?.description}}</h3>
-                        <h4>{{dataClinica?.address}}, {{dataClinica?.city}} </h4>
-
-                        <h5>Especialidad</h5>
-                        <p>{{especialidadText}}</p>
-
-                        <h5>Profesional</h5>
-                        <p>{{especialistaText}}</p>
-
-                        <h5>Fecha y hora de la reserva</h5>
-                        <p>{{filterForDay.Day | date:'EEEE' : locale }} {{filterForDay.Day | date:'d/M/yy'}} {{time}}</p>
-
-
-
-                        <a href="#" (click)="Paso2()" id="volver-turno">Volver</a>
-                        <button (click)="CheckPaciente()" class="btn btn-success pointer" id="confirmacion-definitiva">Confirmar
-                            reserva</button>
-                    </div>
-
-                    <span>Ante cualquier consultam no dude en comunicarse con el Centro al que está reservando.</span>
-
                 </div>
 
             </div>
