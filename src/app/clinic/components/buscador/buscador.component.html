@@ -301,7 +301,7 @@
 
                     <div class="col-xs-12 slide-clinica collapse" id="collapseExample{{row.clinicId}}">
                         <div class="col-xs-12 menu-slide">
-                            <a (click)="info(row.clinicId)" class="info-slide activeFilter pointer">Información</a>
+                            <a (click)="info(row.clinicId)" class="info-slide activeFilter pointer">Horarios</a>
                             <a (click)="comen(row.clinicId)" class="com-slide pointer">Comentarios</a>
                             <a (click)="ubi(row.clinicId,row.latitude,row.longitude)" class="ubi-slide pointer">Ubicación</a>
                         </div>
@@ -309,8 +309,6 @@
                         <div class="col-xs-12 height-slide">
 
                             <div class="col-xs-12 info-cluster" id="info{{row.clinicId}}">
-
-                                <p>{{row.description}} </p>
                                 <!-- 
                                 <div class="divider-slide"></div>
 
@@ -331,8 +329,6 @@
                                     <i class="fa fa-medkit" aria-hidden="true"></i>
                                     <span>Guardia</span>
                                 </div> -->
-
-                                <div class="divider-slide"></div>
 
                                 <h2>Horarios de atención</h2>
                                 <div *ngFor="let day of row.openCloseHours">
