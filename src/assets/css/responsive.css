@@ -439,4 +439,7 @@ section.search-section {
 		margin-left: 26px;
 		margin-bottom: 36px;
 	}
+	.telefonoNosotros {
+		text-align: right;
+	}
 }
