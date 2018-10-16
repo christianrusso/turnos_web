@@ -4505,7 +4505,11 @@ display: block;
 
 .confirmacion-reserva .cluster-reserva-def{
 
-border: 1px solid #454edb;
+border: none;
+
+background-color: white;
+
+border-radius: 12px;
 
 padding: 25px;
 }
@@ -4535,7 +4539,7 @@ font-weight: 400;
 
 color: #454edb;
 
-margin-bottom: 20px;
+margin-bottom: 28px;
 }
 
 
@@ -4603,7 +4607,7 @@ margin-top: 0;
 
 .confirmacion-reserva .cluster-reserva-def a{
 
-font-family: Poppins;
+font-family: SfUiDisplayRegular;
 
 font-size: 14px;
 
@@ -4611,15 +4615,11 @@ display: inline-block;
 
 text-align: center;
 
-border-radius: 4px;
+border-radius: 16px;
 
 height: 32px;
 
 line-height: 33px;
-
-margin-left: 15px;
-
-margin-top: 30px;
 }
 
 
@@ -4648,6 +4648,10 @@ background: #50ae20;
 color: #fff;
 
 width: 180px;
+
+font-family: SfUiDisplayRegular !important;
+
+border-radius: 12px;
 }
 
 .confirmacion-reserva .circle{

@@ -442,4 +442,7 @@ section.search-section {
 	.telefonoNosotros {
 		text-align: right;
 	}
+	.reservaTwoMenus {
+		display: flex;
+	}
 }

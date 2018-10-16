@@ -172,6 +172,16 @@
   color: #fff;
 
   width: 180px;
+
+  font-family: SfUiDisplayRegular;
+
+  border-radius: 16px;
+
+  font-size: 14px;
+
+  height: 32px;
+
+  vertical-align: inherit;
 }
 
 .pointer {
