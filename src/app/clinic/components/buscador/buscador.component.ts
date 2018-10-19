@@ -32,6 +32,9 @@ export class BuscadorComponent extends BaseComponent
   public limitForObraSocial = 115;
   public limitForUbicacion = 115;
   public idRubro= 1;
+  public currentDate= new Date();
+  public availableStart = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() , this.currentDate.getDate());
+  public availableEnd= new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() , this.currentDate.getDate()+15);
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
@@ -53,6 +56,8 @@ export class BuscadorComponent extends BaseComponent
     this.identity = this._RegisterLoginService.getToken();
     if(this.busqueda.ubicacion!=""){
       this.filtro = {
+        AvailableAppointmentStartDate:this.availableStart,
+        AvailableAppointmentEndDate:this.availableEnd,
         Cities: [this.busqueda.ubicacion],
         Specialties: [],
         Subspecialties: [],
@@ -64,6 +69,8 @@ export class BuscadorComponent extends BaseComponent
       };
     }else{
       this.filtro = {
+        AvailableAppointmentStartDate:this.availableStart,
+        AvailableAppointmentEndDate:this.availableEnd,
         Cities: [],
         Specialties: [],
         Subspecialties: [],
@@ -488,5 +495,10 @@ FiltrarDistancia(deviceValue) {
 
     }
 
+  }
+  BuscarFilterTop(){
+    this.filtro.AvailableAppointmentEndDate =new Date(this.filtro.AvailableAppointmentStartDate);
+    this.filtro.AvailableAppointmentStartDate= new Date(this.filtro.AvailableAppointmentStartDate);
+    this.getByFilter(this.filtro);
   }
 }

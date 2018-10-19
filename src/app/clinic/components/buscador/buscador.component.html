@@ -34,17 +34,11 @@
                         </div>
                         <div class="form-group" style="margin-right: 20px;">
                             <label class="textCardTop" for="staticEmail5" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">FECHA</label>
-                            <select class=" form-control form-inline" style="font-family: SfUiDisplayLight;" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail5">
-                                <option value="1">¿Cuando?</option>
-                                <option value="2">Peluquería</option>
-                                <option value="3">Estéticas</option>
-                                <option value="4">Restaurantes</option>
-                                <option value="5">Deportes</option>
-                                <option value="6">Servicios para el vehículo</option>
-                            </select>
+                            <input #AvailableAppointmentStartDate="ngModel"  name="AvailableAppointmentStartDate" [(ngModel)]="filtro.AvailableAppointmentStartDate" class=" form-control form-inline" id="Categorías" style="font-family: SfUiDisplayLight;"  type="date">
+                       
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-transparent btn-round-lg special-link butttonBuscar textCardTop" style="font-family: SfUiDisplaySemiBold; font-size: 13px; width: 132px; height: 40px;">BUSCAR</button>
+                            <button (click)="BuscarFilterTop()" type="button" class="btn btn-transparent btn-round-lg special-link butttonBuscar textCardTop" style="font-family: SfUiDisplaySemiBold; font-size: 13px; width: 132px; height: 40px;">BUSCAR</button>
 
                         </div>
                     </form>

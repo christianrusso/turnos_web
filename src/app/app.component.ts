@@ -54,7 +54,6 @@ export class AppComponent extends BaseComponent
     
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
-        console.log(socialPlatform+" sign in data : " , userData);
         // Now sign-in with userData
         // ...
         this._RegisterLoginService.onRegisterFacebook({"Email":userData.email,"UserId":userData.id}).subscribe(
@@ -63,7 +62,7 @@ export class AppComponent extends BaseComponent
             this.identity = this._RegisterLoginService.getToken();
             this.user = response.logo;
             $(".modal-gral").fadeOut();
-            window.location.href = "/#/clinica/buscador";
+            location.reload();
 
           },
           error => {
@@ -147,11 +146,10 @@ export class AppComponent extends BaseComponent
         this.getTurns();
         this.errorLogin=null;
 
-        window.location.href = "/#/clinica/buscador";
+        location.reload();
 
       },
       error => {
-        console.log("hola");
         // Manejar errores
         this.errorLogin="Email o password incorrecto";
       }
@@ -166,7 +164,8 @@ export class AppComponent extends BaseComponent
       }
     );
     localStorage.removeItem("tokenTurnos");
-    window.location.href = "/clinica/buscador";
+    location.reload();
+
   }
 
 }

@@ -39,7 +39,6 @@ export class MiturnoService {
   }
   getToken() {
     let token = localStorage.getItem("tokenTurnos");
-    console.log(token);
     if (token != null) {
       this.token = token;
     } else {
