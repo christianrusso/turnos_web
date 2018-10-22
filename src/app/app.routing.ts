@@ -14,6 +14,7 @@ import { MisturnosComponent } from './clinic/components/misturnos/misturnos.comp
 import { CargaclinicaComponent } from './clinic/components/cargaclinica/cargaclinica.component';
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
 import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
+import { PreguntasFrecuentesComponent } from './clinic/components/preguntas-frecuentes/preguntas-frecuentes.component';
 
 export const appRoutes: Routes = [
   { path: '', component: IndexComponent },
@@ -28,6 +29,7 @@ export const appRoutes: Routes = [
   { path: 'carga', component: CargaclinicaComponent },
   { path: 'peluqueria/buscador', component: BuscadorPeluqueriaComponent},
   { path: 'favoritos', component: FavoritosComponent},
+  { path: 'preguntasFrecuentes', component: PreguntasFrecuentesComponent},
 
 
 ];

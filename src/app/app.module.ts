@@ -53,6 +53,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from "angular-6-social-login";
+import { PreguntasFrecuentesComponent } from './clinic/components/preguntas-frecuentes/preguntas-frecuentes.component';
 
 // let config = new AuthServiceConfig([
 //   {
@@ -102,7 +103,8 @@ export function getAuthServiceConfigs() {
     MisturnosComponent,
     CargaclinicaComponent,
     BuscadorPeluqueriaComponent,
-    FavoritosComponent
+    FavoritosComponent,
+    PreguntasFrecuentesComponent
   ],
   imports: [
     CommonModule,

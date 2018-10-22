@@ -37,7 +37,7 @@
                         <a [routerLink]="['/nosotros']" class=" nav-link help">Sé parte de nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link help" [routerLink]="['/ayuda']">Ayuda</a>
+                        <a class="nav-link help" [routerLink]="['/preguntasFrecuentes']">Preguntas Frecuentes</a>
                     </li>
                     <li class="nav-item" *ngIf="identity == null">
                         <a href="" class="nav-link help" id="registrarte-link">Registrate</a>
@@ -59,7 +59,7 @@
 
                             <a class="dropdown-item" href="#">Editar datos</a>
                             <a class="dropdown-item" href="#">Configurar cuenta</a>
-                            <a class="dropdown-item" href="#">Ayuda</a>
+                            <a class="dropdown-item" [routerLink]="['/ayuda']">Ayuda</a>
                         </div>
                     </li>
                     <li class="nav-item" *ngIf="identity && identity != null">
