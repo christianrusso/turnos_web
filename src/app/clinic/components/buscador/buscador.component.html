@@ -225,7 +225,11 @@
                 <div *ngIf="dontResult">
                     <h5 class="text-center text-danger vertical"> "No se han encontrado resultados para esta busqueda"</h5>
                 </div>
-                <div class="text-center ">
+                <div class="text-center" style="display: flex; margin-top: 51px;">
+                    <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 2px #00b1f2 solid; color: #00b1f2; cursor: pointer; width: 20%;" id="bestScore" (click)="orderResults('score', false, 'bestScore')">MEJOR PUNTUACIÓN</span>
+                    <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 28%;" id="bestComments" (click)="orderResults('comments', false, 'bestComments')">MAYOR CANTIDAD DE COMENTARIOS</span>
+                    <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 20%;" id="lessScore" (click)="orderResults('score', true, 'lessScore')">MENOR PUNTUACIÓN</span>
+                    <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 32%;" id="lessComments" (click)="orderResults('comments', true, 'lessComments')">MENOR CANTIDAD DE COMENTARIOS</span>
                 </div>
                 <div *ngFor="let row of clinicas; let i = index">
                     <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -402,6 +406,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <button style="background: #50ae20; color: #fff; border-radius: 50px; padding: 10px 3px; transition: all 0.3s ease-in-out; font-family: SfUiDisplaySemiBold; width: 150px;" (click)="getByFilter(filtro, true);">VER MÁS</button>
                 </div>
             </div>
 

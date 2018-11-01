@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from "@angular/core";
 import { BusquedaService } from "../../services/busqueda.service";
+import { global } from "../../../global/global";
 import { MapService } from "../../services/map.service";
 import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd } from "@angular/router";
@@ -35,6 +36,7 @@ export class BuscadorComponent extends BaseComponent
   public currentDate= new Date();
   public availableStart = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() , this.currentDate.getDate());
   public availableEnd= new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() , this.currentDate.getDate()+15);
+  public from = 0;
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
@@ -65,7 +67,9 @@ export class BuscadorComponent extends BaseComponent
         medicalPlans: [],
         Score: "",
         ScoreQuantity: "",
-        AvailableAppointmentDate: ""
+        AvailableAppointmentDate: "",
+        SortField: "score",
+        AscendingOrder: false
       };
     }else{
       this.filtro = {
@@ -78,7 +82,9 @@ export class BuscadorComponent extends BaseComponent
         medicalPlans: [],
         Score: "",
         ScoreQuantity: "",
-        AvailableAppointmentDate: ""
+        AvailableAppointmentDate: "",
+        SortField: "score",
+        AscendingOrder: false
       };
     }    
     this.filtroFecha = {
@@ -86,7 +92,7 @@ export class BuscadorComponent extends BaseComponent
       fecha: ""
     };
     this.dontResult = false;
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
     this.getSplecialties();
     this.getSubSplecialties();
     this.getMedicalInsurance();
@@ -141,7 +147,14 @@ export class BuscadorComponent extends BaseComponent
       }
     );
   }
-  public getByFilter(filtro) {
+  public getByFilter(filtro, page) {
+    filtro.From = 0;
+    if (page != 'undefined' && page == true) {
+      filtro.to = this.from;
+    } else {
+      this.from = 0;
+      filtro.to = global.quantityOfResultsToShow;
+    }
     $("#loading-bar-spinner").removeAttr("hidden");
     $("#loading-bar-spinner").show();
     this._BusquedaService.getByFilter(filtro).subscribe(
@@ -149,6 +162,11 @@ export class BuscadorComponent extends BaseComponent
         if (response.length != 0) {
           this.dontResult = false;
           this.clinicas = response;
+          if (this.from == 0) {
+            this.from = this.from + response.length + global.quantityOfResultsToShow;
+          } else {
+            this.from = this.from + response.length;
+          }
         } else {
           this.dontResult = true;
           this.clinicas = null;
@@ -178,7 +196,7 @@ export class BuscadorComponent extends BaseComponent
     } else {
       this.getSubSplecialties();
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
   //filtro cunado cambia la especialiad
@@ -193,7 +211,7 @@ export class BuscadorComponent extends BaseComponent
       }
     );
 
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
   public FiltrarSubEspecialidad(Subspecialties, deviceValue) {
     this.clinicas = [];
@@ -206,7 +224,7 @@ export class BuscadorComponent extends BaseComponent
         }
       }
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
   public FiltrarObrasSocial(obraSocial, deviceValue) {
     this.clinicas = [];
@@ -223,7 +241,7 @@ export class BuscadorComponent extends BaseComponent
         }
       }
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
   //filtro city
@@ -238,20 +256,20 @@ export class BuscadorComponent extends BaseComponent
         }
       }
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
   //filtro Score
   public FiltrarScore(score) {
     this.clinicas = [];
     this.filtro.Score = score;
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
   //filtro ScoreQuantity
   public FiltrarScoreQuantity(ScoreQuantity) {
     this.clinicas = [];
     this.filtro.ScoreQuantity = ScoreQuantity;
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
   //filtro pro distancia
@@ -296,7 +314,7 @@ FiltrarDistancia(deviceValue) {
         MedicalPlans: []
       };
     }   
-     this.getByFilter(this.filtro);
+     this.getByFilter(this.filtro, false);
   }
   //fin filtro por distancia.
 
@@ -318,7 +336,7 @@ FiltrarDistancia(deviceValue) {
     $(".range-slider").val(0);
     $(".range-slider__range").val(0);
     $(".range-slider__value").text(0);
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
   // ACTIVADOR DE PESTAÑAS DE CADA CLINICA
@@ -400,7 +418,7 @@ FiltrarDistancia(deviceValue) {
 
   onFechaFilter() {
     this.filtro.AvailableAppointmentDate = this.filtroFecha.fecha;
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
   categoria(id) {
     this.filtroFecha.categorias = id.value;
@@ -499,6 +517,23 @@ FiltrarDistancia(deviceValue) {
   BuscarFilterTop(){
     this.filtro.AvailableAppointmentEndDate =new Date(this.filtro.AvailableAppointmentStartDate);
     this.filtro.AvailableAppointmentStartDate= new Date(this.filtro.AvailableAppointmentStartDate);
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
+  }
+
+  orderResults(sort, order, element) {
+    (document.querySelector('#bestScore') as HTMLElement).style.color = 'black';
+    (document.querySelector('#bestScore') as HTMLElement).style.borderBottom = '1px black solid';
+    (document.querySelector('#lessScore') as HTMLElement).style.color = 'black';
+    (document.querySelector('#lessScore') as HTMLElement).style.borderBottom = '1px black solid';
+    (document.querySelector('#bestComments') as HTMLElement).style.color = 'black';
+    (document.querySelector('#bestComments') as HTMLElement).style.borderBottom = '1px black solid';
+    (document.querySelector('#lessComments') as HTMLElement).style.color = 'black';
+    (document.querySelector('#lessComments') as HTMLElement).style.borderBottom = '1px black solid';
+
+    (document.querySelector('#' + element) as HTMLElement).style.color = '#00b1f2';
+    (document.querySelector('#' + element) as HTMLElement).style.borderBottom = '2px #00b1f2 solid';
+    this.filtro.SortField = sort;
+    this.filtro.AscendingOrder = order;
+    this.getByFilter(this.filtro, false);
   }
 }
