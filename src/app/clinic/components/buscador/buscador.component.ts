@@ -16,7 +16,7 @@ import { BaseComponent } from "../../core/base.component";
 export class BuscadorComponent extends BaseComponent
   implements OnInit, AfterViewInit, OnDestroy {
   public busqueda = null;
-  public clinicas;
+  public clinicas = [];
   public filtro;
   public coments;
   public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -152,9 +152,17 @@ export class BuscadorComponent extends BaseComponent
     if (page != 'undefined' && page == true) {
       filtro.to = this.from;
     } else {
+      this.clinicas = null;
       this.from = 0;
       filtro.to = global.quantityOfResultsToShow;
     }
+
+    if (this.clinicas) {
+      var actualClinics = this.clinicas.length;
+    } else {
+      var actualClinics = 0;
+    }
+    console.log(filtro);
     $("#loading-bar-spinner").removeAttr("hidden");
     $("#loading-bar-spinner").show();
     this._BusquedaService.getByFilter(filtro).subscribe(
@@ -165,9 +173,9 @@ export class BuscadorComponent extends BaseComponent
           if (this.from == 0) {
             this.from = this.from + response.length + global.quantityOfResultsToShow;
           } else {
-            this.from = this.from + response.length;
+            this.from = this.from + (response.length - actualClinics);
           }
-          if (response.length - global.quantityOfResultsToShow == 0) {
+          if ((response.length - actualClinics) == global.quantityOfResultsToShow) {
             (document.querySelector('#verMasButton') as HTMLElement).style.display = 'block';
           } else {
             (document.querySelector('#verMasButton') as HTMLElement).style.display = 'none';
