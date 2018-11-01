@@ -37,6 +37,7 @@ export class BuscadorComponent extends BaseComponent
   public availableStart = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() , this.currentDate.getDate());
   public availableEnd= new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() , this.currentDate.getDate()+15);
   public from = 0;
+  public showLoading = true;
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
@@ -162,11 +163,12 @@ export class BuscadorComponent extends BaseComponent
     } else {
       var actualClinics = 0;
     }
-    console.log(filtro);
+    this.showLoading = true;
     $("#loading-bar-spinner").removeAttr("hidden");
     $("#loading-bar-spinner").show();
     this._BusquedaService.getByFilter(filtro).subscribe(
       response => {
+        this.showLoading = false;
         if (response.length != 0) {
           this.dontResult = false;
           this.clinicas = response;
