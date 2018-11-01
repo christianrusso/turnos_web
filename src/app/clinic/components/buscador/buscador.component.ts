@@ -167,6 +167,11 @@ export class BuscadorComponent extends BaseComponent
           } else {
             this.from = this.from + response.length;
           }
+          if (response.length - global.quantityOfResultsToShow == 0) {
+            (document.querySelector('#verMasButton') as HTMLElement).style.display = 'block';
+          } else {
+            (document.querySelector('#verMasButton') as HTMLElement).style.display = 'none';
+          }
         } else {
           this.dontResult = true;
           this.clinicas = null;
