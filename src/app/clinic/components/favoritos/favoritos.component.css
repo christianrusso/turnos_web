@@ -1,0 +1,19 @@
+.logoimg{
+    width: 100%;
+    max-width: 120px;
+    /* width: 120px; */
+    max-height: 140px;
+    border-radius: 10%;
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+.scoreSize {
+    width: 40px;
+    display: inline-table;
+    text-align: center;
+    height: 34px;
+    border: none;
+    border-radius: 4px;
+    font-size: 20.5pt;
+}

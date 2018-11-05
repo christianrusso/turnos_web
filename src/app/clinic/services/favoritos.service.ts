@@ -36,4 +36,12 @@ export class FavoritosService {
 
     return JSON.parse(this.token);
   }
+  removeFavorite(id) {
+    this.headers.set("Authorization", "Bearer " + this.getToken().token);
+    return this._http
+        .post(this.url + 'Api/Client/RemoveFavoriteClinic', {Id: id}, {
+          headers: this.headers
+        })
+        .map(res => res.json());
+  }
 }

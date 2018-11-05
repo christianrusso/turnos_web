@@ -6,11 +6,45 @@
   <div class="row nosotros-align">
   <div class="col-sm-12 col-md-8 offset-sm-2">
     <div class="row">
-    <div class="col-xs-12 col-md-6 text-nosotros">
+    <div class="col-xs-12 col-md-9">
       
-      <h2>Listado de favoritos.</h2>
+      <h2 style="font-family: SfUiDisplaySemiBold; color: #454edb; font-size: 30px;">Mis favoritos.</h2>
       <div *ngFor="let row of favoritos">
-          <p> {{row.name}}</p>
+        <div class="col-xs-12 cluster-clinica" style="display: flex;">
+          <div class="col-xs-12 col-sm-2 col-md-3 img-clin">
+            <img class="logoimg" src="{{row.logo}}" alt="Clinica">
+          </div>
+          <div class="col-xs-12 col-sm-7 col-md-5">
+            <div class="specific-clinica">
+              <h3 style="font-family: SfUiDisplayMedium; color: black; font-size: 25px;">{{row.name}}</h3>
+            </div>
+            <div class="ubi-clinica">
+              <i class="fa fa-map-marker"></i>
+              <span style="font-family: SfUiDisplayLight; font-size: 13px;">{{row.city}}</span>
+            </div>
+            <div><br></div>
+            <div class="stars-opiniones">
+              <span style="background-color: #454EDB; color:white; font-family: SfUiDisplayBold; font-size: 21px; vertical-align: middle;" class="scoreSize">{{row.score | number:'1.0-1'}}</span>
+              &nbsp;
+              <span *ngFor="let scor of score">
+                  <span *ngIf="row.score -scor >= scor">
+                      <i class="fa fa-star"></i>
+                  </span>
+              </span>
+            </div>
+
+          </div>
+
+          <div class="col-xs-12 col-md-3 col-sm-3 ask-clin">
+            <a (click)="favorito(i,row.clinicId)" class="heart" *ngIf="identity != null">
+              <i id="icon{{row.clinicId}}" class="fa fa-heart-o corazon"></i>
+            </a>
+
+            <a style="color: #454edb; border-radius: 50px; padding: 10px 3px; transition: all 0.3s ease-in-out; font-family: SfUiDisplayRegular; font-size: 11px; border: solid 1px #454edb;" (click)="Reservar(row.clinicId)" class="btn-round-lg">VER MÁS</a>
+            <a style="color: #e83030; border-radius: 50px; padding: 10px 3px; transition: all 0.3s ease-in-out; font-family: SfUiDisplayRegular; font-size: 11px; border: solid 1px #e83030;" (click)="deleteFavorite(row.clinicId)" class="btn-round-lg">ELIMINAR</a>
+            <!-- <a href="" class="pagar">Pagar ahora</a> -->
+          </div>
+        </div>
       </div>
   
     </div>

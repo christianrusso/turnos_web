@@ -10,6 +10,8 @@ import { FavoritosService } from "../../services/favoritos.service";
 })
 export class FavoritosComponent implements OnInit {
 
+  public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
   constructor(    private _FavoritosService: FavoritosService,
   ) { }
     public favoritos;
@@ -27,5 +29,17 @@ export class FavoritosComponent implements OnInit {
       // Manejar errores
     }
   );
-}
+ }
+
+ public deleteFavorite(id) {
+      this._FavoritosService.removeFavorite(id).subscribe(
+          console.log()
+          response => {
+              this.getFavorite();
+          },
+          error => {
+              // Manejar errores
+          }
+      );
+ }
 }
