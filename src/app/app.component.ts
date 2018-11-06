@@ -96,6 +96,11 @@ export class AppComponent extends BaseComponent
           response.forEach(element => {
             if (element.appointments.length > 0) {
               element.appointments.forEach(appoint => {
+                if (appoint.state == 1) {
+                  var now = new Date().getTime();
+                  var to = new Date(appoint.dateTime).getTime();
+                  appoint.diffToAppointment = Math.round((to-now) / 60000);
+                }
                 this.alertTurn.push(appoint);
               })
             }

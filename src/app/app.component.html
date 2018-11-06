@@ -21,14 +21,39 @@
     
     
                             <span>
-                                <i class="fa fa-bell-o">
+                                <i class="fa fa-bell-o notificationBell">
                                 </i>
                             </span>
                             <span class="badge" *ngIf="alertTurn.length > 0">{{alertTurn.length}}</span>
     
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <p class="dropdown-item text-white" *ngFor="let row of alertTurn; let i = index">Turno en: {{row.clinic}}</p>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 20rem; box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.2);">
+                            <p style="font-family: SfUiDisplayMedium; font-size: 11px; margin-left: 10px;">NOTIFICACIONES</p>
+                            <hr>
+                            <div *ngFor="let row of alertTurn; let i = index" style="margin-left: 10px;">
+                                <div style="display: flex;">
+                                    <div *ngIf="row.state == 1">
+                                        <div></div>
+                                        <div>
+                                            <p style="font-family: SfUiDisplayMedium; font-size: 14px;">¡Tienes una reserva en {{row.clinic}}!</p>
+                                            <p *ngIf="row.diffToAppointment >= 0 && row.diffToAppointment <= 60" style="font-family: SfUiDisplayLight; font-size: 13px; color: #e83030;"><img style="width: 19px;" src="/assets/img/clock.png">En menos de una hora</p>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="row.state == 2">
+                                        <div></div>
+                                        <div>
+                                            <p style="font-family: SfUiDisplayMedium; font-size: 14px;">No te olvides de puntuar tu reserva en {{row.clinic}}</p>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="row.state == 3">
+                                        <div>
+                                            <p style="font-family: SfUiDisplayMedium; font-size: 14px;">¡Lo sentimos!</p>
+                                            <p style="font-family: SfUiDisplayLight; font-size: 12px;">Tu reserva en {{row.clinic}} ha sido cancelada</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
                         </div>
                     </li>
                     <div class="line-menu-header"></div>

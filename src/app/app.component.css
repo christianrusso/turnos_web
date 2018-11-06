@@ -14,17 +14,24 @@
     display: inline-block;
     border-radius: 2px;
   }
-  
- 
+
+  .notificationBell {
+    position: absolute;
+    left: -16px;
+    top: 14px;
+    font-size: 25px;
+  }
   
   .notification .badge {
     position: absolute;
-    top: -5px;
-    right: -10px;
+    top: 11px;
+    right: -6px;
     padding: 5px 10px;
-    border-radius: 50%;
-    background-color: red;
-    color: white;
+    border-radius: 100%;
+    background-color: #1fefeb;
+    color: #454edb;
+    font-family: SfUiDisplayBold;
+    font-size: 11px;
   }
 
   .imgLogo{
@@ -41,7 +48,7 @@
   @media (min-width: 1200px){
     .container {
       max-width: 87%;
-  }
+    }
   }
 
   .container {
@@ -62,4 +69,24 @@
     margin-bottom: -28px;
 }
 
+}
+
+@media (max-width: 1000px) {
+  .notificationBell {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    font-size: 25px;
+  }
+  .notification .badge {
+    position: absolute;
+    top: 0px;
+    right: 13px;
+    padding: 5px 10px;
+    border-radius: 100%;
+    background-color: #1fefeb;
+    color: #454edb;
+    font-family: SfUiDisplayBold;
+    font-size: 11px;
+  }
 }
