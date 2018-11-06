@@ -34,6 +34,37 @@
     font-size: 11px;
   }
 
+  .user-options {
+    background: none repeat scroll 0 0 #ffffff;
+    width: 125px;
+    z-index: 999;
+    border:solid #ffffff 1px;
+  }
+
+  .user-options:after, .user-options:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .user-options:after {
+    border-color: rgba(238, 238, 238, 0);
+    border-bottom-color: #ffffff;
+    border-width: 15px;
+    margin-left: -15px;
+  }
+  .user-options:before {
+    border-color: rgba(204, 204, 204, 0);
+    border-bottom-color: #ffffff;
+    border-width: 16px;
+    margin-left: -16px;
+  }
+
   .imgLogo{
     width: 100%;
     max-width: 60px;

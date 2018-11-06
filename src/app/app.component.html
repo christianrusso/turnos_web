@@ -27,7 +27,7 @@
                             <span class="badge" *ngIf="alertTurn.length > 0">{{alertTurn.length}}</span>
     
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 20rem; box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.2);">
+                        <div class="dropdown-menu user-options" aria-labelledby="navbarDropdown" style="min-width: 20rem; box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.2); left: -163px;">
                             <p style="font-family: SfUiDisplayMedium; font-size: 11px; margin-left: 10px;">NOTIFICACIONES</p>
                             <hr>
                             <div *ngFor="let row of alertTurn; let i = index" style="margin-left: 10px;">
@@ -36,7 +36,7 @@
                                         <div></div>
                                         <div>
                                             <p style="font-family: SfUiDisplayMedium; font-size: 14px;">¡Tienes una reserva en {{row.clinic}}!</p>
-                                            <p *ngIf="row.diffToAppointment >= 0 && row.diffToAppointment <= 60" style="font-family: SfUiDisplayLight; font-size: 13px; color: #e83030;"><img style="width: 19px;" src="/assets/img/clock.png">En menos de una hora</p>
+                                            <p *ngIf="row.diffToAppointment >= 0 && row.diffToAppointment <= 60" style="font-family: SfUiDisplayLight; font-size: 13px; color: #e83030;"><img style="width: 19px;" src="/assets/img/clock.png"> &nbsp; En menos de una hora</p>
                                         </div>
                                     </div>
                                     <div *ngIf="row.state == 2">
