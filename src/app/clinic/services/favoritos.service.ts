@@ -41,7 +41,6 @@ export class FavoritosService {
     return this._http
         .post(this.url + 'Api/Client/RemoveFavoriteClinic', {Id: id}, {
           headers: this.headers
-        })
-        .map(res => res.json());
+        });
   }
 }

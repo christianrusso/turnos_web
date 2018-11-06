@@ -33,7 +33,6 @@ export class FavoritosComponent implements OnInit {
 
  public deleteFavorite(id) {
       this._FavoritosService.removeFavorite(id).subscribe(
-          console.log()
           response => {
               this.getFavorite();
           },
