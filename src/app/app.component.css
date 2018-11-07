@@ -32,6 +32,7 @@
     color: #454edb;
     font-family: SfUiDisplayBold;
     font-size: 11px;
+    width: 25px;
   }
 
   .user-options {
@@ -119,5 +120,6 @@
     color: #454edb;
     font-family: SfUiDisplayBold;
     font-size: 11px;
+    width: 25px;
   }
 }
