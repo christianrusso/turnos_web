@@ -428,6 +428,7 @@
     <div style="z-index: 999; width: 100%; height: 100%; background-color: #6F75CB; position: fixed; opacity: 0.5;"></div>
     <div style="background-color: white; position: absolute; top: 30px; width: 96%; left: 50%; margin-left: -48%; z-index: 1000; height: auto; display: block; padding-right: 0px; padding-left: 17px;">
         <!--<p (click)="closeMapa()" style="float: right;">cerrar</p>-->
+        <div style="position: absolute; top: 0px; z-index: 100;" (click)="closeMapa();"><img style="width: 20px;" src="/assets/img/close.png"></div>
         <div style="display: flex; flex-flow: row wrap;">
             <div class="col-xs-12 col-md-3 white float-left filter-search" style="background-color: white; ">
                 <div class="col-xs-12 col-md-12 white">
@@ -578,7 +579,7 @@
             <div class="col-xs-12 col-md-3 white" style="height: 1197px; overflow: auto;">
                 <div>
                     <div *ngFor="let row of clinicas">
-                        <div class="col-xs-12 cluster-clinica" style="display: flex; padding-bottom: 38px;">
+                        <div class="col-xs-12 cluster-clinica clinicBorder" style="display: flex; padding-bottom: 38px;">
                             <div class="col-xs-12 col-sm-3 col-md-4 img-clin">
                                 <img class="logoimg" src="{{row.logo}}" alt="Clinica">
                             </div>
@@ -608,7 +609,6 @@
             </div>
             <div class="col-xs-12 col-md-6 white">
                 <div class="col-12 float-left clinica-search" style="height: 100%; padding-left: 0px; padding-right: 0px; height: 100%;">
-                    <div style="position: absolute; left: 93%; top: 0px; z-index: 100;" (click)="closeMapa();">Cerrar</div>
                     <div id="google-map" class="" style="margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; height: 1100px;"></div>
                 </div>
             </div>

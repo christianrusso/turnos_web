@@ -32,8 +32,8 @@
                             <hr>
                             <div *ngFor="let row of alertTurn; let i = index" style="margin-left: 10px;">
                                 <div style="display: flex;">
-                                    <div *ngIf="row.state == 1">
-                                        <div></div>
+                                    <div *ngIf="row.state == 1" style="display: flex;">
+                                        <div style="margin-right: 8px;"><img style="max-width: 70px;" src="{{row.logo}}" /></div>
                                         <div>
                                             <p style="font-family: SfUiDisplayMedium; font-size: 14px;">¡Tienes una reserva en {{row.clinic}}!</p>
                                             <p *ngIf="row.diffToAppointment >= 0 && row.diffToAppointment <= 60" style="font-family: SfUiDisplayLight; font-size: 13px; color: #e83030;"><img style="width: 19px;" src="/assets/img/clock.png"> &nbsp; En menos de una hora</p>
