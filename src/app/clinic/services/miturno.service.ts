@@ -16,7 +16,7 @@ export class MiturnoService {
   GetWeekForClient(date) {
     this.headers.set("Authorization", "Bearer " + this.getToken().token);
     return this._http
-      .post(this.url + "api/Appointment/GetWeekForClient", date, {
+      .post(this.url + "api/client/GetWeekForClient", date, {
         headers: this.headers
       })
       .map(res => res.json());
