@@ -74,8 +74,6 @@ export class BuscadorComponent extends BaseComponent
       };
     }else{
       this.filtro = {
-        AvailableAppointmentStartDate:this.availableStart,
-        AvailableAppointmentEndDate:this.availableEnd,
         Cities: [],
         Specialties: [],
         Subspecialties: [],
