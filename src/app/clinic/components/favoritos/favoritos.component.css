@@ -1,4 +1,4 @@
-.logoimg{
+.logoimg {
     width: 100%;
     max-width: 120px;
     /* width: 120px; */
@@ -16,4 +16,12 @@
     border: none;
     border-radius: 4px;
     font-size: 20.5pt;
+}
+.seeMore:hover {
+    background-color: #454edb;
+    color: white !important;
+}
+.delete:hover {
+    background-color: #e83030;
+    color: white !important;
 }
