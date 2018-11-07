@@ -5,13 +5,14 @@ import { MapService } from "../../services/map.service";
 import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { BaseComponent } from "../../core/base.component";
+import { VerMapService } from "../../services/ver-mapa.service";
 
 
 @Component({
   selector: "app-buscador",
   templateUrl: "./buscador.component.html",
   styleUrls: ["./buscador.component.css"],
-  providers: [BusquedaService, MapService, RegisterLoginService]
+  providers: [BusquedaService, MapService, RegisterLoginService, VerMapService]
 })
 export class BuscadorComponent extends BaseComponent
   implements OnInit, AfterViewInit, OnDestroy {
@@ -38,9 +39,13 @@ export class BuscadorComponent extends BaseComponent
   public availableEnd= new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() , this.currentDate.getDate()+15);
   public from = 0;
   public showLoading = true;
+  public showMap = false;
+  public locations = [];
+  public insertStart = [];
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
+    private _VerMapService: VerMapService,
     private _RegisterLoginService: RegisterLoginService,
     private _router: Router,
   ) {
@@ -175,14 +180,45 @@ export class BuscadorComponent extends BaseComponent
           } else {
             this.from = this.from + (response.length - actualClinics);
           }
-          if ((response.length - actualClinics) == global.quantityOfResultsToShow) {
-            (document.querySelector('#verMasButton') as HTMLElement).style.display = 'block';
-          } else {
-            (document.querySelector('#verMasButton') as HTMLElement).style.display = 'none';
+          if ((document.querySelector('#verMasButton') as HTMLElement)) {
+            if ((response.length - actualClinics) == global.quantityOfResultsToShow) {
+              (document.querySelector('#verMasButton') as HTMLElement).style.display = 'block';
+            } else {
+              (document.querySelector('#verMasButton') as HTMLElement).style.display = 'none';
+            }
           }
+          this.locations = [];
+          response.forEach(element => {
+            this.score.forEach(star => {
+              if (element.score - star >= star) {
+                this.insertStart.push('<i class="fa fa-star"></i>');
+              }
+            });
+
+            this.locations.push([
+              '<div class="col-xs-12 col-md-12 infow"><div class="row"><div class="col-xs-12 col-md-5"><img src=' +
+              element.logo +
+              '></div><div class="col-xs-12 col-md-7"><h3>' +
+              element.name +
+              '</h3><p class="location"><i class="fa fa-map-marker"></i>' +
+              element.address +
+              '</p><div class="punt">' +
+              element.score +
+              '</div><div class="stars">' +
+              this.insertStart +
+              "</div></div></div></div>",
+              element.latitude,
+              element.longitude
+            ]);
+            this.insertStart = [];
+          });
         } else {
           this.dontResult = true;
           this.clinicas = null;
+          this.locations = [];
+        }
+        if (this.showMap) {
+          this._VerMapService.generateMap(this.locations, null);
         }
         $("#loading-bar-spinner").hide();
       },
@@ -438,7 +474,12 @@ FiltrarDistancia(deviceValue) {
   }
 
   VerMapa() {
-    this._router.navigate(["/ver-mapa"]);
+    this.showMap = true;
+    this.getByFilter(this.filtro, false);
+    //this._VerMapService.generateMap(this.locations, null);
+  }
+  closeMapa() {
+    this.showMap = false;
   }
 
   getDayName(day): string {
