@@ -96,7 +96,7 @@ export class VerMapService {
    });
    // Fit these bounds to the map
    map.fitBounds(bounds);
-   map.setZoom(16);
+   map.setZoom(12);
  }
  AutoCenter();
 

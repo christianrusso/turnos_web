@@ -53,6 +53,15 @@ button.delete-filters:hover {
   display: block;
   cursor: pointer;
 }
+.scoreSize {
+  width: 40px;
+  display: inline-table;
+  text-align: center;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20.5pt;
+}
 .logoimg{
   width: 100%;
   max-width: 120px;
