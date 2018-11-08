@@ -4885,3 +4885,11 @@ background: #d1fbfa;
     }
 }
 
+.firstStep {
+    margin-left: 100px;
+}
+@media screen and (max-width: 750px) {
+    .firstStep {
+        margin-left: 0px;
+    }
+}
