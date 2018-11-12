@@ -254,3 +254,12 @@ mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-today.cal-in-month.ng-star-ins
 mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-future.cal-in-month.ng-star-inserted.cal-has-events:hover {
   background: #8ef6f4 !important;
 }
+
+.seeMore:hover {
+  background-color: #454edb;
+  color: white !important;
+}
+.delete:hover {
+  background-color: #e83030;
+  color: white !important;
+}

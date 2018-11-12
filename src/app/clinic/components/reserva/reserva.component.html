@@ -285,35 +285,37 @@
 
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-header" style="background-color: transparent; border: none; padding: 0 0.5rem 0.3rem 0;">
+                    <button type="button" class="close" data-dismiss="modal"><img style="width: 12px;" src="/assets/img/close.png"></button>
                 </div>
-                <div class="modal-body">
-                    <div class=" text-reserva" *ngIf="doctorBlock">
-                        <h2 class="text-center">Seleccione doctor y horario.</h2>
+                <div class="modal-body" style="padding: 0 0 1rem 0 !important;">
+                    <div class=" text-reserva" *ngIf="doctorBlock" style="border-bottom: 1px #707070 solid; position: absolute; width: 100%; top: -16px;">
+                        <h2 class="text-center" style="font-family: SfUiDisplayMedium; font-size: 13px; color: black;">SELECCIONE DOCTOR Y HORARIO</h2>
 
                     </div>
-                    <div class=" text-reserva" *ngIf="doctorBlock==false">
+                    <div class=" text-reserva" style="font-family: SfUiDisplayLight; font-size: 11px;" *ngIf="doctorBlock==false">
                         <h2 class="text-center">Seleccione horario.</h2>
                     </div>
                     <div class="col-xs-4 col-md-12 horariosModal">
 
                         <form>
-                            <div class="form-group" *ngIf="doctorBlock">
-                                <label class=" text-center" for="">Médico</label>
-                                <select2 (valueChanged)="FiltrarEspecialista($event)" name="medico-turno" lang="es">
-                                    <option value=""></option>
-                                    <option *ngFor="let row of especialista" value="{{row.id}}">{{row.firstName}},{{row.lastName}}
-                                    </option>
-                                </select2>
-                            </div>
+                            <div style="display: flex;">
+                                <div class="form-group" style="width: 45%; margin-right: 44px;" *ngIf="doctorBlock">
+                                    <label class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 11px;">Médico</label>
+                                    <select2 (valueChanged)="FiltrarEspecialista($event)" name="medico-turno" lang="es">
+                                        <option value=""></option>
+                                        <option *ngFor="let row of especialista" value="{{row.id}}">{{row.firstName}},{{row.lastName}}
+                                        </option>
+                                    </select2>
+                                </div>
 
-                            <div class="form-group">
-                                <label class=" text-center" for="">Horario</label>
-                                <select2 [data]="horarios" (valueChanged)="FiltrarHoraSelect($event)" name="appointmentHorario"
-                                    lang="es">
+                                <div class="form-group" style="width: 45%;">
+                                    <label class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 11px;">Horario</label>
+                                    <select2 [data]="horarios" (valueChanged)="FiltrarHoraSelect($event)" name="appointmentHorario"
+                                        lang="es">
 
-                                </select2>
+                                    </select2>
+                                </div>
                             </div>
 
                             <div class="form-group" *ngIf="dontAvailable">
@@ -321,7 +323,10 @@
 
                             </div>
 
-                            <a data-dismiss="modal" (click)="Paso3()" class=" sig-turno text-white pointer">Siguiente</a>
+                            <div>
+                                <a style="color: #e83030; border-radius: 50px; padding: 10px 3px; transition: all 0.3s ease-in-out; font-family: SfUiDisplayRegular; font-size: 12px; border: solid 1px #e83030; float: left; width: 110px; text-align: center; cursor: pointer;" data-dismiss="modal"  class="btn-round-lg delete">Cancelar</a>
+                                <a style="color: #454edb; border-radius: 50px; padding: 10px 3px; transition: all 0.3s ease-in-out; font-family: SfUiDisplayRegular; font-size: 12px; border: solid 1px #454edb; float: right; width: 110px; text-align: center; cursor: pointer;" data-dismiss="modal" (click)="Paso3()" class="btn-round-lg seeMore">Siguiente</a>
+                            </div>
                         </form>
                     </div>
 
