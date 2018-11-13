@@ -179,9 +179,9 @@ width: 180px;
 
 .pointer {cursor: pointer;}
 .modal-header{
-    background-color: #454edb;
     border-top-left-radius: 0rem !important;
     border-top-right-radius: 0rem !important;
+    text-align: center;
 }
 
 .modal-dialog {
@@ -243,7 +243,69 @@ mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-future.cal-in-month.ng-star-in
 
 
 .backBtn{
-    background-color:#454edb !important;
-    border-color: #454edb !important;
-    background: #454edb !important;
+    color: #454edb;
+    border-radius: 50px;
+    padding: 10px 3px;
+    font-family: SfUiDisplayRegular;
+    font-size: 11px;
+    border: solid 1px #454edb;
+    width: 121px;
+}
+.backBtnRight{
+    color: #454edb;
+    border-radius: 50px;
+    padding: 10px 3px;
+    font-family: SfUiDisplayRegular;
+    font-size: 11px;
+    border: solid 1px #454edb;
+    width: 66px;
+}
+.seeMore:hover {
+    background-color: #454edb;
+    color: white !important;
+}
+
+.modalTitle {
+    font-family: SfUiDisplayMedium;
+    font-size: 16px;
+}
+
+.modalText {
+    font-family: SfUiDisplayLight;
+    font-size: 16px;
+}
+
+.itemContent {
+    margin-bottom: 10px;
+}
+
+.cal-month-view .cal-day-badge {
+    background-color: #454edb;
+}
+
+.cal-month-view .cal-open-day-events {
+    background-color: rgba(69, 78, 219, 0.28);
+    box-shadow: none;
+}
+
+.cal-month-view .cal-event-title:link {
+    color: #454edb;
+}
+
+.cal-week-view .cal-event {
+    background-color: rgba(69, 78, 219, 0.19);
+    border: solid 1px #454edb;
+}
+
+.cal-week-view .cal-event-title:link {
+    color: #454edb;
+}
+
+.cal-day-view .cal-event {
+    background-color: rgba(69, 78, 219, 0.19);
+    border: solid 1px #454edb;
+}
+
+.cal-day-view .cal-event-title:link {
+    color: #454edb;
 }

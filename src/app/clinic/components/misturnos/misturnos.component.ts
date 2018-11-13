@@ -93,7 +93,8 @@ export class MisturnosComponent implements OnInit {
     this._MiTurno.GetWeekForClient(this.filter).subscribe(
       response => {
         console.log(response);
-        response.forEach(element => {
+        var clinica = response.clinic_GetWeekForClient;
+        clinica.forEach(element => {
           if (element.appointments.length > 0) {
             element.appointments.forEach(appoint => {
               this.misturns.push(appoint);
@@ -101,7 +102,7 @@ export class MisturnosComponent implements OnInit {
               if (appoint.state == 1) {
                 if (new Date().getTime() + (1 * 24 * 60 * 60 * 1000) <= new Date(date.setDate(date.getDate())).getTime()) {
                   this.events.push({
-                    title: appoint.specialty,
+                    title: appoint.specialty + " - " + appoint.doctor,
                     start: new Date(date.setDate(date.getDate())),
                     actions: this.actions24HoursCancel,
                     id: appoint.id
@@ -109,7 +110,7 @@ export class MisturnosComponent implements OnInit {
                 }
                 else if (new Date().getTime() > new Date(date.setDate(date.getDate())).getTime()) {
                   this.events.push({
-                    title: appoint.specialty,
+                    title: appoint.specialty + " - " + appoint.doctor,
                     start: new Date(date.setDate(date.getDate())),
                     actions: this.actions24HoursConfirm,
                     id: appoint.id
@@ -117,7 +118,7 @@ export class MisturnosComponent implements OnInit {
                 }
                 else{
                   this.events.push({
-                    title: appoint.specialty,
+                    title: appoint.specialty + " - " + appoint.doctor,
                     start: new Date(date.setDate(date.getDate())),
                     id:appoint.id
                   });
@@ -125,14 +126,14 @@ export class MisturnosComponent implements OnInit {
                 }
               } else if (appoint.state == 2) {
                 this.events.push({
-                  title: appoint.specialty,
+                  title: appoint.specialty + " - " + appoint.doctor,
                   start: new Date(date.setDate(date.getDate())),
                   actions: this.actionsCancel,
                   id: appoint.id
                 });
               } else {
                 this.events.push({
-                  title: appoint.specialty,
+                  title: appoint.specialty + " - " + appoint.doctor,
                   start: new Date(date.setDate(date.getDate())),
                   actions: this.actionsConfirm,
                   id: appoint.id

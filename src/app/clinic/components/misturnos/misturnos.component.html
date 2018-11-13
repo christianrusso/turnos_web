@@ -9,32 +9,31 @@
     <div class="dias col-md-10 offset-1 calendario-turnos" height="50px">
       <br>
       <ng-template #modalContent let-close="close">
-        <div class="modal-header">
-            <img width="127px" src="/assets/img/logo-white.png" alt="Logo">
-          <button type="button" class="close" (click)="close()">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-header" style="padding: 0;">
+          <span style="font-family: SfUiDisplayMedium; width: 100%; font-size: 14px; margin-top: 17px; margin-left: 38px;">
+            TU RESERVA
+          </span>
+            <button type="button" class="close" (click)="close()" style="margin-right: -5px;">
+              <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <div class="modal-body text-center">
-          <div>
-            Clinica:
-            <pre>{{ turn?.clinic }}</pre>
+          <div class="itemContent">
+            <span class="modalTitle">Clinica:</span>
+            <span class="modalText">{{ turn?.clinic }}</span>
           </div>
-          <div>
-            Doctor:
-            <pre>{{ turn?.doctor  }}</pre>
+          <div class="itemContent">
+            <span class="modalTitle">Doctor:</span>
+            <span class="modalText">{{ turn?.doctor }}</span>
           </div>
-          <div>
-            Especialidad:
-            <pre>{{ turn?.specialty  }}</pre>
+          <div class="itemContent">
+            <span class="modalTitle">Especialidad:</span>
+            <span class="modalText">{{ turn?.specialty }}</span>
           </div>
-          <div *ngIf="turn.subspecialty">
-            Sub Especialidad:
-            <pre>{{ turn?.subspecialty  }}</pre>
+          <div class="itemContent" *ngIf="turn.subspecialty">
+            <span class="modalTitle">Sub Especialidad:</span>
+            <span class="modalText">{{ turn?.subspecialty }}</span>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
         </div>
       </ng-template>
       <!-- CANCELAR -->
@@ -125,38 +124,38 @@
       </ng-template>
 
       <div class="row text-center ">
-        <div class="col-md-4 ">
+        <div class="col-md-4 col-sm-2">
+            <div class="btn-group">
+              <div class="backBtn btn-round-lg seeMore" (click)="Volver()">
+                Volver atras
+              </div>
+            </div>
         </div>
-        <div class=" col-md-4 ">
+        <div class=" col-md-3 col-sm-5" style="padding-left: 0px; padding-right: 0px;">
           <p class="tamanioTexto ">
             <i (click)="previus(viewDate)" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" class="fa fa-caret-left colorFlecha pointer "></i>
             {{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}
             <i (click)="next(viewDate)"  mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" class=" pointer colorFlecha fa fa-caret-right"></i>
           </p>
         </div>
+        <div class="col-md-5 col-sm-5">
+            <div class="btn-group">
+              <div class="backBtnRight btn-round-lg seeMore" (click)="view = 'month'" [class.active]="view === 'month'">
+                Mes
+              </div>
+              &nbsp;
+              <div class="backBtnRight btn-round-lg seeMore" (click)="view = 'week'" [class.active]="view === 'week'">
+                Semana
+              </div>
+              &nbsp;
+              <div class="backBtnRight btn-round-lg seeMore" (click)="view = 'day'" [class.active]="view === 'day'">
+                Día
+              </div>
+            </div>
+        </div>
       </div>
 
       <div class="row text-center">
-        <div class="col-md-6">
-          <div class="btn-group">
-            <div class="btn btn-primary backBtn" (click)="Volver()">
-              Volver atras
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="btn-group">
-            <div class="btn btn-primary backBtn" (click)="view = 'month'" [class.active]="view === 'month'">
-              Mes
-            </div>
-            <div class="btn btn-primary backBtn" (click)="view = 'week'" [class.active]="view === 'week'">
-              Semana
-            </div>
-            <div class="btn btn-primary backBtn" (click)="view = 'day'" [class.active]="view === 'day'">
-              Día
-            </div>
-          </div>
-        </div>
       </div>
       <br>
 
