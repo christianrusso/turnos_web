@@ -285,7 +285,7 @@
                                 <a (click)="favorito(i,row.clinicId)" class="heart" *ngIf="identity != null">
                                     <i id="icon{{row.clinicId}}" class="fa fa-heart-o corazon"></i>
                                 </a>
-                                <h4>{{row.score | number:'.1-5' }}</h4>
+                                <h4>{{row.score | number:'1.0-1' }}</h4>
                                 <a href="" class="comments">
                                     <p class="comments">{{row.scoreQuantity}} comentarios</p>
                                 </a>
