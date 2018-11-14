@@ -84,7 +84,7 @@
       
       font-weight: 500;
       
-      font-size: 18px;
+      font-size: 17px;
       
       letter-spacing: 0.5px;
       
@@ -102,8 +102,8 @@
   .colorFlecha{
     color: #ccc;
     font-size: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .cal-month-view .cal-header .cal-cell{
     width: 100%;
@@ -308,4 +308,8 @@ mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-future.cal-in-month.ng-star-in
 
 .cal-day-view .cal-event-title:link {
     color: #454edb;
+}
+
+.cal-week-view .cal-header.cal-today {
+    background-color: transparent;
 }
