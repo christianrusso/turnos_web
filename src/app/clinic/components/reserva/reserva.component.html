@@ -248,7 +248,7 @@
                         <div style="display: flex;">
                             <div class="form-group" style="width: 45%; margin-right: 44px;">
                                 <div>
-                                    <p class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 11px;">Obra Social</p>
+                                    <p class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 13px;">Obra Social</p>
                                 </div>
                                 <div>
                                     <select2 (valueChanged)="FiltrarObraSocial($event)" name="MedicalPlanId" type="text" name="obrasSociales" lang="es" style="border: none; font-family: SfUiDisplayLight;">
@@ -258,7 +258,7 @@
                             </div>
 
                             <div class="form-group" style="width: 45%;">
-                                <p class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 11px;">Plan</p>
+                                <p class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 13px;">Plan</p>
                                 <select2  (valueChanged)="SelectMedicalPlans($event)" #MedicalPlanId="ngModel" name="MedicalPlanId"
                                           [(ngModel)]="paciente.MedicalPlanId" type="text" name="appointment" lang="es" style="border: none; font-family: SfUiDisplayLight;">
                                     <option *ngFor="let medical of medicalPlans" value="{{medical.id}}">{{medical.description}}</option>
