@@ -200,17 +200,17 @@
 
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-header" style="background-color: transparent; border: none; padding: 0 0.5rem 0.3rem 0;">
+                    <button type="button" class="close" data-dismiss="modal"><img style="width: 15px;" src="/assets/img/close.png"></button>
                 </div>
                 <div class="modal-body">
-                    <div class=" text-reserva">
-                        <h2 class="text-center">Complete los datos.</h2>
+                    <div class=" text-reserva" style="border-bottom: 1px #707070 solid; position: absolute; width: 100%; top: -16px; left: 0px;">
+                        <h2 class="text-center" style="font-family: SfUiDisplayMedium; font-size: 13px; color: black;">Complete los datos</h2>
 
                     </div>
 
-                    <form #formCategoria="ngForm" (ngSubmit)="onSubmit()">
-                        <div class="row">
+                    <form (ngSubmit)="onSubmit()">
+                        <!--<div class="row">
                             <div class="col-md-12">
                                 <input #FirstName="ngModel" name="FirstName" [(ngModel)]="paciente.FirstName" type="text"
                                     class="form-control text-center" placeholder="Nombre">
@@ -244,24 +244,24 @@
                                 <input #Dni="ngModel" name="Dni" [(ngModel)]="paciente.Dni" type="text" class="form-control text-center"
                                     placeholder="DNI">
                             </div>
-                        </div>
-                        <br>
-                        <div class=" row">
-                            <div class="col-md-12">
-                                <h6 class="text-center" for="">Obra Social</h6>
-                                <select2 (valueChanged)="FiltrarObraSocial($event)" pleceholder="obras" class="form-control"  name="MedicalPlanId" type="text" name="obrasSociales" lang="es">
-                                    <option value=""></option>
-                                    <option class="col-md-6" *ngFor="let obras of obrasSociales" value="{{obras.id}}">{{obras.description}}</option>
-                                </select2>
+                        </div>-->
+                        <div style="display: flex;">
+                            <div class="form-group" style="width: 45%; margin-right: 44px;">
+                                <div>
+                                    <p class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 11px;">Obra Social</p>
+                                </div>
+                                <div>
+                                    <select2 (valueChanged)="FiltrarObraSocial($event)" name="MedicalPlanId" type="text" name="obrasSociales" lang="es" style="border: none;">
+                                        <option *ngFor="let obras of obrasSociales" value="{{obras.id}}">{{obras.description}}</option>
+                                    </select2>
+                                </div>
                             </div>
-                        </div>
-                        <div class=" row">
-                            <div class="col-md-12">
-                                <h6 class="text-center" for="">Plan</h6>
-                                <select2  (valueChanged)="SelectMedicalPlans($event)" pleceholder="obras" class="form-control" #MedicalPlanId="ngModel" name="MedicalPlanId"
-                                    [(ngModel)]="paciente.MedicalPlanId" type="text" name="appointment" lang="es">
-                                    <option value=""></option>
-                                    <option class="col-md-6" *ngFor="let medical of medicalPlans" value="{{medical.id}}">{{medical.description}}</option>
+
+                            <div class="form-group" style="width: 45%;">
+                                <p class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 11px;">Plan</p>
+                                <select2  (valueChanged)="SelectMedicalPlans($event)" #MedicalPlanId="ngModel" name="MedicalPlanId"
+                                          [(ngModel)]="paciente.MedicalPlanId" type="text" name="appointment" lang="es" style="border: none;">
+                                    <option *ngFor="let medical of medicalPlans" value="{{medical.id}}">{{medical.description}}</option>
                                 </select2>
                             </div>
                         </div>
