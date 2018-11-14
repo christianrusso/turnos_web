@@ -131,14 +131,14 @@
               </div>
             </div>
         </div>
-        <div class=" col-md-3 col-sm-5" style="padding-left: 0px; padding-right: 0px;">
+        <div class=" col-md-4 col-sm-5" style="padding-left: 0px; padding-right: 0px;">
           <p class="tamanioTexto " style="margin-bottom: 0; margin-top: 8px;">
             <i (click)="previus(viewDate)" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" class="fa fa-caret-left colorFlecha pointer "></i>
             {{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}
             <i (click)="next(viewDate)"  mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" class=" pointer colorFlecha fa fa-caret-right"></i>
           </p>
         </div>
-        <div class="col-md-5 col-sm-5">
+        <div class="col-md-4 col-sm-5">
             <div class="btn-group">
               <div class="backBtnRight btn-round-lg seeMore" (click)="view = 'month'" [class.active]="view === 'month'">
                 Mes
