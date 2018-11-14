@@ -263,3 +263,12 @@ mwl-calendar-month-cell.cal-cell.cal-day-cell.cal-future.cal-in-month.ng-star-in
   background-color: #e83030;
   color: white !important;
 }
+
+.select2 {
+  width: 100% !important;
+  font-family: SfUiDisplayLight;
+}
+
+.select2-selection__rendered {
+  font-family: SfUiDisplayLight;
+}

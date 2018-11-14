@@ -199,7 +199,7 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <div class="modal-content">
+            <div class="modal-content" style="height: 200px;">
                 <div class="modal-header" style="background-color: transparent; border: none; padding: 0 0.5rem 0.3rem 0;">
                     <button type="button" class="close" data-dismiss="modal"><img style="width: 15px;" src="/assets/img/close.png"></button>
                 </div>
@@ -251,7 +251,7 @@
                                     <p class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 11px;">Obra Social</p>
                                 </div>
                                 <div>
-                                    <select2 (valueChanged)="FiltrarObraSocial($event)" name="MedicalPlanId" type="text" name="obrasSociales" lang="es" style="border: none;">
+                                    <select2 (valueChanged)="FiltrarObraSocial($event)" name="MedicalPlanId" type="text" name="obrasSociales" lang="es" style="border: none; font-family: SfUiDisplayLight;">
                                         <option *ngFor="let obras of obrasSociales" value="{{obras.id}}">{{obras.description}}</option>
                                     </select2>
                                 </div>
@@ -260,7 +260,7 @@
                             <div class="form-group" style="width: 45%;">
                                 <p class=" text-center" for="" style="font-family: SfUiDisplayLight; font-size: 11px;">Plan</p>
                                 <select2  (valueChanged)="SelectMedicalPlans($event)" #MedicalPlanId="ngModel" name="MedicalPlanId"
-                                          [(ngModel)]="paciente.MedicalPlanId" type="text" name="appointment" lang="es" style="border: none;">
+                                          [(ngModel)]="paciente.MedicalPlanId" type="text" name="appointment" lang="es" style="border: none; font-family: SfUiDisplayLight;">
                                     <option *ngFor="let medical of medicalPlans" value="{{medical.id}}">{{medical.description}}</option>
                                 </select2>
                             </div>
@@ -268,8 +268,10 @@
                         <br>
                         <div class="row">
 
-                            <div class="col-md-1 offset-sm-5">
-                                <input class="btn btn-success text-center" type="submit" value="aceptar">
+                            <div class="col-md-12">
+                                <input class="btn btn-success text-center"
+                                       style="color: white; width: 155px; position: absolute; left: 50%; margin-left: -77.5px; border-radius: 50px; padding: 10px 3px; transition: all 0.3s ease-in-out; font-family: SfUiDisplayRegular; font-size: 11px;"
+                                       type="submit" value="Aceptar">
 
                             </div>
                         </div>

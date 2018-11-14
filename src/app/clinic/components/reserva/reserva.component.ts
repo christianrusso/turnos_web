@@ -466,7 +466,7 @@ export class ReservaComponent extends BaseComponent
       }
     );
   }
-  SelectMedicalPlans(medicalPlans){
+  SelectMedicalPlans(medicalPlans) {
       this.paciente.MedicalPlanId=medicalPlans.value;
   }
 }
