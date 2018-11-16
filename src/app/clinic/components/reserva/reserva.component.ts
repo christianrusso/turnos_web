@@ -456,7 +456,7 @@ export class ReservaComponent extends BaseComponent
   }
 
   FiltrarObraSocial(obra){
-    this._ReservaComponent.GetMedicalPlans(obra.value).subscribe(
+    this._ReservaComponent.GetMedicalPlans(obra.value,this.clinicId).subscribe(
       response => {
         this.medicalPlans = response;
         this.refresh.next();

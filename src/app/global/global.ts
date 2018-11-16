@@ -1,4 +1,4 @@
 export let global = {
-  url: 'http://orbitsa.xyz:5000/',
+  url: 'https://orbitsa.xyz:4443/',
   quantityOfResultsToShow: 10
 };

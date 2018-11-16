@@ -130,11 +130,11 @@ export class ReservaService {
 
 
   //GetMedicalPlans
-  GetMedicalPlans(id) {
+  GetMedicalPlans(idMedicalInsurance, idClinic) {
     return this._http
       .post(
         this.url + "api/MedicalPlan/GetAll",
-        { Id: id },
+        { Id: idMedicalInsurance, "UserId": idClinic },
         { headers: this.headers }
       )
       .map(res => res.json());
