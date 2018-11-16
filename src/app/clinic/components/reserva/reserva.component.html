@@ -252,6 +252,7 @@
                                 </div>
                                 <div>
                                     <select2 (valueChanged)="FiltrarObraSocial($event)" name="MedicalPlanId" type="text" name="obrasSociales" lang="es" style="border: none; font-family: SfUiDisplayLight;">
+                                        <option value=""></option>
                                         <option *ngFor="let obras of obrasSociales" value="{{obras.id}}">{{obras.description}}</option>
                                     </select2>
                                 </div>

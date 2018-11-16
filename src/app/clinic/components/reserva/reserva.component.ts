@@ -91,11 +91,6 @@ export class ReservaComponent extends BaseComponent
     Day: null,
     Time: null,
     DoctorId: null,
-    FirstName: null,
-    LastName: null,
-    Address: null,
-    PhoneNumber: null,
-    Dni: null,
     MedicalPlanId: null
   };
   refresh: Subject<any> = new Subject();
