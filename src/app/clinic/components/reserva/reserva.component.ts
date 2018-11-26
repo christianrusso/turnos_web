@@ -398,6 +398,10 @@ export class ReservaComponent extends BaseComponent
     );
   }
 
+  goToHome() {
+    this._router.navigate(["clinica/buscador"]);
+  }
+
   CheckPaciente() {
     this._ReservaComponent.checkPaciente(this.clinicId).subscribe(
       response => {
@@ -418,7 +422,8 @@ export class ReservaComponent extends BaseComponent
                 // Manejar errores
               }
             );
-          this._router.navigate(["/exito"]);
+          //this._router.navigate(["/exito"]);
+          $("#exitoso").modal("show");
         }
       },
       error => {
@@ -447,7 +452,8 @@ export class ReservaComponent extends BaseComponent
         // Manejar errores
       }
     );
-    this._router.navigate(["/exito"]);
+    //this._router.navigate(["/exito"]);
+    $("#exitoso").modal("show");
   }
 
   FiltrarObraSocial(obra){
