@@ -221,15 +221,22 @@
                     </form>
                 </div> -->
 
-
-                <div *ngIf="dontResult">
-                    <h5 class="text-center text-danger vertical"> "No se han encontrado resultados para esta busqueda"</h5>
-                </div>
                 <div class="text-center" style="display: flex; margin-top: 51px;">
                     <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 2px #00b1f2 solid; color: #00b1f2; cursor: pointer; width: 20%;" id="bestScore" (click)="orderResults('score', false, 'bestScore')">MEJOR PUNTUACIÓN</span>
                     <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 28%;" id="bestComments" (click)="orderResults('comments', false, 'bestComments')">MAYOR CANTIDAD DE COMENTARIOS</span>
                     <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 20%;" id="lessScore" (click)="orderResults('score', true, 'lessScore')">MENOR PUNTUACIÓN</span>
                     <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 32%;" id="lessComments" (click)="orderResults('comments', true, 'lessComments')">MENOR CANTIDAD DE COMENTARIOS</span>
+                </div>
+                <div *ngIf="dontResult" style="text-align: center; margin-top: 50px;">
+                    <div>
+                        <img src="/assets/img/resultados.png" style="width: 80%;">
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <span style="font-family: SfUiDisplayHeavy; font-size: 18px; color: #454EDB;">¡ LO SENTIMOS !</span>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <span style="font-family: SfUiDisplayLight; font-size: 25px; color: #454EDB;">No hemos encontrado resultados para su búsqueda</span>
+                    </div>
                 </div>
                 <div *ngFor="let row of clinicas; let i = index">
                     <a data-toggle="collapse" href="#collapseExample{{row.clinicId}}" role="button" aria-expanded="false" aria-controls="collapseExample">

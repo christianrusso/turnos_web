@@ -4848,6 +4848,10 @@ background: #d1fbfa;
     font-family: 'SfUiDisplayMedium';
     src: url('../fonts/SF UI Display Medium.otf');
 }
+@font-face {
+    font-family: 'SfUiDisplayHeavy';
+    src: url('../fonts/SF UI Display Heavy.otf');
+}
 
 .firstStep {
     margin-left: 100px;
