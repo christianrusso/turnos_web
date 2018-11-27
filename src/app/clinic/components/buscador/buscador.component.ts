@@ -75,7 +75,8 @@ export class BuscadorComponent extends BaseComponent
         ScoreQuantity: "",
         AvailableAppointmentDate: "",
         SortField: "score",
-        AscendingOrder: false
+        AscendingOrder: false,
+        Stars: []
       };
     }else{
       this.filtro = {
@@ -88,7 +89,8 @@ export class BuscadorComponent extends BaseComponent
         ScoreQuantity: "",
         AvailableAppointmentDate: "",
         SortField: "score",
-        AscendingOrder: false
+        AscendingOrder: false,
+        Stars: []
       };
     }    
     this.filtroFecha = {
