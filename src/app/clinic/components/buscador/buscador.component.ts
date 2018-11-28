@@ -329,7 +329,7 @@ FiltrarDistancia(deviceValue) {
   this.distancia = parseInt(deviceValue.target.value);
   if (navigator.geolocation) {
  
-    navigator.geolocation.watchPosition(position => {
+    navigator.geolocation.getCurrentPosition(position => {
       this.showPosition(position);
     });
   } else {
@@ -349,7 +349,8 @@ FiltrarDistancia(deviceValue) {
         Specialties: this.filtro.Specialties,
         Subspecialties: this.filtro.Subspecialties,
         MedicalInsurances: this.filtro.MedicalInsurances,
-        MedicalPlans: []
+        MedicalPlans: [],
+        Stars: []
       };
     }else{
       this.filtro = {
@@ -362,7 +363,8 @@ FiltrarDistancia(deviceValue) {
         Specialties: this.filtro.Specialties,
         Subspecialties: this.filtro.Subspecialties,
         MedicalInsurances: this.filtro.MedicalInsurances,
-        MedicalPlans: []
+        MedicalPlans: [],
+        Stars: []
       };
     }   
      this.getByFilter(this.filtro, false);
@@ -380,7 +382,8 @@ FiltrarDistancia(deviceValue) {
       medicalPlans: [],
       Score: "",
       ScoreQuantity: "",
-      AvailableAppointmentDate: ""
+      AvailableAppointmentDate: "",
+      Stars: []
     };
     
     $("input[type=checkbox]").prop("checked", false);
