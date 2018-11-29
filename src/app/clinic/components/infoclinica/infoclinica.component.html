@@ -1,0 +1,118 @@
+<div class="container-fluid  ">
+    <!-- BÚSQUEDA-->
+    <div class="row">
+        <section class="col-12 col-md-10 offset-md-1  search-section">
+            <div style="height: auto; margin-bottom: 60px;">
+                <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+            </div>
+            <div style="display: flex;" class="twoElements">
+                <div class="firstElement">
+                    <div style="border-bottom: 1px solid #707070; padding-bottom: 22px;" class="clinicNameWrap">
+                        <div class="clinicName">
+                            <h3>{{clinicData?.name}}</h3>
+                        </div>
+                        <div class="starScore">
+                            <div class="infoStars starsPosition" style="margin-top: 7px; margin-right: 9px; width: 108px;">
+                                <span *ngFor="let scor of score">
+                                    <span *ngIf="clinicData?.score -scor >= scor">
+                                        <i class="fa fa-star"></i>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="score">
+                                <h4 style="margin-top: 5px;">{{clinicData?.score | number:'1.0-1' }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-top: 25px; border-bottom: 1px solid #707070; padding-bottom: 22px;">
+                        <div>
+                            <span class="informacion">INFORMACIÓN</span>
+                        </div>
+                        <div style="margin-top: 13px;">
+                            <span class="description">{{ (clinicData?.description.length>150)? (clinicData?.description | slice:0:150)+'..':(clinicData?.description) }}</span>
+                        </div>
+                    </div>
+                    <div style="padding-top: 22px; border-bottom: 1px solid #707070; padding-bottom: 22px;">
+                        <div class="addressPosition">
+                            <div style="margin-right: 68%;">
+                                <i class="fa fa-map-marker"></i>
+                                <span class="address">{{clinicData?.address}}</span>
+                            </div>
+                            <div>
+                                <span class="comollegar">Cómo Llegar</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-top: 22px; border-bottom: 1px solid #707070; padding-bottom: 22px;">
+                        <div>
+                            <span class="horarios">HORARION DE ATENCIÓN</span>
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap;">
+                            <div *ngFor="let hour of clinicData?.openCloseHours" style="border: 1px solid #454edb; padding: 5px; width: 210px; text-align: center;">
+                                <span *ngIf="hour.dayNumber == 1"><span class="day">Lunes</span> <span class="hour">{{hour.start}} - {{hour.end}}</span></span>
+                                <span *ngIf="hour.dayNumber == 2"><span class="day">Martes</span> <span class="hour">{{hour.start}} - {{hour.end}}</span></span>
+                                <span *ngIf="hour.dayNumber == 3"><span class="day">Miércoles</span> <span class="hour">{{hour.start}} - {{hour.end}}</span></span>
+                                <span *ngIf="hour.dayNumber == 4"><span class="day">Jueves</span> <span class="hour">{{hour.start}} - {{hour.end}}</span></span>
+                                <span *ngIf="hour.dayNumber == 5"><span class="day">Viernes</span> <span class="hour">{{hour.start}} - {{hour.end}}</span></span>
+                                <span *ngIf="hour.dayNumber == 6"><span class="day">Sábado</span> <span class="hour">{{hour.start}} - {{hour.end}}</span></span>
+                                <span *ngIf="hour.dayNumber == 0"><span class="day">Domingo</span> <span class="hour">{{hour.start}} - {{hour.end}}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-top: 22px; padding-bottom: 22px;">
+                        <div>
+                            <span class="comentarios">COMENTARIOS DE USUARIOS</span>
+                        </div>
+                        <div style="display: flex; border-bottom: 1px solid #707070;">
+                            <div style="margin-right: 20px;">
+                                <span class="comentariosScore">{{clinicData?.score | number:'1.0-1' }}</span>
+                            </div>
+                            <div>
+                                <div class="infoStars" style="margin-top: 17px;">
+                                    <span *ngFor="let scor of score">
+                                        <span *ngIf="clinicData?.score -scor >= scor">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div>
+                                    <p class="comments">{{(clinicData?.scoreQuantity == 1) ? clinicData?.scoreQuantity + ' valoración' : clinicData?.scoreQuantity + ' valoraciones'}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngFor="let comment of clinicData?.ratings" style=" border-bottom: 1px solid #707070;">
+                            <div style="display: flex;">
+                                <div style="margin-right: 20px; margin-top: 19px;" [ngClass]="comment.score > 0 && comment.score < 4 ? 'scoreButtonRed' : comment.score >= 4 && comment.score < 7 ? 'scoreButtonYellow' : comment.score >= 7 ? 'scoreButtonGreen' : ''">
+                                    <h4 style="margin-top: 8.5px;">{{comment.score | number:'1.0-1' }}</h4>
+                                </div>
+                                <div>
+                                    <div style="margin-top: 17px;">
+                                        <p class="commentUser">{{comment.user}}</p>
+                                    </div>
+                                    <div>
+                                        <p class="commentDate">{{comment.dateTime | date: 'd LLLL yyyy'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="commentComment">{{comment.comment}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="secondElement">
+                    <div style="background-color: white; text-align: center; height: 65px; padding-top: 18px;">
+                        <span class="haceReserva">¡Hacé tu reserva GRATIS!!</span>
+                    </div>
+                    <div style="background-color: #00b900; text-align: center; height: 65px; padding-top: 18px;">
+                        <span class="reserva">RESERVAR</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="/assets/img/corazon_empty.png" style="width: 50px;">
+                        <img src="/assets/img/share.png" style="width: 45px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -38,9 +38,11 @@ import { RouterModule } from "@angular/router";
 import { ReservaExitoComponent } from "./clinic/components/reserva-exito/reserva-exito.component";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { MisturnosComponent } from "./clinic/components/misturnos/misturnos.component";
+import { InfoClinicaComponent } from "./clinic/components/infoclinica/infoclinica.component";
 import { NgbModalModule } from "@ng-bootstrap/ng-bootstrap/modal/modal.module";
 import { CargaclinicaComponent } from "./clinic/components/cargaclinica/cargaclinica.component";
 import { AgmCoreModule } from "@agm/core";
+import { NgxGalleryModule } from 'ngx-gallery';
 // import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 // import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
@@ -98,6 +100,7 @@ export function getAuthServiceConfigs() {
     NosotrosComponent,
     VerMapaComponent,
     ReservaComponent,
+    InfoClinicaComponent,
     NavComponent,
     ReservaExitoComponent,
     MisturnosComponent,
@@ -114,6 +117,7 @@ export function getAuthServiceConfigs() {
     BrowserModule,
     routing,
     HttpModule,
+    NgxGalleryModule,
     Select2Module,
     FormsModule,
     HttpClientModule,

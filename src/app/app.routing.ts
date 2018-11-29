@@ -9,6 +9,7 @@ import { AyudaComponent } from './clinic/components/ayuda/ayuda.component';
 import { NosotrosComponent } from './clinic/components/nosotros/nosotros.component';
 import { VerMapaComponent } from './clinic/components/ver-mapa/ver-mapa.component';
 import { ReservaComponent } from './clinic/components/reserva/reserva.component';
+import { InfoClinicaComponent } from './clinic/components/infoclinica/infoclinica.component';
 import { ReservaExitoComponent } from './clinic/components/reserva-exito/reserva-exito.component';
 import { MisturnosComponent } from './clinic/components/misturnos/misturnos.component';
 import { CargaclinicaComponent } from './clinic/components/cargaclinica/cargaclinica.component';
@@ -24,6 +25,7 @@ export const appRoutes: Routes = [
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'ver-mapa', component: VerMapaComponent },
   { path: 'reserva/:id', component: ReservaComponent,   runGuardsAndResolvers: 'always'},
+  { path: 'clinica/infoclinica/:id', component: InfoClinicaComponent, runGuardsAndResolvers: 'always'},
   { path: 'exito', component: ReservaExitoComponent },
   { path: 'misturnos', component: MisturnosComponent },
   { path: 'carga', component: CargaclinicaComponent },

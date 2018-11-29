@@ -1,0 +1,174 @@
+.clinicName {
+  font-family: SfUiDisplayMedium;
+  font-size: 28px;
+  #margin-right: 71%;
+  width: 50%;
+}
+.score {
+  font-family: SfUiDisplayBold;
+  font-size: 23px;
+  color: white;
+  background-color: #454edb;
+  border-radius: 3px;
+  width: 36px;
+  height: 41px;
+  text-align: center;
+}
+.infoStars .fa.fa-star{
+  color: #faca1d;
+  letter-spacing: 6px;
+  font-size: 16px;
+}
+.informacion {
+  font-family: SfUiDisplaySemiBold;
+  font-size: 12px;
+}
+.horarios {
+  font-family: SfUiDisplaySemiBold;
+  font-size: 12px;
+}
+.comentarios {
+  font-family: SfUiDisplaySemiBold;
+  font-size: 12px;
+}
+.comentariosScore {
+  font-family: SfUiDisplayRegular;
+  font-size: 55px;
+  color: #454edb;
+}
+.comments {
+  font-family: SfUiDisplayRegular;
+  font-size: 13px;
+  color: #454edb;
+}
+.description {
+  font-family: SfUiDisplayLight;
+  font-size: 14px;
+}
+.address {
+  font-family: SfUiDisplayLight;
+  font-size: 14px;
+}
+.comollegar {
+  font-family: SfUiDisplaySemiBold;
+  font-size: 14px;
+  color: #454edb;
+}
+.scoreButtonRed {
+  font-family: SfUiDisplayBold;
+  font-size: 16px;
+  color: white;
+  background-color: red;
+  border-radius: 3px;
+  width: 47px;
+  height: 47px;
+  text-align: center;
+}
+.scoreButtonYellow {
+  font-family: SfUiDisplayBold;
+  font-size: 16px;
+  color: white;
+  background-color: #EECC61;
+  border-radius: 3px;
+  width: 47px;
+  height: 47px;
+  text-align: center;
+}
+.scoreButtonGreen {
+  font-family: SfUiDisplayBold;
+  font-size: 16px;
+  color: white;
+  background-color: #0FBD0D;
+  border-radius: 3px;
+  width: 47px;
+  height: 47px;
+  text-align: center;
+}
+.commentUser {
+  font-family: SfUiDisplaySemiBold;
+  font-size: 12px;
+}
+.commentDate {
+  font-family: SfUiDisplayRegular;
+  font-size: 11px;
+}
+.commentComment {
+  font-family: SfUiDisplayLight;
+  font-size: 12px;
+}
+.haceReserva {
+  font-family: SfUiDisplayMedium;
+  font-size: 14px;
+}
+.reserva {
+  font-family: SfUiDisplayBold;
+  font-size: 16px;
+  color: white;
+}
+.twoElements {
+  flex-wrap: nowrap;
+}
+.firstElement {
+  width: 70%;
+}
+.secondElement {
+  width: 29%;
+  margin-left: 30px;
+}
+.day {
+  font-family: SfUiDisplaySemiBold;
+  font-size: 14px;
+  color: #454edb;
+}
+.hour {
+  font-family: SfUiDisplayLight;
+  font-size: 14px;
+  color: #454edb;
+}
+.clinicNameWrap {
+  display: flex;
+}
+.starsPosition {
+  text-align: right;
+  margin-left: 60%;
+}
+.starScore {
+  display: flex;
+  width: 50%;
+}
+.addressPosition {
+  display: flex;
+}
+
+@media only screen and (max-width: 768px){
+  .twoElements {
+    flex-wrap: wrap;
+  }
+  .firstElement {
+    width: 100%;
+  }
+  .secondElement {
+    width: 100%;
+    margin-left: 0px;
+  }
+  .clinicNameWrap {
+    flex-wrap: wrap;
+  }
+  .starsPosition {
+    text-align: left;
+    margin-left: 0%;
+  }
+  .starScore {
+    display: block;
+    width: 100%;
+  }
+  .score {
+    height: 30px;
+  }
+  .clinicName {
+    width: 100%;
+  }
+  .addressPosition {
+    flex-wrap: wrap;
+  }
+}

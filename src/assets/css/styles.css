@@ -43,7 +43,7 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 101;
+    z-index: 1001;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.54);
     background: #454edb;
     padding: 10px 15px;
