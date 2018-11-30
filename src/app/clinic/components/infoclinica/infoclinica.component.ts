@@ -14,7 +14,7 @@ import { VerMapService } from "../../services/ver-mapa.service";
   selector: "app-infoclinica",
   templateUrl: "./infoclinica.component.html",
   styleUrls: ["./infoclinica.component.css"],
-  providers: [InfoService]
+  providers: [InfoService, BusquedaService]
 })
 export class InfoClinicaComponent
   implements OnInit {
@@ -59,6 +59,7 @@ export class InfoClinicaComponent
       private _route: ActivatedRoute,
       private _infoComponent: InfoService,
       private _RegisterLoginService: RegisterLoginService,
+      private _BusquedaService: BusquedaService,
       private _router: Router
   ) {
   }
@@ -94,17 +95,59 @@ export class InfoClinicaComponent
     );
   }
 
-Reservar(id) {
-    this.identity = this._RegisterLoginService.getToken();
+    Reservar(id) {
+        this.identity = this._RegisterLoginService.getToken();
 
-    if (this.identity != null) {
-        this._router.navigate(["/reserva/", id]);
-        //window.location.href = "/reserva/"+id+"";
-    } else {
-        $(".modal-gral").css("display", "block");
-        $(".modulo-inicio").css("display", "block");
-        $("#d-ini").addClass("activeInside");
-        $("#d-reg").removeClass("activeInside");
+        if (this.identity != null) {
+            this._router.navigate(["/reserva/", id]);
+            //window.location.href = "/reserva/"+id+"";
+        } else {
+            $(".modal-gral").css("display", "block");
+            $(".modulo-inicio").css("display", "block");
+            $("#d-ini").addClass("activeInside");
+            $("#d-reg").removeClass("activeInside");
+        }
     }
-}
+
+    noFavorito(id) {
+        this.identity = this._RegisterLoginService.getToken();
+
+        if (this.identity != null) {
+            this.clinicData.isFavorite = false;
+            this._BusquedaService.removeFavorito(id).subscribe(
+                response => {
+                    console.log(response);
+                },
+                error => {
+                    // Manejar errores
+                }
+            );
+        } else {
+            $(".modal-gral").css("display", "block");
+            $(".modulo-inicio").css("display", "block");
+            $("#d-ini").addClass("activeInside");
+            $("#d-reg").removeClass("activeInside");
+        }
+    }
+
+    Favorito(id) {
+        this.identity = this._RegisterLoginService.getToken();
+
+        if (this.identity != null) {
+            this.clinicData.isFavorite = true;
+            this._BusquedaService.addFavorito(id).subscribe(
+                response => {
+                    console.log(response);
+                },
+                error => {
+                    // Manejar errores
+                }
+            );
+        } else {
+            $(".modal-gral").css("display", "block");
+            $(".modulo-inicio").css("display", "block");
+            $("#d-ini").addClass("activeInside");
+            $("#d-reg").removeClass("activeInside");
+        }
+    }
 }

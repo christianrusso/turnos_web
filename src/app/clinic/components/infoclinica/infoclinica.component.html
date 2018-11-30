@@ -108,8 +108,8 @@
                         <span class="reserva">RESERVAR</span>
                     </div>
                     <div style="text-align: center;">
-                        <img *ngIf="!clinicData?.isFavorite" src="/assets/img/corazon_empty.png" style="width: 50px;">
-                        <img *ngIf="clinicData?.isFavorite" src="/assets/img/corazon_full.gif" style="width: 50px;">
+                        <img (click)="Favorito(clinicData?.clinicId)" *ngIf="clinicData.isFavorite == false" src="/assets/img/corazon_empty.png" style="width: 50px;">
+                        <img (click)="noFavorito(clinicData?.clinicId)" *ngIf="clinicData.isFavorite == true" src="/assets/img/corazon_full.gif" style="width: 50px;">
                         <img src="/assets/img/share.png" style="width: 45px;">
                     </div>
                 </div>
