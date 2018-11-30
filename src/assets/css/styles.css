@@ -559,7 +559,7 @@ width: 100%;
 
 height: 100vh;
 
-z-index: 5;
+z-index: 2000;
 }
 
 .modal-gral .inside-modal{
@@ -1467,7 +1467,7 @@ width: 100%;
 
 height: 100vh;
 
-z-index: 102;
+z-index: 2000;
 }
 
 .modal-gral .inside-modal{

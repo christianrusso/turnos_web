@@ -21,6 +21,7 @@ export class InfoClinicaComponent
 
   clinicId;
   clinicData;
+  public identity;
   public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   galleryOptions = [
       {
@@ -41,12 +42,24 @@ export class InfoClinicaComponent
         small: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
         medium: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
         big: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg'
+      },
+      {
+          small: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
+          medium: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
+          big: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg'
+      },
+      {
+          small: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
+          medium: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
+          big: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg'
       }
   ];
 
   constructor(
       private _route: ActivatedRoute,
-      private _infoComponent: InfoService
+      private _infoComponent: InfoService,
+      private _RegisterLoginService: RegisterLoginService,
+      private _router: Router
   ) {
   }
   
@@ -57,6 +70,7 @@ export class InfoClinicaComponent
       this.clinicId = params["id"];
       this.GetByFilterClinic();
     });
+    this.identity = this._RegisterLoginService.getToken();
   }
 
   public GetByFilterClinic() {
@@ -79,4 +93,18 @@ export class InfoClinicaComponent
         }
     );
   }
+
+Reservar(id) {
+    this.identity = this._RegisterLoginService.getToken();
+
+    if (this.identity != null) {
+        this._router.navigate(["/reserva/", id]);
+        //window.location.href = "/reserva/"+id+"";
+    } else {
+        $(".modal-gral").css("display", "block");
+        $(".modulo-inicio").css("display", "block");
+        $("#d-ini").addClass("activeInside");
+        $("#d-reg").removeClass("activeInside");
+    }
+}
 }
