@@ -10,9 +10,11 @@
   color: white;
   background-color: #454edb;
   border-radius: 3px;
-  width: 36px;
+  width: 50px;
   height: 41px;
   text-align: center;
+  padding-right: 4px;
+  padding-left: 4px;
 }
 .infoStars .fa.fa-star{
   color: #faca1d;
