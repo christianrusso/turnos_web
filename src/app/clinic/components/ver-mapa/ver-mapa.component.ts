@@ -260,7 +260,7 @@ export class VerMapaComponent extends BaseComponent
 
   //SubEspecialidades
   public getSubSplecialties() {
-    this._BusquedaService.getSubSpeciality(this.idRubro).subscribe(
+    this._BusquedaService.getSubSpeciality(this.idRubro, this.filtro.Specialties).subscribe(
       response => {
         this.subEspecialidades = response;
       },
