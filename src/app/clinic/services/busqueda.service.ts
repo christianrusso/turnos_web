@@ -41,7 +41,7 @@ export class BusquedaService {
     return this._http
       .post(
         this.url + "api/Data/GetSubspecialtiesForSelect",
-        {"rubro":id},
+        {"rubro":id, "ids" : []},
         { headers: this.headers }
       )
       .map(res => res.json());
