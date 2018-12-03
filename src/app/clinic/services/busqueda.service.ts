@@ -37,11 +37,11 @@ export class BusquedaService {
       .map(res => res.json());
   }
   //SubSpecialty
-  getSubSpeciality(id) {
+  getSubSpeciality(id, specialities) {
     return this._http
       .post(
         this.url + "api/Data/GetSubspecialtiesForSelect",
-        {"rubro":id, "ids" : []},
+        {"rubro":id, "Ids": specialities},
         { headers: this.headers }
       )
       .map(res => res.json());
@@ -73,7 +73,7 @@ export class BusquedaService {
     return this._http
       .post(
         this.url + "api/Data/GetSubspecialtiesForSelect",
-        { id: id,rubro: idrubro },
+        { Ids: id, rubro: idrubro },
         { headers: this.headers }
       )
       .map(res => res.json());

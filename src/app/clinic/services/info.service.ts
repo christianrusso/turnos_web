@@ -15,12 +15,28 @@ export class InfoService {
     this.url = global.url;
   }
 
-  GetByFilterClinic(data) {
+  GetByFilterClinic(data) { 
+    this.getToken();
+    console.log(this.token);
+    if(this.token != null){
+      this.headers.set("Authorization", "Bearer " + this.getToken().token);
+    }
     return this._http
       .post(this.url + "Api/Clinic/GetByFilter", data, {
-        headers: null
+        headers: this.headers
       })
       .map(res => res.json());
+  }
+
+  getToken() {
+    let token = localStorage.getItem("tokenTurnos");
+    if (token != "undefined") {
+      this.token = token;
+    } else {
+      this.token = null;
+    }
+
+    return JSON.parse(this.token);
   }
 
 

@@ -132,7 +132,7 @@ export class BuscadorComponent extends BaseComponent
 
   //SubEspecialidades
   public getSubSplecialties() {
-    this._BusquedaService.getSubSpeciality(this.idRubro).subscribe(
+    this._BusquedaService.getSubSpeciality(this.idRubro, this.filtro.Specialties).subscribe(
       response => {
         this.subEspecialidades = response;
       },
@@ -253,7 +253,7 @@ export class BuscadorComponent extends BaseComponent
   //filtro cunado cambia la especialiad
   public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
     this.clinicas = [];
-    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad,this.idRubro).subscribe(
+    this._BusquedaService.getSubSpecialityOnEspeciality(this.filtro.Specialties, this.idRubro).subscribe(
       response => {
         this.subEspecialidades = response;
       },
