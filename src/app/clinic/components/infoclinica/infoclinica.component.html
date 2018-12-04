@@ -39,7 +39,7 @@
                                 <span class="address">{{clinicData?.address}}</span>
                             </div>
                             <div>
-                                <span class="comollegar">Cómo Llegar</span>
+                                <span class="comollegar" (click)="showCompleteMap()">Cómo Llegar</span>
                             </div>
                         </div>
                     </div>
@@ -115,5 +115,19 @@
                 </div>
             </div>
         </section>
+    </div>
+</div>
+
+<div *ngIf="showMap">
+    <div style="z-index: 2999; width: 100%; height: 100%; background-color: #6F75CB; position: fixed; opacity: 0.5; top: 0px;" (click)="closeMapa()"></div>
+    <div style="background-color: white; position: absolute; top: 50%; margin-top: 220px; width: 96%; left: 50%; margin-left: -48%; z-index: 3000; height: 440px; display: block; padding-right: 0px;">
+        <div style="margin-top: 20px;">
+            <div style="position: absolute; top: 0px; z-index: 100;" (click)="closeMapa();"><img style="width: 24px;" src="/assets/img/close.png"></div>
+            <div class="col-xs-12 col-md-12 white">
+                <div class="col-12 float-left clinica-search" style="height: 100%; padding-left: 0px; padding-right: 0px; height: 100%;">
+                    <div id="google-map" class="" style="margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; height: 400px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

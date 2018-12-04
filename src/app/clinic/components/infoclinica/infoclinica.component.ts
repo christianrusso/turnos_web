@@ -14,7 +14,7 @@ import { VerMapService } from "../../services/ver-mapa.service";
   selector: "app-infoclinica",
   templateUrl: "./infoclinica.component.html",
   styleUrls: ["./infoclinica.component.css"],
-  providers: [InfoService, BusquedaService]
+  providers: [InfoService, BusquedaService, VerMapService]
 })
 export class InfoClinicaComponent
   implements OnInit {
@@ -23,6 +23,9 @@ export class InfoClinicaComponent
   clinicData;
   public identity;
   public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  showMap = false;
+  locations = [];
+  insertStart = [];
   galleryOptions = [
       {
         width: '100%'
@@ -60,7 +63,8 @@ export class InfoClinicaComponent
       private _infoComponent: InfoService,
       private _RegisterLoginService: RegisterLoginService,
       private _BusquedaService: BusquedaService,
-      private _router: Router
+      private _router: Router,
+      private _VerMapService: VerMapService
   ) {
   }
   
@@ -75,6 +79,8 @@ export class InfoClinicaComponent
   }
 
   public GetByFilterClinic() {
+    this.locations = [];
+    this.insertStart = [];
     const data = {
       ClinicId: this.clinicId,
       Cities: [],
@@ -87,6 +93,28 @@ export class InfoClinicaComponent
     this._infoComponent.GetByFilterClinic(data).subscribe(
         response => {
           this.clinicData = response[0];
+
+          this.score.forEach(star => {
+              if (this.clinicData.score - star >= star) {
+                  this.insertStart.push('<i class="fa fa-star"></i>');
+              }
+          });
+
+          this.locations.push([
+              '<div class="col-xs-12 col-md-12 infow"><div class="row"><div class="col-xs-12 col-md-5"><img src=' +
+              this.clinicData.logo +
+              '></div><div class="col-xs-12 col-md-7"><h3>' +
+              this.clinicData.name +
+              '</h3><p class="location"><i class="fa fa-map-marker"></i>' +
+              this.clinicData.address +
+              '</p><div class="punt">' +
+              this.clinicData.score +
+              '</div><div class="stars">' +
+              this.insertStart +
+              "</div></div></div></div>",
+              this.clinicData.latitude,
+              this.clinicData.longitude
+          ]);
           console.log(this.clinicData);
         },
         error => {
@@ -149,5 +177,16 @@ export class InfoClinicaComponent
             $("#d-ini").addClass("activeInside");
             $("#d-reg").removeClass("activeInside");
         }
+    }
+
+    closeMapa() {
+        this.showMap = false;
+    }
+
+    showCompleteMap() {
+      this.showMap = true;
+      setTimeout (() => {
+          this._VerMapService.generateMap(this.locations, null);
+      }, 500);
     }
 }
