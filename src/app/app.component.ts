@@ -59,6 +59,7 @@ export class AppComponent extends BaseComponent
         this._RegisterLoginService.onRegisterFacebook({"Email":userData.email,"UserId":userData.id}).subscribe(
           response => {
             localStorage.setItem("tokenTurnos", JSON.stringify(response));
+            localStorage.setItem("email", userData.email);
             this.identity = this._RegisterLoginService.getToken();
             this.user = response.logo;
             $(".modal-gral").fadeOut();
@@ -159,6 +160,7 @@ export class AppComponent extends BaseComponent
     this._RegisterLoginService.onLogin(this.login).subscribe(
       response => {
         localStorage.setItem("tokenTurnos", JSON.stringify(response));
+        localStorage.setItem("email", this.login.email);
         this.identity = this._RegisterLoginService.getToken();
         this.user = response.logo;
         $(".modal-gral").fadeOut();

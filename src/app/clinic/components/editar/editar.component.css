@@ -1,0 +1,41 @@
+.selectedOption {
+    font-family: SfUiDisplayBold;
+    font-size: 13px;
+    color: #19b8f2;
+    border-bottom: 2px solid #19b8f2;
+    margin-bottom: -1.4px;
+}
+.unselectedOption {
+    font-family: SfUiDisplayBold;
+    font-size: 13px;
+}
+.labelStyle {
+    font-family: SfUiDisplayLight;
+    font-size: 12px;
+}
+.inputTextStyle {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 330px;
+}
+.inputText {
+    font-family: SfUiDisplayLight;
+    font-size: 18px;
+}
+.passwordText {
+    font-family: SfUiDisplayLight;
+    font-size: 10px;
+    margin-top: 6px;
+}
+.modificarButton {
+    font-family: SfUiDisplayRegular;
+    font-size: 11px;
+    background-color: transparent;
+    color: #454edb;
+    border: 1px solid #454edb;
+    border-radius: 10px;
+    padding: 8px;
+    padding-left: 31px;
+    padding-right: 31px;
+}

@@ -48,6 +48,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
 import { CalendarModule } from 'angular-calendar';
 import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
+import { EditarComponent } from './clinic/components/editar/editar.component';
 
 import {
   SocialLoginModule,
@@ -107,6 +108,7 @@ export function getAuthServiceConfigs() {
     CargaclinicaComponent,
     BuscadorPeluqueriaComponent,
     FavoritosComponent,
+    EditarComponent,
     PreguntasFrecuentesComponent
   ],
   imports: [

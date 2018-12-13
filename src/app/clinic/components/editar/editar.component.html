@@ -1,0 +1,48 @@
+<section class="col col-sm-12 general nosotros container-fluid">
+  <div style="margin-top: 150px; height: 100vh;">
+    <div class="col-sm-12" style="padding-left: 133px; margin-bottom: 60px;">
+        <h2 style="font-family: SfUiDisplayMedium; color: black; font-size: 28px;">Mi Cuenta</h2>
+    </div>
+    <div class="col-sm-12" style="height: 80px;">
+      <div style="display: flex; text-align: center; border-bottom: 1px solid black; height: 35px;" class="col-sm-12 spaceBetweenBlocks">
+        <div class="col-sm-1"></div>
+        <div class="selectedOption col-sm-2" id="firstStep" style="cursor: pointer;" (click)="changeStep(1, 'firstStep');">DATOS DE CUENTA</div>
+        <div class="unselectedOption col-sm-2" id="secondStep" style="cursor: pointer;" (click)="changeStep(2, 'secondStep');">DATOS PERSONALES</div>
+        <div class="unselectedOption col-sm-2" id="thirdStep" style="cursor: pointer;" (click)="changeStep(3, 'thirdStep');">TARJETAS DE CRÉDITO</div>
+        <div class="unselectedOption col-sm-2" id="fourthStep" style="cursor: pointer;" (click)="changeStep(4, 'fourthStep');">DATOS DE FACTURACIÓN</div>
+        <div class="unselectedOption col-sm-2" id="fifthStep" style="cursor: pointer;" (click)="changeStep(5, 'fifthStep');">NOTIFICACIONES</div>
+      </div>
+    </div>
+
+    <div *ngIf="step == 1" class="col-sm-12" style="display: flex; flex-wrap: wrap;">
+      <div class="col-sm-1"></div>
+      <div style="clear: both;">
+        <div style="clear: both;">
+          <p class="labelStyle">Nombre de usuario</p>
+        </div>
+        <div style="clear: both;">
+          <input type="text" name="username" id="username" [(ngModel)]="email" [readonly]="!isEditing" class="inputTextStyle inputText">
+        </div>
+        <div style="clear: both; margin-top: 20px;">
+          <p class="labelStyle">Contraseña Actual</p>
+        </div>
+        <div style="clear: both;">
+          <input type="password" [(ngModel)]="actualPassword" class="inputTextStyle inputText" [readonly]="!isEditing">
+        </div>
+        <div style="clear: both; margin-top: 20px;">
+          <p class="labelStyle">Contraseña Nueva</p>
+        </div>
+        <div style="clear: both;">
+          <input type="password" [(ngModel)]="newPassword" class="inputTextStyle inputText" [readonly]="!isEditing">
+          <p class="passwordText">Debe ser de al menos 8 caracteres y contener mayúscula, números</p>
+        </div>
+        <div style="clear: both; margin-top: 20px;" *ngIf="!isEditing">
+          <button class="modificarButton" (click)="editState()">MODIFICAR</button>
+        </div>
+        <div style="clear: both; margin-top: 20px;" *ngIf="isEditing">
+          <button class="modificarButton" (click)="saveAccount()">GUARDAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

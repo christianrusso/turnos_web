@@ -15,6 +15,7 @@ import { MisturnosComponent } from './clinic/components/misturnos/misturnos.comp
 import { CargaclinicaComponent } from './clinic/components/cargaclinica/cargaclinica.component';
 import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-peluqueria/buscador-peluqueria.component";
 import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
+import { EditarComponent } from './clinic/components/editar/editar.component';
 import { PreguntasFrecuentesComponent } from './clinic/components/preguntas-frecuentes/preguntas-frecuentes.component';
 
 export const appRoutes: Routes = [
@@ -22,6 +23,7 @@ export const appRoutes: Routes = [
   { path: 'home/:id', component: HomeComponent },
   { path: 'clinica/buscador', component: BuscadorComponent,   runGuardsAndResolvers: 'always',},
   { path: 'ayuda', component: AyudaComponent },
+  { path: 'editar', component: EditarComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'ver-mapa', component: VerMapaComponent },
   { path: 'reserva/:id', component: ReservaComponent,   runGuardsAndResolvers: 'always'},
