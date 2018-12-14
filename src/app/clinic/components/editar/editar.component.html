@@ -21,7 +21,7 @@
           <p class="labelStyle">Nombre de usuario</p>
         </div>
         <div style="clear: both;">
-          <input type="text" name="username" id="username" [(ngModel)]="email" [readonly]="!isEditing" class="inputTextStyle inputText">
+          <input type="text" [(ngModel)]="email" [readonly]="!isEditing" class="inputTextStyle inputText">
         </div>
         <div style="clear: both; margin-top: 20px;">
           <p class="labelStyle">Contraseña Actual</p>
@@ -41,6 +41,87 @@
         </div>
         <div style="clear: both; margin-top: 20px;" *ngIf="isEditing">
           <button class="modificarButton" (click)="saveAccount()">GUARDAR</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="step == 2" class="col-sm-12" style="display: flex; flex-wrap: wrap;">
+      <div class="col-sm-1"></div>
+      <div>
+        <div style="clear: both; display: flex; flex-wrap: wrap;">
+          <div>
+            <div style="clear: both;">
+              <p class="labelStyle">Nombre</p>
+            </div>
+            <div style="clear: both;">
+              <input type="text" [(ngModel)]="nombre" [readonly]="!isEditingPersonales" class="inputTextStyle inputText">
+            </div>
+          </div>
+          <div class="marginPersonalesFields">
+            <div style="clear: both;">
+              <p class="labelStyle">Apellido</p>
+            </div>
+            <div style="clear: both;">
+              <input type="text" [(ngModel)]="apellido" [readonly]="!isEditingPersonales" class="inputTextStyle inputText">
+            </div>
+          </div>
+        </div>
+        <div style="clear: both; display: flex; flex-wrap: wrap; margin-top: 20px;">
+          <div>
+            <div style="clear: both;">
+              <p class="labelStyle">DNI</p>
+            </div>
+            <div style="clear: both;">
+              <input type="text" [(ngModel)]="dni" [readonly]="!isEditingPersonales" class="inputTextStyle inputText">
+            </div>
+          </div>
+          <div class="marginPersonalesFields">
+            <div style="clear: both;">
+              <p class="labelStyle">Email</p>
+            </div>
+            <div style="clear: both;">
+              <input type="text" [(ngModel)]="emailPersonales" [readonly]="!isEditingPersonales" class="inputTextStyle inputText">
+            </div>
+          </div>
+        </div>
+        <div style="clear: both; display: flex; flex-wrap: wrap; margin-top: 20px;">
+          <div>
+            <div style="clear: both;">
+              <p class="labelStyle">Dirección</p>
+            </div>
+            <div style="clear: both;">
+              <input type="text" [(ngModel)]="address" [readonly]="!isEditingPersonales" class="inputTextStyle inputText">
+            </div>
+          </div>
+          <div class="marginPersonalesFields">
+            <div style="clear: both;">
+              <p class="labelStyle">Teléfono</p>
+            </div>
+            <div style="clear: both;">
+              <input type="text" [(ngModel)]="phone" [readonly]="!isEditingPersonales" class="inputTextStyle inputText">
+            </div>
+          </div>
+        </div>
+        <div style="clear: both; margin-top: 20px;" *ngIf="!isEditingPersonales">
+          <button class="modificarButton" (click)="editStatePersonales()">MODIFICAR</button>
+        </div>
+        <div style="clear: both; margin-top: 20px;" *ngIf="isEditingPersonales">
+          <button class="modificarButton" (click)="savePersonales()">GUARDAR</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="step == 5" class="col-sm-12" style="display: flex; flex-wrap: wrap;">
+      <div class="col-sm-1"></div>
+      <div>
+        <div style="clear: both; background-color: white; border-radius: 10px; padding: 40px;">
+          <div style="display: flex; flex-wrap: wrap;">
+            <div style="clear: both;">
+              <p class="notificationsTitle">Whatsapp</p>
+              <p class="notificationsDescription">Te escribiremos al <span class="notificationsDescriptionBold">(54) 11 25196901</span> si hay un cambio en el estado de tus reservas.</p>
+            </div>
+            <div style="clear: both;">
+              <button class="modificarButton notificacionesModificar">MODIFICAR</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

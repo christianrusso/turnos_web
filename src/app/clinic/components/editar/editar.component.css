@@ -39,3 +39,36 @@
     padding-left: 31px;
     padding-right: 31px;
 }
+.marginPersonalesFields {
+    margin-left: 60px;
+}
+.notificationsTitle {
+    font-family: SfUiDisplayLight;
+    font-size: 18px;
+}
+.notificationsDescription {
+    font-family: SfUiDisplayLight;
+    font-size: 13px;
+    width: 270px;
+}
+.notificationsDescriptionBold {
+    font-family: SfUiDisplayBold;
+    font-size: 13px;
+}
+.notificacionesModificar {
+    margin-left: 42px;
+    margin-top: 14px;
+}
+
+@media only screen and (max-width:915px){
+    .marginPersonalesFields {
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width:550px){
+    .notificacionesModificar {
+        margin-left: 0px;
+        margin-top: 14px;
+    }
+}
