@@ -29,7 +29,8 @@
                             <span class="informacion">INFORMACIÓN</span>
                         </div>
                         <div style="margin-top: 13px;">
-                            <span class="description">{{ (clinicData?.description.length>150)? (clinicData?.description | slice:0:150)+'..':(clinicData?.description) }}</span>
+                            <span class="description">{{ (clinicData?.description?.length>150)? (clinicData?.description | slice:0:150)+'..':(clinicData?.description) }}</span>
+                            <span class="description" *ngIf="clinicData?.description == null">Descripción aún no disponible</span>
                         </div>
                     </div>
                     <div style="padding-top: 22px; border-bottom: 1px solid #707070; padding-bottom: 22px;">
@@ -45,7 +46,7 @@
                     </div>
                     <div style="padding-top: 22px; border-bottom: 1px solid #707070; padding-bottom: 22px;">
                         <div>
-                            <span class="horarios">HORARION DE ATENCIÓN</span>
+                            <span class="horarios">HORARIOS DE ATENCIÓN</span>
                         </div>
                         <div style="display: flex; flex-wrap: wrap;">
                             <div *ngFor="let hour of clinicData?.openCloseHours" style="border: 1px solid #454edb; padding: 5px; width: 210px; text-align: center;">

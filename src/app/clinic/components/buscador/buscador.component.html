@@ -24,12 +24,8 @@
                         <div class="form-group">
                             <label class="textCardTop" for="staticEmail3" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">UBICACIÓN</label>
                             <select class=" form-control form-inline" style="font-family: SfUiDisplayLight;" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail3">
-                                <option value="1">¿Donde?</option>
-                                <option value="2">Peluquería</option>
-                                <option value="3">Estéticas</option>
-                                <option value="4">Restaurantes</option>
-                                <option value="5">Deportes</option>
-                                <option value="6">Servicios para el vehículo</option>
+                                <option value="">¿Donde?</option>
+                                <option *ngFor="let row of cities;let i = index" value="row.id">{{row.text}}</option>
                             </select>
                         </div>
                         <div class="form-group" style="margin-right: 20px;">
@@ -265,7 +261,7 @@
 
                                 </div>
                                 <div style="margin: 5px 0px;">
-                                    <p class="descr-clin"> {{ (row.description.length>150)? (row.description | slice:0:150)+'..':(row.description) }}</p>
+                                    <p class="descr-clin"> {{ (row.description?.length>150)? (row.description | slice:0:150)+'..':(row.description) }}</p>
                                 </div>
 
                                 <!-- <div class="icon-clin">
