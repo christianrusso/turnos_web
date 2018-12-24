@@ -33,6 +33,7 @@ import {
   format,
   isThisSecond
 } from "date-fns";
+import { global } from "../../../global/global";
 
 @Component({
   selector: "app-reserva",
@@ -91,7 +92,8 @@ export class ReservaComponent extends BaseComponent
     Day: null,
     Time: null,
     DoctorId: null,
-    MedicalPlanId: null
+    MedicalPlanId: null,
+    Source: global.source
   };
   refresh: Subject<any> = new Subject();
   public items: Observable<Array<any>>;
