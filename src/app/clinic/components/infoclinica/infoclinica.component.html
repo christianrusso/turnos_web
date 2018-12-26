@@ -2,8 +2,12 @@
     <!-- BÚSQUEDA-->
     <div class="row">
         <section class="col-12 col-md-10 offset-md-1  search-section">
-            <div style="height: auto; margin-bottom: 60px;">
-                <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+            <div style="height: auto; margin-bottom: 60px; text-align: center;">
+                <ngx-slick [config]="slideConfig">
+                    <div ngxSlickItem *ngFor="let slide of slides">
+                        <img src="{{ slide.img }}" alt="" width="100%">
+                    </div>
+                </ngx-slick>
             </div>
             <div style="display: flex;" class="twoElements">
                 <div class="firstElement">

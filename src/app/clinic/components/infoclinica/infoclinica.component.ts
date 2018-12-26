@@ -1,13 +1,10 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from "@angular/core";
 import { BusquedaService } from "../../services/busqueda.service";
-import { global } from "../../../global/global";
-import { MapService } from "../../services/map.service";
 import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { InfoService } from "../../services/info.service";
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
-import { BaseComponent } from "../../core/base.component";
 import { VerMapService } from "../../services/ver-mapa.service";
+import { SlickModule } from 'ngx-slick';
 
 
 @Component({
@@ -26,37 +23,8 @@ export class InfoClinicaComponent
   showMap = false;
   locations = [];
   insertStart = [];
-  galleryOptions = [
-      {
-        width: '100%'
-      },
-      {
-        breakpoint: 768,
-        fullWidth: true
-      }
-  ];
-  galleryImages = [
-      {
-        small: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
-        medium: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
-        big: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg'
-      },
-      {
-        small: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
-        medium: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
-        big: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg'
-      },
-      {
-          small: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
-          medium: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
-          big: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg'
-      },
-      {
-          small: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
-          medium: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg',
-          big: 'https://clinica-web.com.ar/wp-content/uploads/2016/01/clinica-santa-isabel.jpg'
-      }
-  ];
+    slides = [];
+    slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
 
   constructor(
       private _route: ActivatedRoute,
@@ -100,6 +68,13 @@ export class InfoClinicaComponent
               }
           });
 
+          for (var i = 0; i < this.clinicData.images.length; i++) {
+              var img = {
+                  img: this.clinicData.images[i]
+              }
+              this.slides.push(img);
+          }
+
           this.locations.push([
               '<div class="col-xs-12 col-md-12 infow"><div class="row"><div class="col-xs-12 col-md-5"><img src=' +
               this.clinicData.logo +
@@ -115,7 +90,6 @@ export class InfoClinicaComponent
               this.clinicData.latitude,
               this.clinicData.longitude
           ]);
-          console.log(this.clinicData);
         },
         error => {
           // Manejar errores
@@ -144,7 +118,6 @@ export class InfoClinicaComponent
             this.clinicData.isFavorite = false;
             this._BusquedaService.removeFavorito(id).subscribe(
                 response => {
-                    console.log(response);
                 },
                 error => {
                     // Manejar errores
@@ -165,7 +138,6 @@ export class InfoClinicaComponent
             this.clinicData.isFavorite = true;
             this._BusquedaService.addFavorito(id).subscribe(
                 response => {
-                    console.log(response);
                 },
                 error => {
                     // Manejar errores

@@ -49,6 +49,7 @@ import { BuscadorPeluqueriaComponent } from "./peluqueria/components/buscador-pe
 import { CalendarModule } from 'angular-calendar';
 import { FavoritosComponent } from './clinic/components/favoritos/favoritos.component';
 import { EditarComponent } from './clinic/components/editar/editar.component';
+import { SlickModule } from 'ngx-slick';
 
 import {
   SocialLoginModule,
@@ -130,6 +131,7 @@ export function getAuthServiceConfigs() {
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
     SocialLoginModule,
+    SlickModule.forRoot(),
     
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCeS0Tku62WXG03D8NKXgMxA6RNuBKbrSI",
