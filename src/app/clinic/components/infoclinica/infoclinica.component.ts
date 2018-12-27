@@ -24,7 +24,7 @@ export class InfoClinicaComponent
   locations = [];
   insertStart = [];
     slides = [];
-    slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
+    slideConfig = {"slidesToShow": 3, "slidesToScroll": 1};
 
   constructor(
       private _route: ActivatedRoute,
