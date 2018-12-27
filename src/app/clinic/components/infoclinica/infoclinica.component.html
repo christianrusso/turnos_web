@@ -44,7 +44,7 @@
                                 <span class="address">{{clinicData?.address}}</span>
                             </div>
                             <div>
-                                <span class="comollegar" (click)="showCompleteMap()">Cómo Llegar</span>
+                                <span class="comollegar" style="cursor: pointer;" (click)="showCompleteMap()">Cómo Llegar</span>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                     <div style="text-align: center;">
                         <img (click)="Favorito(clinicData?.clinicId)" *ngIf="clinicData?.isFavorite == false" src="/assets/img/corazon_empty.png" style="width: 50px;">
                         <img (click)="noFavorito(clinicData?.clinicId)" *ngIf="clinicData?.isFavorite == true" src="/assets/img/corazon_full.gif" style="width: 50px;">
-                        <img src="/assets/img/share.png" style="width: 45px;">
+                        <img src="/assets/img/share.png" style="width: 45px;" (click)="showShareWindow();">
                     </div>
                 </div>
             </div>
@@ -136,3 +136,27 @@
         </div>
     </div>
 </div>
+
+<div [style.display]="showShare ? 'block' : 'none'">
+    <div style="z-index: 2999; width: 100%; height: 100%; background-color: #6F75CB; position: fixed; opacity: 0.5; top: 0px;" (click)="closeShare()"></div>
+    <div style="background-color: white; position: absolute; top: 50%; margin-top: 220px; width: 50%; left: 50%; margin-left: -25%; z-index: 3000; height: 300px; display: block; padding-right: 0px;">
+        <div style="margin-top: 20px;">
+            <div style="position: absolute; top: 0px; z-index: 100;" (click)="closeShare();"><img style="width: 24px;" src="/assets/img/close.png"></div>
+            <div class="col-xs-12 col-md-12 white">
+                <div class="col-12 float-left clinica-search" style="padding-left: 0px; padding-right: 0px; height: 100%; text-align: center;">
+                    <div class="fb-share-button" data-layout="button" data-size="large" data-mobile-iframe="true"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2';
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>

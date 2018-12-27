@@ -21,10 +21,11 @@ export class InfoClinicaComponent
   public identity;
   public score = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   showMap = false;
+  showShare = false;
   locations = [];
   insertStart = [];
-    slides = [];
-    slideConfig = {"slidesToShow": 3, "slidesToScroll": 1};
+  slides = [];
+  slideConfig = {"slidesToShow": 3, "slidesToScroll": 1};
 
   constructor(
       private _route: ActivatedRoute,
@@ -153,6 +154,14 @@ export class InfoClinicaComponent
 
     closeMapa() {
         this.showMap = false;
+    }
+
+    closeShare() {
+        this.showShare = false;
+    }
+
+    showShareWindow() {
+      this.showShare = true;
     }
 
     showCompleteMap() {
