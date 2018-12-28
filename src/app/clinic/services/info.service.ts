@@ -17,7 +17,6 @@ export class InfoService {
 
   GetByFilterClinic(data) { 
     this.getToken();
-    console.log(this.token);
     if(this.token != null){
       this.headers.set("Authorization", "Bearer " + this.getToken().token);
     }
