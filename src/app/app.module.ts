@@ -36,7 +36,7 @@ import { NgProgressModule } from "@ngx-progressbar/core";
 import { NgProgressHttpModule } from "@ngx-progressbar/http";
 import { RouterModule } from "@angular/router";
 import { ReservaExitoComponent } from "./clinic/components/reserva-exito/reserva-exito.component";
-import { LocationStrategy, HashLocationStrategy } from "@angular/common";
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from "@angular/common";
 import { MisturnosComponent } from "./clinic/components/misturnos/misturnos.component";
 import { InfoClinicaComponent } from "./clinic/components/infoclinica/infoclinica.component";
 import { NgbModalModule } from "@ng-bootstrap/ng-bootstrap/modal/modal.module";
@@ -145,7 +145,7 @@ export function getAuthServiceConfigs() {
       useClass: NgLoadingSpinnerInterceptor,
       multi: true
     },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
