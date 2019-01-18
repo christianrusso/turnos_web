@@ -1,44 +1,24 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from "@angular/core";
 import { BusquedaService } from "../../services/busqueda.service";
+import { global } from "../../../global/global";
 import { MapService } from "../../services/map.service";
 import { RegisterLoginService } from "../../services/register-login.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { BaseComponent } from "../../core/base.component";
+import { VerMapService } from "../../services/ver-mapa.service";
 
-declare const google: any;
+
 @Component({
   selector: 'app-buscador-peluqueria',
   templateUrl: './buscador-peluqueria.component.html',
   styleUrls: ['./buscador-peluqueria.component.css'],
-  providers: [BusquedaService, MapService, RegisterLoginService]
-
+  providers: [BusquedaService, MapService, RegisterLoginService, VerMapService]
 })
 export class BuscadorPeluqueriaComponent extends BaseComponent
   implements OnInit, AfterViewInit {
 
-  businessType;
-  businessTypeName;
-
-  constructor(
-    private _BusquedaService: BusquedaService,
-    private _MapService: MapService,
-    private _RegisterLoginService: RegisterLoginService,
-    private _router: Router
-  ) {
-    super();
-    let route = this._router.url;
-    let pos = route.indexOf("/", 1);
-
-    if (pos != -1) {
-      this.businessType = route.substring(1, pos);
-      this.businessTypeName = this.businessType;
-      switch (this.businessType) {
-        case "peluqueria":
-          this.businessType = 2;
-          break;
-      }
-    }
-  }
+  public businessType;
+  public businessTypeName;
   public busqueda = null;
   public allData;
   public filtro;
@@ -56,6 +36,34 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
   public limitForSubEspecialidad = 5;
   public limitForObraSocial = 5;
   public limitForUbicacion = 5;
+  public from = 0;
+  public showLoading = true;
+  public showMap = false;
+  public locations = [];
+  public insertStart = [];
+  public hairdressings = [];
+
+  constructor(
+    private _BusquedaService: BusquedaService,
+    private _MapService: MapService,
+    private _RegisterLoginService: RegisterLoginService,
+    private _router: Router,
+    private _VerMapService: VerMapService
+  ) {
+    super();
+    let route = this._router.url;
+    let pos = route.indexOf("/", 1);
+
+    if (pos != -1) {
+      this.businessType = route.substring(1, pos);
+      this.businessTypeName = this.businessType;
+      switch (this.businessType) {
+        case "peluqueria":
+          this.businessType = 2;
+          break;
+      }
+    }
+  }
 
   async ngAfterViewInit(): Promise<void> {
     await this.loadScript("/assets/js/script3.js");
@@ -82,29 +90,85 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
       businessType: this.businessType
     };
     this.dontResult = false;
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
     this.getSplecialties();
     this.getSubSplecialties();
     this.getCities();
   }
-  public getByFilter(filtro) {
+  public getByFilter(filtro, page) {
+    filtro.From = 0;
+    if (page != 'undefined' && page == true) {
+      filtro.to = this.from;
+    } else {
+      this.hairdressings = null;
+      this.from = 0;
+      filtro.to = global.quantityOfResultsToShow;
+    }
+
+    if (this.hairdressings) {
+      var actualHairdressings = this.hairdressings.length;
+    } else {
+      var actualHairdressings = 0;
+    }
+    this.showLoading = true;
     $("#loading-bar-spinner").removeAttr("hidden");
     $("#loading-bar-spinner").show();
     this._BusquedaService.getByFilter(filtro).subscribe(
-      response => {
-        if (response.length != 0) {
-          console.log(response);
-          this.dontResult = false;
-          this.allData = response;
-        } else {
-          this.dontResult = true;
-          this.allData = null;
+        response => {
+          this.showLoading = false;
+          if (response.length != 0) {
+            this.dontResult = false;
+            this.hairdressings = response;
+            if (this.from == 0) {
+              this.from = this.from + response.length + global.quantityOfResultsToShow;
+            } else {
+              this.from = this.from + (response.length - actualHairdressings);
+            }
+            if ((document.querySelector('#verMasButton') as HTMLElement)) {
+              if ((response.length - actualHairdressings) == global.quantityOfResultsToShow) {
+                (document.querySelector('#verMasButton') as HTMLElement).style.display = 'block';
+              } else {
+                (document.querySelector('#verMasButton') as HTMLElement).style.display = 'none';
+              }
+            }
+            this.locations = [];
+            response.forEach(element => {
+              this.score.forEach(star => {
+                if (element.score - star >= star) {
+                  this.insertStart.push('<i class="fa fa-star"></i>');
+                }
+              });
+
+              this.locations.push([
+                '<div class="col-xs-12 col-md-12 infow"><div class="row"><div class="col-xs-12 col-md-5"><img src=' +
+                element.logo +
+                '></div><div class="col-xs-12 col-md-7"><h3>' +
+                element.name +
+                '</h3><p class="location"><i class="fa fa-map-marker"></i>' +
+                element.address +
+                '</p><div class="punt">' +
+                element.score +
+                '</div><div class="stars">' +
+                this.insertStart +
+                "</div></div></div></div>",
+                element.latitude,
+                element.longitude
+              ]);
+              this.insertStart = [];
+            });
+          } else {
+            this.dontResult = true;
+            this.hairdressings = null;
+            this.locations = [];
+          }
+          if (this.showMap) {
+            this._VerMapService.generateMap(this.locations, null);
+          }
+          $("#loading-bar-spinner").hide();
+        },
+        error => {
+          // Manejar errores
         }
-        $("#loading-bar-spinner").hide();
-      },
-      error => {
-        // Manejar errores
-      }
     );
   }
   // ACTIVADOR DE PESTAÑAS DE CADA CLINICA
@@ -208,10 +272,16 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
       this.limitForUbicacion = 5;
     }
   }
+
   VerMapa() {
+    this.showMap = true;
+    this.getByFilter(this.filtro, false);
+    //this._VerMapService.generateMap(this.locations, null);
   }
 
-
+  closeMapa() {
+    this.showMap = false;
+  }
 
   //Filtros
   public FiltrarEspecialidad(especialidad, deviceValue) {
@@ -230,7 +300,7 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
     } else {
       this.getSubSplecialties();
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
   //filtro cunado cambia la especialiad
@@ -245,7 +315,7 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
       }
     );
 
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
   public FiltrarSubEspecialidad(Subspecialties, deviceValue) {
     this.allData = [];
@@ -258,7 +328,7 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
         }
       }
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
   public FiltrarObrasSocial(obraSocial, deviceValue) {
     this.allData = [];
@@ -275,7 +345,7 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
         }
       }
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
   //filtro city
@@ -290,31 +360,32 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
         }
       }
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
   //filtro Score
   public FiltrarScore(score) {
     this.allData = [];
     this.filtro.Score = score;
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
   //filtro ScoreQuantity
   public FiltrarScoreQuantity(ScoreQuantity) {
     this.allData = [];
     this.filtro.ScoreQuantity = ScoreQuantity;
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 
 
   //filtro pro distancia
+  public geolocation;
   FiltrarDistancia(deviceValue) {
     this.distancia = parseInt(deviceValue.target.value);
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+
+      navigator.geolocation.getCurrentPosition(position => {
         this.showPosition(position);
-      }
-      );
+      });
     } else {
       alert("Geolocation is not supported by this browser.");
     }
@@ -331,8 +402,7 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
         Cities: [this.busqueda.ubicacion],
         Specialties: this.filtro.Specialties,
         Subspecialties: this.filtro.Subspecialties,
-        MedicalInsurances: this.filtro.MedicalInsurances,
-        MedicalPlans: []
+        Stars: []
       };
     } else {
       this.filtro = {
@@ -344,11 +414,10 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
         Cities: [],
         Specialties: this.filtro.Specialties,
         Subspecialties: this.filtro.Subspecialties,
-        MedicalInsurances: this.filtro.MedicalInsurances,
-        MedicalPlans: []
+        Stars: []
       };
     }
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
   //fin filtro por distancia.
 
@@ -368,6 +437,6 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
     $(".range-slider").val(0);
     $(".range-slider__range").val(0);
     $(".range-slider__value").text(0);
-    this.getByFilter(this.filtro);
+    this.getByFilter(this.filtro, false);
   }
 }
