@@ -3,89 +3,113 @@
 
 <!-- Resultados -->
 <!-- // resultados -->
-<div class="container-fluid  ">
+<div class="container-fluid  " *ngIf="!showMap">
     <!-- BÚSQUEDA-->
     <div class="row">
         <section class="col-12 col-md-10 offset-md-1  search-section">
+            <div class="card">
+                <div class="row card-body">
+                    <form class="form-inline col-12" style="width: 100%;">
+                        <div class="form-group col-4">
+                            <label class="textCardTop" for="staticEmail3" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">UBICACIÓN</label>
+                            <select class=" form-control form-inline" style="font-family: SfUiDisplayLight;" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail3">
+                                <option value="">¿Donde?</option>
+                                <option *ngFor="let row of cities;let i = index" value="row.id">{{row.text}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-4" style="margin-right: 20px;">
+                            <label class="textCardTop" for="staticEmail5" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">FECHA</label>
+                            <input #AvailableAppointmentStartDate="ngModel"  name="AvailableAppointmentStartDate" [(ngModel)]="filtro.AvailableAppointmentStartDate" class=" form-control form-inline" id="Categorías" style="font-family: SfUiDisplayLight;"  type="date">
+
+                        </div>
+                        <div class="form-group col-3" style="justify-content: center;">
+                            <button (click)="BuscarFilterTop()" type="button" class="btn btn-transparent btn-round-lg special-link butttonBuscar textCardTop" style="font-family: SfUiDisplaySemiBold; font-size: 13px; width: 132px; height: 40px;">BUSCAR</button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
             <!-- Filtros -->
             <div class="col-12 col-md-3 float-left filter-search">
-                <h2>Peluqueria</h2>
-                <h3>Estetica</h3>
 
                 <div class="image-ubication">
-                    <img src="/assets/img/lugares.png">
                     <p>
-                        <a class="pointer" (click)="VerMapa()">Ver Centros en el mapa</a>
+                        <a class="pointer" (click)="VerMapa()">VER RESULTADOS EN EL MAPA</a>
                     </p>
                 </div>
 
                 <div class="col-xs-12 white">
-                    <div class="menu-filters">
-                        <a href="" class="activeFilters" id="filtro-simple">Filtros</a>
-                        <a href="" id="filtro-extra">Filtros extras</a>
+                    <div class="menu-filters" style="height: 50px; background-color: #00b1f2; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                        <span id="" style="display: -webkit-inline-box; margin-top: 12px; color:white; font-family: SfUiDisplaySemiBold; font-size: 18px; margin-left: 38px;">FILTRAR POR:</span>
+                        <!--<a href="" id="filtro-extra" style="color: white;">FILTROS EXTRAS</a>-->
                     </div>
-                    <form action="" method="" class="form-filter">
+                    <form action="" method="" class="form-filter" style="margin-left: 38px; padding-right: 10px;">
                         <!-- Especialidad -->
-                        <label>Especialidad</label>
-                        <div *ngFor="let row of especialidades; let i = index">
-                            <p [hidden]="i >= limitForEspecialidad">
-                                <input type="checkbox" id="cbox{{row.id}}" value="first_checkbox" (click)="FiltrarEspecialidad(row.id,$event)">
-                                <label for="cbox{{row.id}}">{{row.text}}</label>
-                            </p>
-
+                        <label style="font-family: SfUiDisplaySemiBold;">Especialidad</label>
+                        <div class="ex3">
+                            <div *ngFor="let row of especialidades; let i = index">
+                                <p>
+                                    <input type="checkbox" id="cbox{{row.id}}" value="first_checkbox" (click)="FiltrarEspecialidad(row.id,$event)">
+                                    <label for="cbox{{row.id}}">{{row.text}}</label>
+                                </p>
+                            </div>
                         </div>
                         <!-- filtros para ver mas o menos -->
-                        <p *ngIf="especialidades?.length >= 6 && limitForEspecialidad !=100">
+                        <!-- <p *ngIf="especialidades?.length >= 6 && limitForEspecialidad !=100">
                             <a (click)="verMasEspecialista(true)" class="see-more">Ver más</a>
                         </p>
                         <p *ngIf="limitForEspecialidad==100 ">
                             <a (click)="verMasEspecialista(false)" class="see-more">Ver menos</a>
-                        </p>
+                        </p> -->
                         <!-- fin filtros -->
                         <div class="divider-filtros"></div>
                         <!-- Sub especialidad -->
-                        <label>Sub especialidad</label>
-                        <div *ngFor="let row of subEspecialidades;let i = index">
-                            <p [hidden]="i >= limitForSubEspecialidad">
-                                <input type="checkbox" id="chbox{{row.id}}" value="primer_checkbox" (click)="FiltrarSubEspecialidad(row.id,$event)">
-                                <label for="chbox{{row.id}}">{{row.text}}</label>
-                            </p>
+                        <label style="font-family: SfUiDisplaySemiBold;">Sub especialidad</label>
+                        <div class="ex3">
+                            <div *ngFor="let row of subEspecialidades;let i = index">
+                                <p>
+                                    <input type="checkbox" id="chbox{{row.id}}" value="primer_checkbox" (click)="FiltrarSubEspecialidad(row.id,$event)">
+                                    <label for="chbox{{row.id}}">{{row.text}}</label>
+                                </p>
+                            </div>
                         </div>
                         <!-- filtros para ver mas o menos -->
-                        <p *ngIf="subEspecialidades?.length >= 6 && limitForSubEspecialidad !=100 ">
+                        <!-- <p *ngIf="subEspecialidades?.length >= 6 && limitForSubEspecialidad !=100 ">
                             <a (click)="verMasSubEspecialista(true)" class="see-more">Ver más</a>
                         </p>
                         <p *ngIf="limitForSubEspecialidad==100 ">
                             <a (click)="verMasSubEspecialista(false)" class="see-more">Ver menos</a>
-                        </p>
-                 
+                        </p> -->
                         <!-- fin filtros -->
                         <div class="divider-filtros"></div>
                         <!-- Ubicación -->
-                        <label>Ubicación</label>
-                        <div *ngFor="let row of cities;let i = index">
-                            <p [hidden]="i >= limitForUbicacion">
-                                <input *ngIf="row.id==busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o"
-                                    value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)" checked="checked">
-                                <input *ngIf="row.id!=busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o"
-                                    value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
-                                <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
-                            </p>
+                        <label style="font-family: SfUiDisplaySemiBold;">Ubicación</label>
+                        <div class="ex3">
+                            <div *ngFor="let row of cities;let i = index">
+                                <p [hidden]="i >= limitForUbicacion">
+                                    <input *ngIf="row.id==busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)"
+                                           checked="checked">
+                                    <input *ngIf="row.id!=busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
+                                    <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
+                                </p>
+                            </div>
                         </div>
+
                         <!-- filtros para ver mas o menos -->
-                        <p *ngIf="cities?.length >= 6 && limitForUbicacion !=100">
+                        <!-- <p *ngIf="cities?.length >= 6 && limitForUbicacion !=100">
                             <a (click)="verMasUbicacion(true)" class="see-more">Ver más</a>
                         </p>
                         <p *ngIf="limitForUbicacion==100 ">
                             <a (click)="verMasUbicacion(false)" class="see-more">Ver menos</a>
-                        </p>
+                        </p> -->
                         <!-- fin filtros -->
 
                         <div class="divider-filtros"></div>
 
 
                         <!-- Distancia -->
-                        <label>Distancia desde mi ubicación</label>
+                        <label style="font-family: SfUiDisplaySemiBold;">Distancia desde mi ubicación</label>
                         <div class="range-slider">
                             <input class="range-slider__range" type="range" value="0" min="0" max="100" (change)="FiltrarDistancia($event)">
                             <span class="range-slider__value">0</span>
@@ -94,12 +118,11 @@
 
                         <div class="divider-filtros"></div>
 
-                        <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos
-                            los filtros</button>
+                        <button class="delete-filters btn-transparent pointer" style="margin-left: 0px !important; width: 100%;" (click)="BorrarFiltros()">Borrar todos los filtros</button>
 
                     </form>
 
-                    <form action="" method="" class="form-filter-extra">
+                    <form action="" method="" class="form-filter-extra" style="margin-left: 38px; padding-right: 10px;">
 
                         <!-- Puntuación -->
                         <label>Puntuación de clientes</label>
@@ -135,8 +158,7 @@
 
                         <div class="divider-filtros"></div>
 
-                        <button class="delete-filters btn-transparent pointer" (click)="BorrarFiltros()">Borrar todos
-                            los filtros</button>
+                        <button class="delete-filters btn-transparent pointer" style="margin-left: 0px !important; width: 100%;" (click)="BorrarFiltros()">Borrar todos los filtros</button>
 
                     </form>
 
@@ -151,7 +173,7 @@
             <div class="col-12 col-md-9 float-left clinica-search">
 
                 <!-- Ordenar por -->
-                <div class="col-xs-12 ordenar-clinica">
+                <!-- <div class="col-xs-12 ordenar-clinica">
                     <form method="" action="" id="form-ordenar">
                         <div class="form-group ordenar-clinica">
                             <label for="">Ordenar por</label>
@@ -162,22 +184,33 @@
                             </select>
                         </div>
                     </form>
-                </div>
+                </div> -->
 
-                <div *ngIf="dontResult">
-                    <h5 class="text-center text-danger vertical"> "No se han encontrado resultados para esta busqueda"</h5>
+                <div class="text-center" style="display: flex; margin-top: 51px;">
+                    <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 2px #00b1f2 solid; color: #00b1f2; cursor: pointer; width: 20%;" id="bestScore" (click)="orderResults('score', false, 'bestScore')">MEJOR PUNTUACIÓN</span>
+                    <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 28%;" id="bestComments" (click)="orderResults('comments', false, 'bestComments')">MAYOR CANTIDAD DE COMENTARIOS</span>
+                    <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 20%;" id="lessScore" (click)="orderResults('score', true, 'lessScore')">MENOR PUNTUACIÓN</span>
+                    <span style="font-family: SfUiDisplaySemiBold; font-size: 12px; border-bottom: 1px black solid; cursor: pointer; width: 32%;" id="lessComments" (click)="orderResults('comments', true, 'lessComments')">MENOR CANTIDAD DE COMENTARIOS</span>
                 </div>
-                <div class="text-center ">
+                <div *ngIf="dontResult" style="text-align: center; margin-top: 50px;">
+                    <div>
+                        <img src="/assets/img/resultados.png" style="width: 80%;">
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <span style="font-family: SfUiDisplayHeavy; font-size: 18px; color: #454EDB;">¡ LO SENTIMOS !</span>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <span style="font-family: SfUiDisplayLight; font-size: 25px; color: #454EDB;">No hemos encontrado resultados para su búsqueda</span>
+                    </div>
                 </div>
-                <div *ngFor="let row of allData">
-                    <a data-toggle="collapse" href="#collapseExample{{row.hairdressingId}}" role="button" aria-expanded="false"
-                        aria-controls="collapseExample">
+                <div *ngFor="let row of allData; let i = index">
+                    <a href="/{{businessTypeName}}">
 
-                        <div class="col-xs-12 cluster-clinica">
+                        <div class="col-xs-12 cluster-clinica" style="display: flex;">
                             <div class="col-xs-12 col-sm-2 img-clin">
                                 <img class="logoimg" src="{{row.logo}}" alt="Clinica">
                             </div>
-                            <div class="col-xs-12 col-sm-6 text-clin">
+                            <div class="col-xs-12 col-sm-7 text-clin">
                                 <div class="specific-clinica">
                                     <h3>{{row.name}}</h3>
                                 </div>
@@ -193,11 +226,12 @@
                                         </span>
                                     </span>
 
-                                    <p>Ver comentarios</p>
+                                    <!--<p>Ver comentarios</p>-->
 
                                 </div>
-                                <p class="descr-clin"> {{ (row.description.length>150)? (row.description |
-                                    slice:0:150)+'..':(row.description) }}</p>
+                                <div style="margin: 5px 0px;">
+                                    <p class="descr-clin"> {{ (row.description?.length>150)? (row.description | slice:0:150)+'..':(row.description) }}</p>
+                                </div>
 
                                 <!-- <div class="icon-clin">
                                     <span data-toggle="tooltip" title="Médico">
@@ -218,35 +252,34 @@
                                 </div> -->
 
                             </div>
-                            <div class="col-xs-12 col-sm-4 ask-clin">
-                                <a href="" class="heart">
-                                    <i class="fa fa-heart-o corazon"></i>
+
+                            <div class="col-xs-12 col-sm-3 ask-clin">
+                                <a (click)="favorito(i,row.clinicId)" class="heart" *ngIf="identity != null">
+                                    <i id="icon{{row.clinicId}}" class="fa fa-heart-o corazon"></i>
                                 </a>
-                                <h4>{{row.score | number:'.1-5' }}</h4>
+                                <h4>{{row.score | number:'1.0-1' }}</h4>
                                 <a href="" class="comments">
-                                    <p>{{row.scoreQuantity}} comentarios</p>
+                                    <p class="comments">{{row.scoreQuantity}} comentarios</p>
                                 </a>
 
-                                <a (click)="Reservar(row.hairdressingId)" class="reservar">Reservar</a>
+                                <a (click)="Reservar(row.clinicId)" class="reservar btn-round-lg">RESERVAR</a>
                                 <!-- <a href="" class="pagar">Pagar ahora</a> -->
                             </div>
                         </div>
                     </a>
 
 
-                    <div class="col-xs-12 slide-clinica collapse" id="collapseExample{{row.hairdressingId}}">
+                    <div class="col-xs-12 slide-clinica collapse" id="collapseExample{{row.clinicId}}">
                         <div class="col-xs-12 menu-slide">
-                            <a (click)="info(row.hairdressingId)" class="info-slide activeFilter pointer">Información</a>
-                            <a (click)="comen(row.hairdressingId)" class="com-slide pointer">Comentarios</a>
-                            <a (click)="ubi(row.hairdressingId,row.latitude,row.longitude)" class="ubi-slide pointer">Ubicación</a>
+                            <a (click)="info(row.clinicId)" class="info-slide activeFilter pointer">Horarios</a>
+                            <a (click)="comen(row.clinicId)" class="com-slide pointer">Comentarios</a>
+                            <a (click)="ubi(row.clinicId,row.latitude,row.longitude)" class="ubi-slide pointer">Ubicación</a>
                         </div>
 
                         <div class="col-xs-12 height-slide">
 
-                            <div class="col-xs-12 info-cluster" id="info{{row.hairdressingId}}">
-
-                                <p>{{row.description}} </p>
-                                <!-- 
+                            <div class="col-xs-12 info-cluster" id="info{{row.clinicId}}">
+                                <!--
                                 <div class="divider-slide"></div>
 
                                 <h2> Servicios</h2>
@@ -267,17 +300,15 @@
                                     <span>Guardia</span>
                                 </div> -->
 
-                                <div class="divider-slide"></div>
-
                                 <h2>Horarios de atención</h2>
                                 <div *ngFor="let day of row.openCloseHours">
-                                    <p>{{getDayName(day.dayNumber) }} de {{getHour(day.start)}}hs a
-                                        {{getHour(day.end)}}hs</p>
+                                    <p>{{getDayName(day.dayNumber) }} de {{getHour(day.start)}}hs a {{getHour(day.end)}}hs
+                                    </p>
                                 </div>
                                 <p>Feriados: Cerrado</p>
                             </div>
 
-                            <div class="col-xs-12 com-cluster" id="comen{{row.hairdressingId}}">
+                            <div class="col-xs-12 com-cluster" id="comen{{row.clinicId}}">
                                 <!-- <h2>Destacados por los usuarios</h2>
                                 <div class="destacado">
                                     <i class="fa fa-medkit" aria-hidden="true"></i>
@@ -304,7 +335,7 @@
                                 <h2>Todos los comentarios</h2>
                                 <div class="form-group comentarios form-inline">
                                     <label for="">Ordenar por</label>
-                                    <select id="ordernarPor" class="form-control" name="comentarios" lang="es" (change)="filterComentariosOrderBy($event,row.hairdressingId)">
+                                    <select id="ordernarPor" class="form-control" name="comentarios" lang="es" (change)="filterComentariosOrderBy($event,row.clinicId)">
                                         <option value="2">Más recientes</option>
                                         <option value="1">Mejor calificación</option>
                                     </select>
@@ -329,7 +360,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 ubi-cluster" id="ubi{{row.hairdressingId}}">
+                            <div class="col-xs-12 ubi-cluster" id="ubi{{row.clinicId}}">
                                 <div class="line-mapa">
                                     <div class="line-ubi">
                                         <i class="fa fa-map-marker"></i>
@@ -338,19 +369,201 @@
                                             <!-- <span class="scnd">Palermo</span> -->
                                         </div>
                                     </div>
-                                    <div class="line-button">
+                                    <!-- <div class="line-button">
                                         <a href="">Cómo llegar</a>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div id="regularMap{{row.hairdressingId}}" class="col-xs-12 map"></div>
+                                <div id="regularMap{{row.clinicId}}" class="col-xs-12 map"></div>
                                 <br>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div *ngIf="showLoading" style="width: 100%; text-align: center;">
+                    <div><img src="/assets/img/loader.gif" style="width: 20%;" /></div>
+                </div>
+                <div style="text-align: center; margin-top: 10px; display: none;" id="verMasButton">
+                    <button style="background: #50ae20; color: #fff; border-radius: 50px; padding: 10px 3px; transition: all 0.3s ease-in-out; font-family: SfUiDisplaySemiBold; width: 150px;" (click)="getByFilter(filtro, true);">VER MÁS</button>
+                </div>
             </div>
 
         </section>
 
+    </div>
+</div>
+
+
+
+
+
+<div *ngIf="showMap">
+    <div style="z-index: 999; width: 100%; height: 100%; background-color: #6F75CB; position: fixed; opacity: 0.5;"></div>
+    <div style="background-color: white; position: absolute; top: 30px; width: 96%; left: 50%; margin-left: -48%; z-index: 3000; height: auto; display: block; padding-right: 0px; padding-left: 17px;">
+        <!--<p (click)="closeMapa()" style="float: right;">cerrar</p>-->
+        <div style="position: absolute; top: 0px; z-index: 100;" (click)="closeMapa();"><img style="width: 24px;" src="/assets/img/close.png"></div>
+        <div style="display: flex; flex-flow: row wrap;">
+            <div class="col-xs-12 col-md-3 white float-left filter-search" style="background-color: white; ">
+                <div class="col-xs-12 col-md-12 white">
+                    <div class="menu-filters" style="height: 50px; background-color: #00b1f2; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                        <span id="" style="display: -webkit-inline-box; margin-top: 12px; color:white; font-family: SfUiDisplaySemiBold; font-size: 18px; margin-left: 38px;">FILTRAR POR:</span>
+                        <!--<a href="" id="filtro-extra" style="color: white;">FILTROS EXTRAS</a>-->
+                    </div>
+                    <form action="" method="" class="form-filter" style="margin-left: 38px; padding-right: 10px;">
+                        <!-- Especialidad -->
+                        <label style="font-family: SfUiDisplaySemiBold;">Especialidad</label>
+                        <div class="ex3">
+                            <div *ngFor="let row of especialidades; let i = index">
+                                <p>
+                                    <input type="checkbox" id="cbox{{row.id}}" value="first_checkbox" (click)="FiltrarEspecialidad(row.id,$event)">
+                                    <label for="cbox{{row.id}}">{{row.text}}</label>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- filtros para ver mas o menos -->
+                        <!-- <p *ngIf="especialidades?.length >= 6 && limitForEspecialidad !=100">
+                            <a (click)="verMasEspecialista(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForEspecialidad==100 ">
+                            <a (click)="verMasEspecialista(false)" class="see-more">Ver menos</a>
+                        </p> -->
+                        <!-- fin filtros -->
+                        <div class="divider-filtros"></div>
+                        <!-- Sub especialidad -->
+                        <label style="font-family: SfUiDisplaySemiBold;">Sub especialidad</label>
+                        <div class="ex3">
+                            <div *ngFor="let row of subEspecialidades;let i = index">
+                                <p>
+                                    <input type="checkbox" id="chbox{{row.id}}" value="primer_checkbox" (click)="FiltrarSubEspecialidad(row.id,$event)">
+                                    <label for="chbox{{row.id}}">{{row.text}}</label>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- filtros para ver mas o menos -->
+                        <!-- <p *ngIf="subEspecialidades?.length >= 6 && limitForSubEspecialidad !=100 ">
+                            <a (click)="verMasSubEspecialista(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForSubEspecialidad==100 ">
+                            <a (click)="verMasSubEspecialista(false)" class="see-more">Ver menos</a>
+                        </p> -->
+                        <!-- fin filtros -->
+                        <div class="divider-filtros"></div>
+                        <!-- Ubicación -->
+                        <label style="font-family: SfUiDisplaySemiBold;">Ubicación</label>
+                        <div class="ex3">
+                            <div *ngFor="let row of cities;let i = index">
+                                <p [hidden]="i >= limitForUbicacion">
+                                    <input *ngIf="row.id==busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)"
+                                           checked="checked">
+                                    <input *ngIf="row.id!=busqueda.ubicacion" type="checkbox" id="chboxCtiy{{row.id}}o" value="primer_checkbox_obra" (click)="FiltrarCities(row.id,$event)">
+                                    <label for="chboxCtiy{{row.id}}o">{{row.text}}</label>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- filtros para ver mas o menos -->
+                        <!-- <p *ngIf="cities?.length >= 6 && limitForUbicacion !=100">
+                            <a (click)="verMasUbicacion(true)" class="see-more">Ver más</a>
+                        </p>
+                        <p *ngIf="limitForUbicacion==100 ">
+                            <a (click)="verMasUbicacion(false)" class="see-more">Ver menos</a>
+                        </p> -->
+                        <!-- fin filtros -->
+
+                        <div class="divider-filtros"></div>
+
+
+                        <!-- Distancia -->
+                        <label style="font-family: SfUiDisplaySemiBold;">Distancia desde mi ubicación</label>
+                        <div class="range-slider">
+                            <input class="range-slider__range" type="range" value="0" min="0" max="100" (change)="FiltrarDistancia($event)">
+                            <span class="range-slider__value">0</span>
+                        </div>
+                        <input id="Distancia" type="text" name="desplazo" placeholder="km" class="range-slider">
+
+                        <div class="divider-filtros"></div>
+
+                        <button class="delete-filters btn-transparent pointer" style="margin-left: 0px !important; width: 100%;" (click)="BorrarFiltros()">Borrar todos los filtros</button>
+
+                    </form>
+
+                    <form action="" method="" class="form-filter-extra" style="margin-left: 38px; padding-right: 10px;">
+
+                        <!-- Puntuación -->
+                        <label>Puntuación de clientes</label>
+                        <p class="general-puntuacion click" (click)="FiltrarScore(0)">0</p>
+                        <p class="general-puntuacion wrong click" (click)="FiltrarScore(1)">1+</p>
+                        <p class="general-puntuacion medium click" (click)="FiltrarScore(5)">5+</p>
+                        <p class="general-puntuacion good click" (click)="FiltrarScore(7)">7+</p>
+
+                        <div class="divider-filtros"></div>
+
+
+                        <!-- Cantidad de opiniones -->
+                        <label>Cantidad de opiniones</label>
+                        <p>
+                            <input type="checkbox" id="cfbox1" value="firstf_checkbox" name="fooby[2][]" (click)="FiltrarScoreQuantity(0)">
+                            <label for="cfbox1">0+</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="cfbox2" value="secondf_checkbox" name="fooby[2][]" (click)="FiltrarScoreQuantity(10)">
+                            <label for="cfbox2">10+</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="cfbox3" value="thirdf_checkbox" name="fooby[2][]" (click)="FiltrarScoreQuantity(30)">
+                            <label for="cfbox3">30+</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="cfbox4" value="fourthf_checkbox" name="fooby[2][]" (click)="FiltrarScoreQuantity(50)">
+                            <label for="cfbox4">más de 50</label>
+                        </p>
+
+
+
+
+                        <div class="divider-filtros"></div>
+
+                        <button class="delete-filters btn-transparent pointer" style="margin-left: 0px !important; width: 100%;" (click)="BorrarFiltros()">Borrar todos los filtros</button>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3 white" style="height: 1197px; overflow: auto;">
+                <div>
+                    <div *ngFor="let row of clinicas">
+                        <div class="col-xs-12 cluster-clinica clinicBorder" style="display: flex; padding-bottom: 11px; padding-top: 11px; margin-top: 21px;">
+                            <div class="col-xs-12 col-sm-3 col-md-4 img-clin">
+                                <img class="logoimg" src="{{row.logo}}" alt="Clinica">
+                            </div>
+                            <div class="col-xs-12 col-sm-9 col-md-8">
+                                <div class="specific-clinica">
+                                    <h3 style="font-family: SfUiDisplayMedium; color: black; font-size: 25px;">{{row.name}}</h3>
+                                </div>
+                                <div class="ubi-clinica">
+                                    <i class="fa fa-map-marker"></i>
+                                    <span style="font-family: SfUiDisplayLight; font-size: 13px;">{{row.city}}</span>
+                                </div>
+                                <div><br></div>
+                                <div class="stars-opiniones">
+                                    <span style="background-color: #454EDB; color:white; font-family: SfUiDisplayBold; font-size: 21px; vertical-align: middle;" class="scoreSize">{{row.score | number:'1.0-1'}}</span>
+                                    &nbsp;
+                                    <span *ngFor="let scor of score">
+                              <span *ngIf="row.score -scor >= scor">
+                                  <i class="fa fa-star"></i>
+                              </span>
+                          </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 white">
+                <div class="col-12 float-left clinica-search" style="height: 100%; padding-left: 0px; padding-right: 0px; height: 100%;">
+                    <div id="google-map" class="" style="margin-left: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; height: 1100px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

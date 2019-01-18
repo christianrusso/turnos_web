@@ -26,36 +26,28 @@ export class BusquedaService {
   }
 
   //Specialty
-  getSpeciality() {
+  getSpeciality(id) {
     return this._http
       .post(
-        this.url + "api/Data/GetSpecialtiesForSelect",
-        {},
+        this.url + "Api/Data/GetSpecialtiesForSelect",
+        {
+          "Id": id
+        },
         { headers: this.headers }
       )
       .map(res => res.json());
   }
   //SubSpecialty
-  getSubSpeciality() {
+  getSubSpeciality(id, specialities) {
     return this._http
       .post(
         this.url + "api/Data/GetSubspecialtiesForSelect",
-        {},
+        {"rubro":id, "Ids": specialities},
         { headers: this.headers }
       )
       .map(res => res.json());
   }
 
-  //ObrasSociales
-  getMedicalInsurance() {
-    return this._http
-      .post(
-        this.url + "api/Data/GetMedicalInsurancesForSelect",
-        {},
-        { headers: this.headers }
-      )
-      .map(res => res.json());
-  }
   //Ciudades
   getCities() {
     return this._http
@@ -68,11 +60,11 @@ export class BusquedaService {
   }
 
   //SubSpecialty
-  getSubSpecialityOnEspeciality(id) {
+  getSubSpecialityOnEspeciality(id, rubro) {
     return this._http
       .post(
         this.url + "api/Data/GetSubspecialtiesForSelect",
-        { id: id },
+        { ids: [id], rubro: rubro },
         { headers: this.headers }
       )
       .map(res => res.json());

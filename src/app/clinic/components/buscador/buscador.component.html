@@ -9,31 +9,20 @@
         <section class="col-12 col-md-10 offset-md-1  search-section">
             <div class="card">
                 <div class="row card-body">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <label class="textCardTop" for="staticEmail2" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">CATEGORIA</label>
-                            <select class=" form-control form-inline" style="font-family: SfUiDisplayLight;" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail2">
-                                <option value="1">Medicina</option>
-                                <option value="2">Peluquería</option>
-                                <option value="3">Estéticas</option>
-                                <option value="4">Restaurantes</option>
-                                <option value="5">Deportes</option>
-                                <option value="6">Servicios para el vehículo</option>
-                            </select>
-                        </div> 
-                        <div class="form-group">
+                    <form class="form-inline col-12" style="width: 100%;">
+                        <div class="form-group col-4">
                             <label class="textCardTop" for="staticEmail3" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">UBICACIÓN</label>
                             <select class=" form-control form-inline" style="font-family: SfUiDisplayLight;" id="Categorías" (valueChanged)="categoria($event)" id="staticEmail3">
                                 <option value="">¿Donde?</option>
                                 <option *ngFor="let row of cities;let i = index" value="row.id">{{row.text}}</option>
                             </select>
                         </div>
-                        <div class="form-group" style="margin-right: 20px;">
+                        <div class="form-group col-4" style="margin-right: 20px;">
                             <label class="textCardTop" for="staticEmail5" style="font-family: SfUiDisplaySemiBold; font-size: 13px;">FECHA</label>
                             <input #AvailableAppointmentStartDate="ngModel"  name="AvailableAppointmentStartDate" [(ngModel)]="filtro.AvailableAppointmentStartDate" class=" form-control form-inline" id="Categorías" style="font-family: SfUiDisplayLight;"  type="date">
                        
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-3" style="justify-content: center;">
                             <button (click)="BuscarFilterTop()" type="button" class="btn btn-transparent btn-round-lg special-link butttonBuscar textCardTop" style="font-family: SfUiDisplaySemiBold; font-size: 13px; width: 132px; height: 40px;">BUSCAR</button>
 
                         </div>

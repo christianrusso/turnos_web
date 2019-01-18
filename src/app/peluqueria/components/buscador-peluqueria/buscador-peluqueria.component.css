@@ -1,56 +1,152 @@
 #ordernarPor {
-    font-family: Poppins !important;
-    font-size: 15px !important;
-    color: #888 !important;
-    line-height: 35px !important;
-  }
-  
-  .vertical {
-    line-height: 500px;
-  }
-  
-  .img {
-    width: 50px;
-  }
-  
-  .pointer {
-    cursor: pointer;
-  }
-  button.delete-filters {
-    transition: all 0.3s ease-in-out;
-    border: 1px solid #fb1313;
-    color: #fb1313;
-    width: 84%;
-    display: block;
-    margin-left: 20px;
-    text-align: center;
-    height: 35px;
-    border-radius: 3px;
-    line-height: 35px;
-    font-family: Poppins;
-    margin-bottom: 15px;
-    margin-top: 20px;
-    background: transparent;
-  }
-  
-  button.delete-filters:hover {
-    transition: all 0.3s ease-in-out;
-  
-    background: #fb1313;
-  
-    color: #fff;
-  }
-  .container-fluid {
-    margin: 0%;
-  }
-  
-  .see-more {
-    color: #803aec !important;
-    font-family: Poppins;
-    font-size: 12px;
-    margin-left: 20px;
-    margin-top: 10px;
-    display: block;
-    cursor: pointer;
-  }
-  
+  font-family: Poppins !important;
+  font-size: 15px !important;
+  color: #888 !important;
+  line-height: 35px !important;
+}
+
+.vertical {
+  line-height: 500px;
+}
+
+.img {
+  width: 50px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+button.delete-filters {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #fb1313;
+  color: #fb1313;
+  width: 84%;
+  display: block;
+  margin-left: 20px;
+  text-align: center;
+  height: 35px;
+  border-radius: 3px;
+  line-height: 35px;
+  font-family: Poppins;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  background: transparent;
+}
+
+button.delete-filters:hover {
+  transition: all 0.3s ease-in-out;
+
+  background: #fb1313;
+
+  color: #fff;
+}
+.container-fluid {
+  margin: 0%;
+}
+
+.see-more {
+  color: #803aec !important;
+  font-family: Poppins;
+  font-size: 12px;
+  margin-left: 20px;
+  margin-top: 10px;
+  display: block;
+  cursor: pointer;
+}
+.scoreSize {
+  width: 40px;
+  display: inline-table;
+  text-align: center;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20.5pt;
+}
+.logoimg{
+  width: 100%;
+  max-width: 120px;
+  /* width: 120px; */
+  max-height: 140px;
+  border-radius: 10%;
+  display: block;
+  text-align: center;
+  margin: auto;
+}
+
+.textCardTop{
+
+  color: #333;
+  font-family: Poppins;
+  font-weight: 500;
+  padding-left: 38px;
+  padding-right: 30px;
+
+}
+/* .form-group.mb-2.distancia {
+  padding-right: 38px;
+} */
+.butttonBuscar{
+
+  border: 1px solid #454edb !important;
+  border-radius: 51px;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  background: transparent;
+  color: blue;
+  margin-top: -8px;
+}
+
+div.ex3 {
+  height: 130px;
+  overflow: auto;
+
+}
+
+
+::-webkit-scrollbar {
+  width: 12px;
+  background:transparent;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey;
+  border-radius: 10px;
+  height: 3px;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #C5C5C5;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #C5C5C5
+;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* .buscadorSelect {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0;
+  position: relative;
+  vertical-align: middle;
+  width: 0px !important;
+  height: 30px !important;
+} */
+.form-group.mx-sm-1.mb-2.distancia.button {
+  margin-top: 11px;
+}
+
+.comments{
+  color: #454edb;
+}

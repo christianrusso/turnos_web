@@ -1,5 +1,5 @@
 export let global = {
-  url: 'https://todoreservas.com.ar:4443/',
+  url: 'http://localhost:5000/',
   quantityOfResultsToShow: 10,
   source: 2
 };

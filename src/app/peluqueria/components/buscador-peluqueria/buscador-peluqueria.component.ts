@@ -16,6 +16,9 @@ declare const google: any;
 export class BuscadorPeluqueriaComponent extends BaseComponent
   implements OnInit, AfterViewInit {
 
+  businessType;
+  businessTypeName;
+
   constructor(
     private _BusquedaService: BusquedaService,
     private _MapService: MapService,
@@ -23,6 +26,18 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
     private _router: Router
   ) {
     super();
+    let route = this._router.url;
+    let pos = route.indexOf("/", 1);
+
+    if (pos != -1) {
+      this.businessType = route.substring(1, pos);
+      this.businessTypeName = this.businessType;
+      switch (this.businessType) {
+        case "peluqueria":
+          this.businessType = 2;
+          break;
+      }
+    }
   }
   public busqueda = null;
   public allData;
@@ -55,11 +70,16 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
       var cities = []
     }
     this.filtro = {
-      Cities: cities,
+      Cities: [],
       Specialties: [],
       Subspecialties: [],
       Score: "",
       ScoreQuantity: "",
+      AvailableAppointmentDate: "",
+      SortField: "score",
+      AscendingOrder: false,
+      Stars: [],
+      businessType: this.businessType
     };
     this.dontResult = false;
     this.getByFilter(this.filtro);
@@ -134,7 +154,7 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
   }
   //Specialidades
   public getSplecialties() {
-    this._BusquedaService.getSpeciality().subscribe(
+    this._BusquedaService.getSpeciality(this.businessType).subscribe(
       response => {
         this.especialidades = response;
       },
@@ -156,7 +176,7 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
   }
   //SubEspecialidades
   public getSubSplecialties() {
-    this._BusquedaService.getSubSpeciality().subscribe(
+    this._BusquedaService.getSubSpeciality(this.businessType, this.filtro.Subspecialties).subscribe(
       response => {
         this.subEspecialidades = response;
       },
@@ -216,7 +236,7 @@ export class BuscadorPeluqueriaComponent extends BaseComponent
   //filtro cunado cambia la especialiad
   public FiltrarSubEspecialidadOnEspecialidad(especialidad) {
     this.allData = [];
-    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad).subscribe(
+    this._BusquedaService.getSubSpecialityOnEspeciality(especialidad, this.businessType).subscribe(
       response => {
         this.subEspecialidades = response;
       },
